@@ -10,6 +10,7 @@ import { site } from "@/content/facts";
 import { Header } from "@/components/Header";
 import { Footer } from "@/components/Footer";
 import { PersonJsonLd, WebSiteJsonLd } from "@/components/StructuredData";
+import { displayFont } from "../fonts";
 import "../globals.css";
 
 export function generateStaticParams() {
@@ -68,7 +69,7 @@ export default async function LocaleLayout({
   const content = getContent(locale as Locale);
 
   return (
-    <html lang={content.htmlLang}>
+    <html lang={content.htmlLang} className={displayFont.variable}>
       <body className="min-h-dvh flex flex-col">
         <NextIntlClientProvider>
           <a
