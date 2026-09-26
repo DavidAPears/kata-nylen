@@ -25,7 +25,8 @@ with no credentials.
 | --- | --- |
 | `npm run dev` | Dev server |
 | `npm run build` | Production build |
-| `npm test` | Vitest suite |
+| `npm test` | Vitest suite (unit + component) |
+| `npm run test:e2e` | Playwright layout/responsive suite |
 | `npm run typecheck` | `tsc --noEmit` |
 | `npm run lint` | ESLint |
 
@@ -93,6 +94,20 @@ caps total guests.
 invite-first OAuth flows, and every attendee on a Calendar event can see every
 other attendee's email address — a GDPR problem for a public signup form. The
 useful half ("add to calendar") is implemented without any API.
+
+## Responsive
+
+The book-release link is shared over WhatsApp, so most visitors meet this site
+on a phone. `npm run test:e2e` asserts that **no page scrolls horizontally** at
+320, 390, 768 and 1024px, that the RSVP form can be completed on a phone, and
+that interactive controls meet the 24px minimum touch target.
+
+> Playwright cannot install its bundled Chromium on macOS 12, so locally the
+> config drives the system Chrome via `channel: "chrome"`. CI runs Linux, where
+> the bundled browser installs normally.
+
+Run it with the dev server already up (it reuses one — Next 16 allows only a
+single dev server per project directory) or let it start one.
 
 ## Security & privacy
 

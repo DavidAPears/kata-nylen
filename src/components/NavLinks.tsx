@@ -10,7 +10,13 @@ import type { AppPathname } from "@/i18n/routing";
  * `aria-current` — which matters for screen readers and gives the design pass
  * an obvious hook for an active state.
  */
-export function NavLinks({ locale }: { locale: Locale }) {
+export function NavLinks({
+  locale,
+  className = "",
+}: {
+  locale: Locale;
+  className?: string;
+}) {
   const pathname = usePathname();
   const { nav } = getContent(locale);
 
@@ -22,8 +28,8 @@ export function NavLinks({ locale }: { locale: Locale }) {
   ];
 
   return (
-    <nav aria-label={nav.menuLabel}>
-      <ul className="flex flex-wrap items-center gap-4 text-sm">
+    <nav aria-label={nav.menuLabel} className={className}>
+      <ul className="flex flex-wrap items-center gap-x-5 gap-y-1 text-sm">
         {items.map((item) => {
           const isActive = pathname === item.href;
           return (
@@ -31,11 +37,11 @@ export function NavLinks({ locale }: { locale: Locale }) {
               <Link
                 href={item.href}
                 aria-current={isActive ? "page" : undefined}
-                className={
+                className={`inline-flex min-h-6 items-center py-1 ${
                   isActive
                     ? "font-semibold text-[var(--color-ink)]"
                     : "text-[var(--color-ink-muted)] underline underline-offset-4 hover:no-underline"
-                }
+                }`}
               >
                 {item.label}
               </Link>

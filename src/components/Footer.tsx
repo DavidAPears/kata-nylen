@@ -63,7 +63,10 @@ export function Footer({ locale }: { locale: Locale }) {
             {footer.copyright.replace("{year}", String(new Date().getFullYear()))}
           </p>
           <div className="flex items-center gap-4">
-            <Link href="/privacy" className="underline underline-offset-4">
+            <Link
+              href="/privacy"
+              className="inline-flex min-h-6 items-center underline underline-offset-4"
+            >
               {footer.privacyLabel}
             </Link>
             <LanguageSwitcher locale={locale} label={nav.languageLabel} />

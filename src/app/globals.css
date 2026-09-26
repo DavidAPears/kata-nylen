@@ -65,6 +65,27 @@ h1, h2, h3 {
   text-wrap: balance;
 }
 
+/*
+ * Nothing may force the page to scroll sideways on a phone.
+ *
+ * The book-release link gets shared by WhatsApp, so most visitors meet this
+ * site on a narrow screen. A single unbreakable string — a long URL, a Swedish
+ * compound like "klimatångestforskning", a code token — is enough to widen the
+ * whole document and break every section below it.
+ */
+code, samp, kbd, pre {
+  overflow-wrap: anywhere;
+}
+
+h1, h2, h3, h4, p, li, dd, dt, address, label, figcaption {
+  overflow-wrap: break-word;
+}
+
+/* Media never exceeds its column. */
+img, svg, video, iframe, canvas {
+  max-width: 100%;
+}
+
 /* Visible focus everywhere — brief §15. Never remove this. */
 :focus-visible {
   outline: 3px solid var(--color-ink);

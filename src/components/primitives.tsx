@@ -79,7 +79,7 @@ export function ExternalAnchor({
       target="_blank"
       // noopener/noreferrer: never let an external page reach back into ours.
       rel="noopener noreferrer"
-      className="underline underline-offset-4 hover:no-underline"
+      className="inline-flex min-h-6 items-center underline underline-offset-4 hover:no-underline"
     >
       {children}
       {description ? <span className="sr-only"> ({description})</span> : null}

@@ -134,6 +134,10 @@ export function RsvpForm({
       ) : null}
 
       {/* Brief §10: separate, explicit, never pre-checked. */}
+      {/* The default 13px checkbox is below the 24px minimum touch target
+          (WCAG 2.5.8) — and this is the control that records consent, so it
+          has to be easy to hit deliberately and easy to leave alone. The label
+          is part of the target, since clicking it toggles the box. */}
       <div className="mb-5 flex items-start gap-3">
         <input
           id="marketingConsent"
@@ -141,9 +145,12 @@ export function RsvpForm({
           type="checkbox"
           checked={marketingConsent}
           onChange={(event) => setMarketingConsent(event.target.checked)}
-          className="mt-1"
+          className="mt-0.5 size-5 shrink-0"
         />
-        <label htmlFor="marketingConsent" className="text-sm">
+        <label
+          htmlFor="marketingConsent"
+          className="flex min-h-6 items-center text-sm"
+        >
           {forms.fields.marketingConsent}
         </label>
       </div>

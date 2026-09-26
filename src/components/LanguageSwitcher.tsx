@@ -3,6 +3,7 @@
 import { usePathname } from "@/i18n/navigation";
 import { Link } from "@/i18n/navigation";
 import { locales, type Locale } from "@/i18n/routing";
+import { flagFor } from "./FlagIcons";
 
 /**
  * SV | EN switcher.
@@ -16,16 +17,19 @@ import { locales, type Locale } from "@/i18n/routing";
 export function LanguageSwitcher({
   locale,
   label,
+  className = "",
 }: {
   locale: Locale;
   label: string;
+  className?: string;
 }) {
   const pathname = usePathname();
 
   return (
-    <nav aria-label={label} className="flex items-center gap-1 text-sm">
+    <nav aria-label={label} className={`flex items-center gap-1 text-sm ${className}`}>
       {locales.map((code, index) => {
         const isActive = code === locale;
+        const Flag = flagFor[code];
         return (
           <span key={code} className="flex items-center gap-1">
             {index > 0 ? (
@@ -38,12 +42,20 @@ export function LanguageSwitcher({
               locale={code}
               hrefLang={code}
               aria-current={isActive ? "true" : undefined}
-              className={`px-1 uppercase ${
+              className={`flex min-h-6 items-center gap-1.5 px-1 py-1 uppercase ${
                 isActive
                   ? "font-semibold text-[var(--color-ink)]"
                   : "text-[var(--color-ink-muted)] underline underline-offset-4"
               }`}
             >
+              {/* Dimmed when inactive so the current language reads as current
+                  without relying on colour alone — the weight and underline
+                  carry it too. */}
+              <Flag
+                className={`h-3.5 w-5 shrink-0 rounded-[1.5px] ${
+                  isActive ? "" : "opacity-60"
+                }`}
+              />
               {code}
             </Link>
           </span>
