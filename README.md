@@ -1,5 +1,11 @@
 # katanylen.com
 
+> ## ⚠️ READ THIS FIRST: [LAUNCH-BLOCKERS.md](LAUNCH-BLOCKERS.md)
+>
+> **Until katanylen.com is verified in Resend, RSVP confirmation emails only
+> reach your own inbox.** Real guests would get nothing. This must be fixed
+> before launch.
+
 Personal website for Kata Nylén — psychologist, author and speaker.
 
 Bilingual (Swedish + English) MVP: **Home · Book Release · Speaking · Contact**.

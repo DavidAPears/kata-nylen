@@ -25,6 +25,13 @@ constraints, and code comments reference its sections (`§10`, `§21.3`…).
 7. Do not add analytics, embeds or third-party scripts without checking the
    cookie-consent consequences in brief §16.
 
+## Launch blockers
+
+`LAUNCH-BLOCKERS.md` is the live list. The critical one: email sends from
+Resend's shared test address, which delivers only to the account owner's
+inbox, so real guests receive no RSVP confirmation until katanylen.com is
+verified in Resend.
+
 ## Current stage
 
 Wireframe. Styling is intentionally minimal white/grey; behaviour,
