@@ -1,94 +1,146 @@
-# ⚠️ LAUNCH BLOCKERS
+# ⚠️ LAUNCH BLOCKERS & NEXT STEPS
 
-Things that MUST be done before this site goes live. Nothing here is optional.
+Live wireframe: **https://kata-nylen.vercel.app** (noindexed, see §4)
+Attendee sheet: `docs/google-sheets-setup.md`
+
+Status as of 26 Sep 2026: RSVP pipeline works end to end in production. Form →
+Google Sheet → confirmation email. Event details, design and the domain are
+outstanding.
 
 ---
 
-## 🔴 1. VERIFY THE DOMAIN IN RESEND — OR NOBODY GETS THEIR RSVP EMAIL
+# PART A — THINGS WE DO (David + Claude)
 
-**This is the big one. Getting RSVPs is the entire point of the site right now.**
+## 🔴 A1. DOMAIN + EMAIL — the one that blocks launch
 
-### The problem
+**Today, RSVP confirmation emails only reach davidapears@gmail.com.** Emails
+send from Resend's shared `onboarding@resend.dev`, which by design delivers
+only to the Resend account owner. A real guest would submit the form, see
+"Du står på listan", and receive nothing.
 
-Right now emails are sent from `onboarding@resend.dev`, which is Resend's
-shared loaner address. It has one hard rule:
+Once **katanylen.com** is bought, in order:
 
-> **It only delivers to the email address the Resend account was created with.**
-
-So today:
-
-| | Works? |
-| --- | --- |
-| Test RSVP to davidapears@gmail.com | ✅ yes |
-| Real guest RSVPs to their own email | ❌ **NO** |
-| Organiser notification to Kata | ❌ **NO** |
-
-**If the site launched today, guests would fill in the form, see "You're on the
-list", and receive nothing.** The RSVP is still recorded, but the person gets
-no confirmation. That is a broken launch.
-
-### The fix
-
-1. Buy **katanylen.com** (or use another domain you already own).
-2. In Resend: **Domains → Add Domain** → enter the domain.
-3. Resend shows several DNS records (SPF, DKIM, and usually a DMARC record).
-4. Add those records at whoever hosts the domain's DNS (GoDaddy / Namecheap /
-   Cloudflare / etc).
-5. Back in Resend, click **Verify**. Usually minutes, occasionally a few hours.
-6. Update `.env.local` AND the production environment variables:
+1. **Resend → Domains → Add Domain** → `katanylen.com`.
+2. Copy the DNS records Resend shows (SPF, DKIM, usually DMARC).
+3. Add them wherever the domain's DNS is hosted.
+4. Back in Resend, click **Verify**. Minutes, occasionally hours.
+5. Update **both** places, they are separate:
+   - `.env.local` (local dev)
+   - **Vercel → Project → Settings → Environment Variables** (production)
 
    ```
-   CONTACT_FROM_EMAIL="Kata Nylén <hej@katanylen.com>"
+   CONTACT_FROM_EMAIL=Kata Nylén <hej@katanylen.com>
    CONTACT_TO_EMAIL=kata.nylen@gmail.com
    ```
 
-7. Test with an address that is NOT your own, to prove the restriction is gone.
+   In Vercel, paste values WITHOUT surrounding quotes.
+6. **Vercel → Domains → Add** `katanylen.com`, and point the domain's DNS at
+   Vercel.
+7. **Redeploy.** Required: it lifts the noindex (§A4) and updates canonical
+   URLs.
+8. Test with an address that is NOT davidapears@gmail.com, to prove the
+   restriction is gone. This is the actual proof that launch is unblocked.
 
-### Interim option
+## 🔴 A2. EVENT DETAILS → `src/content/facts.ts`
 
-If katanylen.com is not bought yet but you own another domain, verify that one
-instead and send from it today. Swap to katanylen.com later. It is one
-environment variable.
+Until these are filled in, the book-release page shows "Meddelas snart",
+emits no Event structured data, and serves no calendar file. Nothing is
+invented, by design.
+
+- `launchEvent.startsAt` / `endsAt` (ISO 8601 with timezone)
+- `launchEvent.venueName`, `addressLine`, `postalCode`, `city`
+- `launchEvent.programme` (only if there genuinely is one)
+- `launchEvent.capacity` (only if the venue caps it)
+- `launchEvent.accessibility`
+
+Plus-ones are already enabled, capped at 4 places per booking
+(`maxPlacesPerRsvp`).
+
+## 🟠 A3. MAP / DIRECTIONS ON THE BOOK-RELEASE PAGE
+
+Currently a plain "Vägbeskrivning" text link, which needs no API key and opens
+the visitor's own maps app.
+
+To add a visual map, use the **Google Static Maps API**: the page renders a map
+image generated server-side, so the key never reaches the browser. Do NOT use
+the Maps JavaScript API for a single fixed venue — it ships a large bundle,
+hurts Core Web Vitals, and exposes a key that must then be referrer-restricted.
+
+- Needs `GOOGLE_MAPS_API_KEY` (server-side only, no `NEXT_PUBLIC_` prefix)
+- Restrict the key to the Static Maps API in Google Cloud Console
+- Keep the text directions link alongside it for accessibility
+- Blocked on A2: there is no venue to plot yet
+
+## 🟢 A4. SEARCH INDEXING — already handled, but know how it works
+
+On `kata-nylen.vercel.app` the site serves `Disallow: /` plus a `noindex` meta
+tag, so Kata's name is not indexed against placeholder copy.
+
+It lifts itself: Vercel sets `VERCEL_PROJECT_PRODUCTION_URL` to the project's
+production domain, so indexing switches on once katanylen.com is attached
+**and the project is redeployed**. Override either way with `SITE_INDEXABLE`.
+
+## 🟠 A5. ROTATE THE RESEND API KEY
+
+The current key was visible in a screenshot during setup. Low risk (it can only
+send email as this account) but it should be replaced: Resend → API Keys →
+delete → create new → update `.env.local` AND Vercel.
+
+## 🟠 A6. DESIGN PASS
+
+The wireframe is deliberately white/grey. See `docs/brand-notes.md` for the
+direction taken from Kata's own book-launch flyer, and the open question of
+whether navy/orange is the site's identity or only the book campaign's.
+
+Seams to work on: tokens in `src/app/globals.css`, primitives in
+`src/components/primitives.tsx`. Blocked on B2 and B3 below.
+
+## 🟠 A7. SMALLER ITEMS
+
+- Privacy page reviewed for legal accuracy (retention periods are assumptions)
+- Proper mobile navigation if the design calls for it (four links currently
+  wrap onto their own row)
+- Confirmation email wording is a draft; Kata should rewrite it
+  (`src/lib/messages/rsvp.ts`)
+- Consider an `apple-touch-icon` if the site gets saved to home screens
 
 ---
 
-## 🟢 SEARCH INDEXING — handled automatically
+# PART B — THINGS KATA OWES US
 
-While the site is on `kata-nylen.vercel.app` it serves `Disallow: /` and a
-`noindex` meta tag, so it stays out of Google. It would otherwise put Kata's
-name against placeholder copy, and later compete with the real domain.
+## B1. Read the Swedish copy
 
-This lifts itself: Vercel sets `VERCEL_PROJECT_PRODUCTION_URL` to the project's
-production domain, so indexing switches on the moment katanylen.com is attached
-**and the project is redeployed**. Nothing to remember, but do trigger a
-redeploy after adding the domain.
+`src/content/sv.ts` is a draft I wrote to get the site working. It has not been
+read by a native speaker. Swedish is a first-class language here, not a
+translation, so she should correct tone as well as wording.
 
-Override either way with `SITE_INDEXABLE=true` / `SITE_INDEXABLE=false`.
+## B2. Brand assets
 
----
+- Font names from the Canva file (title, kicker, body) — see `docs/brand-notes.md`
+- Real hex values, or the book cover artwork file
+- Decision: navy + orange sitewide, or reserved for the book-release page?
+- Is the wavy-line motif for the site, or flyer-only?
+- Is the leaf mark permanent, or tied to this book?
 
-## 🔴 2. EVENT DETAILS
+## B3. Images and factual content
 
-Until these are in `src/content/facts.ts`, the book-release page shows
-"To be confirmed", emits no Event structured data, and serves no calendar file:
+- Approved portrait
+- Book cover asset
+- Approved short bio (SV + EN)
+- Preferred professional title
+- Book title, publisher, publication date, purchase URL, synopsis, themes
+- Confirmed speaking topics and formats — **do not publish unapproved ones**
+- Verified credentials, previous events, approved testimonials if any
+- Social/professional profile URLs (these feed the JSON-LD, confirmed only)
+- Whether she wants a public email address on the site
 
-- date and start time
-- end time
-- venue name and full address
-
----
-
-## 🟠 3. BEFORE PUBLISHING
-
-- [ ] Kata reads `src/content/sv.ts` end to end (the Swedish is an unreviewed draft)
-- [ ] Kata approves the English copy in `src/content/en.ts`
-- [ ] Real book title, cover image, synopsis
-- [ ] Approved portrait and short bio
-- [ ] Confirmed speaking topics and formats
-- [ ] Privacy page reviewed for legal accuracy
-- [ ] Google Sheet connected (`npm run check:sheets`)
+See `docs/build-brief.md` §23 for the full list.
 
 ---
 
-See `docs/google-sheets-setup.md` for the attendee list, and
-`docs/build-brief.md` for the full brief.
+## Reference
+
+- `docs/build-brief.md` — the brief; code comments cite its sections
+- `docs/google-sheets-setup.md` — attendee list, and `npm run check:sheets`
+- `docs/brand-notes.md` — visual direction and open questions
+- `AGENTS.md` — hard rules (never invent facts, no em dashes, etc.)

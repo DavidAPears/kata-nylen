@@ -25,12 +25,15 @@ constraints, and code comments reference its sections (`§10`, `§21.3`…).
 7. Do not add analytics, embeds or third-party scripts without checking the
    cookie-consent consequences in brief §16.
 
-## Launch blockers
+## Picking this up again
 
-`LAUNCH-BLOCKERS.md` is the live list. The critical one: email sends from
-Resend's shared test address, which delivers only to the account owner's
-inbox, so real guests receive no RSVP confirmation until katanylen.com is
-verified in Resend.
+**Read `LAUNCH-BLOCKERS.md` first.** It is the live to-do list, split into what
+we do (Part A) and what Kata owes us (Part B).
+
+The critical item: email sends from Resend's shared test address, which
+delivers only to the account owner's inbox, so real guests receive no RSVP
+confirmation until katanylen.com is bought and verified in Resend. Everything
+else can wait; that cannot.
 
 ## Current stage
 
