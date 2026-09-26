@@ -1,0 +1,39 @@
+# Dependencies
+node_modules/
+.pnp
+.pnp.js
+.yarn/
+
+# Env / secrets  ← Google Maps key, Resend key, etc. live here
+.env
+.env.*
+!.env.example
+*.pem
+*.key
+
+# Build output
+dist/
+build/
+out/
+.next/
+.astro/
+.vercel/
+.netlify/
+.cache/
+
+# Logs
+*.log
+npm-debug.log*
+yarn-debug.log*
+yarn-error.log*
+pnpm-debug.log*
+
+# OS / editor
+.DS_Store
+Thumbs.db
+.idea/
+.vscode/*
+!.vscode/extensions.json
+
+# Testing
+coverage/
