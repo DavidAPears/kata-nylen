@@ -1,7 +1,7 @@
 import type { MetadataRoute } from "next";
 import { locales, routing, type Locale } from "@/i18n/routing";
 import { getPathname } from "@/i18n/navigation";
-import { site } from "@/content/facts";
+import { resolveSiteUrl } from "@/lib/site-url";
 
 const routes = ["/", "/book-release", "/speaking", "/contact", "/privacy"] as const;
 
@@ -10,6 +10,8 @@ const routes = ["/", "/book-release", "/speaking", "/contact", "/privacy"] as co
  * the two versions are understood as one page in two languages.
  */
 export default function sitemap(): MetadataRoute.Sitemap {
+  const site = { url: resolveSiteUrl() };
+
   return locales.flatMap((locale) =>
     routes.map((route) => ({
       url: `${site.url}${getPathname({ locale, href: route })}`,

@@ -6,7 +6,7 @@ import { setRequestLocale } from "next-intl/server";
 import { routing, locales, type Locale } from "@/i18n/routing";
 import { getContent } from "@/content";
 import { getPathname } from "@/i18n/navigation";
-import { site } from "@/content/facts";
+import { resolveSiteUrl, isIndexable } from "@/lib/site-url";
 import { Header } from "@/components/Header";
 import { Footer } from "@/components/Footer";
 import { PersonJsonLd, WebSiteJsonLd } from "@/components/StructuredData";
@@ -27,7 +27,11 @@ export async function generateMetadata({
   const content = getContent(locale);
 
   return {
-    metadataBase: new URL(site.url),
+    metadataBase: new URL(resolveSiteUrl()),
+    // Staging deployments must not reach search results at all.
+    ...(isIndexable()
+      ? {}
+      : { robots: { index: false, follow: false, nocache: true } }),
     title: {
       default: content.home.seo.title,
       template: "%s | Kata Nylén",

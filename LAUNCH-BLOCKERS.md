@@ -52,6 +52,21 @@ environment variable.
 
 ---
 
+## 🟢 SEARCH INDEXING — handled automatically
+
+While the site is on `kata-nylen.vercel.app` it serves `Disallow: /` and a
+`noindex` meta tag, so it stays out of Google. It would otherwise put Kata's
+name against placeholder copy, and later compete with the real domain.
+
+This lifts itself: Vercel sets `VERCEL_PROJECT_PRODUCTION_URL` to the project's
+production domain, so indexing switches on the moment katanylen.com is attached
+**and the project is redeployed**. Nothing to remember, but do trigger a
+redeploy after adding the domain.
+
+Override either way with `SITE_INDEXABLE=true` / `SITE_INDEXABLE=false`.
+
+---
+
 ## 🔴 2. EVENT DETAILS
 
 Until these are in `src/content/facts.ts`, the book-release page shows
