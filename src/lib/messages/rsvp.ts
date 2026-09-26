@@ -52,11 +52,24 @@ export function attendeeConfirmation(record: RsvpRecord, locale: Locale) {
   };
 }
 
-export function organiserNotification(record: RsvpRecord) {
+export function organiserNotification(
+  record: RsvpRecord,
+  /** True when the attendee list could not be written — see `saveRsvp`. */
+  storeFailed = false,
+) {
   return {
-    subject: `New RSVP — ${record.name}`,
+    subject: storeFailed
+      ? `New RSVP (NOT SAVED TO SHEET) — ${record.name}`
+      : `New RSVP — ${record.name}`,
     text: [
       "New RSVP for the book release.",
+      ...(storeFailed
+        ? [
+            "",
+            "⚠️  This RSVP could NOT be written to the attendee sheet.",
+            "    Add it manually — this email is the only record.",
+          ]
+        : []),
       "",
       `Name:      ${record.name}`,
       `Email:     ${record.email}`,

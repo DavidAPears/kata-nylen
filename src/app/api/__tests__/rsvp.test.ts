@@ -174,6 +174,55 @@ describe("POST /api/rsvp", () => {
     expect(recipients).not.toContain("organiser@example.com");
   });
 
+  it("still honours the RSVP when the attendee store throws", async () => {
+    // A spreadsheet outage must not cost someone their place at the launch.
+    setRsvpStore({
+      name: "broken",
+      durable: true,
+      async save() {
+        throw new Error("Sheets API 503");
+      },
+    });
+
+    const response = await post(valid);
+    expect(response.status).toBe(200);
+    await expect(response.json()).resolves.toMatchObject({ ok: true });
+  });
+
+  it("flags the organiser email loudly when the store failed", async () => {
+    setRsvpStore({
+      name: "broken",
+      durable: true,
+      async save() {
+        throw new Error("Sheets API 503");
+      },
+    });
+
+    await post(valid);
+
+    // That email is now the only record of the submission, so it must say so.
+    const organiser = sendEmailMock.mock.calls.find(
+      ([m]) => m.to === "organiser@example.com",
+    );
+    expect(organiser).toBeDefined();
+    expect(organiser![0].subject).toContain("NOT SAVED");
+    expect(organiser![0].text).toContain("Add it manually");
+  });
+
+  it("still confirms to the attendee when the store failed", async () => {
+    setRsvpStore({
+      name: "broken",
+      durable: true,
+      async save() {
+        throw new Error("boom");
+      },
+    });
+
+    await post(valid);
+    const recipients = sendEmailMock.mock.calls.map(([m]) => m.to);
+    expect(recipients).toContain("guest@example.com");
+  });
+
   it("does not lose an RSVP when the confirmation email fails", async () => {
     // Email is best-effort. A mail outage must not cost someone their place.
     sendEmailMock.mockResolvedValue({ sent: false, error: "smtp down" });

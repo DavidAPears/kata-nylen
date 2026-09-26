@@ -1,5 +1,5 @@
 import { rsvpSchema, toFieldErrors } from "@/lib/validation";
-import { getRsvpStore, toRecord } from "@/lib/rsvp-store";
+import { saveRsvp, toRecord } from "@/lib/rsvp-store";
 import { sendEmail, notificationRecipient } from "@/lib/email";
 import { attendeeConfirmation, organiserNotification } from "@/lib/messages/rsvp";
 import { rateLimit, clientKey } from "@/lib/rate-limit";
@@ -48,7 +48,7 @@ export async function POST(request: Request) {
   }
 
   const record = toRecord(parsed.data);
-  const result = await getRsvpStore().save(record);
+  const result = await saveRsvp(record);
 
   if (result.status === "full") {
     return Response.json({ ok: false, error: "full" }, { status: 409 });
@@ -56,6 +56,9 @@ export async function POST(request: Request) {
 
   // A duplicate is not an error for the person submitting — they are already
   // on the list, which is exactly what they wanted. Re-send the confirmation.
+  //
+  // When the store failed we still notify the organiser: that email is the
+  // only remaining record of the submission, so it must not be skipped.
   await Promise.all([
     (async () => {
       const message = attendeeConfirmation(record, locale);
@@ -64,7 +67,7 @@ export async function POST(request: Request) {
     (async () => {
       const to = notificationRecipient();
       if (!to || result.status === "duplicate") return;
-      const message = organiserNotification(record);
+      const message = organiserNotification(record, result.status === "error");
       await sendEmail({ to, replyTo: record.email, ...message });
     })(),
   ]);

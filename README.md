@@ -70,24 +70,29 @@ Run the dev server and look at the footer — it lists everything still
 outstanding, with the exact key to fill in. That panel renders only in
 development.
 
-### RSVP storage is not decided yet
+### RSVP storage: Google Sheet
 
-`src/lib/rsvp-store.ts` defines the interface the rest of the app talks to.
-The current adapter logs the submission and relies on the notification email
-as the record — it does **not** claim to persist anything durably.
+RSVPs are appended to a Google Sheet Kata can open, sort and export herself —
+chosen over a database specifically so nobody has to build an admin screen.
+Setup is in [`docs/google-sheets-setup.md`](docs/google-sheets-setup.md).
 
-Swapping in real storage is a change to that one file. Options considered:
+`src/lib/rsvp-store.ts` defines the interface; `rsvp-store-sheets.ts` implements
+it against the Sheets REST API. With the `GOOGLE_SHEETS_*` variables unset the
+app falls back to logging, so local development needs no credentials.
 
-| | Kata can see the list | Export | Setup |
-| --- | --- | --- | --- |
-| **Google Sheet** (service account) | Yes, live | Native | Moderate |
-| Postgres (Neon/Vercel) | Only via a UI we'd build | We'd build it | Easy code |
-| Email only | Inbox only | No | Trivial |
+**A sheet outage never costs someone their place.** If the API fails, the RSVP
+is still accepted, the visitor still gets their confirmation, and the organiser
+notification email — subject-prefixed `NOT SAVED TO SHEET` — becomes the
+recoverable record. Failing the request would turn a spreadsheet hiccup into a
+lost attendee, which is worse than a row pasted in by hand.
+
+Duplicates are detected by email and written once. `RSVP_CAPACITY` optionally
+caps total guests.
 
 **Google Calendar auto-invite was considered and rejected**: it requires
 invite-first OAuth flows, and every attendee on a Calendar event can see every
 other attendee's email address — a GDPR problem for a public signup form. The
-useful half of the idea ("add to calendar") is implemented without any API.
+useful half ("add to calendar") is implemented without any API.
 
 ## Security & privacy
 
