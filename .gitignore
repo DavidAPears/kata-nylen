@@ -11,6 +11,18 @@ node_modules/
 *.pem
 *.key
 
+# Google service-account keys. The downloaded file is named unpredictably
+# (e.g. myproject-1a2b3c4d.json), so these patterns are belt-and-braces —
+# the real rule is: don't put the JSON in the repo at all. Copy the two
+# values it contains into .env.local and delete the file.
+*service-account*.json
+*serviceaccount*.json
+*gserviceaccount*.json
+google-credentials*.json
+gcp-*.json
+/credentials/
+/secrets/
+
 # Build output
 *.tsbuildinfo
 dist/

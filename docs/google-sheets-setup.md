@@ -48,8 +48,13 @@ In the [Google Cloud Console](https://console.cloud.google.com/):
    - No roles are needed — project roles are irrelevant here. Access comes from
      sharing the sheet, in step 3.
 4. Open the new service account → **Keys → Add key → Create new key → JSON**.
-   A `.json` file downloads. **Treat it like a password.** Do not commit it,
-   and do not put it in the repo — even ignored.
+   A `.json` file downloads. **Treat it like a password.**
+
+   Do not put it in the repo at all. Copy the two values you need into
+   `.env.local` (step 4), then delete the file. `.gitignore` has patterns for
+   the common names as a backstop, but Google names the download after your
+   project id, so don't rely on them. If you want to keep it, store it outside
+   the repo or in a password manager.
 
 ## 3. Share the sheet with the service account
 
