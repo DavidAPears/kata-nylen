@@ -269,7 +269,7 @@ export default async function BookReleasePage({
             forms={content.forms}
             labels={bookRelease.rsvp}
             guestsAllowed={guestsAllowed}
-            maxGuests={launchEvent.maxGuestsPerRsvp + 1}
+            maxGuests={launchEvent.maxPlacesPerRsvp}
             calendar={calendar}
           />
         </div>

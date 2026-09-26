@@ -96,16 +96,21 @@ Variables**. Paste the private key value *including* the quotes.
 
 ## 5. Check it works
 
-Start the dev server and submit an RSVP — or:
-
 ```bash
-curl -X POST http://localhost:3000/api/rsvp \
-  -H 'content-type: application/json' \
-  -d '{"name":"Test","email":"test@example.com","locale":"en"}'
+npm run check:sheets
 ```
 
-A row should appear in the sheet. If not, check the server logs — the adapter
-reports the Sheets API status code and message verbatim.
+This walks the whole setup and names the exact step that failed plus the fix,
+rather than leaving you with a bare 403. It uses the real adapter, so a pass
+means the RSVP route will work.
+
+On success it writes one row named `CONNECTION TEST (delete me)`. Delete it.
+It is left behind on purpose: proving the write happened is the point, and
+removing it silently would leave you unsure whether it ever did.
+
+What it checks, in order: variables present, private key well formed,
+authentication, spreadsheet reachable, tab exists, and a real write through
+the adapter.
 
 | Symptom | Cause |
 | --- | --- |

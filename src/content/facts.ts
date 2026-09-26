@@ -65,9 +65,11 @@ export const launchEvent = {
   postalCode: TODO as Fact<string>,
   city: TODO as Fact<string>,
   country: "SE",
-  /** Whether +1s are permitted. When false, the guests field is not rendered. */
-  guestsAllowed: TODO as Fact<boolean>,
-  maxGuestsPerRsvp: 1,
+  /** Whether +1s are permitted. When false, the places field is not rendered.
+   *  CONFIRMED 2026-09-26: yes, Kata wants as many people there as possible. */
+  guestsAllowed: true as Fact<boolean>,
+  /** Total places one person may reserve, INCLUDING themselves. */
+  maxPlacesPerRsvp: 4,
   /** Optional cap; when set, RSVPs beyond it are refused. */
   capacity: TODO as Fact<number>,
   /** Optional RSVP deadline, ISO 8601. */
@@ -128,7 +130,6 @@ export function outstandingFacts(): string[] {
   check("launchEvent.venueName", launchEvent.venueName);
   check("launchEvent.addressLine", launchEvent.addressLine);
   check("launchEvent.city", launchEvent.city);
-  check("launchEvent.guestsAllowed", launchEvent.guestsAllowed);
 
   return missing;
 }

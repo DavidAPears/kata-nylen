@@ -10,7 +10,8 @@
     "typecheck": "tsc --noEmit",
     "test": "vitest run",
     "test:watch": "vitest",
-    "test:e2e": "playwright test"
+    "test:e2e": "playwright test",
+    "check:sheets": "tsx scripts/check-sheets.mts"
   },
   "dependencies": {
     "google-auth-library": "^10.9.1",
@@ -35,6 +36,7 @@
     "eslint-config-next": "16.3.6",
     "jsdom": "^29.1.1",
     "tailwindcss": "^4",
+    "tsx": "^4.23.15",
     "typescript": "^5",
     "vitest": "^4.1.11"
   }

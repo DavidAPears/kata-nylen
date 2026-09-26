@@ -248,7 +248,7 @@ export const sv: SiteContent = {
       name: "Namn",
       email: "E-post",
       organisation: "Organisation",
-      guests: "Antal gäster",
+      guests: "Antal platser, inklusive dig",
       reason: "Anledning till kontakt",
       message: "Meddelande",
       marketingConsent:

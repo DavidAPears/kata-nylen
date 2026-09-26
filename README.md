@@ -27,6 +27,7 @@ with no credentials.
 | `npm run build` | Production build |
 | `npm test` | Vitest suite (unit + component) |
 | `npm run test:e2e` | Playwright layout/responsive suite |
+| `npm run check:sheets` | Diagnose the Google Sheets RSVP connection |
 | `npm run typecheck` | `tsc --noEmit` |
 | `npm run lint` | ESLint |
 
