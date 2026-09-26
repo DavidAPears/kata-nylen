@@ -22,7 +22,7 @@ export function Footer({ locale }: { locale: Locale }) {
               </a>
             ) : (
               <TodoNote>
-                Professional email — confirm with Kata whether she wants it
+                Professional email. Confirm with Kata whether she wants it
                 public (<code>person.email</code>).
               </TodoNote>
             )}

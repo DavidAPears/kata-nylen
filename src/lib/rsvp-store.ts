@@ -89,7 +89,7 @@ export async function saveRsvp(record: RsvpRecord): Promise<SaveResult> {
   } catch (cause) {
     const reason = cause instanceof Error ? cause.message : String(cause);
     console.error(
-      `[rsvp:store-failed] store=${store.name} — RSVP accepted anyway; ` +
+      `[rsvp:store-failed] store=${store.name}: RSVP accepted anyway; ` +
         `recover it from the organiser notification email. Reason: ${reason}`,
     );
     return { status: "error", reason };

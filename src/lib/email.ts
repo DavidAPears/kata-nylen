@@ -37,7 +37,7 @@ export async function sendEmail(message: Message): Promise<SendResult> {
 
   if (!resend || !from) {
     console.info(
-      `[email:skipped] to=<redacted> subject="${message.subject}" — no RESEND_API_KEY/CONTACT_FROM_EMAIL configured`,
+      `[email:skipped] to=<redacted> subject="${message.subject}" (no RESEND_API_KEY/CONTACT_FROM_EMAIL configured)`,
     );
     return { sent: false, skipped: true };
   }

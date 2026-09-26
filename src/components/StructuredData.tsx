@@ -122,8 +122,8 @@ export function EventJsonLd({ locale }: { locale: Locale }) {
         name: isResolved(book.title)
           ? `${locale === "sv" ? "Bokrelease" : "Book release"}: ${book.title}`
           : locale === "sv"
-            ? "Bokrelease — Kata Nylén"
-            : "Book release — Kata Nylén",
+            ? "Bokrelease med Kata Nylén"
+            : "Book release with Kata Nylén",
         startDate: launchEvent.startsAt,
         ...(isResolved(launchEvent.endsAt) ? { endDate: launchEvent.endsAt } : {}),
         eventStatus: "https://schema.org/EventScheduled",

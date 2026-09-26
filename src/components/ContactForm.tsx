@@ -83,7 +83,7 @@ export function ContactForm({
         {(props) => (
           <select {...props} name="reason" defaultValue={defaultReason ?? ""} className={inputClass}>
             <option value="" disabled>
-              —
+              {forms.chooseOption}
             </option>
             {reasons.map((reason) => (
               <option key={reason.value} value={reason.value}>

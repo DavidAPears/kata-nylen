@@ -52,8 +52,8 @@ export function getCalendarEvent(locale: "sv" | "en"): CalendarEvent | null {
       ? `Bokrelease: ${bookTitle}`
       : `Book release: ${bookTitle}`
     : locale === "sv"
-      ? "Bokrelease — Kata Nylén"
-      : "Book release — Kata Nylén";
+      ? "Bokrelease med Kata Nylén"
+      : "Book release with Kata Nylén";
 
   const addressParts = [
     launchEvent.venueName,

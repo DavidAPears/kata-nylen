@@ -25,7 +25,7 @@ export function attendeeConfirmation(record: RsvpRecord, locale: Locale) {
 
   if (locale === "sv") {
     return {
-      subject: "Din plats är bokad — bokrelease med Kata Nylén",
+      subject: "Din plats är bokad: bokrelease med Kata Nylén",
       text: [
         `Hej ${record.name},`,
         "",
@@ -39,7 +39,7 @@ export function attendeeConfirmation(record: RsvpRecord, locale: Locale) {
   }
 
   return {
-    subject: "You're on the list — Kata Nylén book release",
+    subject: "You're on the list: Kata Nylén book release",
     text: [
       `Hello ${record.name},`,
       "",
@@ -59,22 +59,22 @@ export function organiserNotification(
 ) {
   return {
     subject: storeFailed
-      ? `New RSVP (NOT SAVED TO SHEET) — ${record.name}`
-      : `New RSVP — ${record.name}`,
+      ? `New RSVP (NOT SAVED TO SHEET): ${record.name}`
+      : `New RSVP: ${record.name}`,
     text: [
       "New RSVP for the book release.",
       ...(storeFailed
         ? [
             "",
             "⚠️  This RSVP could NOT be written to the attendee sheet.",
-            "    Add it manually — this email is the only record.",
+            "    Add it manually. This email is the only record.",
           ]
         : []),
       "",
       `Name:      ${record.name}`,
       `Email:     ${record.email}`,
       `Guests:    ${record.guests}`,
-      `Marketing: ${record.marketingConsent ? "yes — consented" : "no"}`,
+      `Marketing: ${record.marketingConsent ? "yes, consented" : "no"}`,
       `Submitted: ${record.submittedAt}`,
     ].join("\n"),
   };
@@ -88,12 +88,12 @@ export function contactNotification(input: {
   message: string;
 }) {
   return {
-    subject: `Enquiry (${input.reason}) — ${input.name}`,
+    subject: `Enquiry (${input.reason}): ${input.name}`,
     text: [
       `Reason:       ${input.reason}`,
       `Name:         ${input.name}`,
       `Email:        ${input.email}`,
-      `Organisation: ${input.organisation || "—"}`,
+      `Organisation: ${input.organisation || "(none)"}`,
       "",
       input.message,
     ].join("\n"),

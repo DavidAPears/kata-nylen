@@ -26,7 +26,7 @@ export const sv: SiteContent = {
 
   home: {
     seo: {
-      title: "Kata Nylén — Psykolog, författare och föreläsare",
+      title: "Kata Nylén | Psykolog, författare och föreläsare",
       description:
         "Kata Nylén är psykolog, författare och föreläsare. Hon arbetar med klimatpsykologi, psykologisk motståndskraft, beteendeförändring och hur människor möter osäkerhet.",
     },
@@ -42,7 +42,7 @@ export const sv: SiteContent = {
       heading: "Om Kata",
       body: [
         "Kata Nylén är psykolog, författare och föreläsare. Hennes arbete rör sig i skärningspunkten mellan klimatpsykologi, psykologisk motståndskraft, beteendeförändring och människans svar på osäkerhet.",
-        "Hon skriver och talar om vad som händer med människor — enskilt och tillsammans — när världen omkring dem förändras snabbare än vad tanken hinner med.",
+        "Hon skriver och talar om vad som händer med människor, enskilt och tillsammans, när världen omkring dem förändras snabbare än vad tanken hinner med.",
       ],
     },
     featuredBook: {
@@ -66,7 +66,7 @@ export const sv: SiteContent = {
           id: "psychological-resilience",
           title: "Psykologisk motståndskraft",
           description:
-            "Vad som faktiskt bär människor och grupper under långvarig press — bortom individuell coping.",
+            "Vad som faktiskt bär människor och grupper under långvarig press, bortom individuell coping.",
         },
         {
           id: "behavioural-change",
@@ -123,12 +123,13 @@ export const sv: SiteContent = {
       dateLabel: "Datum",
       timeLabel: "Tid",
       venueLabel: "Plats",
+      toBeConfirmed: "Meddelas snart",
       rsvpCta: "Anmäl mig",
     },
     invitation: {
       heading: "Om kvällen",
       body: [
-        "En kväll för att fira släppet av den nya boken — ett samtal, en läsning och tid att prata.",
+        "En kväll för att fira släppet av den nya boken, med ett samtal, en läsning och tid att prata.",
         "Du är varmt välkommen. Anmäl dig gärna så att vi vet hur många vi blir.",
       ],
     },
@@ -174,7 +175,7 @@ export const sv: SiteContent = {
           id: "climate-psychology",
           title: "Klimatpsykologi",
           description:
-            "Vad klimatkrisen gör med hur människor tänker, känner och handlar — och vad det innebär för organisationer.",
+            "Vad klimatkrisen gör med hur människor tänker, känner och handlar, och vad det innebär för organisationer.",
         },
         {
           id: "resilience",
@@ -255,6 +256,7 @@ export const sv: SiteContent = {
     },
     optional: "valfritt",
     required: "obligatoriskt",
+    chooseOption: "Välj ett alternativ",
     honeypot: "Lämna detta fält tomt",
     privacyNotice:
       "Vi använder dina uppgifter endast för att svara på din fråga eller hantera din plats på evenemanget. Vi säljer eller delar dem aldrig.",
@@ -279,7 +281,7 @@ export const sv: SiteContent = {
       rsvpHeading: "Du står på listan.",
       rsvpBody:
         "Vi har skickat en bekräftelse till din e-postadress med detaljerna för kvällen.",
-      contactHeading: "Tack — ditt meddelande är på väg.",
+      contactHeading: "Tack. Ditt meddelande är på väg.",
       contactBody: "Vi återkommer så snart vi kan.",
     },
   },

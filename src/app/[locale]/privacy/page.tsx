@@ -145,7 +145,7 @@ export default async function PrivacyPage({
       <TodoNote>
         Brief §16: exact legal wording must be reviewed before production, and
         the data-controller contact details confirmed. Retention periods above
-        are drafted assumptions — Kata needs to confirm them.
+        are drafted assumptions that Kata needs to confirm.
       </TodoNote>
     </Container>
   );

@@ -100,7 +100,7 @@ export default async function BookReleasePage({
             <dt className="text-sm uppercase tracking-wide text-[var(--color-ink-muted)]">
               {bookRelease.hero.dateLabel}
             </dt>
-            <dd>{formatDate(startsAt, locale) ?? "—"}</dd>
+            <dd>{formatDate(startsAt, locale) ?? bookRelease.hero.toBeConfirmed}</dd>
           </div>
           <div>
             <dt className="text-sm uppercase tracking-wide text-[var(--color-ink-muted)]">
@@ -109,24 +109,25 @@ export default async function BookReleasePage({
             <dd>
               {formatTime(startsAt, locale)
                 ? `${formatTime(startsAt, locale)}${
-                    formatTime(endsAt, locale) ? `–${formatTime(endsAt, locale)}` : ""
+                    formatTime(endsAt, locale) ? `-${formatTime(endsAt, locale)}` : ""
                   }`
-                : "—"}
+                : bookRelease.hero.toBeConfirmed}
             </dd>
           </div>
           <div>
             <dt className="text-sm uppercase tracking-wide text-[var(--color-ink-muted)]">
               {bookRelease.hero.venueLabel}
             </dt>
-            <dd>{venueName ?? "—"}</dd>
+            <dd>{venueName ?? bookRelease.hero.toBeConfirmed}</dd>
           </div>
         </dl>
 
         {!startsAt || !venueName ? (
           <TodoNote>
             Event date, time and venue (<code>launchEvent.*</code>). Until these
-            are confirmed the page shows em-dashes rather than invented details,
-            and no Event structured data or calendar file is emitted.
+            are confirmed the page shows a to-be-confirmed placeholder rather
+            than invented details, and no Event structured data or calendar
+            file is emitted.
           </TodoNote>
         ) : null}
 

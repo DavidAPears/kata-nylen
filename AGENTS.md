@@ -17,7 +17,12 @@ constraints, and code comments reference its sections (`§10`, `§21.3`…).
 4. **Never emit structured data for unconfirmed facts.** A wrong date in
    JSON-LD propagates into search results and AI answers.
 5. **Marketing consent is separate, explicit and never pre-checked.**
-6. Do not add analytics, embeds or third-party scripts without checking the
+6. **No em dashes or en dashes in anything a person reads** — site copy, email,
+   page titles, placeholders. They read as machine-written, and this site's
+   whole proposition is a real person's voice. Use commas, colons or full
+   stops. Enforced by `src/content/__tests__/no-dashes.test.ts` and
+   `e2e/no-dashes.spec.ts`. (Code comments are not covered.)
+7. Do not add analytics, embeds or third-party scripts without checking the
    cookie-consent consequences in brief §16.
 
 ## Current stage

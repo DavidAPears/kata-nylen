@@ -93,6 +93,8 @@ export type BookReleaseContent = {
     dateLabel: string;
     timeLabel: string;
     venueLabel: string;
+    /** Shown in place of a detail Kata has not confirmed yet. */
+    toBeConfirmed: string;
     rsvpCta: string;
   };
   invitation: {
@@ -173,6 +175,8 @@ export type FormsContent = {
   };
   optional: string;
   required: string;
+  /** Placeholder option in a select, before a choice is made. */
+  chooseOption: string;
   /** Honeypot field label, visually hidden but present for screen readers */
   honeypot: string;
   privacyNotice: string;

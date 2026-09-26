@@ -64,7 +64,7 @@ export default async function SpeakingPage({
         <TodoNote>
           Confirm Kata&apos;s actual speaking themes (§11). The list above is
           drawn from the brief&apos;s suggested subjects, not from a confirmed
-          offering — do not publish until she approves it.
+          offering. Do not publish until she approves it.
         </TodoNote>
       </Section>
 
@@ -95,7 +95,7 @@ export default async function SpeakingPage({
           <p>{speaking.credibility.intro}</p>
         </Prose>
         <TodoNote>
-          Verified credentials only — previous events, organisations, media,
+          Verified credentials only: previous events, organisations, media,
           approved testimonials, academic background (§23). Nothing is rendered
           here until Kata supplies it.
         </TodoNote>

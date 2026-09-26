@@ -42,8 +42,8 @@ export default async function HomePage({
         </div>
         {!isResolved(person.portrait) ? (
           <TodoNote>
-            Approved portrait (<code>person.portrait</code>) — brief §6 wants it
-            used prominently here.
+            Approved portrait (<code>person.portrait</code>). Brief §6 wants
+            it used prominently here.
           </TodoNote>
         ) : null}
       </Container>

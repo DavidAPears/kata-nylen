@@ -95,6 +95,13 @@ invite-first OAuth flows, and every attendee on a Calendar event can see every
 other attendee's email address — a GDPR problem for a public signup form. The
 useful half ("add to calendar") is implemented without any API.
 
+## Copy conventions
+
+No em dashes or en dashes in anything a visitor reads: site copy, outgoing
+email, page titles, placeholders. They read as machine-written. Two tests
+enforce it, one over the content files and one over the rendered pages, so
+inline copy in a component is caught too.
+
 ## Responsive
 
 The book-release link is shared over WhatsApp, so most visitors meet this site

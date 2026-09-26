@@ -11,7 +11,7 @@ export function TodoNote({ children }: { children: React.ReactNode }) {
   if (process.env.NODE_ENV === "production") return null;
   return (
     <p className="my-2 border border-dashed border-neutral-400 bg-neutral-100 px-3 py-2 text-sm text-neutral-700">
-      <strong className="font-semibold">TODO — </strong>
+      <strong className="font-semibold">TODO: </strong>
       {children}
     </p>
   );

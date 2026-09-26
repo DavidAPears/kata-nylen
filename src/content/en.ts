@@ -25,7 +25,7 @@ export const en: SiteContent = {
 
   home: {
     seo: {
-      title: "Kata Nylén — Psychologist, author and speaker",
+      title: "Kata Nylén | Psychologist, author and speaker",
       description:
         "Kata Nylén is a Swedish psychologist, author and speaker working with climate psychology, psychological resilience, behavioural change and how people respond to uncertainty.",
     },
@@ -41,7 +41,7 @@ export const en: SiteContent = {
       heading: "About Kata",
       body: [
         "Kata Nylén is a Swedish psychologist, author and speaker. Her work sits at the intersection of climate psychology, psychological resilience, behavioural change and the human response to uncertainty.",
-        "She writes and speaks about what happens to people — individually and collectively — when the world around them changes faster than the mind expects.",
+        "She writes and speaks about what happens to people, individually and collectively, when the world around them changes faster than the mind expects.",
       ],
     },
     featuredBook: {
@@ -65,7 +65,7 @@ export const en: SiteContent = {
           id: "psychological-resilience",
           title: "Psychological resilience",
           description:
-            "What actually sustains people and groups under prolonged pressure — beyond individual coping.",
+            "What actually sustains people and groups under prolonged pressure, beyond individual coping.",
         },
         {
           id: "behavioural-change",
@@ -122,12 +122,13 @@ export const en: SiteContent = {
       dateLabel: "Date",
       timeLabel: "Time",
       venueLabel: "Venue",
+      toBeConfirmed: "To be confirmed",
       rsvpCta: "Reserve my place",
     },
     invitation: {
       heading: "About the evening",
       body: [
-        "An evening to mark the release of the new book — a conversation, a reading, and time to talk.",
+        "An evening to mark the release of the new book, with a conversation, a reading, and time to talk.",
         "You are warmly welcome. Please reserve a place so we know how many to expect.",
       ],
     },
@@ -173,7 +174,7 @@ export const en: SiteContent = {
           id: "climate-psychology",
           title: "Climate psychology",
           description:
-            "What the climate crisis does to how people think, feel and act — and what follows from that for organisations.",
+            "What the climate crisis does to how people think, feel and act, and what follows from that for organisations.",
         },
         {
           id: "resilience",
@@ -255,6 +256,7 @@ export const en: SiteContent = {
     },
     optional: "optional",
     required: "required",
+    chooseOption: "Choose an option",
     honeypot: "Leave this field empty",
     privacyNotice:
       "We use your details only to answer your enquiry or manage your place at the event. We never sell or share them.",
@@ -279,7 +281,7 @@ export const en: SiteContent = {
       rsvpHeading: "You're on the list.",
       rsvpBody:
         "We've sent a confirmation to your email address with the event details.",
-      contactHeading: "Thank you — your message is on its way.",
+      contactHeading: "Thank you. Your message is on its way.",
       contactBody: "We'll come back to you as soon as we can.",
     },
   },

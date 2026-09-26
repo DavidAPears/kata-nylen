@@ -30,7 +30,7 @@ export async function generateMetadata({
     metadataBase: new URL(site.url),
     title: {
       default: content.home.seo.title,
-      template: "%s — Kata Nylén",
+      template: "%s | Kata Nylén",
     },
     description: content.home.seo.description,
     // Brief §7: every page needs hreflang + x-default so the two language
