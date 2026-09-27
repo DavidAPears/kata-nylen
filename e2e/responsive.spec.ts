@@ -156,6 +156,33 @@ test.describe("phone", () => {
     await expect(switcher.locator("svg").first()).toBeHidden();
   });
 
+  test("no text is painted outside its own container", async ({ page }) => {
+    /*
+      A scrollWidth check misses text that overflows inside a clipped parent:
+      the box reports the right size while the glyphs paint past it and are
+      cut off. Measuring the text range catches that.
+    */
+    for (const path of ["/sv/bokrelease", "/en/book-release", "/sv", "/en"]) {
+      await page.goto(path);
+      const clipped = await page.evaluate(() => {
+        const bad: string[] = [];
+        for (const el of document.querySelectorAll("main p, main h1, main h2, main h3")) {
+          if (!el.firstChild || !el.textContent?.trim()) continue;
+          const range = document.createRange();
+          range.selectNodeContents(el);
+          const text = range.getBoundingClientRect();
+          const box = el.getBoundingClientRect();
+          // A couple of px of tolerance for antialiasing and italic overhang.
+          if (text.width > box.width + 3) {
+            bad.push(`${el.tagName}: "${el.textContent.trim().slice(0, 40)}"`);
+          }
+        }
+        return bad;
+      });
+      expect(clipped, `text painted outside its container on ${path}`).toEqual([]);
+    }
+  });
+
   test("interactive controls meet the 24px minimum touch target", async ({ page }) => {
     await page.goto("/sv/bokrelease");
 

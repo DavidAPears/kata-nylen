@@ -72,6 +72,23 @@ function formatDate(iso: string | undefined, locale: Locale): string | null {
   }).format(new Date(iso));
 }
 
+/**
+ * A short date for the three-column row on a phone.
+ *
+ * "Wednesday, 11 November 2026" forces that column to wrap over several lines
+ * and pushes the whole hero down into the artwork. The weekday is pleasant but
+ * not information anyone needs here.
+ */
+function formatDateShort(iso: string | undefined, locale: Locale): string | null {
+  if (!iso) return null;
+  return new Intl.DateTimeFormat(locale === "sv" ? "sv-SE" : "en-GB", {
+    day: "numeric",
+    month: "short",
+    year: "numeric",
+    timeZone: launchEvent.timeZone,
+  }).format(new Date(iso));
+}
+
 function formatTime(iso: string | undefined, locale: Locale): string | null {
   if (!iso) return null;
   return new Intl.DateTimeFormat(locale === "sv" ? "sv-SE" : "en-GB", {
@@ -168,7 +185,18 @@ export default async function BookReleasePage({
             title is what people search for. The evening's own name sits above
             it so the page still matches the invitation, which leads with it.
           */}
-          <p className="mb-5 text-sm uppercase tracking-[0.25em] text-[var(--color-book-orange-text)]">
+          <p /*
+              Tighter tracking on a phone: at 0.25em this line ran past the
+              container and was silently clipped by the hero's overflow-hidden,
+              so it looked cut off at both edges rather than wrapping.
+            */
+            /*
+              Held inside the leaf's navy centre on a phone. The leaf narrows
+              towards the top, and a wider line runs out over the orange band
+              where cream text has almost no contrast and simply disappears.
+              It was never clipped; it was camouflaged.
+            */
+            className="mx-auto mb-5 max-w-[15rem] text-xs uppercase tracking-[0.12em] text-[var(--color-book-orange-text)] sm:mx-0 sm:max-w-none sm:text-sm sm:tracking-[0.25em]">
             {/*
               The event's own name alone read as "some evening event". This is
               a book launch, and saying so is the point of the page, so both
@@ -176,10 +204,25 @@ export default async function BookReleasePage({
               dropped: at this size it made the line unreadable, and "Book
               launch" now carries the meaning anyway.
             */}
-            {resolved(launchEvent.name[locale]) ?? launchEventNameFor(locale)}
+            {/*
+              The plain Swedish name in both languages here. The English gloss
+              "(Resilience Salon)" makes this line long enough to run out over
+              the orange band on a phone, and it is redundant beside "Book
+              launch", which already says what the evening is. The gloss still
+              appears in the Event structured data and the calendar file.
+            */}
+            {resolved(launchEvent.name.sv) ?? launchEventNameFor(locale)}
             <span aria-hidden="true" className="mx-2 opacity-60">
               /
             </span>
+            {/*
+              A break opportunity after the separator. The margin around the
+              slash is visual only, so without this the whole line is one
+              unbreakable word: it reports no overflow, paints past its box and
+              gets clipped by the hero's overflow-hidden. Silent and invisible
+              to a scrollWidth check.
+            */}
+            <wbr />
             {bookRelease.hero.launchLabel}
           </p>
           {/*
@@ -194,7 +237,7 @@ export default async function BookReleasePage({
             Both use `hidden`, which is display:none, so assistive technology
             reads whichever one is actually shown and never both.
           */}
-          <h1 className="max-w-xl text-4xl text-[var(--color-book-cream-light)] sm:text-5xl">
+          <h1 className="mx-auto max-w-[17rem] text-4xl text-[var(--color-book-cream-light)] sm:mx-0 sm:max-w-xl sm:text-5xl">
             <span className="sm:hidden">
               {bookTitleFor(locale) ?? bookRelease.hero.heading}
             </span>
@@ -203,18 +246,33 @@ export default async function BookReleasePage({
             </span>
           </h1>
           {bookSubtitleFor(locale) ? (
-            <p className="mt-4 max-w-xl text-sm uppercase tracking-[0.12em] text-[var(--color-book-cream)]/80">
+            <p className="mx-auto mt-4 max-w-[17rem] text-sm uppercase tracking-[0.12em] text-[var(--color-book-cream)]/80 sm:mx-0 sm:max-w-xl">
               {bookSubtitleFor(locale)}
             </p>
           ) : null}
 
-          <dl className="mt-10 grid max-w-lg gap-6 text-[var(--color-book-cream-light)] sm:grid-cols-3">
+          <dl /*
+              Three columns on a phone too. Stacked, these three rows pushed
+              the hero down into the artwork and left the RSVP button sitting
+              over the orange band.
+            */
+            className="mx-auto mt-10 grid max-w-[19rem] grid-cols-3 gap-3 text-[var(--color-book-cream-light)] sm:mx-0 sm:max-w-lg sm:gap-6">
             <div>
               <dt className="text-xs uppercase tracking-[0.18em] text-[var(--color-book-orange-text)]">
                 {bookRelease.hero.dateLabel}
               </dt>
               <dd className="mt-1">
-                {formatDate(startsAt, locale) ?? bookRelease.hero.toBeConfirmed}
+                {/*
+                  Short date in the narrow column, full date where there is
+                  room. "Wednesday, 11 November 2026" wrapped over three lines
+                  on a phone and pushed the hero down into the artwork.
+                */}
+                <span className="sm:hidden">
+                  {formatDateShort(startsAt, locale) ?? bookRelease.hero.toBeConfirmed}
+                </span>
+                <span className="hidden sm:inline">
+                  {formatDate(startsAt, locale) ?? bookRelease.hero.toBeConfirmed}
+                </span>
               </dd>
             </div>
             <div>
