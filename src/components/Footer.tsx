@@ -5,6 +5,7 @@ import { collectives, person, isResolved } from "@/content/facts";
 import { Container, ExternalAnchor } from "./primitives";
 import { LanguageSwitcher } from "./LanguageSwitcher";
 import { OutstandingContent, TodoNote } from "./TodoNote";
+import { iconForProfile, labelForProfile } from "./SocialIcons";
 
 export function Footer({ locale }: { locale: Locale }) {
   const { footer, nav } = getContent(locale);
@@ -43,11 +44,19 @@ export function Footer({ locale }: { locale: Locale }) {
             <h2 className="mb-2 font-semibold">{footer.followHeading}</h2>
             {person.sameAs.length > 0 ? (
               <ul className="space-y-1">
-                {person.sameAs.map((url) => (
-                  <li key={url}>
-                    <ExternalAnchor href={url}>{new URL(url).hostname}</ExternalAnchor>
-                  </li>
-                ))}
+                {person.sameAs.map((url) => {
+                  const Icon = iconForProfile(url);
+                  return (
+                    <li key={url}>
+                      <ExternalAnchor href={url}>
+                        <span className="inline-flex items-center gap-2">
+                          {Icon ? <Icon className="h-4 w-4 shrink-0" /> : null}
+                          {labelForProfile(url)}
+                        </span>
+                      </ExternalAnchor>
+                    </li>
+                  );
+                })}
               </ul>
             ) : (
               <TodoNote>

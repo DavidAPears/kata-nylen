@@ -20,7 +20,7 @@ export default async function HomePage({
   return (
     <>
       {/* Hero */}
-      <Container className="py-14 sm:py-20">
+      <Container className="py-12 sm:py-16">
         <div className="grid items-center gap-10 sm:grid-cols-[1.1fr_0.9fr] sm:gap-14">
           <div>
             <p className="mb-4 text-sm uppercase tracking-[0.2em] text-[var(--color-ink-muted)]">
@@ -65,7 +65,11 @@ export default async function HomePage({
                 sizes="(min-width: 640px) 42vw, 100vw"
                 // Capped on small screens so the portrait supports the
                 // headline rather than swamping it.
-                className="max-h-[60vh] w-full rounded-xl object-cover sm:max-h-none"
+                // Capped at both sizes. Uncapped, the 2:3 portrait ran off
+                // the bottom of the fold on a laptop, and since the columns
+                // are vertically centred it left a slab of empty space above
+                // the headline. object-top keeps her face in frame as it crops.
+                className="max-h-[52vh] w-full rounded-xl object-cover object-top sm:max-h-[30rem]"
               />
             </div>
           ) : null}

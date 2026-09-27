@@ -39,7 +39,7 @@ export const person = {
   /** §12: professional email — only rendered if Kata wants it public */
   email: TODO as Fact<string>,
   /** §14: verified profiles for JSON-LD `sameAs`. Only add confirmed URLs. */
-  sameAs: [] as string[],
+  sameAs: ["https://www.linkedin.com/in/kata-nyl%C3%A9n-147b31127/"] as string[],
   /**
     * §6: portrait, used prominently on the home page.
     *
@@ -168,7 +168,7 @@ export function outstandingFacts(): string[] {
   check("book.title", book.title);
   check("book.publisher", book.publisher);
   if (book.synopsis.sv && !TODO_APPROVED.synopsis) {
-    missing.push("book.synopsis — DRAFT, needs Kata's or the publisher's copy");
+    missing.push("book.synopsis: DRAFT, needs Kata's or the publisher's copy");
   }
   check("book.publicationDate", book.publicationDate);
   check("book.purchaseUrl", book.purchaseUrl);

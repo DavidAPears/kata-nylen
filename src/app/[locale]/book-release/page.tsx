@@ -96,46 +96,44 @@ export default async function BookReleasePage({
         of path data is cached separately instead of bloating every request.
       */}
       {/*
-        Taller on wide screens. The leaf motif is portrait; in a short, wide
-        hero it renders narrow and the title crosses the orange bands. Giving
-        the hero height lets the leaf scale up so its navy centre is wide
-        enough to hold the text.
+        The chapter-opener motif is portrait; a wide hero fights it. So rather
+        than stretching or over-zooming it, the pattern gets its own panel at
+        its natural proportions on wide screens and the content sits beside it
+        on flat navy, which also makes contrast a non-issue.
+
+        On a phone the viewport is already portrait, so the pattern works
+        full-bleed behind the content exactly as it does in the book.
       */}
-      <div className="relative isolate flex items-center overflow-hidden bg-[var(--color-book-navy)] sm:min-h-[42rem]">
+      <div className="relative isolate overflow-hidden bg-[var(--color-book-navy)]">
         <div
           aria-hidden="true"
-          className="pointer-events-none absolute inset-0 bg-center bg-no-repeat"
+          className="pointer-events-none absolute inset-0 bg-center bg-no-repeat sm:hidden"
           style={{
             backgroundImage: "url(/leaf-pattern.svg)",
-            // Zoomed past "cover" on purpose. At cover the text crosses the
-            // orange bands and stops being readable; scaling up puts the
-            // leaf's navy centre behind the content and pushes the bands to
-            // the edges. This is how the book does it, and it means no wash
-            // over the artwork, which was making the colours look smudged.
             backgroundSize: "auto 155%",
           }}
         />
-        {/*
-          No scrim. The book's colours are flat and vivid, and any wash over
-          them reads as smudged. Contrast comes from the composition instead:
-          the content sits in the leaf's navy centre, exactly as the chapter
-          openers do, so it is cream on navy at 7.7:1. The content is kept
-          narrow so it stays inside that centre at every width.
-        */}
-        <Container className="relative py-24 text-center sm:py-32">
+        <div
+          aria-hidden="true"
+          className="pointer-events-none absolute inset-y-0 left-0 hidden w-[44%] bg-cover bg-center sm:block"
+          style={{ backgroundImage: "url(/leaf-pattern.svg)" }}
+        />
+
+        <Container className="relative py-24 text-center sm:py-28 sm:text-left">
+          <div className="sm:ml-[46%]">
           <p className="mb-5 text-sm uppercase tracking-[0.25em] text-[var(--color-book-orange-text)]">
             {bookRelease.hero.eyebrow}
           </p>
-          <h1 className="mx-auto max-w-xl text-4xl text-[var(--color-book-cream-light)] sm:text-5xl">
+          <h1 className="max-w-xl text-4xl text-[var(--color-book-cream-light)] sm:text-5xl">
             {bookTitleFor(locale) ?? bookRelease.hero.heading}
           </h1>
           {isResolved(book.subtitle) ? (
-            <p className="mx-auto mt-4 max-w-xl text-sm uppercase tracking-[0.12em] text-[var(--color-book-cream)]/80">
+            <p className="mt-4 max-w-xl text-sm uppercase tracking-[0.12em] text-[var(--color-book-cream)]/80">
               {book.subtitle}
             </p>
           ) : null}
 
-          <dl className="mx-auto mt-10 grid max-w-lg gap-6 text-[var(--color-book-cream-light)] sm:grid-cols-3">
+          <dl className="mt-10 grid max-w-lg gap-6 text-[var(--color-book-cream-light)] sm:grid-cols-3">
             <div>
               <dt className="text-xs uppercase tracking-[0.18em] text-[var(--color-book-orange-text)]">
                 {bookRelease.hero.dateLabel}
@@ -172,6 +170,7 @@ export default async function BookReleasePage({
               {bookRelease.hero.rsvpCta}
             </a>
           </p>
+          </div>
         </Container>
       </div>
 
