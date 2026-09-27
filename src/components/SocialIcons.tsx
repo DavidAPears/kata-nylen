@@ -29,11 +29,10 @@ export function LinkedInIcon({ className = "" }: { className?: string }) {
 /**
  * Natur & Kultur's mark, for the link to Kata's author page.
  *
- * ⚠️ This is a publisher's registered logo, shown here desaturated so it sits
- * with the other icons. Most publishers' brand guidelines require their logo
- * to appear unaltered, so this is worth checking with Natur & Kultur. Two
- * compliant alternatives if they object: drop the `grayscale` class and show
- * it in its own colours, or replace the mark with a plain text link.
+ * Shown in its own colours, unaltered. A publisher's registered logo normally
+ * has to appear that way under their brand guidelines, so this is both the
+ * compliant choice and the one that needs no permission. It is a small mark
+ * with only a little red in it, so it sits fine beside the LinkedIn glyph.
  */
 export function PublisherMark({ className = "" }: { className?: string }) {
   return (
@@ -45,7 +44,7 @@ export function PublisherMark({ className = "" }: { className?: string }) {
       height={134}
       loading="lazy"
       decoding="async"
-      className={`opacity-80 grayscale transition-opacity hover:opacity-100 ${className}`}
+      className={`opacity-90 transition-opacity hover:opacity-100 ${className}`}
     />
   );
 }
