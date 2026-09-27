@@ -117,7 +117,17 @@ export const launchEvent = {
    */
   name: {
     sv: "Resilienssalong" as Fact<string>,
-    en: "Resilienssalong" as Fact<string>,
+    /**
+     * The Swedish name leads and the English follows in brackets, as the book
+     * title does: the evening is called Resilienssalong, and that is what the
+     * signage and everyone there will say.
+     *
+     * "Salong" is a salon in the cultural sense, an evening gathering for
+     * conversation, music and ideas. Note that "salon" in English leans
+     * towards hairdressing; if that reads badly, "Resilienssalong (An evening
+     * of resilience)" is the alternative.
+     */
+    en: "Resilienssalong (Resilience Salon)" as Fact<string>,
   },
   tagline: {
     sv: "Odla psykologisk resiliens tillsammans" as Fact<string>,
@@ -261,9 +271,10 @@ export function outstandingFacts(): string[] {
   if (book.themes.sv.length === 0) missing.push("book.themes.sv");
   if (book.themes.en.length === 0) missing.push("book.themes.en");
 
-  check("launchEvent.endsAt (calendar falls back to 2 hours)", launchEvent.endsAt);
-  check("launchEvent.accessibility.sv", launchEvent.accessibility.sv);
-  check("launchEvent.accessibility.en", launchEvent.accessibility.en);
+  // Deliberately NOT listed: endsAt, capacity, postalCode and accessibility.
+  // David has decided none of them are needed for this launch. The calendar
+  // file falls back to a two-hour event, RSVPs are uncapped, and the address
+  // renders without a postcode. Revisit only if that changes.
 
   return missing;
 }
