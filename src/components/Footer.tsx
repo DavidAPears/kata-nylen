@@ -43,16 +43,27 @@ export function Footer({ locale }: { locale: Locale }) {
           <div>
             <h2 className="mb-2 font-semibold">{footer.followHeading}</h2>
             {person.sameAs.length > 0 ? (
-              <ul className="space-y-1">
+              <ul className="flex flex-wrap items-center gap-4">
                 {person.sameAs.map((url) => {
                   const Icon = iconForProfile(url);
+                  const label = labelForProfile(url);
                   return (
                     <li key={url}>
-                      <ExternalAnchor href={url}>
-                        <span className="inline-flex items-center gap-2">
-                          {Icon ? <Icon className="h-4 w-4 shrink-0" /> : null}
-                          {labelForProfile(url)}
-                        </span>
+                      {/*
+                        Icon alone, with the name visually hidden. The link
+                        still needs an accessible name, so the text is present
+                        for screen readers rather than removed. The link keeps
+                        a 24px target even though the glyph is smaller.
+                      */}
+                      <ExternalAnchor href={url} underline={!Icon}>
+                        {Icon ? (
+                          <>
+                            <Icon className="h-[18px] w-[18px] shrink-0" />
+                            <span className="sr-only">{label}</span>
+                          </>
+                        ) : (
+                          label
+                        )}
                       </ExternalAnchor>
                     </li>
                   );

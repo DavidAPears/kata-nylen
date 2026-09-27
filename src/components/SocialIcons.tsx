@@ -12,6 +12,10 @@ export function LinkedInIcon({ className = "" }: { className?: string }) {
   return (
     <svg
       viewBox="0 0 24 24"
+      // Explicit dimensions as a floor: without them, an SVG with only a
+      // viewBox falls back to 300x150 if the sizing class is ever missing.
+      width="18"
+      height="18"
       className={className}
       fill="currentColor"
       aria-hidden="true"
