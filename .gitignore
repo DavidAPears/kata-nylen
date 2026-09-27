@@ -29,6 +29,7 @@ dist/
 build/
 out/
 .next/
+.next-verify/
 .astro/
 .vercel/
 .netlify/

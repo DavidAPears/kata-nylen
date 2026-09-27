@@ -45,8 +45,13 @@ semantics or reduced-motion support in the meantime.
 ## Before committing
 
 ```bash
-npm run typecheck && npm test && npm run build
+npm run typecheck && npm test && NEXT_BUILD_DIR=.next-verify npm run build
 ```
+
+**Never run a plain `npm run build` while a dev server is running.** Both write
+to `.next`, so the build pulls the files the dev server is serving out from
+under it and the browser starts failing on missing chunks. `NEXT_BUILD_DIR`
+sends the build somewhere else.
 
 <!-- BEGIN:nextjs-agent-rules -->
 
