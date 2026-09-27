@@ -90,13 +90,6 @@ export default async function HomePage({
             <p key={paragraph}>{paragraph}</p>
           ))}
         </Prose>
-        {!isResolved(person.shortBio[locale]) ? (
-          <TodoNote>
-            Approved {locale === "sv" ? "Swedish" : "English"} short bio
-            (<code>person.shortBio.{locale}</code>). The copy above is drafted
-            direction, not Kata&apos;s approved biography.
-          </TodoNote>
-        ) : null}
       </Section>
 
       {/* Featured book — strongest conversion area during the campaign (§9) */}

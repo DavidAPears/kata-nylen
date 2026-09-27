@@ -4,7 +4,6 @@ import type { Locale } from "@/i18n/routing";
 import { getContent } from "@/content";
 import { getPathname, Link } from "@/i18n/navigation";
 import { Container, Section, Prose } from "@/components/primitives";
-import { TodoNote } from "@/components/TodoNote";
 
 export async function generateMetadata({
   params,
@@ -61,11 +60,6 @@ export default async function SpeakingPage({
             </li>
           ))}
         </ul>
-        <TodoNote>
-          Confirm Kata&apos;s actual speaking themes (§11). The list above is
-          drawn from the brief&apos;s suggested subjects, not from a confirmed
-          offering. Do not publish until she approves it.
-        </TodoNote>
       </Section>
 
       <Section ornament id="formats" heading={speaking.formats.heading} tone="sunken">
@@ -80,9 +74,6 @@ export default async function SpeakingPage({
             </li>
           ))}
         </ul>
-        <TodoNote>
-          Only publish formats Kata confirms she offers (§11).
-        </TodoNote>
       </Section>
 
       {/*
@@ -94,11 +85,6 @@ export default async function SpeakingPage({
         <Prose>
           <p>{speaking.credibility.intro}</p>
         </Prose>
-        <TodoNote>
-          Verified credentials only: previous events, organisations, media,
-          approved testimonials, academic background (§23). Nothing is rendered
-          here until Kata supplies it.
-        </TodoNote>
       </Section>
 
       <Section ornament id="enquiry" heading={speaking.cta.heading} tone="sunken">

@@ -426,12 +426,7 @@ export default async function BookReleasePage({
               <p>{launchEvent.accessibility[locale]}</p>
             </Prose>
           </>
-        ) : (
-          <TodoNote>
-            Accessibility information for the venue
-            (<code>launchEvent.accessibility.{locale}</code>).
-          </TodoNote>
-        )}
+        ) : null}
       </Section>
 
       {/* RSVP */}

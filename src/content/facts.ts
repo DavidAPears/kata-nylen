@@ -36,8 +36,15 @@ export const person = {
   jobTitle: { sv: TODO as Fact<string>, en: TODO as Fact<string> },
   /** §23: approved short bios */
   shortBio: { sv: TODO as Fact<string>, en: TODO as Fact<string> },
-  /** §12: professional email — only rendered if Kata wants it public */
-  email: TODO as Fact<string>,
+  /**
+    * §12: public contact address.
+    *
+    * ⚠️ This is Kata's personal Gmail. Publishing it invites scraping and
+    * spam. Once katanylen.com exists, move to a role address such as
+    * hej@katanylen.com forwarded to her, which can be changed later without
+    * breaking anything.
+    */
+  email: "kata.nylen@gmail.com" as Fact<string>,
   /** §14: verified profiles for JSON-LD `sameAs`. Only add confirmed URLs. */
   sameAs: [
     "https://www.linkedin.com/in/kata-nyl%C3%A9n-147b31127/",
@@ -185,7 +192,10 @@ export const launchEvent = {
   /** What the evening holds, as listed on the poster. */
   includes: {
     sv: ["Musik", "Text", "Samtal", "Möten", "Mingel", "Boksignering"],
-    en: ["Music", "Readings", "Conversation", "Meeting people", "Mingling", "Book signing"],
+    /* "Möten" and "Mingel" are distinct in Swedish but collapse into one idea
+       in English, so they become a single item rather than reading as a
+       repetition. */
+    en: ["Music", "Readings", "Conversation", "Networking", "Book signing"],
   },
   /** Performing with Kata. A real person: credit, never drop. */
   guests: [
