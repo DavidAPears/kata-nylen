@@ -26,30 +26,35 @@ Exact values from the vector art in the book's interior.
 Earlier guesses of `#152a4a` / `#de8a3e`, sampled from a photo of a screen,
 were wrong. These replace them.
 
-## Typeface — CONFIRMED, and it is commercial
+## Typefaces — CONFIRMED, two of them, both commercial
 
-The book is set in:
+Checked against which text spans actually use each face, not just the font
+list, because the two do very different jobs:
 
-| Font | Weights present | Role |
+| Font | Role |
+| --- | --- |
+| **Rita Smith** | Book title, chapter titles, orange section headings. The distinctive one: rounded, chunky, warm, slightly quirky. |
+| **TT Jenevers** | Body text, subheads, page numbers. Sturdy wedge serifs, moderate contrast. |
+
+Both are commercial and Kata's print licences do not cover web use.
+
+**Recommended: licence the real pair.** The design's premise is that the site
+and the book read as one object, and only the real faces deliver that.
+
+### Stand-ins currently loaded
+
+Chosen by rendering the book's own words against candidates side by side.
+
+| Role | Stand-in | Rejected |
 | --- | --- | --- |
-| **TT Jenevers** | Regular, Medium, Bold, ExtraBold, + italics | Everything |
-| **Rita Smith** | — | Secondary/display |
+| Display (for Rita Smith) | **Fraunces**, SOFT 70 / WONK 1 | Crete Round (too evenly rounded), Bitter (too rigid a slab) |
+| Body (for TT Jenevers) | **Literata** | Source Serif 4 (too neutral), Newsreader (too much contrast) |
 
-My earlier guess of Playfair Display was wrong.
+Fraunces is variable; the SOFT and WONK axes are what get it near Rita Smith's
+warmth, tuned in `globals.css`. Playfair Display, used in the first pass, was
+wrong on both counts: far too high-contrast and Didone.
 
-**TT Jenevers is a commercial face from TypeType.** The print licence Kata
-already holds does not cover web use. Two options:
-
-1. **Buy a TT Jenevers webfont licence** from TypeType. Gives exact continuity
-   between book and site. Recommended if the budget allows, since the whole
-   point is that they read as one object.
-2. **Substitute a free face.** Closest in character (sturdy wedge serifs,
-   moderate contrast, warm and bookish): **Literata**, then **Fraunces** or
-   **Newsreader**. None is a match; they are a family resemblance.
-
-Currently loaded: Playfair Display, as a stand-in from the earlier pass. It is
-noticeably higher-contrast and more Didone than TT Jenevers, so it should be
-swapped once the decision is made. One line in `src/app/fonts.ts`.
+Swapping either is a few lines in `src/app/fonts.ts`.
 
 ## The leaf — EXTRACTED, not traced
 

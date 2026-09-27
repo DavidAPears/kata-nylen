@@ -1,23 +1,45 @@
-import { Playfair_Display } from "next/font/google";
+import { Fraunces, Literata } from "next/font/google";
 
 /**
- * Display face.
+ * ⚠️ BOTH ARE STAND-INS. The book uses two commercial faces, confirmed from
+ * the embedded fonts in the print PDF and checked against which text spans
+ * actually use them:
  *
- * Playfair Display is my best read of the serif on Kata's own book-launch
- * flyer — high-contrast, bracketed serifs, editorial rather than literary.
- * ⚠️ Unconfirmed: identified from a photo of a screen. If Kata made that flyer
- * in Canva, the real name is in the editor — swap this the moment we know.
+ *   • Rita Smith   — book title, chapter titles, orange section headings.
+ *                    The distinctive one: rounded, chunky, warm, a bit quirky.
+ *   • TT Jenevers  — body text, subheads, page numbers. The workhorse:
+ *                    sturdy wedge serifs, moderate contrast.
  *
- * Loaded via next/font so the file is self-hosted, preloaded and subset at
- * build time: no render-blocking request to Google, no layout shift, and no
- * third-party connection to declare in the privacy notice (brief §16).
+ * Kata's print licences do not cover web use. If the budget allows, licence
+ * the real pair and swap them in here; the design's whole premise is that the
+ * site and the book read as one object, and only the real faces do that.
  *
- * `latin-ext` is required — Swedish needs å, ä, ö, and "Nylén" needs é.
+ * The substitutes below were chosen by rendering the book's own words against
+ * candidates side by side, not from memory.
  */
-export const displayFont = Playfair_Display({
+
+/**
+ * Display, standing in for Rita Smith. Fraunces is a variable face whose SOFT
+ * and WONK axes get close to Rita Smith's rounded, slightly quirky warmth.
+ * Rejected: Crete Round (too evenly rounded), Bitter (too rigid a slab).
+ */
+export const displayFont = Fraunces({
   subsets: ["latin", "latin-ext"],
   display: "swap",
   variable: "--font-display-loaded",
-  // Only the weights we actually use; every extra weight is bytes on the wire.
-  weight: ["400", "600", "700"],
+  // Variable font: weights come from CSS, so no `weight` here. Declaring the
+  // axes lets us dial in SOFT and WONK, which is what gets us near Rita Smith.
+  axes: ["SOFT", "WONK", "opsz"],
+});
+
+/**
+ * Body, standing in for TT Jenevers. Literata shares its sturdy wedge serifs
+ * and moderate contrast, and is built for long-form reading on screen.
+ * Rejected: Source Serif 4 (too neutral), Newsreader (too much contrast).
+ */
+export const bodyFont = Literata({
+  subsets: ["latin", "latin-ext"],
+  display: "swap",
+  variable: "--font-body-loaded",
+  weight: ["400", "600"],
 });
