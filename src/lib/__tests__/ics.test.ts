@@ -87,6 +87,24 @@ describe("with confirmed event details", () => {
     expect(url.searchParams.get("dates")).toBe("20260416T160000Z/20260416T190000Z");
   });
 
+  it("folds long lines to 75 octets, as RFC 5545 requires", async () => {
+    // Outlook and some Google importers reject an over-length line outright,
+    // which would lose the guest their calendar entry.
+    vi.doMock("@/content/facts", () => ({
+      ...confirmedFacts,
+      launchEventNameFor: () =>
+        "A deliberately very long event name that will not fit inside a single seventy five octet calendar line and must therefore be folded across several",
+    }));
+    const { buildIcs, getCalendarEvent } = await import("../ics");
+    const ics = buildIcs(getCalendarEvent("en")!);
+    for (const line of ics.split("\r\n")) {
+      expect(line.length).toBeLessThanOrEqual(75);
+    }
+    // A continuation is marked by a single leading space, and nothing is lost.
+    expect(ics).toContain("\r\n ");
+    expect(ics.replace(/\r\n /g, "")).toContain("must therefore be folded");
+  });
+
   it("builds a directions link without needing a Maps API key", async () => {
     const { directionsUrl } = await load();
     const url = new URL(directionsUrl("Example Venue, Stockholm"));
