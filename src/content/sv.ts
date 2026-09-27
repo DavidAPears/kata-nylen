@@ -230,7 +230,14 @@ export const sv: SiteContent = {
     },
     credibility: {
       heading: "Bakgrund",
-      intro: "Böcker, tidigare uppdrag och professionell bakgrund.",
+      intro: "Tidigare uppdrag, i urval. Hela listan finns under Medier.",
+      roles: {
+        moderator: "Moderator",
+        workshop: "Workshop",
+        interview: "Intervju",
+        contributor: "Medverkande",
+      },
+      recognitionLabel: "Omnämnande",
     },
     cta: {
       heading: "Vill du bjuda in Kata?",

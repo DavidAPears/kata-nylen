@@ -746,6 +746,39 @@ export function bookSubtitleFor(locale: "sv" | "en"): string | undefined {
   return resolved(book.subtitleEnglish) ?? resolved(book.subtitle);
 }
 
+/**
+ * The handful of media items that count as evidence on the Speaking page.
+ *
+ * An organiser arriving there is asking one question: has she done this, at
+ * the level I am booking for? So the chairing and workshop credits lead, since
+ * they are the ones that match what is being booked. An interview shows she is
+ * asked for her view, which is worth one slot and no more.
+ *
+ * Deliberately a short selection rather than the whole list. The Media page is
+ * the archive; repeating it here made the same links read twice and turned a
+ * credential list into link-stuffing.
+ *
+ * Chosen by role rather than by id, so a new moderating credit from Kata
+ * surfaces on its own instead of waiting for someone to remember this file.
+ */
+const SPEAKING_ROLE_RANK: Record<MediaRole, number> = {
+  moderator: 0,
+  workshop: 1,
+  interview: 2,
+  contributor: 3,
+};
+
+export function speakingCredentials(limit = 3): MediaItem[] {
+  return [...media]
+    .sort((a, b) => {
+      const byRole = SPEAKING_ROLE_RANK[a.role] - SPEAKING_ROLE_RANK[b.role];
+      if (byRole !== 0) return byRole;
+      // Within a role, anything we have already marked as a highlight wins.
+      return Number(Boolean(b.featured)) - Number(Boolean(a.featured));
+    })
+    .slice(0, limit);
+}
+
 export function bookTitleFor(locale: "sv" | "en"): string | undefined {
   const title = resolved(book.title);
   if (!title) return undefined;

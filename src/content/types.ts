@@ -158,6 +158,17 @@ export type SpeakingContent = {
   credibility: {
     heading: string;
     intro: string;
+    /**
+     * What Kata did, not just where she appeared. Chairing a panel and being
+     * interviewed are different things, and on a Speaking page the difference
+     * is the whole point.
+     */
+    roles: Record<"moderator" | "workshop" | "interview" | "contributor", string>;
+    /**
+     * For the recognition entries. "Mention" rather than "Award": being named
+     * on someone else's list is not a prize, and saying so would overstate it.
+     */
+    recognitionLabel: string;
   };
   cta: {
     heading: string;

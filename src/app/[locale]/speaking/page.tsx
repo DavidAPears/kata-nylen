@@ -4,7 +4,7 @@ import type { Locale } from "@/i18n/routing";
 import { getContent } from "@/content";
 import { getPathname, Link } from "@/i18n/navigation";
 import { Container, Section, Prose, ExternalAnchor } from "@/components/primitives";
-import { recognition, media } from "@/content/facts";
+import { recognition, speakingCredentials } from "@/content/facts";
 
 export async function generateMetadata({
   params,
@@ -30,6 +30,15 @@ export async function generateMetadata({
     },
   };
 }
+
+/**
+ * The small caps label above each entry. No icon beside it: the media-kind
+ * glyphs would have put the same browser-window icon on two of the three
+ * entries, which reads as a bug, and the role is the part that carries
+ * meaning here anyway.
+ */
+const LABEL =
+  "text-xs uppercase tracking-[0.12em] text-[var(--color-ink-muted)]";
 
 export default async function SpeakingPage({
   params,
@@ -95,6 +104,7 @@ export default async function SpeakingPage({
         <ul className="mt-6 max-w-2xl space-y-5">
           {recognition.map((item) => (
             <li key={item.id}>
+              <p className={LABEL}>{speaking.credibility.recognitionLabel}</p>
               <ExternalAnchor href={item.url}>{item.title[locale]}</ExternalAnchor>
               <span className="text-[var(--color-ink-muted)]"> · {item.source}</span>
               <p className="mt-1 max-w-[var(--measure)] text-sm text-[var(--color-ink-muted)]">
@@ -102,14 +112,20 @@ export default async function SpeakingPage({
               </p>
             </li>
           ))}
-          {media
-            .filter((item) => item.featured)
-            .map((item) => (
-              <li key={item.id}>
-                <ExternalAnchor href={item.url}>{item.title[locale]}</ExternalAnchor>
-                <span className="text-[var(--color-ink-muted)]"> · {item.source}</span>
-              </li>
-            ))}
+          {/*
+            A short, role-led selection rather than every featured item. What
+            an organiser needs to know is what Kata actually did: chairing a
+            panel and being interviewed are not the same credential, and the
+            role is the part the Media page does not show. Listing all of them
+            here just repeated that page's links and read as padding.
+          */}
+          {speakingCredentials().map((item) => (
+            <li key={item.id}>
+              <p className={LABEL}>{speaking.credibility.roles[item.role]}</p>
+              <ExternalAnchor href={item.url}>{item.title[locale]}</ExternalAnchor>
+              <span className="text-[var(--color-ink-muted)]"> · {item.source}</span>
+            </li>
+          ))}
         </ul>
 
         <p className="mt-6 flex flex-wrap gap-x-6 gap-y-2">

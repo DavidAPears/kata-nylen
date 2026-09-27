@@ -10,7 +10,11 @@ import {
   bookSubtitleFor,
   launchEventNameFor,
   outstandingFacts,
+  speakingCredentials,
+  media,
 } from "@/content/facts";
+import { en } from "@/content/en";
+import { sv } from "@/content/sv";
 
 describe("the TODO sentinel", () => {
   it("treats a real value as resolved and the sentinel as not", () => {
@@ -98,5 +102,43 @@ describe("outstandingFacts", () => {
   it("flags the synopsis until the publisher has signed it off", () => {
     // It has a value, so a plain sentinel check would miss it.
     expect(outstandingFacts().some((m) => m.startsWith("book.synopsis"))).toBe(true);
+  });
+});
+
+describe("speakingCredentials", () => {
+  it("leads with what Kata ran, not what she was asked about", () => {
+    // An organiser is booking a chair or a workshop, so those credits have to
+    // come first. An interview shows she is asked for her view, which earns a
+    // place but not the top of the list.
+    const roles = speakingCredentials().map((item) => item.role);
+    expect(roles[0]).toBe("moderator");
+    expect(roles).toContain("workshop");
+  });
+
+  it("is a short selection, not the whole media list", () => {
+    expect(speakingCredentials()).toHaveLength(3);
+    expect(speakingCredentials(2)).toHaveLength(2);
+    expect(speakingCredentials().length).toBeLessThan(media.length);
+  });
+
+  it("never repeats an item", () => {
+    const ids = speakingCredentials(media.length).map((item) => item.id);
+    expect(new Set(ids).size).toBe(ids.length);
+  });
+
+  it("returns real items, each with a role label we can render", () => {
+    for (const item of speakingCredentials()) {
+      expect(item.url.startsWith("https://")).toBe(true);
+      expect(en.speaking.credibility.roles[item.role]).toBeTruthy();
+      expect(sv.speaking.credibility.roles[item.role]).toBeTruthy();
+    }
+  });
+
+  it("does not mutate the underlying media list", () => {
+    // It sorts a copy. Sorting `media` in place would silently reorder the
+    // Media page, which is meant to stay in the order we curated.
+    const before = media.map((item) => item.id);
+    speakingCredentials();
+    expect(media.map((item) => item.id)).toEqual(before);
   });
 });

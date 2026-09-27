@@ -230,7 +230,14 @@ export const en: SiteContent = {
     },
     credibility: {
       heading: "Background",
-      intro: "Books, previous events and professional background.",
+      intro: "A selection of previous engagements. The full list is under Media.",
+      roles: {
+        moderator: "Moderator",
+        workshop: "Workshop",
+        interview: "Interview",
+        contributor: "Contributor",
+      },
+      recognitionLabel: "Mention",
     },
     cta: {
       heading: "Interested in inviting Kata?",
