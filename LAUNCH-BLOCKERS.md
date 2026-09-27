@@ -1,26 +1,48 @@
 # ⚠️ LAUNCH BLOCKERS & NEXT STEPS
 
-Live site: **https://kata-nylen.vercel.app** (noindexed until the domain
-is attached, see A4)
+Live site: **https://katanylen.com**
 Attendee sheet: `docs/google-sheets-setup.md`
 
 Status as of 27 Sep 2026: RSVP pipeline works end to end in production. Form →
 Google Sheet → confirmation email. Event details are confirmed, the design pass
 is done, and the site is live at the Vercel URL.
 
-**The domain is now the only thing between us and a real launch.** Everything
-else on this list is either Kata's to supply or a nice-to-have.
+**27 Sep, evening: the domain is live and email is verified.** katanylen.com
+is bought at one.com, DNS points at Vercel, Resend has verified the domain,
+and the site is indexable. Nothing is blocking launch any more. What is left
+is Kata's copy and a handful of improvements.
 
 ---
 
 # PART A — THINGS WE DO (David + Claude)
 
-## 🔴 A1. DOMAIN + EMAIL — the one that blocks launch
+## 🟢 A1. DOMAIN + EMAIL — DONE, 27 Sep
 
-**Today, RSVP confirmation emails only reach davidapears@gmail.com.** Emails
-send from Resend's shared `onboarding@resend.dev`, which by design delivers
-only to the Resend account owner. A real guest would submit the form, see
-"Du står på listan", and receive nothing.
+katanylen.com is registered at one.com and live. Confirmation emails now
+send from `hej@katanylen.com` and reach anyone, not just David.
+
+What was done, for reference if it ever needs redoing:
+
+- one.com's two default `A` records (their parking page) toggled **off**.
+  Leave them off: turning one back on adds a second `A` record for the same
+  name and the site then loads one.com's holding page at random.
+- Custom records added at one.com: `A @ 216.198.79.1` and
+  `CNAME www 24417a89ebe22dc4.vercel-dns-017.com`.
+- Vercel: both the apex and `www` added, with "redirect apex to www"
+  **unticked** so katanylen.com is the real address. The code's
+  `CANONICAL_HOST` assumes the apex.
+- Resend: DKIM, two SPF CNAMEs and DMARC added at one.com, domain verified.
+- `CONTACT_FROM_EMAIL` updated in Vercel and `.env.local`.
+
+⚠️ The domain has a **null MX** record: it accepts no mail at all, because
+she is on one.com's Domain-only plan. Nothing can receive at
+`hej@katanylen.com`. The RSVP confirmation therefore sets a reply-to of
+`CONTACT_TO_EMAIL`, so a guest hitting reply reaches Kata's gmail rather
+than a bounce. If she ever buys a mailbox or forwarding, that reply-to can
+go.
+
+<details>
+<summary>Original instructions, kept in case the domain ever moves</summary>
 
 Once **katanylen.com** is bought, in order:
 
@@ -44,6 +66,8 @@ Once **katanylen.com** is bought, in order:
    URLs.
 8. Test with an address that is NOT davidapears@gmail.com, to prove the
    restriction is gone. This is the actual proof that launch is unblocked.
+
+</details>
 
 ## 🟢 A2. EVENT DETAILS — DONE
 
@@ -90,14 +114,17 @@ address and directions link, so nothing breaks.
 Deliberately NOT the Maps JavaScript API: for one fixed venue it ships a large
 bundle, hurts Core Web Vitals, and exposes a key regardless.
 
-## 🟢 A4. SEARCH INDEXING — already handled, but know how it works
+## 🟢 A4. SEARCH INDEXING — now ON, 27 Sep
 
-On `kata-nylen.vercel.app` the site serves `Disallow: /` plus a `noindex` meta
-tag, so Kata's name is not indexed against placeholder copy.
+It lifted itself, as designed: Vercel promoted katanylen.com to the project's
+production domain, `isIndexable()` flipped, and robots.txt now serves
+`Allow: /` with a sitemap. The `noindex` meta tag is gone, and canonical URLs
+and OG images all point at katanylen.com.
 
-It lifts itself: Vercel sets `VERCEL_PROJECT_PRODUCTION_URL` to the project's
-production domain, so indexing switches on once katanylen.com is attached
-**and the project is redeployed**. Override either way with `SITE_INDEXABLE`.
+Override either way with `SITE_INDEXABLE` if that is ever needed.
+
+**Still to do, and it needs David:** the site is crawlable but nobody has
+told Google it exists. See A8.
 
 ## 🟠 A5. ROTATE THE RESEND API KEY
 
@@ -138,6 +165,36 @@ delete → create new → update `.env.local` AND Vercel.
    What is safe and still strong: her real topics in depth, the real books with
    real publishers, the collectives she works with, her actual areas of
    practice, and verifiable facts about the field.
+
+## 🔵 A8. GETTING HER FOUND — the next real piece of work
+
+Done on 27 Sep: the Person schema now carries `knowsAbout` (her themes) and
+`makesOffer` (keynote, panel, workshop, moderated conversation), so the site
+finally says she is *bookable* rather than only that she exists. The speaking
+page is titled for the query a booker types, not for the page.
+
+What needs David, roughly in order of value:
+
+1. **Google Search Console.** Verify katanylen.com (the DNS TXT method is
+   easiest, one more record at one.com), then submit
+   `https://katanylen.com/sitemap.xml`. Until this happens, indexing relies
+   on Google finding her on its own. This is the single highest-value thing
+   left.
+2. **Bing Webmaster Tools.** Same job, five minutes, and it also feeds
+   ChatGPT search.
+3. **Get the domain linked from somewhere real.** Her Natur & Kultur author
+   page, MySpeaker profile, LinkedIn, Klimatpsykologerna and Climate Psyched
+   all already exist and already carry authority. A link from each to
+   katanylen.com is worth more than anything else on this list. Ask her to
+   add it wherever she can.
+4. **A speaker one-pager** is the natural next page: topics, formats,
+   audience sizes, languages, travel, past engagements, a downloadable bio
+   and photo. That is what a conference producer actually wants, and most of
+   it already exists on the site.
+
+What needs Kata: her job title and short bio are still TODO, so the Person
+schema ships without `jobTitle` or `description`. Those are two of the
+strongest fields on an entity. Run `npm run check:content`.
 
 ## 🟢 A6. DESIGN PASS — DONE, pending Kata's eye
 
