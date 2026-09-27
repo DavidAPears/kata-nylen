@@ -10,6 +10,8 @@ import {
   isResolved,
   resolved,
   bookTitleFor,
+  bookTitlePlainFor,
+  bookSubtitleFor,
   launchEventNameFor,
 } from "@/content/facts";
 import { getCalendarEvent, googleCalendarUrl, directionsUrl } from "@/lib/ics";
@@ -152,12 +154,29 @@ export default async function BookReleasePage({
           <p className="mb-5 text-sm uppercase tracking-[0.25em] text-[var(--color-book-orange-text)]">
             {launchEventNameFor(locale)}
           </p>
+          {/*
+            Two renderings of the same title, one shown at a time.
+
+            On wide screens the cover sits beside this and already shows the
+            Swedish title, so repeating it in brackets is clutter: English
+            pages get the English title alone. On a phone the cover is not in
+            the hero, so the Swedish title leads with the translation in
+            brackets, keeping the real, searchable title visible.
+
+            Both use `hidden`, which is display:none, so assistive technology
+            reads whichever one is actually shown and never both.
+          */}
           <h1 className="max-w-xl text-4xl text-[var(--color-book-cream-light)] sm:text-5xl">
-            {bookTitleFor(locale) ?? bookRelease.hero.heading}
+            <span className="sm:hidden">
+              {bookTitleFor(locale) ?? bookRelease.hero.heading}
+            </span>
+            <span className="hidden sm:inline">
+              {bookTitlePlainFor(locale) ?? bookRelease.hero.heading}
+            </span>
           </h1>
-          {isResolved(book.subtitle) ? (
+          {bookSubtitleFor(locale) ? (
             <p className="mt-4 max-w-xl text-sm uppercase tracking-[0.12em] text-[var(--color-book-cream)]/80">
-              {book.subtitle}
+              {bookSubtitleFor(locale)}
             </p>
           ) : null}
 

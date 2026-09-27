@@ -65,6 +65,7 @@ export const book = {
   /** The book is Swedish. On English pages the Swedish title leads and this
    *  follows in brackets, so the real title stays findable and searchable. */
   titleEnglish: "Psychological resilience" as Fact<string>,
+  subtitleEnglish: "Meeting adversity in an uncertain world" as Fact<string>,
   publisher: "Natur & Kultur" as Fact<string>,
   /* CONFIRMED from the publisher's own title page. */
   publicationDate: "2026-11-06" as Fact<string>,
@@ -225,6 +226,25 @@ export function launchEventNameFor(locale: "sv" | "en"): string {
     : locale === "sv"
       ? "Bokrelease med Kata Nylén"
       : "Book release with Kata Nylén";
+}
+
+/**
+ * The title with no bracketed translation: the Swedish title on Swedish pages,
+ * the English one on English pages.
+ *
+ * Used where the cover is visible beside the text, which is the case on the
+ * book-release hero at `sm` and up. The cover already shows the Swedish title,
+ * so repeating it there just reads as clutter.
+ */
+export function bookTitlePlainFor(locale: "sv" | "en"): string | undefined {
+  if (locale === "sv") return resolved(book.title);
+  return resolved(book.titleEnglish) ?? resolved(book.title);
+}
+
+/** Subtitle, in the page's own language. */
+export function bookSubtitleFor(locale: "sv" | "en"): string | undefined {
+  if (locale === "sv") return resolved(book.subtitle);
+  return resolved(book.subtitleEnglish) ?? resolved(book.subtitle);
 }
 
 export function bookTitleFor(locale: "sv" | "en"): string | undefined {
