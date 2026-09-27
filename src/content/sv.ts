@@ -373,6 +373,7 @@ export const sv: SiteContent = {
       contributor: "medverkande",
     },
     viewAllLabel: "Allt i medier",
+    jumpIntro: "Hoppa till",
   },
 
   contact: {

@@ -11,7 +11,9 @@
     "test": "vitest run",
     "test:watch": "vitest",
     "test:e2e": "playwright test",
-    "check:sheets": "tsx scripts/check-sheets.mts"
+    "check:sheets": "tsx scripts/check-sheets.mts",
+    "og": "tsx scripts/generate-og.mts",
+    "prebuild": "npm run og"
   },
   "dependencies": {
     "google-auth-library": "^10.9.1",

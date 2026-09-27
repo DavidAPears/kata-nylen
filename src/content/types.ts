@@ -286,6 +286,8 @@ export type MediaContent = {
   /** What she did, where it was not a straight interview. */
   roles: { moderator: string; workshop: string; contributor: string };
   viewAllLabel: string;
+  /** Introduces the jump links above the fold. */
+  jumpIntro: string;
 };
 
 export type FooterContent = {

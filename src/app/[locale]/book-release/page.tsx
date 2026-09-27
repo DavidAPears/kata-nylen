@@ -38,10 +38,27 @@ export async function generateMetadata({
         "x-default": getPathname({ locale: "sv", href: "/book-release" }),
       },
     },
+    /*
+      Its own card, in the book's colourway and carrying the date and venue.
+      This link goes out by WhatsApp, LinkedIn and QR code, so for most guests
+      the card IS the invitation.
+    */
     openGraph: {
       title: bookRelease.seo.title,
       description: bookRelease.seo.description,
       type: "website",
+      images: [
+        {
+          url: `/og/book-release-${locale}.jpg`,
+          width: 1200,
+          height: 630,
+          alt: "Resilienssalong, a book launch with Kata Nylén",
+        },
+      ],
+    },
+    twitter: {
+      card: "summary_large_image",
+      images: [`/og/book-release-${locale}.jpg`],
     },
   };
 }

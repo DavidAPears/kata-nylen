@@ -373,6 +373,7 @@ export const en: SiteContent = {
       contributor: "contributor",
     },
     viewAllLabel: "All media",
+    jumpIntro: "Jump to",
   },
 
   contact: {
