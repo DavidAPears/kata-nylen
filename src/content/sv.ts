@@ -48,7 +48,7 @@ export const sv: SiteContent = {
     featuredBook: {
       heading: "Den nya boken",
       description:
-        "En ny bok om psykologi, klimatkänslor och vad det innebär att fortsätta vårda något medan marken rör sig.",
+        "Fem rörelser för att möta motgång utan att stänga av: att lyssna, älska, kollektivisera, agera och att ge och ta emot stöd.",
       cta: { label: "Läs om bokreleasen", href: "/book-release" },
     },
     areasOfWork: {

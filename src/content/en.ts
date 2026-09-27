@@ -47,7 +47,7 @@ export const en: SiteContent = {
     featuredBook: {
       heading: "The new book",
       description:
-        "A new book on psychology, climate emotions and what it means to keep tending something while the ground shifts.",
+        "Five movements for meeting hardship without shutting down: listening, loving, collectivising, acting, and giving and receiving support.",
       cta: { label: "Read about the book release", href: "/book-release" },
     },
     areasOfWork: {

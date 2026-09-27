@@ -97,6 +97,11 @@ export default async function BookReleasePage({
         <h1 className="text-4xl sm:text-5xl">
           {isResolved(book.title) ? book.title : bookRelease.hero.heading}
         </h1>
+        {isResolved(book.subtitle) ? (
+          <p className="mt-3 text-sm uppercase tracking-[0.12em] text-[var(--color-ink-muted)]">
+            {book.subtitle}
+          </p>
+        ) : null}
 
         <dl className="mt-8 grid gap-4 sm:grid-cols-3 sm:max-w-2xl">
           <div>

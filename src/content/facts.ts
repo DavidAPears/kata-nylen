@@ -40,18 +40,46 @@ export const person = {
   email: TODO as Fact<string>,
   /** §14: verified profiles for JSON-LD `sameAs`. Only add confirmed URLs. */
   sameAs: [] as string[],
-  /** §6: approved portrait. Path under /public once supplied. */
-  portrait: TODO as Fact<{ src: string; alt: { sv: string; en: string }; width: number; height: number }>,
+  /**
+    * §6: portrait, used prominently on the home page.
+    *
+    * ⚠️ The filename says "placeholder". Confirm with Kata that this is the
+    * approved image and that the photography rights are cleared (§23) before
+    * launch; swap the src when the final one arrives.
+    */
+  portrait: {
+    src: "/images/portrait-placeholder.jpg",
+    alt: {
+      sv: "Porträtt av Kata Nylén",
+      en: "Portrait of Kata Nylén",
+    },
+    width: 3151,
+    height: 4724,
+  } as Fact<{ src: string; alt: { sv: string; en: string }; width: number; height: number }>,
 };
 
 export const book = {
-  title: TODO as Fact<string>,
-  publisher: TODO as Fact<string>,
+  /* CONFIRMED from the book's own title page. */
+  title: "Psykologisk resiliens" as Fact<string>,
+  subtitle: "Att möta motgång i en osäker värld" as Fact<string>,
+  publisher: "Natur & Kultur" as Fact<string>,
   publicationDate: TODO as Fact<string>,
   purchaseUrl: TODO as Fact<string>,
   isbn: TODO as Fact<string>,
-  synopsis: { sv: TODO as Fact<string>, en: TODO as Fact<string> },
-  themes: { sv: [] as string[], en: [] as string[] },
+  /**
+    * ⚠️ DRAFT, written from the book's own structure, NOT approved by Kata and
+    * NOT the publisher's copy. Natur & Kultur will have official back-cover
+    * and catalogue text; use that instead once we have it (§23).
+    */
+  synopsis: {
+    sv: "Hur står vi upprätt när världen skakar? I Psykologisk resiliens visar psykologen Kata Nylén att motståndskraft inte är något vi bär ensamma. Med utgångspunkt i klimatkris, osäkerhet och förlust följer boken fem rörelser — att lyssna, älska, kollektivisera, agera och att ge och ta emot stöd — som tillsammans stavar LÄKA. En bok om att möta motgång utan att stänga av, och om den kollektiva omsorg som bär oss." as Fact<string>,
+    en: "How do we stay standing when the world shakes? In Psykologisk resiliens, psychologist Kata Nylén argues that resilience is not something we carry alone. Working from climate crisis, uncertainty and loss, the book follows five movements — listening, loving, collectivising, acting, and giving and receiving support — which together spell LÄKA, the Swedish word for to heal. A book about meeting hardship without shutting down, and about the collective care that holds us." as Fact<string>,
+  },
+  /* CONFIRMED: the book's own chapter structure. */
+  themes: {
+    sv: ["Lyssna", "Älska", "Kollektivisera", "Agera", "Ge och ta emot stöd"],
+    en: ["Listen", "Love", "Collectivise", "Act", "Give and receive support"],
+  },
   cover: TODO as Fact<{ src: string; alt: { sv: string; en: string }; width: number; height: number }>,
 };
 
@@ -102,6 +130,9 @@ export const site = {
  * Human-readable audit of what is still missing. Surfaced by
  * `npm run check:content` and on the dev-only content status route.
  */
+/** Things that have a value but are not yet approved by Kata. */
+const TODO_APPROVED = { synopsis: false };
+
 export function outstandingFacts(): string[] {
   const missing: string[] = [];
   const check = (label: string, value: unknown) => {
@@ -118,6 +149,9 @@ export function outstandingFacts(): string[] {
 
   check("book.title", book.title);
   check("book.publisher", book.publisher);
+  if (book.synopsis.sv && !TODO_APPROVED.synopsis) {
+    missing.push("book.synopsis — DRAFT, needs Kata's or the publisher's copy");
+  }
   check("book.publicationDate", book.publicationDate);
   check("book.purchaseUrl", book.purchaseUrl);
   check("book.synopsis.sv", book.synopsis.sv);

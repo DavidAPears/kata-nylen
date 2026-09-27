@@ -56,6 +56,28 @@ wrong on both counts: far too high-contrast and Didone.
 
 Swapping either is a few lines in `src/app/fonts.ts`.
 
+## Why an aspen leaf
+
+Worth knowing before anyone "improves" it: the mark is not generic nature
+decoration. The book's closing chapter is addressed to those who *"ibland
+känner er som ett darrande asplöv"* — who sometimes feel like a trembling
+aspen leaf. The leaf is the book's central metaphor, and the chapter openers
+are built from seven nested copies of it.
+
+## The book — CONFIRMED from its own title page
+
+| | |
+| --- | --- |
+| Title | **Psykologisk resiliens** |
+| Subtitle | Att möta motgång i en osäker värld |
+| Publisher | Natur & Kultur |
+
+Structure: an introduction, *"När du och världen behöver LÄKA"*, then five
+chapters — Lyssna, Älska, Kollektivisera, Agera, and Ge och ta emot stöd.
+**LÄKA** is both an acronym of the first four and the Swedish for *to heal*,
+with *Stöd* (support) at the centre. That framework is the book's spine and
+should shape how the book-release page is written.
+
 ## The leaf — EXTRACTED, not traced
 
 `src/components/Logo.tsx` contains the **actual vector path** from the book.

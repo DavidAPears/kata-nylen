@@ -97,6 +97,12 @@ Seams to work on: tokens in `src/app/globals.css`, primitives in
 
 ## 🟠 A7. SMALLER ITEMS
 
+- The phone RSVP e2e test submits a real RSVP, so running it locally writes a
+  `Test Gäst / gast@example.com` row to the live sheet. De-duplication keeps it
+  to one row, and CI has no credentials so it never writes there. Delete that
+  row before the launch, or point local e2e runs at a server without the
+  Sheets variables.
+
 - Privacy page reviewed for legal accuracy (retention periods are assumptions)
 - Proper mobile navigation if the design calls for it (four links currently
   wrap onto their own row)
@@ -128,7 +134,12 @@ translation, so she should correct tone as well as wording.
 - Book cover asset
 - Approved short bio (SV + EN)
 - Preferred professional title
-- Book title, publisher, publication date, purchase URL, synopsis, themes
+- ~~Book title, publisher~~ — confirmed from the book file: *Psykologisk
+  resiliens*, Att möta motgång i en osäker värld, Natur & Kultur
+- **Synopsis**: a draft is in place, written from the book's own structure. It
+  is NOT approved. Natur & Kultur will have official back-cover and catalogue
+  copy; use that instead.
+- Publication date, purchase URL, cover asset
 - Confirmed speaking topics and formats — **do not publish unapproved ones**
 - Verified credentials, previous events, approved testimonials if any
 - Social/professional profile URLs (these feed the JSON-LD, confirmed only)
