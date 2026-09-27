@@ -95,31 +95,38 @@ export default async function BookReleasePage({
         The pattern is a background image rather than inline SVG so its 21KB
         of path data is cached separately instead of bloating every request.
       */}
-      <div className="relative isolate overflow-hidden bg-[var(--color-book-navy)]">
+      {/*
+        Taller on wide screens. The leaf motif is portrait; in a short, wide
+        hero it renders narrow and the title crosses the orange bands. Giving
+        the hero height lets the leaf scale up so its navy centre is wide
+        enough to hold the text.
+      */}
+      <div className="relative isolate flex items-center overflow-hidden bg-[var(--color-book-navy)] sm:min-h-[42rem]">
         <div
           aria-hidden="true"
-          className="pointer-events-none absolute inset-0 bg-cover bg-center"
-          style={{ backgroundImage: "url(/leaf-pattern.svg)" }}
-        />
-        {/*
-          Radial scrim rather than a flat overlay: dark enough in the middle to
-          guarantee text contrast, clear at the edges so the orange stays as
-          vivid as it is in the book. A flat 55% wash turned it muddy brown.
-        */}
-        <div
-          aria-hidden="true"
-          className="pointer-events-none absolute inset-0"
+          className="pointer-events-none absolute inset-0 bg-center bg-no-repeat"
           style={{
-            background:
-              "radial-gradient(ellipse 62% 78% at 50% 50%, rgba(68,79,105,0.92) 0%, rgba(68,79,105,0.86) 45%, rgba(68,79,105,0.25) 78%, rgba(68,79,105,0) 100%)",
+            backgroundImage: "url(/leaf-pattern.svg)",
+            // Zoomed past "cover" on purpose. At cover the text crosses the
+            // orange bands and stops being readable; scaling up puts the
+            // leaf's navy centre behind the content and pushes the bands to
+            // the edges. This is how the book does it, and it means no wash
+            // over the artwork, which was making the colours look smudged.
+            backgroundSize: "auto 155%",
           }}
         />
-
-        <Container className="relative py-20 text-center sm:py-28">
+        {/*
+          No scrim. The book's colours are flat and vivid, and any wash over
+          them reads as smudged. Contrast comes from the composition instead:
+          the content sits in the leaf's navy centre, exactly as the chapter
+          openers do, so it is cream on navy at 7.7:1. The content is kept
+          narrow so it stays inside that centre at every width.
+        */}
+        <Container className="relative py-24 text-center sm:py-32">
           <p className="mb-5 text-sm uppercase tracking-[0.25em] text-[var(--color-book-orange-text)]">
             {bookRelease.hero.eyebrow}
           </p>
-          <h1 className="mx-auto max-w-3xl text-4xl text-[var(--color-book-cream-light)] sm:text-5xl">
+          <h1 className="mx-auto max-w-xl text-4xl text-[var(--color-book-cream-light)] sm:text-5xl">
             {bookTitleFor(locale) ?? bookRelease.hero.heading}
           </h1>
           {isResolved(book.subtitle) ? (
@@ -128,7 +135,7 @@ export default async function BookReleasePage({
             </p>
           ) : null}
 
-          <dl className="mx-auto mt-10 grid max-w-2xl gap-6 text-[var(--color-book-cream-light)] sm:grid-cols-3">
+          <dl className="mx-auto mt-10 grid max-w-lg gap-6 text-[var(--color-book-cream-light)] sm:grid-cols-3">
             <div>
               <dt className="text-xs uppercase tracking-[0.18em] text-[var(--color-book-orange-text)]">
                 {bookRelease.hero.dateLabel}
