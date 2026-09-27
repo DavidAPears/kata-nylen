@@ -49,6 +49,15 @@ function PublicationEntry({
   locale: Locale;
   copy: ReturnType<typeof getContent>["publications"];
 }) {
+  const translated = locale === "en" && Boolean(publication.titleEn);
+  const title = translated ? publication.titleEn! : publication.title;
+  const subtitle = translated
+    ? publication.subtitleEn
+    : publication.subtitle;
+  // Mark the language honestly so screen readers pronounce it correctly.
+  const titleLang = translated ? "en" : "sv";
+  const showsTranslatedTitle = translated;
+
   return (
     <li className="border-t border-[var(--color-line)] py-8">
       <div className="grid gap-6 sm:grid-cols-[132px_1fr] sm:gap-8">
@@ -84,11 +93,9 @@ function PublicationEntry({
 
         <div>
           <div className="flex flex-wrap items-baseline gap-x-3 gap-y-1">
-            <h3 className="text-xl" lang="sv">
+            <h3 className="text-xl" lang={titleLang}>
               <ExternalAnchor href={publication.url} underline={false}>
-                <span className="underline-offset-4 hover:underline">
-                  {publication.title}
-                </span>
+                <span className="underline-offset-4 hover:underline">{title}</span>
               </ExternalAnchor>
             </h3>
             {publication.isCurrent ? (
@@ -98,14 +105,18 @@ function PublicationEntry({
             ) : null}
           </div>
 
-          {publication.subtitle ? (
-            <p className="mt-1 text-[var(--color-ink-muted)]" lang="sv">
-              {publication.subtitle}
+          {subtitle ? (
+            <p className="mt-1 text-[var(--color-ink-muted)]" lang={titleLang}>
+              {subtitle}
             </p>
           ) : null}
 
           <p className="mt-2 text-sm text-[var(--color-ink-muted)]">
             {[
+              // On English pages the Swedish original comes first, so the real
+              // title stays visible and searchable. These books exist only in
+              // Swedish and nobody should go looking for an English edition.
+              showsTranslatedTitle ? publication.title : null,
               publication.year,
               publication.publisher,
               publication.withAuthors?.length

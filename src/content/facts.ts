@@ -221,8 +221,19 @@ export const launchEvent = {
  */
 export type Publication = {
   id: string;
+  /** The real, published Swedish title. */
   title: string;
   subtitle?: string;
+  /**
+   * English rendering of the title, shown on English pages.
+   *
+   * These books exist only in Swedish. The English is here so a reader knows
+   * what they are looking at, not to suggest an English edition; the cover
+   * beside it and the Swedish original in the details line keep the real
+   * title visible and searchable.
+   */
+  titleEn?: string;
+  subtitleEn?: string;
   /** Year of the edition linked to. */
   year?: string;
   publisher: string;
@@ -253,6 +264,8 @@ export const publications: Publication[] = [
     id: "psykologisk-resiliens",
     title: "Psykologisk resiliens",
     subtitle: "Att möta motgång i en osäker värld",
+    titleEn: "Psychological resilience",
+    subtitleEn: "Meeting adversity in an uncertain world",
     year: "2026",
     publisher: "Natur & Kultur",
     url: "https://www.nok.se/titlar/laromedel-b2/psykologiskresiliens/c5b7d317-19dd-477c-9738-281a9556368b",
@@ -268,6 +281,8 @@ export const publications: Publication[] = [
     id: "klimatpsykologi",
     title: "Klimatpsykologi",
     subtitle: "Hur vi skapar hållbar förändring",
+    titleEn: "Climate psychology",
+    subtitleEn: "How we create sustainable change",
     year: "2025",
     publisher: "Natur & Kultur",
     url: "https://www.nok.se/titlar/akademisk-psykologi/klimatpsykologi/4cd7f427-fbf3-458d-b0cc-f75f3fbf71e8",
@@ -282,6 +297,7 @@ export const publications: Publication[] = [
   {
     id: "kbt-socialt-arbete",
     title: "KBT i socialt arbete med barn och unga",
+    titleEn: "CBT in social work with children and young people",
     year: "2019",
     publisher: "Studentlitteratur",
     url: "https://www.studentlitteratur.se/kurslitteratur/psykologi/klinisk-psykologi---barn-och-ungdom/kbt-i-socialt-arbete-med-barn-och-unga/",
@@ -300,6 +316,7 @@ export const publications: Publication[] = [
   {
     id: "lararens-guide",
     title: "Lärarens guide till klimatmedveten undervisning",
+    titleEn: "A teacher's guide to climate-aware teaching",
     publisher: "Natur & Kultur",
     url: "https://www.nok.se/globalassets/ideella--overgripande/klimatkompensation/guide-klimatmedveten-undervisning_webb-sidvis.pdf",
     role: "author",
@@ -316,11 +333,17 @@ export const publications: Publication[] = [
   {
     id: "evidensbaserad-elevhalsa",
     title: "Evidensbaserad elevhälsa",
+    titleEn: "Evidence-based student health",
     year: "2024",
     publisher: "Studentlitteratur",
     url: "https://www.studentlitteratur.se/kompetensutveckling/medicin/pediatrik/evidensbaserad-elevhalsa-37314-03/",
     role: "chapter",
     editors: ["Josef Milerad", "Carl Lindgren", "Louise Forslund"],
+    cover: { src: "/images/evidensbaserad-elevhalsa.webp", width: 555, height: 800 },
+    summary: {
+      sv: "En antologi om evidensbaserad elevhälsa. Tredje upplagan är uppdaterad med bland annat klimatångest, neuropsykiatri och digitaliseringens påverkan på elevers lärande och mående. Kata Nylén har skrivit ett kapitel.",
+      en: "An edited volume on evidence-based student health. The third edition adds chapters on climate anxiety, neuropsychiatry and how digitalisation affects pupils' learning and wellbeing. Kata Nylén contributed a chapter.",
+    },
   },
 ];
 

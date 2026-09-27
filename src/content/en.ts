@@ -236,7 +236,7 @@ export const en: SiteContent = {
     hero: {
       heading: "Publications",
       standfirst:
-        "Books on climate psychology, psychological resilience and behavioural change, written alone and with others.",
+        "Books on climate psychology, psychological resilience and behavioural change.",
     },
     booksHeading: "Books",
     chaptersHeading: "Contributions",

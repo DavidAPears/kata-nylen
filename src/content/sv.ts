@@ -236,7 +236,7 @@ export const sv: SiteContent = {
     hero: {
       heading: "Publikationer",
       standfirst:
-        "Böcker om klimatpsykologi, psykologisk resiliens och beteendeförändring, skrivna ensam och tillsammans med andra.",
+        "Böcker om klimatpsykologi, psykologisk resiliens och beteendeförändring.",
     },
     booksHeading: "Böcker",
     chaptersHeading: "Bidrag",

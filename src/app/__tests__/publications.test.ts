@@ -78,6 +78,25 @@ describe("publications data", () => {
     }
   });
 
+  it("gives every entry an English title, so an English reader knows what it is", () => {
+    for (const p of publications) {
+      expect(p.titleEn, `${p.id} needs an English title`).toBeTruthy();
+      // The English is a rendering, not a different book.
+      expect(p.titleEn).not.toBe(p.title);
+    }
+  });
+
+  it("keeps a Swedish subtitle paired with an English one", () => {
+    for (const p of publications) {
+      if (p.subtitle) {
+        expect(p.subtitleEn, `${p.id} has a subtitle but no English one`).toBeTruthy();
+      }
+      if (p.subtitleEn) {
+        expect(p.subtitle, `${p.id} has an English subtitle but no Swedish one`).toBeTruthy();
+      }
+    }
+  });
+
   it("orders the authored books newest first", () => {
     const years = publications
       .filter((p) => p.role === "author" && p.year)
