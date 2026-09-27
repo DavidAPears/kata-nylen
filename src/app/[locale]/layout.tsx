@@ -17,6 +17,16 @@ export function generateStaticParams() {
   return locales.map((locale) => ({ locale }));
 }
 
+/**
+ * Only "sv" and "en" are valid locale segments.
+ *
+ * Without this, a request for something like /sw.js or /favicon.ico matches
+ * this segment with locale="sw.js". The layout's notFound() catches it, but
+ * pages render CONCURRENTLY with the layout, so the page runs first with a
+ * nonsense locale and crashes before the 404 lands.
+ */
+export const dynamicParams = false;
+
 export async function generateMetadata({
   params,
 }: {
