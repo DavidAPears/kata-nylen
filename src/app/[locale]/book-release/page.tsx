@@ -4,7 +4,14 @@ import { setRequestLocale } from "next-intl/server";
 import type { Locale } from "@/i18n/routing";
 import { getContent } from "@/content";
 import { getPathname } from "@/i18n/navigation";
-import { book, launchEvent, isResolved, resolved, bookTitleFor } from "@/content/facts";
+import {
+  book,
+  launchEvent,
+  isResolved,
+  resolved,
+  bookTitleFor,
+  launchEventNameFor,
+} from "@/content/facts";
 import { getCalendarEvent, googleCalendarUrl, directionsUrl } from "@/lib/ics";
 import { Container, Section, Prose, ExternalAnchor } from "@/components/primitives";
 import { TodoNote } from "@/components/TodoNote";
@@ -137,8 +144,13 @@ export default async function BookReleasePage({
 
         <Container className="relative py-24 text-center sm:py-28 sm:text-left">
           <div className="sm:ml-[46%]">
+          {/*
+            The book title stays the headline: this is a book launch, and the
+            title is what people search for. The evening's own name sits above
+            it so the page still matches the invitation, which leads with it.
+          */}
           <p className="mb-5 text-sm uppercase tracking-[0.25em] text-[var(--color-book-orange-text)]">
-            {bookRelease.hero.eyebrow}
+            {launchEventNameFor(locale)}
           </p>
           <h1 className="max-w-xl text-4xl text-[var(--color-book-cream-light)] sm:text-5xl">
             {bookTitleFor(locale) ?? bookRelease.hero.heading}
