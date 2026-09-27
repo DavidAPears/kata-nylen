@@ -152,7 +152,18 @@ export default async function BookReleasePage({
             it so the page still matches the invitation, which leads with it.
           */}
           <p className="mb-5 text-sm uppercase tracking-[0.25em] text-[var(--color-book-orange-text)]">
-            {launchEventNameFor(locale)}
+            {/*
+              The event's own name alone read as "some evening event". This is
+              a book launch, and saying so is the point of the page, so both
+              sit here. The bracketed English gloss of "Resilienssalong" is
+              dropped: at this size it made the line unreadable, and "Book
+              launch" now carries the meaning anyway.
+            */}
+            {resolved(launchEvent.name[locale]) ?? launchEventNameFor(locale)}
+            <span aria-hidden="true" className="mx-2 opacity-60">
+              /
+            </span>
+            {bookRelease.hero.launchLabel}
           </p>
           {/*
             Two renderings of the same title, one shown at a time.

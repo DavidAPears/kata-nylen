@@ -95,6 +95,8 @@ export type BookReleaseContent = {
     venueLabel: string;
     /** Shown in place of a detail Kata has not confirmed yet. */
     toBeConfirmed: string;
+    /** Says plainly that this is a book launch, next to the event's own name. */
+    launchLabel: string;
     rsvpCta: string;
   };
   invitation: {

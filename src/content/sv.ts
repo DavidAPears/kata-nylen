@@ -124,6 +124,7 @@ export const sv: SiteContent = {
       timeLabel: "Tid",
       venueLabel: "Plats",
       toBeConfirmed: "Meddelas snart",
+      launchLabel: "Bokrelease",
       rsvpCta: "Anmäl mig",
     },
     invitation: {

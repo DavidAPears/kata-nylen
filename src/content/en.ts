@@ -123,6 +123,7 @@ export const en: SiteContent = {
       timeLabel: "Time",
       venueLabel: "Venue",
       toBeConfirmed: "To be confirmed",
+      launchLabel: "Book launch",
       rsvpCta: "Reserve my place",
     },
     invitation: {

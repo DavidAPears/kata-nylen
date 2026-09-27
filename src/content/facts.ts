@@ -39,7 +39,13 @@ export const person = {
   /** §12: professional email — only rendered if Kata wants it public */
   email: TODO as Fact<string>,
   /** §14: verified profiles for JSON-LD `sameAs`. Only add confirmed URLs. */
-  sameAs: ["https://www.linkedin.com/in/kata-nyl%C3%A9n-147b31127/"] as string[],
+  sameAs: [
+    "https://www.linkedin.com/in/kata-nyl%C3%A9n-147b31127/",
+    // Her author page at Natur & Kultur. In sameAs because it is exactly what
+    // that property is for: tying this site to an authoritative profile of the
+    // same person, which is how search engines and assistants confirm identity.
+    "https://www.nok.se/forfattare/n/kata-nylen/7370a788-9683-413c-adbe-c681b37e3e31",
+  ] as string[],
   /**
     * §6: portrait, used prominently on the home page.
     *

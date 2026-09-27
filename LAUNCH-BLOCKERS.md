@@ -106,6 +106,12 @@ Seams to work on: tokens in `src/app/globals.css`, primitives in
 
 ## 🟠 A7. SMALLER ITEMS
 
+- **Publisher logo in the footer** is shown desaturated so it sits with the
+  LinkedIn icon. Most publishers require their logo to appear unaltered, so
+  worth a quick check with Natur & Kultur. If they object: drop the
+  `grayscale` class in `SocialIcons.tsx` to show it in its own colours, or
+  swap the mark for a plain text link. Either is a one-line change.
+
 - The phone RSVP e2e test submits a real RSVP, so running it locally writes a
   `Test Gäst / gast@example.com` row to the live sheet. De-duplication keeps it
   to one row, and CI has no credentials so it never writes there. Delete that

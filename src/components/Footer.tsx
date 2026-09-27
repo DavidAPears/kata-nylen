@@ -58,7 +58,7 @@ export function Footer({ locale }: { locale: Locale }) {
                       <ExternalAnchor href={url} underline={!Icon}>
                         {Icon ? (
                           <>
-                            <Icon className="h-[18px] w-[18px] shrink-0" />
+                            <Icon className="h-[18px] w-auto shrink-0" />
                             <span className="sr-only">{label}</span>
                           </>
                         ) : (

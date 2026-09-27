@@ -26,15 +26,41 @@ export function LinkedInIcon({ className = "" }: { className?: string }) {
   );
 }
 
+/**
+ * Natur & Kultur's mark, for the link to Kata's author page.
+ *
+ * ⚠️ This is a publisher's registered logo, shown here desaturated so it sits
+ * with the other icons. Most publishers' brand guidelines require their logo
+ * to appear unaltered, so this is worth checking with Natur & Kultur. Two
+ * compliant alternatives if they object: drop the `grayscale` class and show
+ * it in its own colours, or replace the mark with a plain text link.
+ */
+export function PublisherMark({ className = "" }: { className?: string }) {
+  return (
+    // eslint-disable-next-line @next/next/no-img-element
+    <img
+      src="/images/publisher-link.png"
+      alt=""
+      width={274}
+      height={134}
+      loading="lazy"
+      decoding="async"
+      className={`opacity-80 grayscale transition-opacity hover:opacity-100 ${className}`}
+    />
+  );
+}
+
 /** Maps a profile URL to its icon, when we have one. */
 export function iconForProfile(url: string) {
   if (url.includes("linkedin.com")) return LinkedInIcon;
+  if (url.includes("nok.se")) return PublisherMark;
   return null;
 }
 
 /** A readable label for a profile URL. */
 export function labelForProfile(url: string): string {
   if (url.includes("linkedin.com")) return "LinkedIn";
+  if (url.includes("nok.se")) return "Natur & Kultur";
   try {
     return new URL(url).hostname.replace(/^www\./, "");
   } catch {
