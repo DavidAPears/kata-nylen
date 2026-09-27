@@ -62,7 +62,15 @@ export async function POST(request: Request) {
   await Promise.all([
     (async () => {
       const message = attendeeConfirmation(record, locale);
-      await sendEmail({ to: record.email, ...message });
+      // Replies go to Kata, not into the void. The domain has a null MX
+      // record, so nothing accepts mail at hej@katanylen.com -- a guest
+      // asking "can I bring someone?" would hard-bounce and she would never
+      // know they had asked.
+      await sendEmail({
+        to: record.email,
+        replyTo: notificationRecipient() ?? undefined,
+        ...message,
+      });
     })(),
     (async () => {
       const to = notificationRecipient();
