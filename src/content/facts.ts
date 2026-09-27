@@ -234,6 +234,16 @@ export type Publication = {
   editors?: string[];
   /** Notes worth showing, e.g. that something is a free download. */
   note?: { sv: string; en: string };
+  /** Front cover, for the thumbnail. */
+  cover?: { src: string; width: number; height: number };
+  /**
+   * A sentence or two on what the book is about.
+   *
+   * ⚠️ DRAFTS, written from each publisher's own description rather than
+   * copied from it, and not checked by Kata. She should read these: they are
+   * descriptions of her own work.
+   */
+  summary?: { sv: string; en: string };
   /** The current release, given prominence. */
   isCurrent?: boolean;
 };
@@ -248,6 +258,11 @@ export const publications: Publication[] = [
     url: "https://www.nok.se/titlar/laromedel-b2/psykologiskresiliens/c5b7d317-19dd-477c-9738-281a9556368b",
     role: "author",
     isCurrent: true,
+    cover: { src: "/images/book-cover.webp", width: 1618, height: 2480 },
+    summary: {
+      sv: "Om hur vi står kvar, anpassar oss och tar oss igenom svårigheter medan de pågår, och om hur motståndskraft kan odlas både enskilt och tillsammans med andra.",
+      en: "On staying standing, adapting and finding a way through difficulty while it is still happening, and on how resilience can be built alone and together with others.",
+    },
   },
   {
     id: "klimatpsykologi",
@@ -258,6 +273,11 @@ export const publications: Publication[] = [
     url: "https://www.nok.se/titlar/akademisk-psykologi/klimatpsykologi/4cd7f427-fbf3-458d-b0cc-f75f3fbf71e8",
     role: "author",
     withAuthors: ["Frida Hylander", "Kali Andersson"],
+    cover: { src: "/images/klimatpsykologi.webp", width: 640, height: 941 },
+    summary: {
+      sv: "Hur psykologisk kunskap om beteende, känslor och varseblivning kan göra klimatarbetet mer verkningsfullt. För den som leder, beslutar eller känner frustration över att förändring går långsamt.",
+      en: "How psychological understanding of behaviour, emotion and perception can make climate work more effective. For people who lead, decide, or feel frustrated at how slowly change happens.",
+    },
   },
   {
     id: "kbt-socialt-arbete",
@@ -267,6 +287,15 @@ export const publications: Publication[] = [
     url: "https://www.studentlitteratur.se/kurslitteratur/psykologi/klinisk-psykologi---barn-och-ungdom/kbt-i-socialt-arbete-med-barn-och-unga/",
     role: "author",
     withAuthors: ["Jonas Fäldt"],
+    cover: {
+      src: "/images/KBT-i-socialt-arbete-med-barn-och-unga.webp",
+      width: 556,
+      height: 800,
+    },
+    summary: {
+      sv: "Hur kognitiv beteendeterapi kan användas konkret i socialt behandlingsarbete, med exempel för den som möter barn, unga och familjer i socialtjänsten.",
+      en: "How cognitive behavioural therapy can be used concretely in social work, with worked examples for people supporting children, young people and families.",
+    },
   },
   {
     id: "lararens-guide",
@@ -274,6 +303,11 @@ export const publications: Publication[] = [
     publisher: "Natur & Kultur",
     url: "https://www.nok.se/globalassets/ideella--overgripande/klimatkompensation/guide-klimatmedveten-undervisning_webb-sidvis.pdf",
     role: "author",
+    cover: {
+      src: "/images/lararens-guide-till-klimatmedveten-undervisning.png",
+      width: 856,
+      height: 1200,
+    },
     note: {
       sv: "Fri guide att ladda ner (PDF)",
       en: "Free guide to download (PDF)",

@@ -170,7 +170,7 @@ export type PublicationsContent = {
   withLabel: string;
   /** Prefixes the editors of a volume she contributed to. */
   editorsLabel: string;
-  /** Link text out to the publisher. */
+  /** Link text out to the publisher, and the thumbnail's hover label. */
   viewLabel: string;
   currentLabel: string;
 };

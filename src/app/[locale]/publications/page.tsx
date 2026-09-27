@@ -4,7 +4,8 @@ import type { Locale } from "@/i18n/routing";
 import { getContent } from "@/content";
 import { getPathname } from "@/i18n/navigation";
 import { publications, type Publication } from "@/content/facts";
-import { Container, Section, Prose, ExternalAnchor } from "@/components/primitives";
+import Image from "next/image";
+import { Container, Section, ExternalAnchor } from "@/components/primitives";
 
 export async function generateMetadata({
   params,
@@ -49,48 +50,88 @@ function PublicationEntry({
   copy: ReturnType<typeof getContent>["publications"];
 }) {
   return (
-    <li className="border-t border-[var(--color-line)] py-6">
-      <div className="flex flex-wrap items-baseline gap-x-3 gap-y-1">
-        <h3 className="text-xl" lang="sv">
-          {publication.title}
-        </h3>
-        {publication.isCurrent ? (
-          <span className="bg-[var(--color-leaf)] px-2 py-0.5 text-xs uppercase tracking-[0.12em] text-white">
-            {copy.currentLabel}
-          </span>
-        ) : null}
+    <li className="border-t border-[var(--color-line)] py-8">
+      <div className="grid gap-6 sm:grid-cols-[132px_1fr] sm:gap-8">
+        {publication.cover ? (
+          /*
+            The cover is the link. It is aria-hidden and not focusable so it
+            does not become a second tab stop to the same place; the title link
+            below carries the accessible name.
+          */
+          <a
+            href={publication.url}
+            target="_blank"
+            rel="noopener noreferrer"
+            aria-hidden="true"
+            tabIndex={-1}
+            className="group relative block w-28 shrink-0 overflow-hidden rounded-sm shadow-md shadow-black/15 sm:w-full"
+          >
+            <Image
+              src={publication.cover.src}
+              alt=""
+              width={publication.cover.width}
+              height={publication.cover.height}
+              sizes="(min-width: 640px) 132px, 112px"
+              className="w-full transition-transform duration-300 group-hover:scale-[1.03]"
+            />
+            <span className="pointer-events-none absolute inset-0 flex items-end justify-center bg-[var(--color-ink)]/0 p-2 text-center text-xs font-medium text-white opacity-0 transition-all duration-200 group-hover:bg-[var(--color-ink)]/55 group-hover:opacity-100">
+              {copy.viewLabel}
+            </span>
+          </a>
+        ) : (
+          <div aria-hidden="true" className="hidden sm:block" />
+        )}
+
+        <div>
+          <div className="flex flex-wrap items-baseline gap-x-3 gap-y-1">
+            <h3 className="text-xl" lang="sv">
+              <ExternalAnchor href={publication.url} underline={false}>
+                <span className="underline-offset-4 hover:underline">
+                  {publication.title}
+                </span>
+              </ExternalAnchor>
+            </h3>
+            {publication.isCurrent ? (
+              <span className="bg-[var(--color-leaf)] px-2 py-0.5 text-xs uppercase tracking-[0.12em] text-white">
+                {copy.currentLabel}
+              </span>
+            ) : null}
+          </div>
+
+          {publication.subtitle ? (
+            <p className="mt-1 text-[var(--color-ink-muted)]" lang="sv">
+              {publication.subtitle}
+            </p>
+          ) : null}
+
+          <p className="mt-2 text-sm text-[var(--color-ink-muted)]">
+            {[
+              publication.year,
+              publication.publisher,
+              publication.withAuthors?.length
+                ? `${copy.withLabel} ${publication.withAuthors.join(", ")}`
+                : null,
+              publication.editors?.length
+                ? `${copy.editorsLabel} ${publication.editors.join(", ")}`
+                : null,
+            ]
+              .filter(Boolean)
+              .join(" · ")}
+          </p>
+
+          {publication.summary ? (
+            <p className="mt-3 max-w-[var(--measure)]">
+              {publication.summary[locale]}
+            </p>
+          ) : null}
+
+          {publication.note ? (
+            <p className="mt-2 text-sm text-[var(--color-accent)]">
+              {publication.note[locale]}
+            </p>
+          ) : null}
+        </div>
       </div>
-
-      {publication.subtitle ? (
-        <p className="mt-1 text-[var(--color-ink-muted)]" lang="sv">
-          {publication.subtitle}
-        </p>
-      ) : null}
-
-      <p className="mt-2 text-sm text-[var(--color-ink-muted)]">
-        {[
-          publication.year,
-          publication.publisher,
-          publication.withAuthors?.length
-            ? `${copy.withLabel} ${publication.withAuthors.join(", ")}`
-            : null,
-          publication.editors?.length
-            ? `${copy.editorsLabel} ${publication.editors.join(", ")}`
-            : null,
-        ]
-          .filter(Boolean)
-          .join(" · ")}
-      </p>
-
-      {publication.note ? (
-        <p className="mt-1 text-sm text-[var(--color-accent)]">
-          {publication.note[locale]}
-        </p>
-      ) : null}
-
-      <p className="mt-3">
-        <ExternalAnchor href={publication.url}>{copy.viewLabel}</ExternalAnchor>
-      </p>
     </li>
   );
 }
@@ -133,9 +174,6 @@ export default async function PublicationsPage({
 
       {contributions.length > 0 ? (
         <Section ornament id="contributions" heading={copy.chaptersHeading} tone="sunken">
-          <Prose>
-            <p className="sr-only">{copy.chaptersHeading}</p>
-          </Prose>
           <ul className="max-w-3xl">
             {contributions.map((publication) => (
               <PublicationEntry
