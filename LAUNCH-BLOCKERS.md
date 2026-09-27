@@ -95,6 +95,32 @@ The current key was visible in a screenshot during setup. Low risk (it can only
 send email as this account) but it should be replaced: Resend → API Keys →
 delete → create new → update `.env.local` AND Vercel.
 
+## 🟠 A6b. NEXT UP (David's list, 27 Sep)
+
+1. **Review the Publications page** at `/sv/publikationer`. Built but not yet
+   looked at.
+2. **Mobile hamburger nav.** Five items now fit and pass the overflow tests,
+   but they wrap to two rows on a narrow phone. `MobileNavigation` is in the
+   brief's component list (§22).
+3. **A deep "About Kata" page for search and AI discovery.** Linked from the
+   footer rather than the main navigation.
+
+   On (3), two things worth deciding before it is written:
+
+   - A page built *purely for bots* and hidden from navigation is what Google
+     calls a doorway page, and it is penalised. The version that works is a
+     genuinely good, thorough About page that people can also read. Same
+     content, same SEO benefit, no risk. Depth is rewarded; concealment is not.
+   - Brief §21.3 and §11 forbid inventing credentials and fabricating client
+     logos. **"Sweden's leading climate psychologist" and "first book on the
+     subject" need to be true and checkable**, and naming clients such as IKEA
+     or Volvo needs their agreement plus Kata's confirmation that the work
+     happened. Without that they cannot go on the page.
+
+   What is safe and still strong: her real topics in depth, the real books with
+   real publishers, the collectives she works with, her actual areas of
+   practice, and verifiable facts about the field.
+
 ## 🟠 A6. DESIGN PASS
 
 The wireframe is deliberately white/grey. See `docs/brand-notes.md` for the
