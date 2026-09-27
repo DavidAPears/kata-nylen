@@ -16,6 +16,7 @@ export const en: SiteContent = {
   nav: {
     home: "Home",
     bookRelease: "Book Release",
+    publications: "Publications",
     speaking: "Speaking",
     contact: "Contact",
     languageLabel: "Change language",
@@ -224,6 +225,25 @@ export const en: SiteContent = {
       body: "Tell us a little about the event and we'll come back to you.",
       cta: { label: "Speaking enquiry", href: "/contact" },
     },
+  },
+
+  publications: {
+    seo: {
+      title: "Publications",
+      description:
+        "Books by Kata Nylén on climate psychology, psychological resilience, behavioural change and cognitive behavioural therapy.",
+    },
+    hero: {
+      heading: "Publications",
+      standfirst:
+        "Books on climate psychology, psychological resilience and behavioural change, written alone and with others.",
+    },
+    booksHeading: "Books",
+    chaptersHeading: "Contributions",
+    withLabel: "with",
+    editorsLabel: "Edited by",
+    viewLabel: "At the publisher",
+    currentLabel: "New",
   },
 
   contact: {

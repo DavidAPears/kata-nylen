@@ -23,6 +23,7 @@ export function NavLinks({
   const items: { href: AppPathname; label: string }[] = [
     { href: "/", label: nav.home },
     { href: "/book-release", label: nav.bookRelease },
+    { href: "/publications", label: nav.publications },
     { href: "/speaking", label: nav.speaking },
     { href: "/contact", label: nav.contact },
   ];

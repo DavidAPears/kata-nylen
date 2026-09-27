@@ -49,10 +49,33 @@ export function PublisherMark({ className = "" }: { className?: string }) {
   );
 }
 
+/**
+ * MySpeaker's mark, for the link to Kata's booking profile.
+ *
+ * Square, so it sits as a small badge at the same height as the other marks.
+ * The wordmark inside is not legible at this size and is not meant to be; it
+ * reads as a brand cue, and the link's accessible name carries the meaning.
+ */
+export function MySpeakerMark({ className = "" }: { className?: string }) {
+  return (
+    // eslint-disable-next-line @next/next/no-img-element
+    <img
+      src="/images/my-speaker.jpeg"
+      alt=""
+      width={200}
+      height={200}
+      loading="lazy"
+      decoding="async"
+      className={`rounded-[3px] opacity-90 transition-opacity hover:opacity-100 ${className}`}
+    />
+  );
+}
+
 /** Maps a profile URL to its icon, when we have one. */
 export function iconForProfile(url: string) {
   if (url.includes("linkedin.com")) return LinkedInIcon;
   if (url.includes("nok.se")) return PublisherMark;
+  if (url.includes("myspeaker.se")) return MySpeakerMark;
   return null;
 }
 
@@ -60,6 +83,7 @@ export function iconForProfile(url: string) {
 export function labelForProfile(url: string): string {
   if (url.includes("linkedin.com")) return "LinkedIn";
   if (url.includes("nok.se")) return "Natur & Kultur";
+  if (url.includes("myspeaker.se")) return "MySpeaker";
   try {
     return new URL(url).hostname.replace(/^www\./, "");
   } catch {

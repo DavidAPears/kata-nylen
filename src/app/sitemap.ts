@@ -3,7 +3,14 @@ import { locales, routing, type Locale } from "@/i18n/routing";
 import { getPathname } from "@/i18n/navigation";
 import { resolveSiteUrl } from "@/lib/site-url";
 
-const routes = ["/", "/book-release", "/speaking", "/contact", "/privacy"] as const;
+const routes = [
+  "/",
+  "/book-release",
+  "/publications",
+  "/speaking",
+  "/contact",
+  "/privacy",
+] as const;
 
 /**
  * Brief §13: XML sitemap, with each entry declaring its language alternates so

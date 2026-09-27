@@ -17,6 +17,7 @@ export const sv: SiteContent = {
   nav: {
     home: "Hem",
     bookRelease: "Bokrelease",
+    publications: "Publikationer",
     speaking: "Föreläsningar",
     contact: "Kontakt",
     languageLabel: "Byt språk",
@@ -224,6 +225,25 @@ export const sv: SiteContent = {
       body: "Berätta kort om sammanhanget så återkommer vi.",
       cta: { label: "Förfrågan om föreläsning", href: "/contact" },
     },
+  },
+
+  publications: {
+    seo: {
+      title: "Publikationer",
+      description:
+        "Böcker av Kata Nylén om klimatpsykologi, psykologisk resiliens, beteendeförändring och kognitiv beteendeterapi.",
+    },
+    hero: {
+      heading: "Publikationer",
+      standfirst:
+        "Böcker om klimatpsykologi, psykologisk resiliens och beteendeförändring, skrivna ensam och tillsammans med andra.",
+    },
+    booksHeading: "Böcker",
+    chaptersHeading: "Bidrag",
+    withLabel: "med",
+    editorsLabel: "Redaktörer",
+    viewLabel: "Hos förlaget",
+    currentLabel: "Ny",
   },
 
   contact: {

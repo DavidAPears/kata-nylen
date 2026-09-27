@@ -58,7 +58,10 @@ export default async function ContactPage({
 
       <Section id="direct" heading={content.contact.directEmailHeading} tone="sunken">
         {email ? (
-          <a href={`mailto:${email}`} className="underline underline-offset-4">
+          <a
+            href={`mailto:${email}`}
+            className="inline-flex min-h-6 items-center underline underline-offset-4"
+          >
             {email}
           </a>
         ) : (

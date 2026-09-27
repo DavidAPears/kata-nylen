@@ -13,6 +13,7 @@
 export type Nav = {
   home: string;
   bookRelease: string;
+  publications: string;
   speaking: string;
   contact: string;
   /** Accessible label for the language switcher, e.g. "Change language" */
@@ -157,6 +158,23 @@ export type SpeakingContent = {
   };
 };
 
+export type PublicationsContent = {
+  seo: Seo;
+  hero: {
+    heading: string;
+    standfirst: string;
+  };
+  booksHeading: string;
+  chaptersHeading: string;
+  /** Prefixes co-authors, e.g. "with Frida Hylander". */
+  withLabel: string;
+  /** Prefixes the editors of a volume she contributed to. */
+  editorsLabel: string;
+  /** Link text out to the publisher. */
+  viewLabel: string;
+  currentLabel: string;
+};
+
 export type ContactContent = {
   seo: Seo;
   hero: {
@@ -231,6 +249,7 @@ export type SiteContent = {
   home: HomeContent;
   bookRelease: BookReleaseContent;
   speaking: SpeakingContent;
+  publications: PublicationsContent;
   contact: ContactContent;
   forms: FormsContent;
   footer: FooterContent;

@@ -13,6 +13,8 @@ const PATHS = [
   "/en",
   "/sv/bokrelease",
   "/en/book-release",
+  "/sv/publikationer",
+  "/en/publications",
   "/sv/forelasningar",
   "/en/speaking",
   "/sv/kontakt",
@@ -97,6 +99,23 @@ test.describe("phone", () => {
       }));
       expect(scrollWidth).toBeLessThanOrEqual(clientWidth);
       await page.goto("/sv");
+    }
+  });
+
+  test("the five nav links fit without overflowing", async ({ page }) => {
+    // Adding Publications took the nav from four items to five, which is the
+    // kind of change that quietly breaks a phone header.
+    await page.goto("/sv");
+    const nav = page.getByRole("navigation", { name: "Meny" });
+    const links = await nav.getByRole("link").all();
+    expect(links).toHaveLength(5);
+
+    const viewport = await page.evaluate(() => document.documentElement.clientWidth);
+    for (const link of links) {
+      const box = await link.boundingBox();
+      expect(box, "every nav link is laid out").not.toBeNull();
+      expect(box!.x + box!.width, "nav link stays inside the viewport")
+        .toBeLessThanOrEqual(viewport + 1);
     }
   });
 

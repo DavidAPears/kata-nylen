@@ -18,7 +18,10 @@ export function Footer({ locale }: { locale: Locale }) {
           <div>
             <h2 className="mb-2 font-semibold">{footer.contactHeading}</h2>
             {email ? (
-              <a href={`mailto:${email}`} className="underline underline-offset-4">
+              <a
+                href={`mailto:${email}`}
+                className="inline-flex min-h-6 items-center underline underline-offset-4"
+              >
                 {email}
               </a>
             ) : (

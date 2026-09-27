@@ -13,6 +13,8 @@ const PATHS = [
   "/en",
   "/sv/bokrelease",
   "/en/book-release",
+  "/sv/publikationer",
+  "/en/publications",
   "/sv/forelasningar",
   "/en/speaking",
   "/sv/kontakt",

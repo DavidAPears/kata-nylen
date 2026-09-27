@@ -25,6 +25,10 @@ export const routing = defineRouting({
       sv: "/bokrelease",
       en: "/book-release",
     },
+    "/publications": {
+      sv: "/publikationer",
+      en: "/publications",
+    },
     "/speaking": {
       sv: "/forelasningar",
       en: "/speaking",

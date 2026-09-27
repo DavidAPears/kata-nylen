@@ -52,6 +52,9 @@ export const person = {
     // that property is for: tying this site to an authoritative profile of the
     // same person, which is how search engines and assistants confirm identity.
     "https://www.nok.se/forfattare/n/kata-nylen/7370a788-9683-413c-adbe-c681b37e3e31",
+    // Her booking profile at MySpeaker. Another authoritative profile of the
+    // same person, so it belongs in sameAs alongside the others.
+    "https://myspeaker.se/moderatorer/kata-nylen/",
   ] as string[],
   /**
     * §6: portrait, used prominently on the home page.
@@ -206,6 +209,86 @@ export const launchEvent = {
   ],
   accessibility: { sv: TODO as Fact<string>, en: TODO as Fact<string> },
 };
+
+/**
+ * Everything Kata has written, confirmed from each publisher's own page.
+ *
+ * `role` distinguishes what she actually did, which matters: presenting a
+ * chapter contribution as authorship of the whole book would overstate it.
+ *
+ * Co-authors and editors are named because they are real people whose work
+ * this is too.
+ */
+export type Publication = {
+  id: string;
+  title: string;
+  subtitle?: string;
+  /** Year of the edition linked to. */
+  year?: string;
+  publisher: string;
+  url: string;
+  role: "author" | "chapter";
+  /** Other named authors, not including Kata. */
+  withAuthors?: string[];
+  /** Editors, for volumes she contributed a chapter to. */
+  editors?: string[];
+  /** Notes worth showing, e.g. that something is a free download. */
+  note?: { sv: string; en: string };
+  /** The current release, given prominence. */
+  isCurrent?: boolean;
+};
+
+export const publications: Publication[] = [
+  {
+    id: "psykologisk-resiliens",
+    title: "Psykologisk resiliens",
+    subtitle: "Att möta motgång i en osäker värld",
+    year: "2026",
+    publisher: "Natur & Kultur",
+    url: "https://www.nok.se/titlar/laromedel-b2/psykologiskresiliens/c5b7d317-19dd-477c-9738-281a9556368b",
+    role: "author",
+    isCurrent: true,
+  },
+  {
+    id: "klimatpsykologi",
+    title: "Klimatpsykologi",
+    subtitle: "Hur vi skapar hållbar förändring",
+    year: "2025",
+    publisher: "Natur & Kultur",
+    url: "https://www.nok.se/titlar/akademisk-psykologi/klimatpsykologi/4cd7f427-fbf3-458d-b0cc-f75f3fbf71e8",
+    role: "author",
+    withAuthors: ["Frida Hylander", "Kali Andersson"],
+  },
+  {
+    id: "kbt-socialt-arbete",
+    title: "KBT i socialt arbete med barn och unga",
+    year: "2019",
+    publisher: "Studentlitteratur",
+    url: "https://www.studentlitteratur.se/kurslitteratur/psykologi/klinisk-psykologi---barn-och-ungdom/kbt-i-socialt-arbete-med-barn-och-unga/",
+    role: "author",
+    withAuthors: ["Jonas Fäldt"],
+  },
+  {
+    id: "lararens-guide",
+    title: "Lärarens guide till klimatmedveten undervisning",
+    publisher: "Natur & Kultur",
+    url: "https://www.nok.se/globalassets/ideella--overgripande/klimatkompensation/guide-klimatmedveten-undervisning_webb-sidvis.pdf",
+    role: "author",
+    note: {
+      sv: "Fri guide att ladda ner (PDF)",
+      en: "Free guide to download (PDF)",
+    },
+  },
+  {
+    id: "evidensbaserad-elevhalsa",
+    title: "Evidensbaserad elevhälsa",
+    year: "2024",
+    publisher: "Studentlitteratur",
+    url: "https://www.studentlitteratur.se/kompetensutveckling/medicin/pediatrik/evidensbaserad-elevhalsa-37314-03/",
+    role: "chapter",
+    editors: ["Josef Milerad", "Carl Lindgren", "Louise Forslund"],
+  },
+];
 
 /** §1 / §9: the collectives Kata works with. These URLs are confirmed. */
 export const collectives = [
