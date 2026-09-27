@@ -62,6 +62,9 @@ export const book = {
   /* CONFIRMED from the book's own title page. */
   title: "Psykologisk resiliens" as Fact<string>,
   subtitle: "Att möta motgång i en osäker värld" as Fact<string>,
+  /** The book is Swedish. On English pages the Swedish title leads and this
+   *  follows in brackets, so the real title stays findable and searchable. */
+  titleEnglish: "Psychological resilience" as Fact<string>,
   publisher: "Natur & Kultur" as Fact<string>,
   publicationDate: TODO as Fact<string>,
   purchaseUrl: TODO as Fact<string>,
@@ -72,8 +75,8 @@ export const book = {
     * and catalogue text; use that instead once we have it (§23).
     */
   synopsis: {
-    sv: "Hur står vi upprätt när världen skakar? I Psykologisk resiliens visar psykologen Kata Nylén att motståndskraft inte är något vi bär ensamma. Med utgångspunkt i klimatkris, osäkerhet och förlust följer boken fem rörelser — att lyssna, älska, kollektivisera, agera och att ge och ta emot stöd — som tillsammans stavar LÄKA. En bok om att möta motgång utan att stänga av, och om den kollektiva omsorg som bär oss." as Fact<string>,
-    en: "How do we stay standing when the world shakes? In Psykologisk resiliens, psychologist Kata Nylén argues that resilience is not something we carry alone. Working from climate crisis, uncertainty and loss, the book follows five movements — listening, loving, collectivising, acting, and giving and receiving support — which together spell LÄKA, the Swedish word for to heal. A book about meeting hardship without shutting down, and about the collective care that holds us." as Fact<string>,
+    sv: "Hur står vi upprätt när världen skakar? I Psykologisk resiliens visar psykologen Kata Nylén att motståndskraft inte är något vi bär ensamma. Med utgångspunkt i klimatkris, osäkerhet och förlust följer boken fem rörelser: att lyssna, älska, kollektivisera, agera och att ge och ta emot stöd. Tillsammans stavar de LÄKA. En bok om att möta motgång utan att stänga av, och om den kollektiva omsorg som bär oss." as Fact<string>,
+    en: "How do we stay standing when the world shakes? In Psykologisk resiliens, psychologist Kata Nylén argues that resilience is not something we carry alone. Working from climate crisis, uncertainty and loss, the book follows five movements: listening, loving, collectivising, acting, and giving and receiving support. Together they spell LÄKA, the Swedish word for to heal. A book about meeting hardship without shutting down, and about the collective care that holds us." as Fact<string>,
   },
   /* CONFIRMED: the book's own chapter structure. */
   themes: {
@@ -125,6 +128,21 @@ export const site = {
   domain: "katanylen.com",
   url: "https://katanylen.com",
 } as const;
+
+/**
+ * The book's title as it should appear for a given language.
+ *
+ * The book is Swedish, so the Swedish title always leads. On English pages the
+ * translation follows in brackets, which keeps the real, searchable title
+ * intact while still telling an English reader what it means.
+ */
+export function bookTitleFor(locale: "sv" | "en"): string | undefined {
+  const title = resolved(book.title);
+  if (!title) return undefined;
+  if (locale === "sv") return title;
+  const english = resolved(book.titleEnglish);
+  return english ? `${title} (${english})` : title;
+}
 
 /**
  * Human-readable audit of what is still missing. Surfaced by

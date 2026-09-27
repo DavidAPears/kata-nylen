@@ -1,4 +1,5 @@
 import type { ReactNode } from "react";
+import { LeafMark } from "./Logo";
 
 /**
  * Layout primitives for the wireframe stage.
@@ -28,11 +29,14 @@ export function Section({
   heading,
   id,
   tone = "default",
+  ornament = false,
 }: {
   children: ReactNode;
   heading?: string;
   id?: string;
   tone?: "default" | "sunken";
+  /** Marks the heading with the leaf, echoing the book's chapter openers. */
+  ornament?: boolean;
 }) {
   const headingId = id ? `${id}-heading` : undefined;
   return (
@@ -45,7 +49,19 @@ export function Section({
     >
       <Container>
         {heading ? (
-          <h2 id={headingId} className="text-2xl sm:text-3xl mb-6">
+          <h2
+            id={headingId}
+            className="mb-6 flex items-center gap-3 text-2xl sm:text-3xl"
+          >
+            {/*
+              The REAL leaf from the book, not the simplified silhouette. The
+              shape is the book's central metaphor, so it has to be the same
+              one the header uses; only the colour changes. The simplified
+              variant exists for the 16px favicon and nothing else.
+            */}
+            {ornament ? (
+              <LeafMark className="h-8 w-auto shrink-0 text-[var(--color-accent)]" />
+            ) : null}
             {heading}
           </h2>
         ) : null}

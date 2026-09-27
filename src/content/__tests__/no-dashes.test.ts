@@ -1,6 +1,7 @@
 import { describe, it, expect } from "vitest";
 import { en } from "../en";
 import { sv } from "../sv";
+import * as facts from "../facts";
 import {
   attendeeConfirmation,
   organiserNotification,
@@ -15,7 +16,11 @@ import type { RsvpRecord } from "@/lib/rsvp-store";
  * proposition is a real person's voice. Commas, colons and full stops do the
  * same work without the signature.
  *
- * Covers site copy and outgoing email. Rendered pages are checked separately
+ * Covers site copy, the facts module and outgoing email. facts.ts is included
+ * because a drafted synopsis slipped em dashes past the first version of this
+ * test, which only looked at the two content files.
+ *
+ * Rendered pages are checked separately
  * in `e2e/no-dashes.spec.ts`, which also catches copy written inline in a
  * component rather than in the content files.
  */
@@ -41,6 +46,21 @@ describe("site copy contains no em or en dashes", () => {
     ["Swedish", sv],
   ])("%s", (_label, content) => {
     const offenders = walk(content)
+      .filter(([, text]) => FORBIDDEN.test(text))
+      .map(([path, text]) => `${path}: ${text}`);
+
+    expect(offenders).toEqual([]);
+  });
+});
+
+describe("facts contain no em or en dashes", () => {
+  it("every string in facts.ts", () => {
+    const offenders = walk({
+      person: facts.person,
+      book: facts.book,
+      launchEvent: facts.launchEvent,
+      collectives: facts.collectives,
+    })
       .filter(([, text]) => FORBIDDEN.test(text))
       .map(([path, text]) => `${path}: ${text}`);
 

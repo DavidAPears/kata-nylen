@@ -1,7 +1,7 @@
 import { setRequestLocale } from "next-intl/server";
 import type { Locale } from "@/i18n/routing";
 import { getContent } from "@/content";
-import { book, person, isResolved, resolved } from "@/content/facts";
+import { book, person, isResolved, resolved, bookTitleFor } from "@/content/facts";
 import Image from "next/image";
 import { Link } from "@/i18n/navigation";
 import { Container, Section, Prose, ExternalAnchor } from "@/components/primitives";
@@ -102,7 +102,7 @@ export default async function HomePage({
           </div>
           <div>
             <h3 className="text-xl">
-              {isResolved(book.title) ? book.title : home.featuredBook.heading}
+              {bookTitleFor(locale) ?? home.featuredBook.heading}
             </h3>
             {isResolved(book.subtitle) ? (
               <p className="mt-1 text-sm uppercase tracking-[0.12em] text-[var(--color-ink-muted)]">

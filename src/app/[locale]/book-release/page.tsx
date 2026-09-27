@@ -3,7 +3,7 @@ import { setRequestLocale } from "next-intl/server";
 import type { Locale } from "@/i18n/routing";
 import { getContent } from "@/content";
 import { getPathname } from "@/i18n/navigation";
-import { book, launchEvent, isResolved } from "@/content/facts";
+import { book, launchEvent, isResolved, bookTitleFor } from "@/content/facts";
 import { getCalendarEvent, googleCalendarUrl, directionsUrl } from "@/lib/ics";
 import { Container, Section, Prose, ExternalAnchor } from "@/components/primitives";
 import { TodoNote } from "@/components/TodoNote";
@@ -89,68 +89,98 @@ export default async function BookReleasePage({
     // site keeps the green/brown palette; the leaf and the typeface carry
     // across so the two still read as one identity.
     <div className="theme-book">
-      {/* Event hero */}
-      <Container className="py-16 sm:py-24">
-        <p className="mb-4 text-sm uppercase tracking-[0.2em] text-[var(--color-ink-muted)]">
-          {bookRelease.hero.eyebrow}
-        </p>
-        <h1 className="text-4xl sm:text-5xl">
-          {isResolved(book.title) ? book.title : bookRelease.hero.heading}
-        </h1>
-        {isResolved(book.subtitle) ? (
-          <p className="mt-3 text-sm uppercase tracking-[0.12em] text-[var(--color-ink-muted)]">
-            {book.subtitle}
+      {/*
+        Event hero, built to echo the book's chapter openers: the nested leaf
+        motif on navy, with the content sitting in the leaf's calm centre.
+        The pattern is a background image rather than inline SVG so its 21KB
+        of path data is cached separately instead of bloating every request.
+      */}
+      <div className="relative isolate overflow-hidden bg-[var(--color-book-navy)]">
+        <div
+          aria-hidden="true"
+          className="pointer-events-none absolute inset-0 bg-cover bg-center"
+          style={{ backgroundImage: "url(/leaf-pattern.svg)" }}
+        />
+        {/*
+          Radial scrim rather than a flat overlay: dark enough in the middle to
+          guarantee text contrast, clear at the edges so the orange stays as
+          vivid as it is in the book. A flat 55% wash turned it muddy brown.
+        */}
+        <div
+          aria-hidden="true"
+          className="pointer-events-none absolute inset-0"
+          style={{
+            background:
+              "radial-gradient(ellipse 62% 78% at 50% 50%, rgba(68,79,105,0.92) 0%, rgba(68,79,105,0.86) 45%, rgba(68,79,105,0.25) 78%, rgba(68,79,105,0) 100%)",
+          }}
+        />
+
+        <Container className="relative py-20 text-center sm:py-28">
+          <p className="mb-5 text-sm uppercase tracking-[0.25em] text-[var(--color-book-orange-text)]">
+            {bookRelease.hero.eyebrow}
           </p>
-        ) : null}
+          <h1 className="mx-auto max-w-3xl text-4xl text-[var(--color-book-cream-light)] sm:text-5xl">
+            {bookTitleFor(locale) ?? bookRelease.hero.heading}
+          </h1>
+          {isResolved(book.subtitle) ? (
+            <p className="mx-auto mt-4 max-w-xl text-sm uppercase tracking-[0.12em] text-[var(--color-book-cream)]/80">
+              {book.subtitle}
+            </p>
+          ) : null}
 
-        <dl className="mt-8 grid gap-4 sm:grid-cols-3 sm:max-w-2xl">
-          <div>
-            <dt className="text-sm uppercase tracking-wide text-[var(--color-ink-muted)]">
-              {bookRelease.hero.dateLabel}
-            </dt>
-            <dd>{formatDate(startsAt, locale) ?? bookRelease.hero.toBeConfirmed}</dd>
-          </div>
-          <div>
-            <dt className="text-sm uppercase tracking-wide text-[var(--color-ink-muted)]">
-              {bookRelease.hero.timeLabel}
-            </dt>
-            <dd>
-              {formatTime(startsAt, locale)
-                ? `${formatTime(startsAt, locale)}${
-                    formatTime(endsAt, locale) ? `-${formatTime(endsAt, locale)}` : ""
-                  }`
-                : bookRelease.hero.toBeConfirmed}
-            </dd>
-          </div>
-          <div>
-            <dt className="text-sm uppercase tracking-wide text-[var(--color-ink-muted)]">
-              {bookRelease.hero.venueLabel}
-            </dt>
-            <dd>{venueName ?? bookRelease.hero.toBeConfirmed}</dd>
-          </div>
-        </dl>
+          <dl className="mx-auto mt-10 grid max-w-2xl gap-6 text-[var(--color-book-cream-light)] sm:grid-cols-3">
+            <div>
+              <dt className="text-xs uppercase tracking-[0.18em] text-[var(--color-book-orange-text)]">
+                {bookRelease.hero.dateLabel}
+              </dt>
+              <dd className="mt-1">
+                {formatDate(startsAt, locale) ?? bookRelease.hero.toBeConfirmed}
+              </dd>
+            </div>
+            <div>
+              <dt className="text-xs uppercase tracking-[0.18em] text-[var(--color-book-orange-text)]">
+                {bookRelease.hero.timeLabel}
+              </dt>
+              <dd className="mt-1">
+                {formatTime(startsAt, locale)
+                  ? `${formatTime(startsAt, locale)}${
+                      formatTime(endsAt, locale) ? `-${formatTime(endsAt, locale)}` : ""
+                    }`
+                  : bookRelease.hero.toBeConfirmed}
+              </dd>
+            </div>
+            <div>
+              <dt className="text-xs uppercase tracking-[0.18em] text-[var(--color-book-orange-text)]">
+                {bookRelease.hero.venueLabel}
+              </dt>
+              <dd className="mt-1">{venueName ?? bookRelease.hero.toBeConfirmed}</dd>
+            </div>
+          </dl>
 
-        {!startsAt || !venueName ? (
+          <p className="mt-10">
+            <a
+              href="#rsvp"
+              className="inline-block bg-[var(--color-book-orange)] px-7 py-3 font-medium text-[var(--color-book-navy-deep)] hover:brightness-95"
+            >
+              {bookRelease.hero.rsvpCta}
+            </a>
+          </p>
+        </Container>
+      </div>
+
+      {!startsAt || !venueName ? (
+        <Container className="pt-6">
           <TodoNote>
             Event date, time and venue (<code>launchEvent.*</code>). Until these
             are confirmed the page shows a to-be-confirmed placeholder rather
             than invented details, and no Event structured data or calendar
             file is emitted.
           </TodoNote>
-        ) : null}
-
-        <p className="mt-8">
-          <a
-            href="#rsvp"
-            className="inline-block border border-[var(--color-ink)] px-5 py-2.5 font-medium"
-          >
-            {bookRelease.hero.rsvpCta}
-          </a>
-        </p>
-      </Container>
+        </Container>
+      ) : null}
 
       {/* Invitation */}
-      <Section id="invitation" heading={bookRelease.invitation.heading}>
+      <Section ornament id="invitation" heading={bookRelease.invitation.heading}>
         <Prose>
           {bookRelease.invitation.body.map((paragraph) => (
             <p key={paragraph}>{paragraph}</p>
@@ -162,7 +192,7 @@ export default async function BookReleasePage({
       </Section>
 
       {/* About the book */}
-      <Section id="book" heading={bookRelease.aboutBook.heading} tone="sunken">
+      <Section ornament id="book" heading={bookRelease.aboutBook.heading} tone="sunken">
         <div className="grid gap-8 sm:grid-cols-[200px_1fr] sm:items-start">
           <div className="flex aspect-[2/3] items-center justify-center border border-dashed border-[var(--color-line)] bg-white text-sm text-[var(--color-ink-muted)]">
             {isResolved(book.cover) ? "cover" : "Book cover"}
@@ -208,7 +238,7 @@ export default async function BookReleasePage({
 
       {/* Programme — only when there genuinely is one (§10) */}
       {launchEvent.programme.length > 0 ? (
-        <Section id="programme" heading={bookRelease.programme.heading}>
+        <Section ornament id="programme" heading={bookRelease.programme.heading}>
           <ol className="max-w-xl">
             {launchEvent.programme.map((item) => (
               <li
@@ -224,7 +254,7 @@ export default async function BookReleasePage({
       ) : null}
 
       {/* Location */}
-      <Section id="location" heading={bookRelease.location.heading}>
+      <Section ornament id="location" heading={bookRelease.location.heading}>
         {address.length > 0 ? (
           <>
             <address className="not-italic">
@@ -267,7 +297,7 @@ export default async function BookReleasePage({
       </Section>
 
       {/* RSVP */}
-      <Section id="rsvp" heading={bookRelease.rsvp.heading} tone="sunken">
+      <Section ornament id="rsvp" heading={bookRelease.rsvp.heading} tone="sunken">
         <Prose>
           <p>{bookRelease.rsvp.intro}</p>
         </Prose>

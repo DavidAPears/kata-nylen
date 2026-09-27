@@ -32,6 +32,13 @@
   /* Book brand, exact values. Always available, used by .theme-book. */
   --color-book-orange: #fc9a2d;
   --color-book-orange-soft: #ffa951;
+  /* For orange TEXT on navy. The full-strength orange only reaches 3.8:1
+     against navy, which fails WCAG AA; this lighter band from the book's own
+     palette reaches 5.0:1. */
+  --color-book-orange-text: #ffbd7a;
+  /* For dark text on an orange fill. Navy on orange is also 3.8:1; this
+     reaches 5.9:1. */
+  --color-book-navy-deep: #2a3348;
   --color-book-navy: #444f69;
   --color-book-cream: #fff0e0;
   --color-book-cream-light: #fff7ee;
