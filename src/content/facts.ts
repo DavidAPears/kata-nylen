@@ -66,23 +66,37 @@ export const book = {
    *  follows in brackets, so the real title stays findable and searchable. */
   titleEnglish: "Psychological resilience" as Fact<string>,
   publisher: "Natur & Kultur" as Fact<string>,
-  publicationDate: TODO as Fact<string>,
-  purchaseUrl: TODO as Fact<string>,
-  isbn: TODO as Fact<string>,
+  /* CONFIRMED from the publisher's own title page. */
+  publicationDate: "2026-11-06" as Fact<string>,
+  purchaseUrl:
+    "https://www.nok.se/titlar/laromedel-b2/psykologiskresiliens/c5b7d317-19dd-477c-9738-281a9556368b" as Fact<string>,
+  /* Paperback. The epub is 9789127472747. */
+  isbn: "9789127472730" as Fact<string>,
+  pageCount: 220,
   /**
-    * ⚠️ DRAFT, written from the book's own structure, NOT approved by Kata and
-    * NOT the publisher's copy. Natur & Kultur will have official back-cover
-    * and catalogue text; use that instead once we have it (§23).
-    */
+   * The publisher's own short description, as it appears on their title page.
+   *
+   * ⚠️ This is Natur & Kultur's marketing copy, not ours. Using a publisher's
+   * blurb on the author's own site is normal, but confirm with Kata or with
+   * their press contact (Mia Breitholtz) that they are happy for it to appear
+   * here, and that this stays in step if they revise it.
+   *
+   * The English is our translation of that text and needs Kata's eye, since
+   * she is the one who has to stand behind it.
+   */
   synopsis: {
-    sv: "Hur står vi upprätt när världen skakar? I Psykologisk resiliens visar psykologen Kata Nylén att motståndskraft inte är något vi bär ensamma. Med utgångspunkt i klimatkris, osäkerhet och förlust följer boken fem rörelser: att lyssna, älska, kollektivisera, agera och att ge och ta emot stöd. Tillsammans stavar de LÄKA. En bok om att möta motgång utan att stänga av, och om den kollektiva omsorg som bär oss." as Fact<string>,
-    en: "How do we stay standing when the world shakes? In Psykologisk resiliens, psychologist Kata Nylén argues that resilience is not something we carry alone. Working from climate crisis, uncertainty and loss, the book follows five movements: listening, loving, collectivising, acting, and giving and receiving support. Together they spell LÄKA, the Swedish word for to heal. A book about meeting hardship without shutting down, and about the collective care that holds us." as Fact<string>,
+    sv: "Resiliens är förmågan att stå kvar, anpassa sig och navigera svårigheter medan de pågår. I Psykologisk resiliens: att möta motgång i en osäker värld visar psykologen Kata Nylén hur resiliens kan utvecklas både individuellt och tillsammans med andra." as Fact<string>,
+    en: "Resilience is the capacity to stay standing, adapt, and navigate difficulty while it is still happening. In Psykologisk resiliens: att möta motgång i en osäker värld, psychologist Kata Nylén shows how resilience can be developed both on our own and together with others." as Fact<string>,
   },
   /* CONFIRMED: the book's own chapter structure. */
   themes: {
     sv: ["Lyssna", "Älska", "Kollektivisera", "Agera", "Ge och ta emot stöd"],
     en: ["Listen", "Love", "Collectivise", "Act", "Give and receive support"],
   },
+  /**
+   * Front cover. The publisher has a press-image download on their title page
+   * (credit: John Persson), which is the authoritative source for this.
+   */
   cover: TODO as Fact<{ src: string; alt: { sv: string; en: string }; width: number; height: number }>,
 };
 
@@ -171,8 +185,10 @@ export function outstandingFacts(): string[] {
 
   check("book.title", book.title);
   check("book.publisher", book.publisher);
-  if (book.synopsis.sv && !TODO_APPROVED.synopsis) {
-    missing.push("book.synopsis: DRAFT, needs Kata's or the publisher's copy");
+  if (!TODO_APPROVED.synopsis) {
+    missing.push(
+      "book.synopsis: now the publisher's official copy. Confirm Natur & Kultur are happy for it to be used, and have Kata check the English translation.",
+    );
   }
   check("book.publicationDate", book.publicationDate);
   check("book.purchaseUrl", book.purchaseUrl);

@@ -145,10 +145,18 @@ translation, so she should correct tone as well as wording.
 - Preferred professional title
 - ~~Book title, publisher~~ — confirmed from the book file: *Psykologisk
   resiliens*, Att möta motgång i en osäker värld, Natur & Kultur
-- **Synopsis**: a draft is in place, written from the book's own structure. It
-  is NOT approved. Natur & Kultur will have official back-cover and catalogue
-  copy; use that instead.
-- Publication date, purchase URL, cover asset
+- ~~Synopsis, publication date, purchase URL, ISBN~~ all taken from the
+  publisher's title page. Published **6 November 2026**, ISBN 9789127472730
+  (paperback), 220pp.
+  - The Swedish synopsis is Natur & Kultur's own copy. Confirm with Kata or
+    their press contact (Mia Breitholtz, mia.breitholtz@nok.se) that they are
+    happy for it to be used here.
+  - The English is our translation and needs Kata's eye.
+- **Cover asset**: the publisher has a press-image download on that page
+  (credit: John Persson). That is the authoritative source.
+- **Photo credit**: the press portraits of Kata are by **Karin Boo**. Check
+  whether the portrait now on the site is one of hers, and whether a credit is
+  required (§23, photography rights).
 - Confirmed speaking topics and formats — **do not publish unapproved ones**
 - Verified credentials, previous events, approved testimonials if any
 - Social/professional profile URLs (these feed the JSON-LD, confirmed only)
