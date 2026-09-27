@@ -91,10 +91,14 @@ export const launchEvent = {
   startsAt: TODO as Fact<string>,
   endsAt: TODO as Fact<string>,
   timeZone: "Europe/Stockholm",
-  venueName: TODO as Fact<string>,
-  addressLine: TODO as Fact<string>,
-  postalCode: TODO as Fact<string>,
-  city: TODO as Fact<string>,
+  /* CONFIRMED: Knackeriet coworking space by Mariatorget, address taken from
+     their own site. Their private event space is called Djupet; confirm with
+     Kata whether the launch is in Djupet specifically, in which case this
+     should read "Djupet, Knackeriet". */
+  venueName: "Knackeriet" as Fact<string>,
+  addressLine: "Sankt Paulsgatan 25" as Fact<string>,
+  postalCode: "118 48" as Fact<string>,
+  city: "Stockholm" as Fact<string>,
   country: "SE",
   /** Whether +1s are permitted. When false, the places field is not rendered.
    *  CONFIRMED 2026-09-26: yes, Kata wants as many people there as possible. */

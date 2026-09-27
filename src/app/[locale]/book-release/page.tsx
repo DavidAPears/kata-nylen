@@ -270,9 +270,35 @@ export default async function BookReleasePage({
                 </span>
               ))}
             </address>
+            {/*
+              The map is rendered only when a Maps key is configured. Without
+              one the address and the directions link stand on their own,
+              which is a perfectly good experience, so this never blocks.
+              The image is proxied through our own route so the key stays
+              server-side.
+            */}
+            {/*
+              Plain <img> on purpose. The source is our own route, which
+              already returns a correctly sized, long-cached PNG. next/image
+              would add a second optimisation pass over an already optimised
+              image, for no benefit and extra cost.
+            */}
+            {process.env.GOOGLE_MAPS_API_KEY ? (
+              // eslint-disable-next-line @next/next/no-img-element
+              <img
+                src="/api/venue-map"
+                alt=""
+                width={640}
+                height={360}
+                loading="lazy"
+                decoding="async"
+                className="mt-6 w-full max-w-2xl rounded-xl border border-[var(--color-line)]"
+              />
+            ) : null}
+
             <p className="mt-4">
-              {/* A plain directions link — no Maps JS API, no key in the
-                  browser, and it opens the user's own maps app. */}
+              {/* A plain directions link: no Maps JS API, no key in the
+                  browser, and it opens the visitor's own maps app. */}
               <ExternalAnchor href={directionsUrl(address.join(", "))}>
                 {bookRelease.location.directionsLabel}
               </ExternalAnchor>

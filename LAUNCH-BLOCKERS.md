@@ -48,7 +48,8 @@ emits no Event structured data, and serves no calendar file. Nothing is
 invented, by design.
 
 - `launchEvent.startsAt` / `endsAt` (ISO 8601 with timezone)
-- `launchEvent.venueName`, `addressLine`, `postalCode`, `city`
+- ~~`launchEvent.venueName`, `addressLine`, `postalCode`, `city`~~ confirmed:
+  Knackeriet, Sankt Paulsgatan 25, 118 48 Stockholm
 - `launchEvent.programme` (only if there genuinely is one)
 - `launchEvent.capacity` (only if the venue caps it)
 - `launchEvent.accessibility`
@@ -56,20 +57,28 @@ invented, by design.
 Plus-ones are already enabled, capped at 4 places per booking
 (`maxPlacesPerRsvp`).
 
-## 🟠 A3. MAP / DIRECTIONS ON THE BOOK-RELEASE PAGE
+## 🟢 A3. MAP OF THE VENUE — built, just needs a key
 
-Currently a plain "Vägbeskrivning" text link, which needs no API key and opens
-the visitor's own maps app.
+The venue is confirmed: **Knackeriet, Sankt Paulsgatan 25, 118 48 Stockholm**
+(by Mariatorget). Their private event space is called *Djupet*; confirm with
+Kata whether the launch is in Djupet specifically, in which case
+`launchEvent.venueName` should read "Djupet, Knackeriet".
 
-To add a visual map, use the **Google Static Maps API**: the page renders a map
-image generated server-side, so the key never reaches the browser. Do NOT use
-the Maps JavaScript API for a single fixed venue — it ships a large bundle,
-hurts Core Web Vitals, and exposes a key that must then be referrer-restricted.
+The address and a directions link already render. To add the map image:
 
-- Needs `GOOGLE_MAPS_API_KEY` (server-side only, no `NEXT_PUBLIC_` prefix)
-- Restrict the key to the Static Maps API in Google Cloud Console
-- Keep the text directions link alongside it for accessibility
-- Blocked on A2: there is no venue to plot yet
+1. **console.cloud.google.com** with the existing `katanylen` project.
+2. Search **Maps Static API**, open it, **Enable**.
+3. **APIs & Services -> Credentials -> Create credentials -> API key**.
+4. Restrict it: **API restrictions -> Maps Static API** only.
+5. Add `GOOGLE_MAPS_API_KEY` to `.env.local` AND Vercel.
+
+The key never reaches the browser: the image is fetched by `/api/venue-map`
+server-side and streamed back, cached for a day in the browser and a week at
+the edge. Without the key that route returns 404 and the page shows the
+address and directions link, so nothing breaks.
+
+Deliberately NOT the Maps JavaScript API: for one fixed venue it ships a large
+bundle, hurts Core Web Vitals, and exposes a key regardless.
 
 ## 🟢 A4. SEARCH INDEXING — already handled, but know how it works
 
