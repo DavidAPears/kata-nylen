@@ -37,6 +37,10 @@ export const routing = defineRouting({
       sv: "/kontakt",
       en: "/contact",
     },
+    "/media": {
+      sv: "/media",
+      en: "/media",
+    },
     "/about": {
       sv: "/om-kata",
       en: "/about",

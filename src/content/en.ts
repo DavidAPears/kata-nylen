@@ -54,7 +54,7 @@ export const en: SiteContent = {
     areasOfWork: {
       heading: "Areas of work",
       intro:
-        "Five connected fields that run through Kata's writing, speaking and professional practice.",
+        "Six connected fields that run through Kata's writing, speaking and professional practice.",
       topics: [
         {
           id: "climate-psychology",
@@ -81,10 +81,16 @@ export const en: SiteContent = {
             "Grief, anxiety, anger and hope as information rather than symptoms to be managed away.",
         },
         {
-          id: "systemic-change",
+          id: "uncertainty",
           title: "Navigating uncertainty",
           description:
             "How people lead, decide and stay functional inside systemic change they did not choose.",
+        },
+        {
+          id: "organisational",
+          title: "Organisational psychology",
+          description:
+            "Senior teams under pressure, and the relationships that carry an organisation when the load rises.",
         },
       ],
     },
@@ -181,7 +187,7 @@ export const en: SiteContent = {
             "What the climate crisis does to how people think, feel and act, and what follows from that for organisations.",
         },
         {
-          id: "resilience",
+          id: "psychological-resilience",
           title: "Psychological resilience",
           description:
             "Sustaining people through prolonged uncertainty, without reducing resilience to individual endurance.",
@@ -250,6 +256,9 @@ export const en: SiteContent = {
     editorsLabel: "Edited by",
     viewLabel: "At the publisher",
     currentLabel: "New",
+    mediaNudge:
+      "Kata also appears regularly across television, radio, press and podcasts.",
+    mediaNudgeLink: "See where her work has been covered",
   },
 
   about: {
@@ -340,6 +349,32 @@ export const en: SiteContent = {
     mediaHeading: "Interviews and coverage",
   },
 
+  media: {
+    seo: {
+      title: "Media",
+      description:
+        "Kata Nylén in television, press, podcasts and online: interviews and appearances on climate psychology, resilience, climate anxiety and behavioural change.",
+    },
+    hero: {
+      heading: "Media",
+      standfirst:
+        "Interviews and appearances on climate psychology, resilience and how people respond to a changing world. Most are in Swedish.",
+    },
+    kinds: {
+      tv: "Television",
+      radio: "Radio",
+      print: "Press",
+      podcast: "Podcasts",
+      web: "Online",
+    },
+    roles: {
+      moderator: "as moderator",
+      workshop: "workshop",
+      contributor: "contributor",
+    },
+    viewAllLabel: "All media",
+  },
+
   contact: {
     seo: {
       title: "Contact",
@@ -408,6 +443,7 @@ export const en: SiteContent = {
     collectiveHeading: "Collective work",
     followHeading: "Elsewhere",
     aboutLabel: "About Kata",
+    mediaLabel: "Media",
     privacyLabel: "Privacy",
     copyright: "© {year} Kata Nylén",
   },

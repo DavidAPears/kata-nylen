@@ -5,6 +5,7 @@ import { getContent } from "@/content";
 import { getPathname } from "@/i18n/navigation";
 import { publications, type Publication } from "@/content/facts";
 import Image from "next/image";
+import { Link } from "@/i18n/navigation";
 import { Container, Section, ExternalAnchor } from "@/components/primitives";
 
 export async function generateMetadata({
@@ -118,6 +119,7 @@ function PublicationEntry({
               // Swedish and nobody should go looking for an English edition.
               showsTranslatedTitle ? publication.title : null,
               publication.year,
+              publication.editionNote ? publication.editionNote[locale] : null,
               publication.publisher,
               publication.withAuthors?.length
                 ? `${copy.withLabel} ${publication.withAuthors.join(", ")}`
@@ -197,6 +199,21 @@ export default async function PublicationsPage({
           </ul>
         </Section>
       ) : null}
+
+      {/*
+        A quiet pointer onward. Someone who has read to the end of the books
+        is the most likely person to want the interviews, and nothing else on
+        this page points at them.
+      */}
+      <Section id="media-nudge">
+        <p className="max-w-[var(--measure)] text-[var(--color-ink-muted)]">
+          {copy.mediaNudge}{" "}
+          <Link href="/media" className="underline underline-offset-4">
+            {copy.mediaNudgeLink}
+          </Link>
+          .
+        </p>
+      </Section>
     </>
   );
 }

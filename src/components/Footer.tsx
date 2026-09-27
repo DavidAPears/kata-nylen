@@ -85,7 +85,15 @@ export function Footer({ locale }: { locale: Locale }) {
           <p className="text-[var(--color-ink-muted)]">
             {footer.copyright.replace("{year}", String(new Date().getFullYear()))}
           </p>
-          <div className="flex items-center gap-4">
+          {/* Wraps: with Media, About and Privacy alongside the language switcher
+              this row no longer fits a 320px phone on one line. */}
+          <div className="flex flex-wrap items-center gap-x-4 gap-y-2">
+            <Link
+              href="/media"
+              className="inline-flex min-h-6 items-center underline underline-offset-4"
+            >
+              {footer.mediaLabel}
+            </Link>
             <Link
               href="/about"
               className="inline-flex min-h-6 items-center underline underline-offset-4"

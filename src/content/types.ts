@@ -40,6 +40,7 @@ export type Cta = {
     | "/publications"
     | "/speaking"
     | "/contact"
+    | "/media"
     | "/about"
     | "/privacy";
 };
@@ -180,6 +181,9 @@ export type PublicationsContent = {
   /** Link text out to the publisher, and the thumbnail's hover label. */
   viewLabel: string;
   currentLabel: string;
+  /** Quiet pointer to the media page at the foot of the list. */
+  mediaNudge: string;
+  mediaNudgeLink: string;
 };
 
 export type ContactContent = {
@@ -272,9 +276,22 @@ export type AboutContent = {
   mediaHeading: string;
 };
 
+export type MediaContent = {
+  seo: Seo;
+  hero: {
+    heading: string;
+    standfirst: string;
+  };
+  kinds: { tv: string; radio: string; print: string; web: string; podcast: string };
+  /** What she did, where it was not a straight interview. */
+  roles: { moderator: string; workshop: string; contributor: string };
+  viewAllLabel: string;
+};
+
 export type FooterContent = {
   contactHeading: string;
   aboutLabel: string;
+  mediaLabel: string;
   collectiveHeading: string;
   followHeading: string;
   privacyLabel: string;
@@ -294,6 +311,7 @@ export type SiteContent = {
   speaking: SpeakingContent;
   publications: PublicationsContent;
   about: AboutContent;
+  media: MediaContent;
   contact: ContactContent;
   forms: FormsContent;
   footer: FooterContent;

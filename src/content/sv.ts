@@ -55,7 +55,7 @@ export const sv: SiteContent = {
     areasOfWork: {
       heading: "Arbetsområden",
       intro:
-        "Fem sammanhängande fält som löper genom Katas texter, föreläsningar och praktik.",
+        "Sex sammanhängande fält som löper genom Katas texter, föreläsningar och praktik.",
       topics: [
         {
           id: "climate-psychology",
@@ -82,10 +82,16 @@ export const sv: SiteContent = {
             "Sorg, oro, ilska och hopp som information snarare än symtom att hantera bort.",
         },
         {
-          id: "systemic-change",
+          id: "uncertainty",
           title: "Att navigera osäkerhet",
           description:
             "Hur människor leder, beslutar och fungerar inuti en systemförändring de inte valt.",
+        },
+        {
+          id: "organisational",
+          title: "Organisationspsykologi",
+          description:
+            "Ledningsgrupper under press, och relationerna som bär en organisation när belastningen ökar.",
         },
       ],
     },
@@ -182,7 +188,7 @@ export const sv: SiteContent = {
             "Vad klimatkrisen gör med hur människor tänker, känner och handlar, och vad det innebär för organisationer.",
         },
         {
-          id: "resilience",
+          id: "psychological-resilience",
           title: "Psykologisk motståndskraft",
           description:
             "Att bära människor genom långvarig osäkerhet, utan att reducera motståndskraft till individuell uthållighet.",
@@ -250,6 +256,9 @@ export const sv: SiteContent = {
     editorsLabel: "Redaktörer",
     viewLabel: "Hos förlaget",
     currentLabel: "Ny",
+    mediaNudge:
+      "Kata medverkar också regelbundet i tv, radio, press och poddar.",
+    mediaNudgeLink: "Se var hennes arbete har uppmärksammats",
   },
 
   about: {
@@ -340,6 +349,32 @@ export const sv: SiteContent = {
     mediaHeading: "Intervjuer och omnämnanden",
   },
 
+  media: {
+    seo: {
+      title: "I medier",
+      description:
+        "Kata Nylén i tv, press, poddar och på nätet: intervjuer och medverkan om klimatpsykologi, resiliens, klimatångest och beteendeförändring.",
+    },
+    hero: {
+      heading: "I medier",
+      standfirst:
+        "Intervjuer och medverkan om klimatpsykologi, resiliens och hur människor möter en värld i förändring.",
+    },
+    kinds: {
+      tv: "Television",
+      radio: "Radio",
+      print: "Press",
+      podcast: "Poddar",
+      web: "På nätet",
+    },
+    roles: {
+      moderator: "som moderator",
+      workshop: "workshop",
+      contributor: "medverkande",
+    },
+    viewAllLabel: "Allt i medier",
+  },
+
   contact: {
     seo: {
       title: "Kontakt",
@@ -408,6 +443,7 @@ export const sv: SiteContent = {
     collectiveHeading: "Kollektivt arbete",
     followHeading: "Andra platser",
     aboutLabel: "Om Kata",
+    mediaLabel: "I medier",
     privacyLabel: "Integritetspolicy",
     copyright: "© {year} Kata Nylén",
   },

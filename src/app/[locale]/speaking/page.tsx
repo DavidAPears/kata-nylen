@@ -102,15 +102,20 @@ export default async function SpeakingPage({
               </p>
             </li>
           ))}
-          {media.map((item) => (
-            <li key={item.id}>
-              <ExternalAnchor href={item.url}>{item.title[locale]}</ExternalAnchor>
-              <span className="text-[var(--color-ink-muted)]"> · {item.source}</span>
-            </li>
-          ))}
+          {media
+            .filter((item) => item.featured)
+            .map((item) => (
+              <li key={item.id}>
+                <ExternalAnchor href={item.url}>{item.title[locale]}</ExternalAnchor>
+                <span className="text-[var(--color-ink-muted)]"> · {item.source}</span>
+              </li>
+            ))}
         </ul>
 
-        <p className="mt-6">
+        <p className="mt-6 flex flex-wrap gap-x-6 gap-y-2">
+          <Link href="/media" className="underline underline-offset-4">
+            {getContent(locale).media.viewAllLabel}
+          </Link>
           <Link href="/about" className="underline underline-offset-4">
             {getContent(locale).footer.aboutLabel}
           </Link>

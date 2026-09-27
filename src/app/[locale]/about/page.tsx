@@ -126,9 +126,15 @@ export default async function AboutPage({
           {copy.framework.steps.map((step) => (
             <li
               key={step.title}
-              className="flex flex-wrap gap-x-4 gap-y-1 border-b border-[var(--color-line)] py-3"
+              /*
+                Grid, not flex-wrap. With wrapping, a row broke onto two lines
+                only when its description happened to be long, so some sat
+                inline and others did not. A grid keeps every term in the same
+                column and every description aligned beside it.
+              */
+              className="grid gap-x-5 gap-y-1 border-b border-[var(--color-line)] py-3 sm:grid-cols-[11rem_1fr]"
             >
-              <span className="w-36 shrink-0 font-semibold" lang="sv">
+              <span className="font-semibold" lang="sv">
                 {step.title}
               </span>
               <span className="text-[var(--color-ink-muted)]">{step.description}</span>
@@ -224,12 +230,14 @@ export default async function AboutPage({
       {media.length > 0 ? (
         <Section ornament id="media" heading={copy.mediaHeading} tone="sunken">
           <ul className="max-w-2xl space-y-4">
-            {media.map((item) => (
-              <li key={item.id}>
-                <ExternalAnchor href={item.url}>{item.title[locale]}</ExternalAnchor>
-                <span className="text-[var(--color-ink-muted)]"> · {item.source}</span>
-              </li>
-            ))}
+            {media
+              .filter((item) => item.featured)
+              .map((item) => (
+                <li key={item.id}>
+                  <ExternalAnchor href={item.url}>{item.title[locale]}</ExternalAnchor>
+                  <span className="text-[var(--color-ink-muted)]"> · {item.source}</span>
+                </li>
+              ))}
           </ul>
         </Section>
       ) : null}
@@ -253,11 +261,11 @@ export default async function AboutPage({
             );
           })}
         </ul>
-        <TodoNote>
-          More interviews, articles and TV clips can be added to
-          <code>media</code> in <code>facts.ts</code>. Only items with a link,
-          so a reader can check them.
-        </TodoNote>
+          <p className="mt-6">
+            <Link href="/media" className="underline underline-offset-4">
+              {getContent(locale).media.viewAllLabel}
+            </Link>
+          </p>
       </Section>
     </>
   );

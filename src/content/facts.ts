@@ -45,6 +45,20 @@ export const person = {
     * breaking anything.
     */
   email: "kata.nylen@gmail.com" as Fact<string>,
+  /**
+    * A second, monochrome portrait. Used on the media page, where it reads as
+    * a press photograph rather than a website picture.
+    */
+  portraitMono: {
+    src: "/images/portrait-mono.webp",
+    alt: {
+      sv: "Porträtt av Kata Nylén i svartvitt",
+      en: "Black and white portrait of Kata Nylén",
+    },
+    width: 1600,
+    height: 2399,
+  } as Fact<{ src: string; alt: { sv: string; en: string }; width: number; height: number }>,
+
   /** §14: verified profiles for JSON-LD `sameAs`. Only add confirmed URLs. */
   sameAs: [
     "https://www.linkedin.com/in/kata-nyl%C3%A9n-147b31127/",
@@ -249,6 +263,8 @@ export type Publication = {
   editors?: string[];
   /** Notes worth showing, e.g. that something is a free download. */
   note?: { sv: string; en: string };
+  /** Where a later edition exists and `year` is the first publication. */
+  editionNote?: { sv: string; en: string };
   /** Front cover, for the thumbnail. */
   cover?: { src: string; width: number; height: number };
   /**
@@ -287,7 +303,19 @@ export const publications: Publication[] = [
     subtitle: "Hur vi skapar hållbar förändring",
     titleEn: "Climate psychology",
     subtitleEn: "How we create sustainable change",
-    year: "2025",
+    /**
+     * First published autumn 2019. The publisher's current page shows
+     * "Utkom 14 mars 2025", which is a later edition; contemporary sources
+     * from 2020 and 2021 both cite the 2019 original.
+     *
+     * The first date is the one worth showing: it says six years of work in
+     * this field rather than one.
+     */
+    year: "2019",
+    editionNote: {
+      sv: "Ny utgåva 2025",
+      en: "New edition 2025",
+    },
     publisher: "Natur & Kultur",
     url: "https://www.nok.se/titlar/akademisk-psykologi/klimatpsykologi/4cd7f427-fbf3-458d-b0cc-f75f3fbf71e8",
     role: "author",
@@ -393,26 +421,276 @@ export const recognition: Recognition[] = [
   },
 ];
 
+/**
+ * Media appearances, each with a link so a reader can go and watch, read or
+ * listen. Titles are the originals; most of her work is in Swedish and
+ * translating a title would send someone looking for something that does not
+ * exist under that name.
+ *
+ * `role` matters and is not decoration. Moderating a panel, running a
+ * workshop and being interviewed are different things, and a credibility list
+ * that blurs them is overstating.
+ */
+export type MediaKind = "tv" | "radio" | "print" | "web" | "podcast";
+export type MediaRole = "interview" | "moderator" | "workshop" | "contributor";
+
 export type MediaItem = {
   id: string;
   url: string;
   source: string;
+  kind: MediaKind;
+  role: MediaRole;
+  /** Original title, and an English gloss for readers who need one. */
   title: { sv: string; en: string };
+  year?: string;
+  /** Show on the shorter selections used elsewhere. */
+  featured?: boolean;
 };
 
 export const media: MediaItem[] = [
   {
+    id: "nyhetsmorgon-2023",
+    url: "https://www.youtube.com/watch?v=aWYJJdiOPWk",
+    source: "Nyhetsmorgon",
+    kind: "tv",
+    role: "interview",
+    year: "2023",
+    featured: true,
+    title: {
+      sv: "Klimatsnack med Kata Nylén",
+      en: "Climate talk with Kata Nylén",
+    },
+  },
+  {
+    id: "sydsvenskan",
+    url: "https://www.sydsvenskan.se/inpa-livet/hon-kande-skuld-over-klimatkrisen-nar-hon-vantade-barn/",
+    source: "Sydsvenskan",
+    kind: "print",
+    role: "interview",
+    featured: true,
+    title: {
+      sv: "Hon kände skuld över klimatkrisen när hon väntade barn",
+      en: "She felt guilt about the climate crisis while expecting a child",
+    },
+  },
+  {
+    id: "tv4-klimatangest",
+    url: "https://www.tv4.se/artikel/1AgItnEkGSb8w1UgQ0kDsg/experten-sa-undviker-du-klimatangest",
+    source: "TV4",
+    kind: "tv",
+    role: "interview",
+    year: "2021",
+    title: {
+      sv: "Experten: Så undviker du klimatångest",
+      en: "The expert: how to avoid climate anxiety",
+    },
+  },
+  {
+    id: "sveriges-radio-symbolhandling",
+    url: "https://www.sverigesradio.se/artikel/star-en-symbolhandling-i-vagen-for-den-verkliga-losningen",
+    source: "Sveriges Radio",
+    kind: "radio",
+    role: "interview",
+    /**
+     * ⚠️ TITLE UNVERIFIED. Sveriges Radio blocks automated fetching (403), so
+     * this is reconstructed from the URL slug rather than read from the page.
+     * Confirm the exact headline and which programme it was.
+     */
+    title: {
+      sv: "Står en symbolhandling i vägen för den verkliga lösningen?",
+      en: "Does a symbolic act stand in the way of the real solution?",
+    },
+  },
+  {
+    id: "vt-vastervik",
+    url: "https://www.vt.se/nyheter/klimatet/artikel/vasterviksfodda-kata-tiden-ar-har-for-att-vara-modig/jngy2znl",
+    source: "Västerviks-Tidningen",
+    kind: "print",
+    role: "interview",
+    title: {
+      sv: "Västerviksfödda Kata: \u201dTiden är här för att vara modig\u201d",
+      en: "Västervik-born Kata: \u201cNow is the time to be brave\u201d",
+    },
+  },
+  {
     id: "klimatklubben-intervju",
     url: "https://klimatklubben.se/klimatsnack/kata-nylen-klimatpsykologerna-det-ar-fullt-mojlig-att-fa-till-storskalig-beteendeforandring/",
     source: "Klimatklubben",
+    kind: "web",
+    role: "interview",
+    featured: true,
     title: {
-      sv: "\u201dDet är fullt möjligt att få till storskalig beteendeförändring\u201d",
-      en: "\u201cLarge-scale behavioural change is entirely possible\u201d",
+      sv: "Det är fullt möjligt att få till storskalig beteendeförändring",
+      en: "Large-scale behavioural change is entirely possible",
+    },
+  },
+  {
+    id: "specialistpsykologi",
+    url: "https://www.specialistpsykologi.se/kata-nylen-min-professionella-utveckling/",
+    source: "Specialistpsykologi",
+    kind: "web",
+    role: "interview",
+    title: {
+      sv: "Kata Nylén: min professionella utveckling",
+      en: "Kata Nylén: my professional development",
+    },
+  },
+  {
+    id: "sustainable-tomorrow-panel",
+    url: "https://news.cision.com/se/a-sustainable-tomorrow/r/fran-dissonans-till-resonans-i-hallbarhetsomstallningen,c4036697",
+    source: "A Sustainable Tomorrow",
+    kind: "web",
+    role: "moderator",
+    featured: true,
+    title: {
+      sv: "Från dissonans till resonans i hållbarhetsomställningen",
+      en: "From dissonance to resonance in the sustainability transition",
+    },
+  },
+  {
+    id: "sustainable-tomorrow-intervju",
+    url: "https://asustainabletomorrow.com.se/intervju-kata-nylen/",
+    source: "A Sustainable Tomorrow",
+    kind: "web",
+    role: "interview",
+    title: { sv: "Intervju: Kata Nylén", en: "Interview: Kata Nylén" },
+  },
+  {
+    id: "2047-workshop",
+    url: "https://www.2047.nu/?view=article&id=543:klimatworkshop-med-kata-nylen&catid=44",
+    source: "2047",
+    kind: "web",
+    role: "workshop",
+    title: {
+      sv: "Klimatworkshop med Kata Nylén",
+      en: "Climate workshop with Kata Nylén",
+    },
+  },
+  {
+    id: "syre",
+    url: "https://tidningensyre.se/2024/01-maj-2024/spela-dig-fri-fran-klimatangesten/",
+    source: "Tidningen Syre",
+    kind: "web",
+    role: "interview",
+    year: "2024",
+    title: {
+      sv: "Spela dig fri från klimatångesten",
+      en: "Play your way free of climate anxiety",
+    },
+  },
+  {
+    id: "lulea-energi",
+    url: "https://www.luleaenergi.se/arkiv/var-energi-2022/artiklar/hur-ska-vi-orka-bry-oss-om-var-storsta-kris/",
+    source: "Luleå Energi",
+    kind: "web",
+    role: "interview",
+    year: "2022",
+    title: {
+      sv: "Hur ska vi orka bry oss om vår största kris?",
+      en: "How can we find the strength to care about our biggest crisis?",
+    },
+  },
+  {
+    id: "hallbarhetsutmaningen",
+    url: "https://www.youtube.com/watch?v=sWlZ46zH2_M",
+    source: "YouTube",
+    kind: "web",
+    role: "interview",
+    title: {
+      sv: "Hur kan vi som företag och individer ta oss an hållbarhetsutmaningen",
+      en: "How companies and individuals can take on the sustainability challenge",
+    },
+  },
+  {
+    id: "greentopia",
+    url: "https://greentopia.se/nyheter/kata-nylen-hur-organisationer-kan-oka-sin-hallbarhet-och-sin-forandringskraft/",
+    source: "Greentopia",
+    kind: "web",
+    role: "interview",
+    title: {
+      sv: "Hur organisationer kan öka sin hållbarhet och sin förändringskraft",
+      en: "How organisations can build sustainability and capacity for change",
+    },
+  },
+  {
+    id: "ourkidsclimate-guide",
+    url: "https://varabarnsklimat.se/wp-content/uploads/2021/05/Talk-about-climate-guide-for-parents.pdf",
+    source: "Our Kids' Climate",
+    kind: "web",
+    role: "contributor",
+    year: "2021",
+    title: {
+      sv: "Talk to children about the climate crisis (guide för föräldrar)",
+      en: "Talk to children about the climate crisis: a guide for parents",
+    },
+  },
+  {
+    id: "bryta-brod",
+    url: "https://poddtoppen.se/podcast/1703802541/bryta-brod/kata-nylen-56-klimatpsykologerna-om-att-hantera-klimatangest-att-skapa-hopp-genom-handling-och-hitta-mening-i-en-varld-i-forandring",
+    source: "Bryta Bröd",
+    kind: "podcast",
+    role: "interview",
+    featured: true,
+    title: {
+      sv: "Klimatpsykologerna om att hantera klimatångest, skapa hopp genom handling och hitta mening i en värld i förändring",
+      en: "On managing climate anxiety, creating hope through action, and finding meaning in a changing world",
+    },
+  },
+  {
+    id: "klimatekot",
+    url: "https://poddkoll.se/podcast/klimatekot?episode=psykologisk-resiliens-med-kata-nylen&d=hm0g3c6i",
+    source: "Klimatekot",
+    kind: "podcast",
+    role: "interview",
+    title: {
+      sv: "Psykologisk resiliens med Kata Nylén",
+      en: "Psychological resilience with Kata Nylén",
+    },
+  },
+  {
+    id: "mind",
+    url: "https://mind.se/podcast/hur-hanterar-du-din-klimatoro/",
+    source: "Mind",
+    kind: "podcast",
+    role: "interview",
+    title: {
+      sv: "Hur hanterar du din klimatoro?",
+      en: "How do you handle your climate worry?",
+    },
+  },
+  {
+    id: "bvcpodden",
+    url: "https://bvcpodden.fireside.fm/guests/katanylen",
+    source: "BVC-podden",
+    kind: "podcast",
+    role: "interview",
+    title: {
+      sv: "Klimatångest: ge barnen chansen att vara delaktiga",
+      en: "Climate anxiety: give children the chance to take part",
+    },
+  },
+  {
+    id: "lara-fran-larda",
+    url: "https://larafranlarda.com/klimatpsykologi-kata-nylen/",
+    source: "Lära från Lärda",
+    kind: "podcast",
+    role: "interview",
+    title: { sv: "Klimatpsykologi", en: "Climate psychology" },
+  },
+  {
+    id: "innovate019",
+    url: "https://innovate019.podbean.com/e/utkast-kata-nylen/",
+    source: "Bryt Motståndet",
+    kind: "podcast",
+    role: "interview",
+    title: {
+      sv: "Vägen till hållbara och cirkulära affärer",
+      en: "The road to sustainable and circular business",
     },
   },
 ];
 
-/** §1 / §9: the collectives Kata works with. These URLs are confirmed. */
+/** §1 / §9: the collectives Kata works with./** §1 / §9: the collectives Kata works with. These URLs are confirmed. */
 export const collectives = [
   {
     id: "klimatpsykologerna",
