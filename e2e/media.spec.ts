@@ -32,14 +32,29 @@ test.describe("media jump links", () => {
     expect(top, "the podcast section is in view").toBeLessThan(200);
   });
 
-  test("counts match the number of items in each section", async ({ page }) => {
+  test("sits beside the portrait rather than below it", async ({ page }) => {
+    await page.setViewportSize({ width: 1280, height: 900 });
     await page.goto("/en/media");
-    const nav = page.getByRole("navigation", { name: "Jump to" });
 
-    for (const kind of ["tv", "radio", "print", "podcast", "web"]) {
-      const shown = await nav.locator(`a[href="#${kind}"] span span`).last().innerText();
-      const actual = await page.locator(`#${kind} li`).count();
-      expect(Number(shown), `${kind} count`).toBe(actual);
+    const nav = page.getByRole("navigation", { name: "Jump to" });
+    const portrait = page.locator("main img").first();
+    const navBox = (await nav.boundingBox())!;
+    const imgBox = (await portrait.boundingBox())!;
+
+    // It belongs in the gap under the copy, not in a row of its own.
+    expect(navBox.x, "nav is in the left column").toBeLessThan(imgBox.x);
+    expect(navBox.y, "nav is alongside the portrait, not under it")
+      .toBeLessThan(imgBox.y + imgBox.height);
+  });
+
+  test("labels have no counts attached", async ({ page }) => {
+    await page.goto("/en/media");
+    const labels = await page
+      .getByRole("navigation", { name: "Jump to" })
+      .getByRole("link")
+      .allInnerTexts();
+    for (const label of labels) {
+      expect(label.trim(), `"${label}" should be a plain label`).not.toMatch(/\d/);
     }
   });
 

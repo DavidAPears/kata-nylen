@@ -92,6 +92,32 @@ export default async function MediaPage({
             <p className="mt-6 max-w-[var(--measure)] text-lg text-[var(--color-ink-muted)]">
               {copy.hero.standfirst}
             </p>
+
+            {/*
+              Jump links, sitting in the space under the copy rather than in a
+              row of their own. The list below is long and sectioned, so this
+              says what is here and takes you straight to it. Plain anchors:
+              they work without JavaScript and are linkable in their own right.
+            */}
+            <nav aria-label={copy.jumpIntro} className="mt-10">
+              <ul className="flex flex-wrap gap-2.5">
+                {ORDER.map((kind) => {
+                  if (!media.some((item) => item.kind === kind)) return null;
+                  const Icon = MEDIA_KIND_ICONS[kind];
+                  return (
+                    <li key={kind}>
+                      <a
+                        href={`#${kind}`}
+                        className="inline-flex items-center gap-2 rounded-full border border-[var(--color-line)] px-3.5 py-2 text-sm transition-colors hover:border-[var(--color-leaf)] hover:bg-[var(--color-surface-sunken)]"
+                      >
+                        <Icon className="h-[18px] w-[18px] shrink-0 text-[var(--color-leaf)]" />
+                        {copy.kinds[kind]}
+                      </a>
+                    </li>
+                  );
+                })}
+              </ul>
+            </nav>
           </div>
           {portrait ? (
             <Image
@@ -106,35 +132,6 @@ export default async function MediaPage({
           ) : null}
         </div>
 
-        {/*
-          Jump links. The list below is long and sectioned, and the first
-          screen was mostly empty, so this says up front what is here and
-          takes you straight to it. Plain anchors, so they work without
-          JavaScript and are linkable in their own right.
-        */}
-        <nav aria-label={copy.jumpIntro} className="mt-10 sm:mt-14">
-          <ul className="grid grid-cols-2 gap-3 sm:grid-cols-5 sm:gap-4">
-            {ORDER.map((kind) => {
-              const count = media.filter((item) => item.kind === kind).length;
-              if (count === 0) return null;
-              const Icon = MEDIA_KIND_ICONS[kind];
-              return (
-                <li key={kind}>
-                  <a
-                    href={`#${kind}`}
-                    className="flex h-full flex-col items-start gap-2.5 rounded-xl border border-[var(--color-line)] px-4 py-4 transition-colors hover:border-[var(--color-leaf)] hover:bg-[var(--color-surface-sunken)]"
-                  >
-                    <Icon className="h-6 w-6 text-[var(--color-leaf)]" />
-                    <span className="flex flex-wrap items-baseline gap-x-2">
-                      <span className="font-medium">{copy.kinds[kind]}</span>
-                      <span className="text-sm text-[var(--color-ink-muted)]">{count}</span>
-                    </span>
-                  </a>
-                </li>
-              );
-            })}
-          </ul>
-        </nav>
       </Container>
 
       {ORDER.map((kind, index) => {
