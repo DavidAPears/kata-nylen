@@ -1,4 +1,4 @@
-import { launchEvent, book, site, isResolved } from "@/content/facts";
+import { launchEvent, site, isResolved, launchEventNameFor } from "@/content/facts";
 
 /**
  * Calendar output for the book launch.
@@ -46,14 +46,7 @@ export function getCalendarEvent(locale: "sv" | "en"): CalendarEvent | null {
     return null;
   }
 
-  const bookTitle = isResolved(book.title) ? book.title : null;
-  const title = bookTitle
-    ? locale === "sv"
-      ? `Bokrelease: ${bookTitle}`
-      : `Book release: ${bookTitle}`
-    : locale === "sv"
-      ? "Bokrelease med Kata Nylén"
-      : "Book release with Kata Nylén";
+  const title = launchEventNameFor(locale);
 
   const addressParts = [
     launchEvent.venueName,

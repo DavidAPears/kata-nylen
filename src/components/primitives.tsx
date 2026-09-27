@@ -60,7 +60,7 @@ export function Section({
               variant exists for the 16px favicon and nothing else.
             */}
             {ornament ? (
-              <LeafMark className="h-8 w-auto shrink-0 text-[var(--color-accent)]" />
+              <LeafMark className="h-8 w-auto shrink-0 text-[var(--color-leaf)]" />
             ) : null}
             {heading}
           </h2>

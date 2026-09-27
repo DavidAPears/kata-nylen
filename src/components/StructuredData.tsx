@@ -7,6 +7,8 @@ import {
   collectives,
   site,
   isResolved,
+  resolved,
+  launchEventNameFor,
 } from "@/content/facts";
 
 /**
@@ -119,11 +121,12 @@ export function EventJsonLd({ locale }: { locale: Locale }) {
       data={{
         "@context": "https://schema.org",
         "@type": "Event",
-        name: isResolved(book.title)
-          ? `${locale === "sv" ? "Bokrelease" : "Book release"}: ${book.title}`
-          : locale === "sv"
-            ? "Bokrelease med Kata Nylén"
-            : "Book release with Kata Nylén",
+        // The evening has its own name, "Resilienssalong". Falls back to a
+        // generic book-release name only if that is ever unset.
+        name: launchEventNameFor(locale),
+        ...(resolved(launchEvent.tagline[locale])
+          ? { description: launchEvent.tagline[locale] }
+          : {}),
         startDate: launchEvent.startsAt,
         ...(isResolved(launchEvent.endsAt) ? { endDate: launchEvent.endsAt } : {}),
         eventStatus: "https://schema.org/EventScheduled",
@@ -143,7 +146,11 @@ export function EventJsonLd({ locale }: { locale: Locale }) {
             addressCountry: launchEvent.country,
           },
         },
-        performer: { "@type": "Person", name: person.fullName },
+        // Kata plus anyone performing with her. Real people, properly credited.
+        performer: [
+          { "@type": "Person", name: person.fullName },
+          ...launchEvent.guests.map((g) => ({ "@type": "Person", name: g.name })),
+        ],
         organizer: { "@type": "Person", name: person.fullName, url: site.url },
         url: `${site.url}${pagePath}`,
       }}

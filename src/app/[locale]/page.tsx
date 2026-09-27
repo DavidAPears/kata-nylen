@@ -84,7 +84,7 @@ export default async function HomePage({
       </Container>
 
       {/* Introduction */}
-      <Section id="about" heading={home.intro.heading}>
+      <Section ornament id="about" heading={home.intro.heading}>
         <Prose>
           {home.intro.body.map((paragraph) => (
             <p key={paragraph}>{paragraph}</p>
@@ -100,7 +100,7 @@ export default async function HomePage({
       </Section>
 
       {/* Featured book — strongest conversion area during the campaign (§9) */}
-      <Section id="book" heading={home.featuredBook.heading} tone="sunken">
+      <Section ornament id="book" heading={home.featuredBook.heading} tone="sunken">
         <div className="grid gap-8 sm:grid-cols-[200px_1fr] sm:items-start">
           {cover ? (
             <Image
@@ -146,7 +146,7 @@ export default async function HomePage({
       </Section>
 
       {/* Areas of work */}
-      <Section id="areas" heading={home.areasOfWork.heading}>
+      <Section ornament id="areas" heading={home.areasOfWork.heading}>
         <Prose>
           <p>{home.areasOfWork.intro}</p>
         </Prose>
@@ -161,7 +161,7 @@ export default async function HomePage({
       </Section>
 
       {/* Speaking teaser */}
-      <Section id="speaking" heading={home.speakingTeaser.heading} tone="sunken">
+      <Section ornament id="speaking" heading={home.speakingTeaser.heading} tone="sunken">
         <Prose>
           <p>{home.speakingTeaser.body}</p>
         </Prose>
@@ -173,7 +173,7 @@ export default async function HomePage({
       </Section>
 
       {/* Collectives — link out, never duplicate their content (§9) */}
-      <Section id="collective" heading={home.collective.heading}>
+      <Section ornament id="collective" heading={home.collective.heading}>
         <Prose>
           <p>{home.collective.body}</p>
         </Prose>

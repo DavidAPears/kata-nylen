@@ -10,7 +10,13 @@ import { describe, it, expect, vi, afterEach } from "vitest";
 const confirmedFacts = {
   TODO: "__TODO__",
   isResolved: (v: unknown) => v !== "__TODO__",
+  resolved: (v: unknown) => (v === "__TODO__" ? undefined : v),
+  // The evening has its own name; the calendar file should use it rather than
+  // inventing "Book release: <title>".
+  launchEventNameFor: (locale: "sv" | "en") =>
+    locale === "sv" ? "Resilienssalong" : "Resilienssalong",
   launchEvent: {
+    name: { sv: "Resilienssalong", en: "Resilienssalong" },
     startsAt: "2026-04-16T18:00:00+02:00",
     endsAt: "2026-04-16T21:00:00+02:00",
     timeZone: "Europe/Stockholm",
@@ -36,13 +42,15 @@ describe("with confirmed event details", () => {
     const { getCalendarEvent } = await load();
     const event = getCalendarEvent("en");
     expect(event).not.toBeNull();
-    expect(event!.title).toBe("Book release: Example Title");
     expect(event!.location).toBe("Example Venue, Exempelgatan 1, 111 22, Stockholm");
   });
 
-  it("titles the event in Swedish for the sv locale", async () => {
+  it("uses the event's own name rather than a generic book-release title", async () => {
     const { getCalendarEvent } = await load();
-    expect(getCalendarEvent("sv")!.title).toBe("Bokrelease: Example Title");
+    // A guest adding this to their calendar should see what the evening is
+    // actually called.
+    expect(getCalendarEvent("en")!.title).toBe("Resilienssalong");
+    expect(getCalendarEvent("sv")!.title).toBe("Resilienssalong");
   });
 
   it("emits a valid VCALENDAR wrapper with CRLF line endings", async () => {

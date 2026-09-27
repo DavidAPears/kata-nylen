@@ -49,7 +49,7 @@ export default async function SpeakingPage({
         </p>
       </Container>
 
-      <Section id="themes" heading={speaking.themes.heading}>
+      <Section ornament id="themes" heading={speaking.themes.heading}>
         <Prose>
           <p>{speaking.themes.intro}</p>
         </Prose>
@@ -68,7 +68,7 @@ export default async function SpeakingPage({
         </TodoNote>
       </Section>
 
-      <Section id="formats" heading={speaking.formats.heading} tone="sunken">
+      <Section ornament id="formats" heading={speaking.formats.heading} tone="sunken">
         <Prose>
           <p>{speaking.formats.intro}</p>
         </Prose>
@@ -90,7 +90,7 @@ export default async function SpeakingPage({
         logos or testimonials." The section renders only its heading until real,
         verified material is supplied.
       */}
-      <Section id="credibility" heading={speaking.credibility.heading}>
+      <Section ornament id="credibility" heading={speaking.credibility.heading}>
         <Prose>
           <p>{speaking.credibility.intro}</p>
         </Prose>
@@ -101,7 +101,7 @@ export default async function SpeakingPage({
         </TodoNote>
       </Section>
 
-      <Section id="enquiry" heading={speaking.cta.heading} tone="sunken">
+      <Section ornament id="enquiry" heading={speaking.cta.heading} tone="sunken">
         <Prose>
           <p>{speaking.cta.body}</p>
         </Prose>

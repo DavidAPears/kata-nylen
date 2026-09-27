@@ -109,17 +109,37 @@ export const book = {
 };
 
 export const launchEvent = {
-  /** ISO 8601 with timezone, e.g. "2026-04-16T18:00:00+02:00" */
-  startsAt: TODO as Fact<string>,
+  /**
+   * CONFIRMED from the launch poster.
+   *
+   * The evening has a name of its own: "Resilienssalong", subtitled
+   * "Odla psykologisk resiliens tillsammans".
+   */
+  name: {
+    sv: "Resilienssalong" as Fact<string>,
+    en: "Resilienssalong" as Fact<string>,
+  },
+  tagline: {
+    sv: "Odla psykologisk resiliens tillsammans" as Fact<string>,
+    en: "Cultivating psychological resilience together" as Fact<string>,
+  },
+  /** Doors 17.00. Sweden is on CET (UTC+1) in November. */
+  startsAt: "2026-11-11T17:00:00+01:00" as Fact<string>,
+  /** No end time published. The calendar file falls back to two hours. */
   endsAt: TODO as Fact<string>,
+  /** Stage programme begins at 17.15, and guests are asked to be seated by then. */
+  stageStartsAt: "2026-11-11T17:15:00+01:00" as Fact<string>,
   timeZone: "Europe/Stockholm",
-  /* CONFIRMED: Knackeriet coworking space by Mariatorget, address taken from
-     their own site. Their private event space is called Djupet; confirm with
-     Kata whether the launch is in Djupet specifically, in which case this
-     should read "Djupet, Knackeriet". */
-  venueName: "Knackeriet" as Fact<string>,
-  addressLine: "Sankt Paulsgatan 25" as Fact<string>,
-  postalCode: "118 48" as Fact<string>,
+  /**
+   * Djupet is Knackeriet's event space and has its OWN address. Knackeriet's
+   * office is at Sankt Paulsgatan 25; the venue guests should walk to is
+   * Björngårdsgatan 1A. Confirmed against both the poster and Knackeriet's
+   * own Djupet page. Getting this wrong would send guests to the wrong door.
+   */
+  venueName: "Djupet" as Fact<string>,
+  addressLine: "Björngårdsgatan 1A" as Fact<string>,
+  /** Not published for the Björngårdsgatan entrance, so deliberately absent. */
+  postalCode: TODO as Fact<string>,
   city: "Stockholm" as Fact<string>,
   country: "SE",
   /** Whether +1s are permitted. When false, the places field is not rendered.
@@ -131,8 +151,32 @@ export const launchEvent = {
   capacity: TODO as Fact<number>,
   /** Optional RSVP deadline, ISO 8601. */
   rsvpDeadline: TODO as Fact<string>,
-  /** §10: only render a programme if there genuinely is one. */
-  programme: [] as ProgrammeItem[],
+  /** The two published times. */
+  programme: [
+    {
+      time: "17.00",
+      description: { sv: "Dörrarna öppnar", en: "Doors open" },
+    },
+    {
+      time: "17.15",
+      description: {
+        sv: "Programmet börjar på scen. Var på plats senast 17.15.",
+        en: "The stage programme begins. Please be seated by 17.15.",
+      },
+    },
+  ] as ProgrammeItem[],
+  /** What the evening holds, as listed on the poster. */
+  includes: {
+    sv: ["Musik", "Text", "Samtal", "Möten", "Mingel", "Boksignering"],
+    en: ["Music", "Readings", "Conversation", "Meeting people", "Mingling", "Book signing"],
+  },
+  /** Performing with Kata. A real person: credit, never drop. */
+  guests: [
+    {
+      name: "Sebastian Ring",
+      role: { sv: "musiker och kompositör", en: "musician and composer" },
+    },
+  ],
   accessibility: { sv: TODO as Fact<string>, en: TODO as Fact<string> },
 };
 
@@ -162,6 +206,17 @@ export const site = {
  * translation follows in brackets, which keeps the real, searchable title
  * intact while still telling an English reader what it means.
  */
+export function launchEventNameFor(locale: "sv" | "en"): string {
+  const name = resolved(launchEvent.name[locale]);
+  if (name) return name;
+  const title = resolved(book.title);
+  return title
+    ? `${locale === "sv" ? "Bokrelease" : "Book release"}: ${title}`
+    : locale === "sv"
+      ? "Bokrelease med Kata Nylén"
+      : "Book release with Kata Nylén";
+}
+
 export function bookTitleFor(locale: "sv" | "en"): string | undefined {
   const title = resolved(book.title);
   if (!title) return undefined;
@@ -206,10 +261,9 @@ export function outstandingFacts(): string[] {
   if (book.themes.sv.length === 0) missing.push("book.themes.sv");
   if (book.themes.en.length === 0) missing.push("book.themes.en");
 
-  check("launchEvent.startsAt", launchEvent.startsAt);
-  check("launchEvent.venueName", launchEvent.venueName);
-  check("launchEvent.addressLine", launchEvent.addressLine);
-  check("launchEvent.city", launchEvent.city);
+  check("launchEvent.endsAt (calendar falls back to 2 hours)", launchEvent.endsAt);
+  check("launchEvent.accessibility.sv", launchEvent.accessibility.sv);
+  check("launchEvent.accessibility.en", launchEvent.accessibility.en);
 
   return missing;
 }
