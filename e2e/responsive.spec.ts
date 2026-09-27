@@ -19,6 +19,8 @@ const PATHS = [
   "/en/speaking",
   "/sv/kontakt",
   "/en/contact",
+  "/sv/om-kata",
+  "/en/about",
   "/sv/integritetspolicy",
   "/en/privacy",
 ];

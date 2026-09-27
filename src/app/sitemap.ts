@@ -9,6 +9,7 @@ const routes = [
   "/publications",
   "/speaking",
   "/contact",
+  "/about",
   "/privacy",
 ] as const;
 

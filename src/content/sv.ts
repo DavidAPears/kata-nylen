@@ -204,6 +204,12 @@ export const sv: SiteContent = {
           title: "Ledarskap i osäkerhet",
           description: "Beslut och ledarskap när förutsättningarna hela tiden rör sig.",
         },
+        {
+          id: "organisational",
+          title: "Organisationspsykologi",
+          description:
+            "Det som händer mellan människor på jobbet: ledningsgrupper under press, relationerna som bär en organisation, och vad som håller när belastningen ökar.",
+        },
       ],
     },
     formats: {
@@ -244,6 +250,92 @@ export const sv: SiteContent = {
     editorsLabel: "Redaktörer",
     viewLabel: "Hos förlaget",
     currentLabel: "Ny",
+  },
+
+  about: {
+    seo: {
+      title: "Om Kata Nylén",
+      description:
+        "Kata Nylén är psykolog, författare och föreläsare inom klimatpsykologi, psykologisk resiliens, beteendeförändring och organisationspsykologi. Författare till Psykologisk resiliens och medförfattare till Klimatpsykologi.",
+    },
+    hero: {
+      heading: "Om Kata Nylén",
+      standfirst:
+        "Psykolog, författare och föreläsare, med fokus på vad som händer med människor när världen omkring dem förändras snabbare än vad tanken hinner med.",
+    },
+    intro: {
+      heading: "Hennes arbete",
+      body: [
+        "Kata Nylén är psykolog, författare och föreläsare. Hennes arbete rör sig där klimatpsykologi, psykologisk resiliens, beteendeförändring och organisationspsykologi möts: inte som skilda specialiteter, utan som en och samma fråga ställd från olika håll. Vad händer med människor, var för sig och tillsammans, när förutsättningarna förändras snabbare än de hinner ta in, och vad hjälper faktiskt.",
+        "Hon skriver och talar lika mycket för läsare utanför mottagningsrummet som innanför. Böckerna ges ut av Natur & Kultur och Studentlitteratur och används av yrkesverksamma, lärare, ledare och av människor som försöker förstå sina egna reaktioner på en värld i förändring.",
+      ],
+    },
+    fieldsHeading: "Områden hon arbetar med",
+    fields: [
+      {
+        id: "climate-psychology",
+        title: "Klimatpsykologi",
+        description:
+          "Hur klimatkrisen registreras psykologiskt, och varför kunskap om den inte tillförlitligt leder till handling. Klimatpsykologin undersöker det som händer mellan informationen och svaret: undvikandet, avdomningen, de plötsliga larmen, och under vilka förutsättningar människor stannar kvar i engagemang i stället för att stänga av. Boken Klimatpsykologi, skriven tillsammans med Frida Hylander och Kali Andersson, tillämpar detta på klimatarbetet självt, för den som leder eller beslutar och märker att fakta ensamt inte förflyttar någon.",
+      },
+      {
+        id: "psychological-resilience",
+        title: "Psykologisk resiliens",
+        description:
+          "Resiliens som förmågan att stå kvar, anpassa sig och fortsätta röra sig genom svårigheter medan de pågår, snarare än ett personlighetsdrag som vissa har turen att äga. Boken Psykologisk resiliens driver tesen att den inte bärs ensam: den byggs och underhålls i de relationer och sammanhang människor ingår i, och den går att odla medvetet i grupper och team lika väl som hos enskilda.",
+      },
+      {
+        id: "climate-emotions",
+        title: "Klimatkänslor",
+        description:
+          "Sorg, oro, ilska och hopp inför världens tillstånd, behandlade som information snarare än symtom att hantera bort. Svåra känslor inför klimatet är ett rimligt svar på en verklig situation; den psykologiska frågan är vad som gör dem uthärdliga nog att handla utifrån, och vad som i stället förvandlar dem till förlamning.",
+      },
+      {
+        id: "behavioural-change",
+        title: "Beteendeförändring",
+        description:
+          "Avståndet mellan avsikt och beteende, och vad som sluter det. Varför information, brådska och moralisk press så ofta misslyckas med att förändra vad människor gör, och vad forskningen säger fungerar i stället, både på vanans nivå och i en organisation som försöker förändra hur den arbetar.",
+      },
+      {
+        id: "uncertainty",
+        title: "Att navigera osäkerhet",
+        description:
+          "Hur människor beslutar, leder och fungerar inuti en förändring de inte valt och inte kan förutsäga. Långvarig osäkerhet är psykologiskt något annat än en enskild kris: den tar inte slut, och de strategier som bär någon genom en akut nödsituation brukar svikta över år.",
+      },
+      {
+        id: "organisational",
+        title: "Organisationspsykologi",
+        description:
+          "Det som händer mellan människor på jobbet. Ledningsgrupper under ihållande press, relationerna som håller ihop en organisation, och vad som ger vika när belastningen ökar. Det är här resiliens slutar vara en privat angelägenhet och blir en egenskap hos en grupp och hos hur den leds.",
+      },
+    ],
+    frameworkHeading: "LÄKA",
+    framework: {
+      intro:
+        "Psykologisk resiliens är uppbyggd kring fem rörelser. Deras begynnelsebokstäver stavar LÄKA.",
+      steps: [
+        { title: "Lyssna", description: "På dig själv, och på vad dina reaktioner försöker säga." },
+        { title: "Älska", description: "Relationerna och banden som gör svårigheter möjliga att överleva." },
+        { title: "Kollektivisera", description: "Från att bära det ensam till att bära det tillsammans." },
+        { title: "Agera", description: "Gör något, i en skala som faktiskt är tillgänglig för dig." },
+        { title: "Stöd", description: "Att ge det och att ta emot det, vilket är två olika färdigheter." },
+      ],
+      closing:
+        "Tanken som löper genom boken är att resiliens inte är uthållighet. Det handlar inte om att stå ut med mer, utan om vad människor bygger, och bygger tillsammans, så att mindre behöver bäras ensam.",
+    },
+    booksHeading: "Böcker",
+    booksIntro:
+      "Fem titlar för Natur & Kultur och Studentlitteratur, om klimatpsykologi, resiliens, kognitiv beteendeterapi i socialt arbete och klimatmedveten undervisning.",
+    booksCta: { label: "Alla publikationer", href: "/publications" },
+    collectiveHeading: "Kollektivt arbete",
+    collectiveBody:
+      "Vid sidan av sin egen praktik arbetar Kata i kollektiv av psykologer med fokus på klimat och hållbarhet. Deras arbete är fristående från den här sidan och fortsätter i egen rätt.",
+    speakingHeading: "Föreläsningar",
+    speakingBody:
+      "Hon föreläser på konferenser, universitet, ledarskapsevent och inom offentlig sektor, och arbetar med organisationer kring motståndskraft, beteendeförändring och ledarskap i osäkerhet.",
+    speakingCta: { label: "Teman och förfrågningar", href: "/speaking" },
+    elsewhereHeading: "Andra platser",
+    elsewhereBody: "Professionella profiler och var hon kan bokas.",
   },
 
   contact: {
@@ -313,6 +405,7 @@ export const sv: SiteContent = {
     contactHeading: "Kontakt",
     collectiveHeading: "Kollektivt arbete",
     followHeading: "Andra platser",
+    aboutLabel: "Om Kata",
     privacyLabel: "Integritetspolicy",
     copyright: "© {year} Kata Nylén",
   },

@@ -204,6 +204,12 @@ export const en: SiteContent = {
           description:
             "Decision-making and leadership when the conditions keep moving.",
         },
+        {
+          id: "organisational",
+          title: "Organisational psychology",
+          description:
+            "What happens between people at work: senior teams under pressure, the relationships that carry an organisation, and what holds when the load rises.",
+        },
       ],
     },
     formats: {
@@ -244,6 +250,92 @@ export const en: SiteContent = {
     editorsLabel: "Edited by",
     viewLabel: "At the publisher",
     currentLabel: "New",
+  },
+
+  about: {
+    seo: {
+      title: "About Kata Nylén",
+      description:
+        "Kata Nylén is a Swedish psychologist, author and speaker working on climate psychology, psychological resilience, behavioural change and organisational psychology. Author of Psykologisk resiliens and co-author of Klimatpsykologi.",
+    },
+    hero: {
+      heading: "About Kata Nylén",
+      standfirst:
+        "Psychologist, author and speaker, working on what happens to people when the world around them changes faster than the mind expects.",
+    },
+    intro: {
+      heading: "Her work",
+      body: [
+        "Kata Nylén is a Swedish psychologist, author and speaker. Her work sits where climate psychology, psychological resilience, behavioural change and organisational psychology meet: not as separate specialisms, but as one question asked from different directions. What happens to people, individually and together, when conditions shift faster than they can absorb, and what actually helps.",
+        "She writes and speaks for readers outside the clinic as much as inside it. Her books are published by Natur & Kultur and Studentlitteratur, and are used by practitioners, teachers, leaders and people trying to make sense of their own reactions to a changing world.",
+      ],
+    },
+    fieldsHeading: "The subjects she works on",
+    fields: [
+      {
+        id: "climate-psychology",
+        title: "Climate psychology",
+        description:
+          "How the climate crisis registers psychologically, and why knowing about it does not reliably produce action. Climate psychology looks at what happens between the information and the response: the avoidance, the numbing, the bursts of alarm, and the conditions under which people stay engaged instead of shutting down. Her book Klimatpsykologi, written with Frida Hylander and Kali Andersson, applies this to climate work itself, for people who lead or decide and find that facts alone are not moving anyone.",
+      },
+      {
+        id: "psychological-resilience",
+        title: "Psychological resilience",
+        description:
+          "Resilience as the capacity to stay standing, adapt and keep moving through difficulty while it is still happening, rather than a personality trait some people are lucky enough to have. Her book Psykologisk resiliens argues that it is not carried alone: it is built and maintained in the relationships and contexts people are part of, and it can be deliberately cultivated by groups and teams as well as individuals.",
+      },
+      {
+        id: "climate-emotions",
+        title: "Climate emotions",
+        description:
+          "Grief, anxiety, anger and hope about the state of the world, treated as information rather than symptoms to be managed away. Difficult feelings about the climate are a reasonable response to a real situation; the psychological question is what makes them bearable enough to act on, and what turns them into paralysis instead.",
+      },
+      {
+        id: "behavioural-change",
+        title: "Behavioural change",
+        description:
+          "The distance between intention and behaviour, and what closes it. Why information, urgency and moral pressure so often fail to change what people do, and what the evidence says works instead, at the scale of an individual habit and at the scale of an organisation trying to transform how it operates.",
+      },
+      {
+        id: "uncertainty",
+        title: "Navigating uncertainty",
+        description:
+          "How people decide, lead and stay functional inside change they did not choose and cannot predict. Prolonged uncertainty is psychologically distinct from a single crisis: it does not resolve, and the strategies that carry someone through an acute emergency tend to fail over years.",
+      },
+      {
+        id: "organisational",
+        title: "Organisational psychology",
+        description:
+          "What happens between people at work. Senior teams under sustained pressure, the relationships that hold an organisation together, and what gives way when the load rises. This is where resilience stops being a personal matter and becomes a property of a group and how it is led.",
+      },
+    ],
+    frameworkHeading: "LÄKA",
+    framework: {
+      intro:
+        "Psykologisk resiliens is organised around five movements. Their initials spell LÄKA, which is also the Swedish word for to heal.",
+      steps: [
+        { title: "Lyssna", description: "Listen. To yourself, and to what your reactions are telling you." },
+        { title: "Älska", description: "Love. The relationships and attachments that make difficulty survivable." },
+        { title: "Kollektivisera", description: "Collectivise. Move from carrying it alone to carrying it together." },
+        { title: "Agera", description: "Act. Do something, at a scale that is actually available to you." },
+        { title: "Stöd", description: "Support. Give it and receive it, which are different skills." },
+      ],
+      closing:
+        "The argument running through it is that resilience is not endurance. It is not about withstanding more; it is about what people build, and build together, so that less has to be withstood alone.",
+    },
+    booksHeading: "Books",
+    booksIntro:
+      "Five titles for Natur & Kultur and Studentlitteratur, on climate psychology, resilience, cognitive behavioural therapy in social work, and climate-aware teaching.",
+    booksCta: { label: "All publications", href: "/publications" },
+    collectiveHeading: "Collective work",
+    collectiveBody:
+      "Alongside her own practice, Kata works with collectives of psychologists focused on climate and sustainability. Their work is separate from this site and continues in its own right.",
+    speakingHeading: "Speaking",
+    speakingBody:
+      "She speaks at conferences, universities, leadership events and public institutions, and works with organisations on resilience, behavioural change and leading through uncertainty.",
+    speakingCta: { label: "Speaking topics and enquiries", href: "/speaking" },
+    elsewhereHeading: "Elsewhere",
+    elsewhereBody: "Professional profiles and where to book her.",
   },
 
   contact: {
@@ -313,6 +405,7 @@ export const en: SiteContent = {
     contactHeading: "Contact",
     collectiveHeading: "Collective work",
     followHeading: "Elsewhere",
+    aboutLabel: "About Kata",
     privacyLabel: "Privacy",
     copyright: "© {year} Kata Nylén",
   },

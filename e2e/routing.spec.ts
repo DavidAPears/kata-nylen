@@ -27,7 +27,7 @@ test("an unknown locale does not render a page", async ({ request }) => {
 });
 
 test("the real locales still work", async ({ request }) => {
-  for (const path of ["/sv", "/en", "/sv/publikationer", "/en/publications"]) {
+  for (const path of ["/sv", "/en", "/sv/publikationer", "/en/publications", "/sv/om-kata", "/en/about"]) {
     expect((await request.get(path)).status(), `${path} should be 200`).toBe(200);
   }
 });

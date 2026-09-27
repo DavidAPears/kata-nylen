@@ -87,6 +87,12 @@ export function Footer({ locale }: { locale: Locale }) {
           </p>
           <div className="flex items-center gap-4">
             <Link
+              href="/about"
+              className="inline-flex min-h-6 items-center underline underline-offset-4"
+            >
+              {footer.aboutLabel}
+            </Link>
+            <Link
               href="/privacy"
               className="inline-flex min-h-6 items-center underline underline-offset-4"
             >

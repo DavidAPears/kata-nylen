@@ -34,7 +34,14 @@ export type Seo = {
 export type Cta = {
   label: string;
   /** Internal route key, matching `pathnames` in src/i18n/routing.ts */
-  href: "/" | "/book-release" | "/speaking" | "/contact" | "/privacy";
+  href:
+    | "/"
+    | "/book-release"
+    | "/publications"
+    | "/speaking"
+    | "/contact"
+    | "/about"
+    | "/privacy";
 };
 
 export type ExternalLink = {
@@ -230,8 +237,42 @@ export type FormsContent = {
   };
 };
 
+export type AboutSection = {
+  heading: string;
+  body: string[];
+};
+
+export type AboutContent = {
+  seo: Seo;
+  hero: {
+    heading: string;
+    standfirst: string;
+  };
+  intro: AboutSection;
+  /** The subjects she works on, at depth. The substance of the page. */
+  fieldsHeading: string;
+  fields: Topic[];
+  frameworkHeading: string;
+  framework: {
+    intro: string;
+    steps: { title: string; description: string }[];
+    closing: string;
+  };
+  booksHeading: string;
+  booksIntro: string;
+  booksCta: Cta;
+  collectiveHeading: string;
+  collectiveBody: string;
+  speakingHeading: string;
+  speakingBody: string;
+  speakingCta: Cta;
+  elsewhereHeading: string;
+  elsewhereBody: string;
+};
+
 export type FooterContent = {
   contactHeading: string;
+  aboutLabel: string;
   collectiveHeading: string;
   followHeading: string;
   privacyLabel: string;
@@ -250,6 +291,7 @@ export type SiteContent = {
   bookRelease: BookReleaseContent;
   speaking: SpeakingContent;
   publications: PublicationsContent;
+  about: AboutContent;
   contact: ContactContent;
   forms: FormsContent;
   footer: FooterContent;

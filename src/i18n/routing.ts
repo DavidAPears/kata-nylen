@@ -37,6 +37,10 @@ export const routing = defineRouting({
       sv: "/kontakt",
       en: "/contact",
     },
+    "/about": {
+      sv: "/om-kata",
+      en: "/about",
+    },
     "/privacy": {
       sv: "/integritetspolicy",
       en: "/privacy",

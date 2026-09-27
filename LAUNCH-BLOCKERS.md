@@ -102,10 +102,17 @@ delete → create new → update `.env.local` AND Vercel.
 2. **Mobile hamburger nav.** Five items now fit and pass the overflow tests,
    but they wrap to two rows on a narrow phone. `MobileNavigation` is in the
    brief's component list (§22).
-3. **A deep "About Kata" page for search and AI discovery.** Linked from the
-   footer rather than the main navigation.
+3. ~~**A deep "About Kata" page**~~ BUILT, first pass, at `/sv/om-kata` and
+   `/en/about`, linked from the footer beside Privacy. Written to be read, not
+   just crawled. Still needs from Kata:
 
-   On (3), two things worth deciding before it is written:
+   - Her professional title and qualifications, and where she trained
+   - Organisational clients, **with their agreement**, before any can be named
+   - Media coverage, articles and TV clips, with links
+   - Anything she wants said about her standing in the field, phrased so it is
+     checkable
+
+   On (3), two things that shaped how it was written:
 
    - A page built *purely for bots* and hidden from navigation is what Google
      calls a doorway page, and it is penalised. The version that works is a
