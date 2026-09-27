@@ -22,11 +22,18 @@ function contrast(a: string, b: string): number {
   return (hi + 0.05) / (lo + 0.05);
 }
 
-const NAVY = "#444f69";
-const ORANGE = "#fc9a2d";
-const ORANGE_TEXT = "#ffbd7a";
-const NAVY_DEEP = "#2a3348";
-const CREAM = "#fff7ee";
+// The COVER palette, which the book-release page follows. The interior
+// chapter openers use a lighter navy and a more vivid orange; those are kept
+// below as the pair that must never be used for text.
+const NAVY = "#0c2e4e";
+const SAND = "#f7c17b";
+const GREEN = "#76b06c";
+const NAVY_DEEP = "#081f36";
+const CREAM = "#fef3e1";
+
+// Interior palette.
+const INTERIOR_NAVY = "#444f69";
+const INTERIOR_ORANGE = "#fc9a2d";
 const INK = "#2c3327";
 const SURFACE = "#fffaf3";
 
@@ -35,19 +42,20 @@ const AA = 4.5;
 describe("colour pairs actually used for text", () => {
   it.each([
     ["site body: ink on cream surface", INK, SURFACE],
-    ["book hero: cream on navy", CREAM, NAVY],
-    ["book hero labels: light orange on navy", ORANGE_TEXT, NAVY],
-    ["book CTA: deep navy on orange", NAVY_DEEP, ORANGE],
+    ["book hero: cream on cover navy", CREAM, NAVY],
+    ["book hero labels: sand on cover navy", SAND, NAVY],
+    ["book CTA: deep navy on sand", NAVY_DEEP, SAND],
+    ["cover green on cover navy", GREEN, NAVY],
   ])("%s meets AA", (_label, fg, bg) => {
     expect(contrast(fg, bg)).toBeGreaterThanOrEqual(AA);
   });
 
   it.each([
-    ["full-strength orange on navy", ORANGE, NAVY],
-    ["navy on full-strength orange", NAVY, ORANGE],
+    ["interior orange on interior navy", INTERIOR_ORANGE, INTERIOR_NAVY],
+    ["interior navy on interior orange", INTERIOR_NAVY, INTERIOR_ORANGE],
   ])("%s is known to FAIL, so must not be used for text", (_label, fg, bg) => {
-    // Documented here so nobody "fixes" the lighter variants back to the
-    // brand orange without realising why they exist.
+    // Documented so nobody reaches for the interior colours for text. They
+    // are fine as artwork, which is all the chapter motif uses them for.
     expect(contrast(fg, bg)).toBeLessThan(AA);
   });
 });

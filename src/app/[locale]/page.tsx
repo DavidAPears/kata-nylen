@@ -16,6 +16,7 @@ export default async function HomePage({
   setRequestLocale(locale);
   const { home } = getContent(locale);
   const portrait = resolved(person.portrait);
+  const cover = resolved(book.cover);
 
   return (
     <>
@@ -101,9 +102,20 @@ export default async function HomePage({
       {/* Featured book — strongest conversion area during the campaign (§9) */}
       <Section id="book" heading={home.featuredBook.heading} tone="sunken">
         <div className="grid gap-8 sm:grid-cols-[200px_1fr] sm:items-start">
-          <div className="flex aspect-[2/3] items-center justify-center border border-dashed border-[var(--color-line)] bg-white text-sm text-[var(--color-ink-muted)]">
-            {isResolved(book.cover) ? "cover" : "Book cover"}
-          </div>
+          {cover ? (
+            <Image
+              src={cover.src}
+              alt={cover.alt[locale]}
+              width={cover.width}
+              height={cover.height}
+              sizes="(min-width: 640px) 200px, 55vw"
+              className="w-full rounded-sm shadow-lg shadow-black/15"
+            />
+          ) : (
+            <div className="flex aspect-[2/3] items-center justify-center border border-dashed border-[var(--color-line)] bg-white text-sm text-[var(--color-ink-muted)]">
+              Book cover
+            </div>
+          )}
           <div>
             <h3 className="text-xl">
               {bookTitleFor(locale) ?? home.featuredBook.heading}

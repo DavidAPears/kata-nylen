@@ -29,18 +29,27 @@
    *                         like one object.
    */
 
-  /* Book brand, exact values. Always available, used by .theme-book. */
+  /*
+   * Book brand, exact values sampled from the artwork.
+   *
+   * Two sets, because they genuinely differ: the printed COVER uses a darker
+   * navy and a softer sand, while the INTERIOR chapter openers use a lighter
+   * navy and a more vivid orange. The site follows the cover, since that is
+   * the object people will recognise and the cover image sits on the page.
+   */
+  --color-book-navy: #0c2e4e;
+  --color-book-sand: #f7c17b;
+  --color-book-sand-deep: #f4a960;
+  --color-book-green: #76b06c;
+  --color-book-navy-deep: #081f36;
+
+  /* Interior palette, kept for reference. */
   --color-book-orange: #fc9a2d;
   --color-book-orange-soft: #ffa951;
-  /* For orange TEXT on navy. The full-strength orange only reaches 3.8:1
-     against navy, which fails WCAG AA; this lighter band from the book's own
-     palette reaches 5.0:1. */
-  --color-book-orange-text: #ffbd7a;
-  /* For dark text on an orange fill. Navy on orange is also 3.8:1; this
-     reaches 5.9:1. */
-  --color-book-navy-deep: #2a3348;
-  --color-book-navy: #444f69;
-  --color-book-cream: #fff0e0;
+  /* Against the cover's darker navy the sand reaches 8.5:1, so unlike the
+     interior palette no lightened variant is needed for text. */
+  --color-book-orange-text: var(--color-book-sand);
+  --color-book-cream: #fef3e1;
   --color-book-cream-light: #fff7ee;
   --color-book-grey: #ebecef;
   --color-book-red: #e52237;
@@ -73,8 +82,8 @@
   --color-line: color-mix(in srgb, var(--color-book-navy) 22%, white);
   --color-surface: var(--color-book-cream-light);
   --color-surface-sunken: var(--color-book-cream);
-  --color-accent: var(--color-book-orange);
-  --color-leaf: var(--color-book-orange);
+  --color-accent: var(--color-book-sand-deep);
+  --color-leaf: var(--color-book-sand-deep);
 
   background: var(--color-surface);
   color: var(--color-ink);

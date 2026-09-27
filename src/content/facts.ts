@@ -97,7 +97,15 @@ export const book = {
    * Front cover. The publisher has a press-image download on their title page
    * (credit: John Persson), which is the authoritative source for this.
    */
-  cover: TODO as Fact<{ src: string; alt: { sv: string; en: string }; width: number; height: number }>,
+  cover: {
+    src: "/images/book-cover.webp",
+    alt: {
+      sv: "Omslaget till Psykologisk resiliens av Kata Nylén",
+      en: "Cover of Psykologisk resiliens by Kata Nylén",
+    },
+    width: 1618,
+    height: 2480,
+  } as Fact<{ src: string; alt: { sv: string; en: string }; width: number; height: number }>,
 };
 
 export const launchEvent = {

@@ -8,7 +8,37 @@ eyeballed from a photo.
 > in this repo and must not be committed. Everything below was extracted from
 > it and the file itself stays out.
 
-## Colours — CONFIRMED
+## Colours — CONFIRMED, and there are TWO sets
+
+The printed cover and the book's interior do not use the same palette. This
+matters: the cover is the object people recognise, and the cover image sits on
+the book-release page, so the site follows the **cover**. Using the interior
+values made the page fight the cover sitting on it.
+
+### Cover (what the site uses)
+
+Sampled from the cover artwork itself.
+
+| Token | Value |
+| --- | --- |
+| `--color-book-navy` | `#0c2e4e` |
+| `--color-book-sand` | `#f7c17b` |
+| `--color-book-sand-deep` | `#f4a960` |
+| `--color-book-green` | `#76b06c` (her name and the subtitle) |
+| `--color-book-cream` | `#fef3e1` |
+
+The cover using green is worth noticing: it is the bridge between the site's
+green palette and the book's navy, which is why the two colourways sit
+together rather than clashing.
+
+Contrast is also much healthier here. Every pair we use clears WCAG AA
+comfortably, where the interior palette had two failures needing worked
+around.
+
+`public/leaf-pattern.svg` has been recoloured from the interior values to
+these, so the motif and the cover match.
+
+### Interior (reference only)
 
 Exact values from the vector art in the book's interior.
 

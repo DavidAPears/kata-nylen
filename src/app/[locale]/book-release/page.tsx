@@ -1,9 +1,10 @@
 import type { Metadata } from "next";
+import Image from "next/image";
 import { setRequestLocale } from "next-intl/server";
 import type { Locale } from "@/i18n/routing";
 import { getContent } from "@/content";
 import { getPathname } from "@/i18n/navigation";
-import { book, launchEvent, isResolved, bookTitleFor } from "@/content/facts";
+import { book, launchEvent, isResolved, resolved, bookTitleFor } from "@/content/facts";
 import { getCalendarEvent, googleCalendarUrl, directionsUrl } from "@/lib/ics";
 import { Container, Section, Prose, ExternalAnchor } from "@/components/primitives";
 import { TodoNote } from "@/components/TodoNote";
@@ -69,6 +70,7 @@ export default async function BookReleasePage({
   const guestsAllowed =
     isResolved(launchEvent.guestsAllowed) && launchEvent.guestsAllowed;
 
+  const cover = resolved(book.cover);
   const calendarEvent = getCalendarEvent(locale);
   const calendar = calendarEvent
     ? {
@@ -113,11 +115,25 @@ export default async function BookReleasePage({
             backgroundSize: "auto 155%",
           }}
         />
-        <div
-          aria-hidden="true"
-          className="pointer-events-none absolute inset-y-0 left-0 hidden w-[44%] bg-cover bg-center sm:block"
-          style={{ backgroundImage: "url(/leaf-pattern.svg)" }}
-        />
+        {cover ? (
+          <div className="absolute inset-y-0 left-0 hidden w-[44%] items-center justify-center sm:flex">
+            <Image
+              src={cover.src}
+              alt={cover.alt[locale]}
+              width={cover.width}
+              height={cover.height}
+              priority
+              sizes="(min-width: 640px) 30vw, 0px"
+              className="max-h-[78%] w-auto rounded-sm shadow-2xl shadow-black/40"
+            />
+          </div>
+        ) : (
+          <div
+            aria-hidden="true"
+            className="pointer-events-none absolute inset-y-0 left-0 hidden w-[44%] bg-cover bg-center sm:block"
+            style={{ backgroundImage: "url(/leaf-pattern.svg)" }}
+          />
+        )}
 
         <Container className="relative py-24 text-center sm:py-28 sm:text-left">
           <div className="sm:ml-[46%]">
@@ -200,9 +216,20 @@ export default async function BookReleasePage({
       {/* About the book */}
       <Section ornament id="book" heading={bookRelease.aboutBook.heading} tone="sunken">
         <div className="grid gap-8 sm:grid-cols-[200px_1fr] sm:items-start">
-          <div className="flex aspect-[2/3] items-center justify-center border border-dashed border-[var(--color-line)] bg-white text-sm text-[var(--color-ink-muted)]">
-            {isResolved(book.cover) ? "cover" : "Book cover"}
-          </div>
+          {cover ? (
+            <Image
+              src={cover.src}
+              alt={cover.alt[locale]}
+              width={cover.width}
+              height={cover.height}
+              sizes="(min-width: 640px) 200px, 60vw"
+              className="w-full rounded-sm shadow-lg shadow-black/15"
+            />
+          ) : (
+            <div className="flex aspect-[2/3] items-center justify-center border border-dashed border-[var(--color-line)] bg-white text-sm text-[var(--color-ink-muted)]">
+              Book cover
+            </div>
+          )}
           <div>
             <h3 className="text-lg">{bookRelease.aboutBook.synopsisHeading}</h3>
             {isResolved(book.synopsis[locale]) ? (
