@@ -13,32 +13,39 @@
  */
 
 @theme {
-  --color-ink: #1a1a1a;
-  --color-ink-muted: #5c5c5c;
-  --color-line: #d4d4d4;
-  --color-surface: #ffffff;
-  --color-surface-sunken: #f4f4f4;
-  --color-accent: #2f2f2f;
-
   /*
-   * ─── Brand palette (not yet applied to surfaces) ───────────────────────
+   * ─── Palette ──────────────────────────────────────────────────────────
    *
-   * ⚠️ APPROXIMATE. Sampled by eye from a PHOTO OF A SCREEN showing Kata's
-   * book-launch flyer, so both the display and the camera have shifted these.
-   * Do not treat them as the brand's real values — replace them from her
-   * Canva file or the book cover artwork before any of this ships.
+   * The book values are EXACT: extracted from the vector art in the print
+   * PDF of Kata's book, not sampled from a photo.
    *
-   * Note also brief §6: the book cover is "content to incorporate, not a
-   * master brand style guide", and the personal brand must sit above any
-   * individual book. The intended split is that navy/orange belongs to the
-   * book-release campaign page, while the site keeps a quieter palette that
-   * survives her next book.
+   * Two colourways, one design system. The leaf mark and the typeface run
+   * throughout; only the colours change:
+   *
+   *   • Site (default)      muted green + warm brown on cream. Outlives any
+   *                         individual book, per brief §6.
+   *   • Book (.theme-book)  the book's own orange and navy, scoped to the
+   *                         launch campaign so that page and the book feel
+   *                         like one object.
    */
-  --color-book-navy: #152a4a;
-  --color-book-orange: #de8a3e;
-  --color-book-cream: #f3ecdd;
 
-  /* The leaf mark. Muted and botanical — brief §6 warns off bright eco green. */
+  /* Book brand, exact values. Always available, used by .theme-book. */
+  --color-book-orange: #fc9a2d;
+  --color-book-orange-soft: #ffa951;
+  --color-book-navy: #444f69;
+  --color-book-cream: #fff0e0;
+  --color-book-cream-light: #fff7ee;
+  --color-book-grey: #ebecef;
+  --color-book-red: #e52237;
+  --color-book-yellow: #ffd100;
+
+  /* Site colourway. */
+  --color-ink: #2c3327;
+  --color-ink-muted: #5f6857;
+  --color-line: #ded6c6;
+  --color-surface: #fffaf3;
+  --color-surface-sunken: #f5efe3;
+  --color-accent: #8a6a4a;
   --color-leaf: #6e8b4a;
 
   --font-display: var(--font-display-loaded), Georgia, "Times New Roman", serif;
@@ -46,6 +53,24 @@
 
   /* Controls line length — brief §6 asks for carefully controlled measures. */
   --measure: 62ch;
+}
+
+/*
+ * The book-release campaign. Scoped to a wrapper element rather than applied
+ * globally, so removing the campaign after the launch (brief §21.11) is a
+ * matter of deleting one class.
+ */
+.theme-book {
+  --color-ink: var(--color-book-navy);
+  --color-ink-muted: color-mix(in srgb, var(--color-book-navy) 78%, white);
+  --color-line: color-mix(in srgb, var(--color-book-navy) 22%, white);
+  --color-surface: var(--color-book-cream-light);
+  --color-surface-sunken: var(--color-book-cream);
+  --color-accent: var(--color-book-orange);
+  --color-leaf: var(--color-book-orange);
+
+  background: var(--color-surface);
+  color: var(--color-ink);
 }
 
 :root {

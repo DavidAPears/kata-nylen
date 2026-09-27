@@ -1,77 +1,96 @@
 # Brand notes
 
-Working notes from Kata's own design direction. Everything here is
-**provisional** until confirmed — see the open questions at the end.
+Design facts taken from Kata's own material. Unlike the first pass, most of
+this is now **confirmed**, extracted from the print PDF of the book rather than
+eyeballed from a photo.
 
-## Source
+> ⚠️ The book PDF is unpublished and confidential. It is deliberately **not**
+> in this repo and must not be committed. Everything below was extracted from
+> it and the file itself stays out.
 
-A LinkedIn flyer Kata designed for the book launch (*"Tre frågor till höstens
-första möte"*), seen only as a photo of a screen. That matters: both the
-display and the camera shift colour and soften letterforms, so nothing sampled
-from it is trustworthy as a spec.
+## Colours — CONFIRMED
 
-## Direction it shows
+Exact values from the vector art in the book's interior.
 
-- Deep navy ground with warm orange wavy lines, arched to suggest an organic /
-  leaf form — the book's colours.
-- Cream circles holding simple green plant illustrations at three growth stages
-  (seedling → branch shedding leaves → root system). The growth metaphor is
-  doing real work, not decoration.
-- A single leaf mark above her name at the foot of the layout — the basis for
-  the logo now in `src/components/Logo.tsx`.
-- Editorial serif for headings, geometric sans in letterspaced caps for the
-  kicker, humanist sans for body.
-
-## Colours (APPROXIMATE — do not ship these)
-
-| Role | Eyeballed | Confidence |
+| Token | Value | Where it comes from |
 | --- | --- | --- |
-| Book navy | `#152a4a` | Low — photo of a screen |
-| Book orange | `#de8a3e` | Low |
-| Cream | `#f3ecdd` | Low |
-| Leaf green | `#6e8b4a` | Low |
+| `--color-book-orange` | `#fc9a2d` | The leaf, chapter openers |
+| `--color-book-orange-soft` | `#ffa951` | Outer bands of the chapter motif |
+| `--color-book-navy` | `#444f69` | Chapter grounds, body text |
+| `--color-book-cream` | `#fff0e0` | Callout boxes |
+| `--color-book-cream-light` | `#fff7ee` | Page ground |
+| `--color-book-grey` | `#ebecef` | Diagram fills |
+| `--color-book-red` | `#e52237` | Rare accent |
+| `--color-book-yellow` | `#ffd100` | Rare accent |
 
-Replace from Kata's Canva file or the book cover artwork before launch.
+Earlier guesses of `#152a4a` / `#de8a3e`, sampled from a photo of a screen,
+were wrong. These replace them.
 
-## Typefaces
+## Typeface — CONFIRMED, and it is commercial
 
-Identified by eye from a photo, so treat as a starting point:
+The book is set in:
 
-| Role | Best guess | Alternatives |
+| Font | Weights present | Role |
 | --- | --- | --- |
-| Display / headings | Playfair Display | DM Serif Display, Prata, Noto Serif Display |
-| Kicker caps | Montserrat | Poppins, Archivo |
-| Body | Lato | Open Sans, Source Sans 3 |
+| **TT Jenevers** | Regular, Medium, Bold, ExtraBold, + italics | Everything |
+| **Rita Smith** | — | Secondary/display |
 
-Currently loaded: Playfair Display only, via `src/app/fonts.ts`. Body text is
-still system sans — that choice is deferred to the design pass.
+My earlier guess of Playfair Display was wrong.
 
-**If the flyer was made in Canva, the real font names are visible in the editor
-when Kata clicks each text box.** Ask her rather than guessing further.
+**TT Jenevers is a commercial face from TypeType.** The print licence Kata
+already holds does not cover web use. Two options:
 
-## The brand-above-book question
+1. **Buy a TT Jenevers webfont licence** from TypeType. Gives exact continuity
+   between book and site. Recommended if the budget allows, since the whole
+   point is that they read as one object.
+2. **Substitute a free face.** Closest in character (sturdy wedge serifs,
+   moderate contrast, warm and bookish): **Literata**, then **Fraunces** or
+   **Newsreader**. None is a match; they are a family resemblance.
 
-Brief §6: the book cover is *"content to incorporate, not a master brand style
-guide"*, her other books have different identities, and *"the personal brand
-therefore needs to sit above any individual book."*
+Currently loaded: Playfair Display, as a stand-in from the earlier pass. It is
+noticeably higher-contrast and more Didone than TT Jenevers, so it should be
+swapped once the decision is made. One line in `src/app/fonts.ts`.
 
-Navy + orange is this book's identity. Proposed split:
+## The leaf — EXTRACTED, not traced
 
-- **Site** — quieter palette per brief §6 (cream, charcoal, muted botanical
-  green, restrained accent). Survives the next book.
-- **Book-release page** — leans fully into navy and orange. That page *is* the
-  campaign, and §21.11 wants it easy to update or remove afterwards.
+`src/components/Logo.tsx` contains the **actual vector path** from the book.
+The chapter openers are seven nested copies of this outline, so it is the
+book's core motif rather than decoration.
 
-The leaf mark already works either way: it is drawn with `currentColor`, so it
-renders green on cream and cream on navy with no second asset.
+- Filled with `currentColor`, so one path serves every colourway
+- `simplified` prop swaps in a clean silhouette below ~28px, where the toothed
+  edge and thin stem stop reading. The favicon uses it.
+- `public/leaf-pattern.svg` is the full seven-layer chapter motif, extracted
+  with its nesting intact, ready to use as a hero background on the
+  book-release page.
 
-**Not yet decided.** If Kata wants navy/orange throughout, that is a legitimate
-choice — it just means accepting a reskin when book three arrives.
+## Two colourways, one system
 
-## Open questions for Kata
+Agreed direction: the leaf and the typeface run through the whole site; only
+the colours change.
 
-1. Font names from the Canva file (title, kicker, body).
-2. Real hex values, or the source artwork / cover file.
-3. Navy + orange sitewide, or reserved for the book-release campaign?
-4. Does she want the wavy-line motif used on the site, or is it flyer-specific?
-5. Is the leaf hers to keep as a permanent mark, or tied to this book?
+| | Palette | Rationale |
+| --- | --- | --- |
+| **Site** (default) | Muted green, warm brown, cream | Must outlive any single book (brief §6) |
+| **Book release** (`.theme-book`) | The book's orange and navy | That page and the book should feel like one object |
+
+`.theme-book` is a scoped class on the book-release page, not a global mode, so
+removing the campaign after the launch is a one-line deletion (brief §21.11).
+
+## Interior design language, worth borrowing
+
+From the book's own pages:
+
+- Callout boxes: cream ground, generous radius (~12px), no border
+- Section headings: orange, letterspaced caps, above a bold navy subhead
+- Diagrams: soft overlapping circles in orange and cool grey
+- Body: navy on cream, generously leaded
+- Chapter openers: the nested leaf motif, full bleed
+
+## Still open
+
+1. TT Jenevers webfont licence, or substitute?
+2. Should the nested-leaf motif appear on the site, or stay book-only?
+3. Does the site header keep the green leaf on the book page, or adopt the
+   book colourway too? Currently it stays green, since the header is site
+   chrome.

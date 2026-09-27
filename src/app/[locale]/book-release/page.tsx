@@ -85,7 +85,10 @@ export default async function BookReleasePage({
   ].filter(Boolean) as string[];
 
   return (
-    <>
+    // The book's own colourway, scoped to this page. Everything else on the
+    // site keeps the green/brown palette; the leaf and the typeface carry
+    // across so the two still read as one identity.
+    <div className="theme-book">
       {/* Event hero */}
       <Container className="py-16 sm:py-24">
         <p className="mb-4 text-sm uppercase tracking-[0.2em] text-[var(--color-ink-muted)]">
@@ -284,6 +287,6 @@ export default async function BookReleasePage({
 
       <BookJsonLd locale={locale} />
       <EventJsonLd locale={locale} />
-    </>
+    </div>
   );
 }

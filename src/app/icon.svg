@@ -1,12 +1,11 @@
 <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 32 32">
   <!--
-    Favicon. A simplified version of the header leaf: at 16px the side veins
-    turn to mud, so only the blade and midrib survive. Sits on a cream roundel
-    so it holds its shape against both light and dark browser chrome.
+    Favicon. Uses the simplified leaf silhouette, not the real toothed outline:
+    at 16px the serrations turn to mud and the stem disappears. Cream roundel
+    so it holds its shape against light and dark browser chrome.
   -->
-  <rect width="32" height="32" rx="7" fill="#f3ecdd"/>
-  <path
-    d="M16 5c5.4 6 10.4 11.6 10.4 16.2 0 5.2-4.6 9.2-10.4 9.8-5.8-.6-10.4-4.6-10.4-9.8C5.6 16.6 10.6 11 16 5Z"
-    fill="#6e8b4a"/>
-  <path d="M16 8.5v19" stroke="#f3ecdd" stroke-width="2" stroke-linecap="round"/>
+  <rect width="32" height="32" rx="7" fill="#fff0e0"/>
+  <g transform="translate(8.6 3.5) scale(0.265)">
+    <path fill="#444f69" d="M27.5 0C38 14 55 33 55 52.5 55 69 43 81 30.5 83.6V100h-6V83.6C12 81 0 69 0 52.5 0 33 17 14 27.5 0Z"/>
+  </g>
 </svg>

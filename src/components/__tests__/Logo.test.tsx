@@ -47,10 +47,34 @@ describe("LeafMark", () => {
 
   it("inherits colour so it works on any background", () => {
     const { container } = render(<LeafMark />);
-    const strokes = container.querySelectorAll('[stroke="currentColor"]');
-    expect(strokes.length).toBeGreaterThan(0);
+    // One filled path, coloured by context: green on the site, orange on the
+    // book page, cream on navy. No second asset, no build-time recolouring.
+    expect(container.querySelectorAll('[fill="currentColor"]').length).toBe(1);
     // No hard-coded hex anywhere in the mark.
     expect(container.innerHTML).not.toMatch(/#[0-9a-f]{3,6}/i);
+  });
+
+  it("uses the real outline from the book by default", () => {
+    const { container } = render(<LeafMark />);
+    const d = container.querySelector("path")!.getAttribute("d")!;
+    // The extracted outline is long and full of curves; the simplified
+    // silhouette is short. This distinguishes them without pinning the exact
+    // path, which would break on any re-extraction.
+    expect(d.length).toBeGreaterThan(1000);
+  });
+
+  it("swaps to a simplified silhouette when asked", () => {
+    const { container } = render(<LeafMark simplified />);
+    const d = container.querySelector("path")!.getAttribute("d")!;
+    // Below ~28px the toothed edge muds up, so small sizes drop the detail.
+    expect(d.length).toBeLessThan(400);
+    expect(container.querySelectorAll('[fill="currentColor"]').length).toBe(1);
+  });
+
+  it("keeps the same viewBox in both variants, so they swap without shifting", () => {
+    const real = render(<LeafMark />).container.querySelector("svg")!;
+    const simple = render(<LeafMark simplified />).container.querySelector("svg")!;
+    expect(simple.getAttribute("viewBox")).toBe(real.getAttribute("viewBox"));
   });
 
   it("scales without a fixed size baked in", () => {
