@@ -336,6 +336,8 @@ export const sv: SiteContent = {
     speakingCta: { label: "Teman och förfrågningar", href: "/speaking" },
     elsewhereHeading: "Andra platser",
     elsewhereBody: "Professionella profiler och var hon kan bokas.",
+    recognitionHeading: "Erkännanden",
+    mediaHeading: "Intervjuer och omnämnanden",
   },
 
   contact: {

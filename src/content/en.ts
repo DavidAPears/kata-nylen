@@ -336,6 +336,8 @@ export const en: SiteContent = {
     speakingCta: { label: "Speaking topics and enquiries", href: "/speaking" },
     elsewhereHeading: "Elsewhere",
     elsewhereBody: "Professional profiles and where to book her.",
+    recognitionHeading: "Recognition",
+    mediaHeading: "Interviews and coverage",
   },
 
   contact: {

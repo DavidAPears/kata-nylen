@@ -3,7 +3,8 @@ import { setRequestLocale } from "next-intl/server";
 import type { Locale } from "@/i18n/routing";
 import { getContent } from "@/content";
 import { getPathname, Link } from "@/i18n/navigation";
-import { Container, Section, Prose } from "@/components/primitives";
+import { Container, Section, Prose, ExternalAnchor } from "@/components/primitives";
+import { recognition, media } from "@/content/facts";
 
 export async function generateMetadata({
   params,
@@ -81,10 +82,39 @@ export default async function SpeakingPage({
         logos or testimonials." The section renders only its heading until real,
         verified material is supplied.
       */}
+      {/*
+        Background. A conference organiser wants evidence she has done this
+        before, so the same verified recognition and coverage that sits on the
+        About page appears here, where it does a different job.
+      */}
       <Section ornament id="credibility" heading={speaking.credibility.heading}>
         <Prose>
           <p>{speaking.credibility.intro}</p>
         </Prose>
+
+        <ul className="mt-6 max-w-2xl space-y-5">
+          {recognition.map((item) => (
+            <li key={item.id}>
+              <ExternalAnchor href={item.url}>{item.title[locale]}</ExternalAnchor>
+              <span className="text-[var(--color-ink-muted)]"> · {item.source}</span>
+              <p className="mt-1 max-w-[var(--measure)] text-sm text-[var(--color-ink-muted)]">
+                {item.detail[locale]}
+              </p>
+            </li>
+          ))}
+          {media.map((item) => (
+            <li key={item.id}>
+              <ExternalAnchor href={item.url}>{item.title[locale]}</ExternalAnchor>
+              <span className="text-[var(--color-ink-muted)]"> · {item.source}</span>
+            </li>
+          ))}
+        </ul>
+
+        <p className="mt-6">
+          <Link href="/about" className="underline underline-offset-4">
+            {getContent(locale).footer.aboutLabel}
+          </Link>
+        </p>
       </Section>
 
       <Section ornament id="enquiry" heading={speaking.cta.heading} tone="sunken">

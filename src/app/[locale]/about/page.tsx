@@ -8,6 +8,8 @@ import {
   person,
   publications,
   collectives,
+  recognition,
+  media,
   resolved,
 } from "@/content/facts";
 import { Container, Section, Prose, ExternalAnchor } from "@/components/primitives";
@@ -192,6 +194,46 @@ export default async function AboutPage({
         </ul>
       </Section>
 
+      {/*
+        Recognition, attributed rather than asserted. Klimatklubben's list
+        names the collective, not Kata individually, and "Sweden's leading
+        experts" is their description of the group. Both are stated that way
+        and linked, so a reader can check them. An attributed claim someone
+        can verify carries more weight than one we make about ourselves.
+      */}
+      {recognition.length > 0 ? (
+        <Section ornament id="recognition" heading={copy.recognitionHeading}>
+          <ul className="max-w-2xl space-y-6">
+            {recognition.map((item) => (
+              <li key={item.id}>
+                <h3 className="text-lg">
+                  <ExternalAnchor href={item.url}>{item.title[locale]}</ExternalAnchor>
+                </h3>
+                <p className="mt-1 text-sm uppercase tracking-[0.12em] text-[var(--color-ink-muted)]">
+                  {item.source}
+                </p>
+                <p className="mt-2 max-w-[var(--measure)] text-[var(--color-ink-muted)]">
+                  {item.detail[locale]}
+                </p>
+              </li>
+            ))}
+          </ul>
+        </Section>
+      ) : null}
+
+      {media.length > 0 ? (
+        <Section ornament id="media" heading={copy.mediaHeading} tone="sunken">
+          <ul className="max-w-2xl space-y-4">
+            {media.map((item) => (
+              <li key={item.id}>
+                <ExternalAnchor href={item.url}>{item.title[locale]}</ExternalAnchor>
+                <span className="text-[var(--color-ink-muted)]"> · {item.source}</span>
+              </li>
+            ))}
+          </ul>
+        </Section>
+      ) : null}
+
       <Section ornament id="elsewhere" heading={copy.elsewhereHeading}>
         <Prose>
           <p>{copy.elsewhereBody}</p>
@@ -212,8 +254,9 @@ export default async function AboutPage({
           })}
         </ul>
         <TodoNote>
-          Media coverage, articles and TV appearances would sit here or in a
-          section of their own. Only add items that can be linked to.
+          More interviews, articles and TV clips can be added to
+          <code>media</code> in <code>facts.ts</code>. Only items with a link,
+          so a reader can check them.
         </TodoNote>
       </Section>
     </>

@@ -108,7 +108,8 @@ delete → create new → update `.env.local` AND Vercel.
 
    - Her professional title and qualifications, and where she trained
    - Organisational clients, **with their agreement**, before any can be named
-   - Media coverage, articles and TV clips, with links
+   - ~~Media coverage~~ started: the Klimatklubben interview is in, and
+     `recognition` / `media` in facts.ts take more. Only items with a link.
    - Anything she wants said about her standing in the field, phrased so it is
      checkable
 
@@ -188,9 +189,10 @@ translation, so she should correct tone as well as wording.
   - The English is our translation and needs Kata's eye.
 - **Cover asset**: the publisher has a press-image download on that page
   (credit: John Persson). That is the authoritative source.
-- **Photo credit**: the press portraits of Kata are by **Karin Boo**. Check
-  whether the portrait now on the site is one of hers, and whether a credit is
-  required (§23, photography rights).
+- **Photo credit**: the press portraits of Kata are by **Karin Boo**, credited
+  both by Natur & Kultur and on the Klimatklubben interview. Two independent
+  sources, so if the portrait on the site is one of hers it very likely needs
+  that credit (§23, photography rights).
 - Confirmed speaking topics and formats — **do not publish unapproved ones**
 - Verified credentials, previous events, approved testimonials if any
 - Social/professional profile URLs (these feed the JSON-LD, confirmed only)

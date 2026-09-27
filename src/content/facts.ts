@@ -62,6 +62,10 @@ export const person = {
     * ⚠️ The filename says "placeholder". Confirm with Kata that this is the
     * approved image and that the photography rights are cleared (§23) before
     * launch; swap the src when the final one arrives.
+    *
+    * Her press portraits are credited to KARIN BOO, both by Natur & Kultur
+    * and on the Klimatklubben interview. If this is one of hers, it likely
+    * needs that credit.
     */
   portrait: {
     src: "/images/portrait-placeholder.jpg",
@@ -343,6 +347,67 @@ export const publications: Publication[] = [
     summary: {
       sv: "En antologi om evidensbaserad elevhälsa. Tredje upplagan är uppdaterad med bland annat klimatångest, neuropsykiatri och digitaliseringens påverkan på elevers lärande och mående. Kata Nylén har skrivit ett kapitel.",
       en: "An edited volume on evidence-based student health. The third edition adds chapters on climate anxiety, neuropsychiatry and how digitalisation affects pupils' learning and wellbeing. Kata Nylén contributed a chapter.",
+    },
+  },
+];
+
+/**
+ * Third-party recognition and media, each with a link so any reader can check
+ * it. Brief §11: never fabricate credentials. Everything here is quoted from,
+ * or directly attributable to, the linked source.
+ *
+ * Note what is deliberately NOT claimed. Klimatklubben's list names
+ * **Klimatpsykologerna**, the collective, not Kata individually: "Klimat-
+ * psykologerna är med på Klimatklubbens lista över Sveriges 52 främsta
+ * kvinnor". Presenting it as a personal accolade would overstate it, and it is
+ * strong enough stated accurately.
+ *
+ * Likewise "Sveriges ledande experter på klimatpsykologi" is Klimatklubben's
+ * description of the collective, so it is attributed to them rather than
+ * asserted by us. An attributed claim a reader can verify is worth more than
+ * an unattributed one anyway.
+ */
+export type Recognition = {
+  id: string;
+  url: string;
+  source: string;
+  /** What this is, in each language. */
+  title: { sv: string; en: string };
+  /** Why it counts, stated so a reader can check it. */
+  detail: { sv: string; en: string };
+};
+
+export const recognition: Recognition[] = [
+  {
+    id: "klimatklubben-52",
+    url: "https://klimatklubben.se/klimatsnack/kata-nylen-klimatpsykologerna-det-ar-fullt-mojlig-att-fa-till-storskalig-beteendeforandring/",
+    source: "Klimatklubben",
+    title: {
+      sv: "Sveriges 52 främsta klimatkvinnor",
+      en: "Sweden's 52 foremost climate women",
+    },
+    detail: {
+      sv: "Klimatpsykologerna, kollektivet Kata är en del av, finns med på Klimatklubbens lista, som lanserades på Internationella kvinnodagen. Klimatklubben beskriver gruppen som legitimerade psykologer och Sveriges ledande experter på klimatpsykologi.",
+      en: "Klimatpsykologerna, the collective Kata is part of, appears on Klimatklubben's list, published on International Women's Day. Klimatklubben describes the group as licensed psychologists and Sweden's leading experts in climate psychology.",
+    },
+  },
+];
+
+export type MediaItem = {
+  id: string;
+  url: string;
+  source: string;
+  title: { sv: string; en: string };
+};
+
+export const media: MediaItem[] = [
+  {
+    id: "klimatklubben-intervju",
+    url: "https://klimatklubben.se/klimatsnack/kata-nylen-klimatpsykologerna-det-ar-fullt-mojlig-att-fa-till-storskalig-beteendeforandring/",
+    source: "Klimatklubben",
+    title: {
+      sv: "\u201dDet är fullt möjligt att få till storskalig beteendeförändring\u201d",
+      en: "\u201cLarge-scale behavioural change is entirely possible\u201d",
     },
   },
 ];

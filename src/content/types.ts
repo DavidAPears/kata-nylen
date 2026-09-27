@@ -268,6 +268,8 @@ export type AboutContent = {
   speakingCta: Cta;
   elsewhereHeading: string;
   elsewhereBody: string;
+  recognitionHeading: string;
+  mediaHeading: string;
 };
 
 export type FooterContent = {
