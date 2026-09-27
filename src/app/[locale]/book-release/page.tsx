@@ -208,9 +208,46 @@ export default async function BookReleasePage({
             <p key={paragraph}>{paragraph}</p>
           ))}
         </Prose>
-        <TodoNote>
-          A personal invitation in Kata&apos;s own words would sit here (§10).
-        </TodoNote>
+
+        {/*
+          What the evening holds, as the invitation lists it. Middots between
+          items on screen, but a real <ul> underneath, so a screen reader
+          announces it as a list of six things rather than one run-on line.
+        */}
+        {launchEvent.includes[locale].length > 0 ? (
+          <div className="mt-8">
+            <h3 className="text-sm uppercase tracking-[0.18em] text-[var(--color-ink-muted)]">
+              {bookRelease.invitation.includesHeading}
+            </h3>
+            <ul className="mt-3 flex flex-wrap items-center gap-x-3 gap-y-1 text-lg">
+              {launchEvent.includes[locale].map((item, index) => (
+                <li key={item} className="flex items-center gap-3">
+                  {index > 0 ? (
+                    <span aria-hidden="true" className="text-[var(--color-accent)]">
+                      ·
+                    </span>
+                  ) : null}
+                  {item}
+                </li>
+              ))}
+            </ul>
+          </div>
+        ) : null}
+
+        {/* The people appearing. Real people, so named properly. */}
+        {launchEvent.guests.length > 0 ? (
+          <p className="mt-8 text-[var(--color-ink-muted)]">
+            <span className="text-[var(--color-ink)]">Kata Nylén</span>{" "}
+            {bookRelease.invitation.withLabel}{" "}
+            {launchEvent.guests.map((guest, index) => (
+              <span key={guest.name}>
+                {index > 0 ? ", " : ""}
+                <span className="text-[var(--color-ink)]">{guest.name}</span>{" "}
+                ({guest.role[locale]})
+              </span>
+            ))}
+          </p>
+        ) : null}
       </Section>
 
       {/* About the book */}

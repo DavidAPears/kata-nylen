@@ -129,9 +129,11 @@ export const sv: SiteContent = {
     invitation: {
       heading: "Om kvällen",
       body: [
-        "En kväll för att fira släppet av den nya boken, med ett samtal, en läsning och tid att prata.",
+        "En kväll för att fira släppet av den nya boken: en upplevelse av boken och ett tillfälle att odla psykologisk resiliens tillsammans.",
         "Du är varmt välkommen. Anmäl dig gärna så att vi vet hur många vi blir.",
       ],
+      includesHeading: "Kvällen innehåller",
+      withLabel: "med",
     },
     aboutBook: {
       heading: "Om boken",

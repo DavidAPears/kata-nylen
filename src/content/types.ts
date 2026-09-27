@@ -100,6 +100,10 @@ export type BookReleaseContent = {
   invitation: {
     heading: string;
     body: string[];
+    /** Heading above the list of what the evening holds. */
+    includesHeading: string;
+    /** Introduces the people appearing, e.g. "Kata Nylén with ...". */
+    withLabel: string;
   };
   aboutBook: {
     heading: string;

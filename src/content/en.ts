@@ -128,9 +128,11 @@ export const en: SiteContent = {
     invitation: {
       heading: "About the evening",
       body: [
-        "An evening to mark the release of the new book, with a conversation, a reading, and time to talk.",
+        "An evening to mark the release of the new book: an experience of the book, and an occasion to cultivate psychological resilience together.",
         "You are warmly welcome. Please reserve a place so we know how many to expect.",
       ],
+      includesHeading: "The evening holds",
+      withLabel: "with",
     },
     aboutBook: {
       heading: "About the book",
