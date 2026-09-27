@@ -32,6 +32,7 @@ function JsonLd({ data }: { data: Record<string, unknown> }) {
 }
 
 export function PersonJsonLd({ locale }: { locale: Locale }) {
+  const { speaking } = getContent(locale);
   const jobTitle = isResolved(person.jobTitle[locale]) ? person.jobTitle[locale] : null;
   const description = isResolved(person.shortBio[locale]) ? person.shortBio[locale] : null;
   const portrait = isResolved(person.portrait) ? person.portrait : null;
@@ -59,6 +60,31 @@ export function PersonJsonLd({ locale }: { locale: Locale }) {
           },
         }
       : {}),
+    /*
+      The two properties that answer "who can I book to talk about X".
+
+      `knowsAbout` ties this Person entity to her subjects, and `makesOffer`
+      says she can be engaged to speak on them. Someone searching for a
+      climate psychology speaker is asking exactly that question, and without
+      these the site says she is a psychologist and an author but never that
+      she is bookable.
+
+      Both are built from the visible speaking page rather than written
+      separately, which is what keeps them honest: brief section 14 requires
+      structured data to describe content a visitor can actually see, so a
+      theme removed from the page disappears from the schema in the same
+      commit. Nothing here is a claim we are not already making in public.
+    */
+    knowsAbout: speaking.themes.topics.map((topic) => topic.title),
+    makesOffer: speaking.formats.items.map((format) => ({
+      "@type": "Offer",
+      itemOffered: {
+        "@type": "Service",
+        name: format.title,
+        description: format.description,
+        serviceType: locale === "sv" ? "Föreläsning" : "Speaking engagement",
+      },
+    })),
   };
 
   return <JsonLd data={data} />;

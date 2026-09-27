@@ -167,9 +167,11 @@ export const sv: SiteContent = {
 
   speaking: {
     seo: {
-      title: "Föreläsningar",
+      // Titled for what someone booking a speaker actually types. "Föreläsningar"
+      // alone describes the page; this describes what she can be booked for.
+      title: "Föreläsare inom klimatpsykologi och resiliens",
       description:
-        "Kata Nylén föreläser om klimatets psykologi, motståndskraft, beteende och förändring för konferenser, universitet och organisationer.",
+        "Keynote, workshop, panel och modererade samtal om klimatpsykologi, resiliens och beteendeförändring. För konferenser, universitet och organisationer.",
     },
     hero: {
       heading: "Föreläsningar",
@@ -270,9 +272,11 @@ export const sv: SiteContent = {
 
   about: {
     seo: {
-      title: "Om Kata Nylén",
+      // "Om Kata Nylén" became "Om Kata Nylén | Kata Nylén" once the title
+      // template was applied, which spent the whole line saying her name twice.
+      title: "Om Kata",
       description:
-        "Kata Nylén är psykolog, författare och föreläsare inom klimatpsykologi, psykologisk resiliens, beteendeförändring och organisationspsykologi. Författare till Psykologisk resiliens och medförfattare till Klimatpsykologi.",
+        "Kata Nylén är psykolog, författare och föreläsare inom klimatpsykologi, psykologisk resiliens, beteendeförändring och organisationspsykologi.",
     },
     hero: {
       heading: "Om Kata Nylén",
