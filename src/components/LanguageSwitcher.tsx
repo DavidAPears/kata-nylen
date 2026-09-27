@@ -51,8 +51,13 @@ export function LanguageSwitcher({
               {/* Dimmed when inactive so the current language reads as current
                   without relying on colour alone — the weight and underline
                   carry it too. */}
+              {/*
+                Flags are hidden on a phone. The header is tight there and
+                "SV | EN" is unambiguous on its own; the flags are recognition
+                aids, not the label. They return from `sm` up.
+              */}
               <Flag
-                className={`h-3.5 w-5 shrink-0 rounded-[1.5px] ${
+                className={`hidden h-3.5 w-5 shrink-0 rounded-[1.5px] sm:block ${
                   isActive ? "" : "opacity-60"
                 }`}
               />

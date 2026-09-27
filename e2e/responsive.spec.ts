@@ -71,6 +71,19 @@ for (const viewport of WIDTHS) {
   });
 }
 
+test.describe("desktop nav", () => {
+  test.use({ viewport: { width: 1280, height: 900 } });
+
+  test("shows all five links and the flags", async ({ page }) => {
+    await page.goto("/sv");
+    const nav = page.getByRole("banner").getByRole("navigation", { name: "Meny" });
+    expect(await nav.getByRole("link").all()).toHaveLength(5);
+
+    const switcher = page.getByRole("banner").getByRole("navigation", { name: "Byt språk" });
+    await expect(switcher.locator("svg").first()).toBeVisible();
+  });
+});
+
 test.describe("phone", () => {
   test.use({ viewport: { width: 390, height: 844 } });
 
@@ -102,21 +115,41 @@ test.describe("phone", () => {
     }
   });
 
-  test("the five nav links fit without overflowing", async ({ page }) => {
-    // Adding Publications took the nav from four items to five, which is the
-    // kind of change that quietly breaks a phone header.
+  test("the nav fits on one row at phone width, with Home dropped", async ({ page }) => {
+    // Home is hidden on a phone because the wordmark links home. Measured:
+    // five links needed 371px against 350px available at 390px; four links
+    // with tighter spacing need about 337px.
     await page.goto("/sv");
     const nav = page.getByRole("navigation", { name: "Meny" });
     const links = await nav.getByRole("link").all();
-    expect(links).toHaveLength(5);
+    expect(links, "Home is hidden on mobile").toHaveLength(4);
 
     const viewport = await page.evaluate(() => document.documentElement.clientWidth);
+    const tops = new Set<number>();
     for (const link of links) {
-      const box = await link.boundingBox();
-      expect(box, "every nav link is laid out").not.toBeNull();
-      expect(box!.x + box!.width, "nav link stays inside the viewport")
+      const box = (await link.boundingBox())!;
+      expect(box.x + box.width, "nav link stays inside the viewport")
         .toBeLessThanOrEqual(viewport + 1);
+      tops.add(Math.round(box.y));
     }
+    expect(tops.size, "nav sits on one row at 390px").toBe(1);
+  });
+
+  test("the wordmark still leads home once Home is hidden", async ({ page }) => {
+    // Removing a nav item is only safe because this remains.
+    await page.goto("/sv/publikationer");
+    await page.getByRole("banner").getByRole("link", { name: "Kata Nylén" }).click();
+    await expect(page).toHaveURL(/\/sv$/);
+  });
+
+  test("the language switcher reads as text, with flags hidden", async ({ page }) => {
+    await page.goto("/sv");
+    // Scope to the header: the footer has its own switcher.
+    const switcher = page.getByRole("banner").getByRole("navigation", { name: "Byt språk" });
+    await expect(switcher.getByRole("link", { name: "en" })).toBeVisible();
+    // The flags are still in the DOM for wider screens, just not shown here.
+    expect(await switcher.locator("svg").count()).toBeGreaterThan(0);
+    await expect(switcher.locator("svg").first()).toBeHidden();
   });
 
   test("interactive controls meet the 24px minimum touch target", async ({ page }) => {
