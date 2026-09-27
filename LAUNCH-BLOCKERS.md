@@ -1,11 +1,15 @@
 # ⚠️ LAUNCH BLOCKERS & NEXT STEPS
 
-Live wireframe: **https://kata-nylen.vercel.app** (noindexed, see §4)
+Live site: **https://kata-nylen.vercel.app** (noindexed until the domain
+is attached, see A4)
 Attendee sheet: `docs/google-sheets-setup.md`
 
-Status as of 26 Sep 2026: RSVP pipeline works end to end in production. Form →
-Google Sheet → confirmation email. Event details, design and the domain are
-outstanding.
+Status as of 27 Sep 2026: RSVP pipeline works end to end in production. Form →
+Google Sheet → confirmation email. Event details are confirmed, the design pass
+is done, and the site is live at the Vercel URL.
+
+**The domain is now the only thing between us and a real launch.** Everything
+else on this list is either Kata's to supply or a nice-to-have.
 
 ---
 
@@ -41,30 +45,36 @@ Once **katanylen.com** is bought, in order:
 8. Test with an address that is NOT davidapears@gmail.com, to prove the
    restriction is gone. This is the actual proof that launch is unblocked.
 
-## 🔴 A2. EVENT DETAILS → `src/content/facts.ts`
+## 🟢 A2. EVENT DETAILS — DONE
 
-Until these are filled in, the book-release page shows "Meddelas snart",
-emits no Event structured data, and serves no calendar file. Nothing is
-invented, by design.
+Confirmed from the launch poster and Knackeriet's own Djupet page:
 
-- `launchEvent.startsAt` / `endsAt` (ISO 8601 with timezone)
-- ~~`launchEvent.venueName`, `addressLine`, `postalCode`, `city`~~ confirmed:
-  Knackeriet, Sankt Paulsgatan 25, 118 48 Stockholm
-- `launchEvent.programme` (only if there genuinely is one)
-- `launchEvent.capacity` (only if the venue caps it)
-- `launchEvent.accessibility`
+**Resilienssalong, Wednesday 11 November 2026, 17.00, Djupet,
+Björngårdsgatan 1A, Stockholm.** Stage programme from 17.15.
 
-Plus-ones are already enabled, capped at 4 places per booking
+Filling these in switched on the Event structured data and `/api/calendar`
+automatically, because both are gated on the facts being resolved.
+
+⚠️ **The venue is Djupet, at Björngårdsgatan 1A.** An earlier draft of this
+file said Knackeriet, Sankt Paulsgatan 25 — that is Knackeriet's office
+address, taken from their homepage. Djupet has its own door on
+Björngårdsgatan. Do not "correct" it back.
+
+Still TODO in `facts.ts`, deliberately: `endsAt`, `capacity`, `postalCode`
+and `accessibility`. David has decided none are needed for this launch, so
+the content audit does not flag them. The calendar file falls back to a
+two-hour event and RSVPs are uncapped.
+
+Plus-ones are enabled, capped at 4 places per booking
 (`maxPlacesPerRsvp`).
 
 ## 🟢 A3. MAP OF THE VENUE — built, just needs a key
 
-The venue is confirmed: **Knackeriet, Sankt Paulsgatan 25, 118 48 Stockholm**
-(by Mariatorget). Their private event space is called *Djupet*; confirm with
-Kata whether the launch is in Djupet specifically, in which case
-`launchEvent.venueName` should read "Djupet, Knackeriet".
+The venue is confirmed: **Djupet, Björngårdsgatan 1A, Stockholm** (by
+Mariatorget). It is Knackeriet's event space but has its own entrance, which
+is why the address is not Knackeriet's Sankt Paulsgatan one.
 
-The address and a directions link already render. To add the map image:
+The address already renders and links straight out to directions. To add the map image:
 
 1. **console.cloud.google.com** with the existing `katanylen` project.
 2. Search **Maps Static API**, open it, **Enable**.
@@ -97,11 +107,11 @@ delete → create new → update `.env.local` AND Vercel.
 
 ## 🟠 A6b. NEXT UP (David's list, 27 Sep)
 
-1. **Review the Publications page** at `/sv/publikationer`. Built but not yet
-   looked at.
-2. **Mobile hamburger nav.** Five items now fit and pass the overflow tests,
-   but they wrap to two rows on a narrow phone. `MobileNavigation` is in the
-   brief's component list (§22).
+1. ~~**Review the Publications page**~~ reviewed. Now links through to Media
+   at the foot of the contributions list.
+2. ~~**Mobile hamburger nav.**~~ Not needed. The nav fits one row on a phone
+   by dropping Home, with the wordmark carrying that job instead. Locked by an
+   e2e test, so a sixth link would fail rather than wrap silently.
 3. ~~**A deep "About Kata" page**~~ BUILT, first pass, at `/sv/om-kata` and
    `/en/about`, linked from the footer beside Privacy. Written to be read, not
    just crawled. Still needs from Kata:
@@ -129,14 +139,17 @@ delete → create new → update `.env.local` AND Vercel.
    real publishers, the collectives she works with, her actual areas of
    practice, and verifiable facts about the field.
 
-## 🟠 A6. DESIGN PASS
+## 🟢 A6. DESIGN PASS — DONE, pending Kata's eye
 
-The wireframe is deliberately white/grey. See `docs/brand-notes.md` for the
-direction taken from Kata's own book-launch flyer, and the open question of
-whether navy/orange is the site's identity or only the book campaign's.
+Two colourways: the site in green/cream, the book-release page in the cover's
+navy/sand under `.theme-book`. The leaf is the real vector from the book, not
+a lookalike. See `docs/brand-notes.md`.
 
-Seams to work on: tokens in `src/app/globals.css`, primitives in
-`src/components/primitives.tsx`. Blocked on B2 and B3 below.
+Seams if it needs changing: tokens in `src/app/globals.css`, primitives in
+`src/components/primitives.tsx`.
+
+Open question for Kata (B2): is navy/orange the site's identity, or only this
+book's campaign?
 
 ## 🟠 A7. SMALLER ITEMS
 
@@ -148,10 +161,11 @@ Seams to work on: tokens in `src/app/globals.css`, primitives in
   Sheets variables.
 
 - Privacy page reviewed for legal accuracy (retention periods are assumptions)
-- Proper mobile navigation if the design calls for it (four links currently
-  wrap onto their own row)
 - Confirmation email wording is a draft; Kata should rewrite it
   (`src/lib/messages/rsvp.ts`)
+- The Sveriges Radio item's title is reconstructed from its URL slug: the site
+  returns 403 to us, so nobody has read the real headline. Flagged in
+  `facts.ts`. Check it before launch.
 - Consider an `apple-touch-icon` if the site gets saved to home screens
 
 ---
@@ -166,7 +180,11 @@ translation, so she should correct tone as well as wording.
 
 ## B2. Brand assets
 
-- Font names from the Canva file (title, kicker, body) — see `docs/brand-notes.md`
+- ~~Font names from the Canva file~~ identified from the book itself:
+  **Rita Smith** (display) and **TT Jenevers** (body), both commercial. The
+  site currently uses Fraunces and Literata as stand-ins. What we need from
+  Kata is whether she holds a **webfont licence** for the real two, or is
+  happy with the stand-ins. See `docs/brand-notes.md`.
 - Real hex values, or the book cover artwork file
 - Decision: navy + orange sitewide, or reserved for the book-release page?
 - Is the wavy-line motif for the site, or flyer-only?
@@ -208,3 +226,16 @@ See `docs/build-brief.md` §23 for the full list.
 - `docs/google-sheets-setup.md` — attendee list, and `npm run check:sheets`
 - `docs/brand-notes.md` — visual direction and open questions
 - `AGENTS.md` — hard rules (never invent facts, no em dashes, etc.)
+
+## Checks
+
+```
+npm test                  # 361 unit and component tests
+npm run test:coverage     # same, with a coverage table
+npm run test:e2e          # 99 Playwright tests, needs a dev server
+npm run check:content     # what is still unconfirmed in facts.ts
+npm run check:sheets      # can we reach the attendee sheet
+```
+
+Never run `npm run build` while a dev server is up; it writes to the same
+`.next`. Use `NEXT_BUILD_DIR=.next-verify npm run build` instead.

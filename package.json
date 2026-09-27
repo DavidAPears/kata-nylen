@@ -13,6 +13,7 @@
     "test:watch": "vitest",
     "test:e2e": "playwright test",
     "check:sheets": "tsx scripts/check-sheets.mts",
+    "check:content": "tsx scripts/check-content.mts",
     "og": "tsx scripts/generate-og.mts",
     "prebuild": "npm run og"
   },
