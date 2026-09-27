@@ -100,6 +100,17 @@ body {
   line-height: 1.6;
 }
 
+/*
+ * Stop paragraphs ending on a single orphaned word.
+ *
+ * `pretty` asks the browser to avoid a last line with one short word, pulling
+ * a word down from the line above instead. Unsupported browsers just wrap
+ * normally, so there is nothing to fall back to.
+ */
+p, li, dd, dt, figcaption, blockquote {
+  text-wrap: pretty;
+}
+
 h1, h2, h3 {
   font-family: var(--font-display);
   /* SOFT rounds the terminals and WONK tilts a few letters, which is what
