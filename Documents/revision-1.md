@@ -3,7 +3,9 @@
 Source: Kata's review of **katanylen.com/sv**, sent 28 Sep. She has reviewed
 the **Swedish only**. English is untouched and unverified by her.
 
-Nothing in this document has been implemented. It is a plan and a to-do list.
+**Status: Group A is done** (branch `revision-one`, commit `b38023d`). Groups B,
+C and D are still a plan. Group C is blocked on material from Kata, listed in
+section 4.
 
 Her framing, which should govern everything below:
 
@@ -50,22 +52,22 @@ very different risks.
 Cheap, unambiguous, no judgement required. These should go first and could all
 ship in one pass.
 
-- [ ] **A1.** Subtitle to `Att möta motgångar i en osäker värld` everywhere.
+- [x] **A1.** Subtitle to `Att möta motgångar i en osäker värld` everywhere.
       Touches `book.subtitle`, both synopsis strings, the publications entry.
       Add a test so the singular can never come back.
-- [ ] **A2.** LÄKA reduced to four movements: Lyssna, Älska, Kollektivisera,
+- [x] **A2.** LÄKA reduced to four movements: Lyssna, Älska, Kollektivisera,
       Agera. Remove "Ge och ta emot stöd" / "Stöd". Change "fem rörelser" to
       "fyra" in Swedish and English. Rework the About page section to match.
-- [ ] **A3.** Remove "Var på plats senast 17.15." from the launch programme,
+- [x] **A3.** Remove "Var på plats senast 17.15." from the launch programme,
       keeping "Dörrarna öppnar 17.00" and "Programmet börjar 17.15".
-- [ ] **A4.** Split the privacy notice so each form describes only its own
+- [x] **A4.** Split the privacy notice so each form describes only its own
       handling. Currently one string mentions managing event places and is
       shown on the contact form too.
-- [ ] **A5.** Swedish media page: "Television" becomes "TV". Leave English as
+- [x] **A5.** Swedish media page: "Television" becomes "TV". Leave English as
       "Television" unless she says otherwise.
-- [ ] **A6.** Add her chapter in **Vad håller ni på med?** (Adlibris link
+- [x] **A6.** Add her chapter in **Vad håller ni på med?** (Adlibris link
       supplied) as a contribution, not an authored book.
-- [ ] **A7.** Fix the publications count. See the note in section 5 — the
+- [x] **A7.** Fix the publications count. See the note in section 5 — the
       number should be derived from the data, not typed into a sentence.
 
 ### Group B — Repositioning
