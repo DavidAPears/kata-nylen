@@ -430,6 +430,9 @@ export const publications: Publication[] = [
     publisher: "En bok för alla",
     url: "https://www.adlibris.com/sv/bok/vad-haller-ni-pa-med-en-antologi-om-klimatet-9789172218024",
     role: "chapter",
+    /* The publisher's own cover file, from enbokforalla.se, resized to match
+       the other covers on the site. Their original is 4.8MB. */
+    cover: { src: "/images/vad-haller-ni-pa-med.webp", width: 573, height: 800 },
     summary: {
       // The subtitle already says it is an anthology about the climate, and it
       // renders directly above this, so repeating it just wastes the line.
