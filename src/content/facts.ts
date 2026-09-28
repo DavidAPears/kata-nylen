@@ -413,9 +413,13 @@ export const publications: Publication[] = [
       Kata's chapter, supplied by her on 28 Sep 2026 with the Adlibris link.
 
       Publisher and year are from Libris, the Swedish national library
-      catalogue (bib/5g5hjgrt37jkc6z0), rather than from the retailer page,
-      which was unreachable. The catalogue record lists no contributors, so
-      `editors` is deliberately absent rather than guessed.
+      catalogue (bib/5g5hjgrt37jkc6z0), and corroborated by Akademibokhandeln:
+      hardcover, Swedish, 2019.
+
+      `editors` is absent because the book appears to have none. Libris, the
+      publisher's own page and the retailer all credit the seventeen
+      contributors as authors, Kata among them, and none of the three names an
+      editor. So this is settled rather than missing; no need to keep hunting.
 
       ⚠️ The summary is thin on purpose: all we can state is what the record
       says and what Kata told us. Ask her what her chapter is actually about

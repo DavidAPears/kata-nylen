@@ -165,8 +165,11 @@ Items 1 to 6 of the original list are all answered and built. What remains:
    to approve any names first. The examples run without them for now.
 3. **The English.** Her bio, the SNAP description and the new areas of work are
    all our translations of her Swedish. She has not read any of it.
-4. **Who edited "Vad håller ni på med?"** The Libris record names no editors,
-   and the other anthology on the site credits its three.
+4. ~~**Who edited "Vad håller ni på med?"**~~ Settled: it has no credited
+   editor. Libris, En bok för alla's own page and Akademibokhandeln all list
+   the seventeen contributors as authors, Kata among them, and none names an
+   editor. The cover is now on the site too, taken from the publisher's press
+   image.
 5. **The book synopsis.** The last unconfirmed fact in `facts.ts`: it is Natur
    & Kultur's own copy and still needs their sign-off.
 
