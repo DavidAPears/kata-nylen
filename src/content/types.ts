@@ -156,6 +156,17 @@ export type SpeakingContent = {
     intro: string;
     items: Topic[];
   };
+  /**
+   * Real engagements Kata has delivered, supplied by her on 28 Sep 2026.
+   *
+   * No client names. She asked that any be approved before they appear, so
+   * the entries describe the work rather than who bought it.
+   */
+  examples: {
+    heading: string;
+    intro: string;
+    items: { id: string; format: string; description: string }[];
+  };
   credibility: {
     heading: string;
     intro: string;

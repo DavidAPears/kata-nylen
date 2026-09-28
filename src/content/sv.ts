@@ -34,15 +34,19 @@ export const sv: SiteContent = {
     hero: {
       eyebrow: "Kata Nylén",
       headline: "Psykologi för en värld i förändring.",
+      // The headline stays exactly as it is. Kata asked for that, and it
+      // already carries the new emphasis: "en värld i förändring" read as
+      // climate only because everything under it was climate.
       standfirst:
-        "Psykolog, författare och föreläsare som arbetar med klimatpsykologi, motståndskraft och hur människor och organisationer möter genomgripande förändring.",
+        "Legitimerad psykolog och specialist i organisationspsykologi, författare och föreläsare. Kata arbetar med att få kunskap, ambitioner och beslut att bli handling i organisationer.",
       primaryCta: { label: "Utforska Katas arbete", href: "/speaking" },
       secondaryCta: { label: "Bokrelease", href: "/book-release" },
     },
     intro: {
       heading: "Om Kata",
       body: [
-        "Kata Nylén är psykolog, författare och föreläsare. Hennes arbete rör sig i skärningspunkten mellan klimatpsykologi, psykologisk motståndskraft, beteendeförändring och människans svar på osäkerhet.",
+        "Kata Nylén är legitimerad psykolog, specialist i organisationspsykologi, författare och föreläsare. Hon arbetar med organisationsutveckling och förändringsledning, implementering, beteendeförändring och psykologisk resiliens.",
+        "Tråden genom arbetet är avståndet mellan att veta och att göra. Det som behöver förändras är ofta känt; det som saknas är vad som krävs för att förändringen ska ske och hålla. Klimatpsykologin är ett av de områden där den frågan blir som tydligast.",
         "Hon skriver och talar om vad som händer med människor, enskilt och tillsammans, när världen omkring dem förändras snabbare än vad tanken hinner med.",
       ],
     },
@@ -55,17 +59,23 @@ export const sv: SiteContent = {
     areasOfWork: {
       heading: "Arbetsområden",
       intro:
-        "Sex sammanhängande fält som löper genom Katas texter, föreläsningar och praktik.",
+        "Sex sammanhängande fält som löper genom Katas arbete, från hur organisationer förändras till klimatets psykologi.",
       topics: [
         {
-          id: "climate-psychology",
-          title: "Klimatpsykologi",
+          id: "organisational",
+          title: "Organisationspsykologi och förändringsledning",
           description:
-            "Hur klimatkrisen registreras psykologiskt, och vad som hjälper människor att stanna kvar i engagemang i stället för att stänga av.",
+            "Hur organisationer förändras i praktiken: ledningsgrupper under press, relationerna som bär verksamheten och vad som håller när belastningen ökar.",
+        },
+        {
+          id: "implementation",
+          title: "Implementering",
+          description:
+            "Att få evidens, metoder och beslut att fungera i vardagen, långt efter att beslutet är fattat.",
         },
         {
           id: "psychological-resilience",
-          title: "Psykologisk motståndskraft",
+          title: "Psykologisk resiliens",
           description:
             "Vad som faktiskt bär människor och grupper under långvarig press, bortom individuell coping.",
         },
@@ -76,22 +86,16 @@ export const sv: SiteContent = {
             "Varför vetande inte är görande, och vad som verkligen förflyttar beteende hos individer och organisationer.",
         },
         {
-          id: "climate-emotions",
-          title: "Klimatkänslor",
+          id: "climate-psychology",
+          title: "Klimatpsykologi",
           description:
-            "Sorg, oro, ilska och hopp som information snarare än symtom att hantera bort.",
+            "Hur klimatkrisen registreras psykologiskt, och vad som hjälper människor att stanna kvar i engagemang i stället för att stänga av.",
         },
         {
           id: "uncertainty",
           title: "Att navigera osäkerhet",
           description:
             "Hur människor leder, beslutar och fungerar inuti en systemförändring de inte valt.",
-        },
-        {
-          id: "organisational",
-          title: "Organisationspsykologi",
-          description:
-            "Ledningsgrupper under press, och relationerna som bär en organisation när belastningen ökar.",
         },
       ],
     },
@@ -173,22 +177,22 @@ export const sv: SiteContent = {
         "Föreläsningarna formas efter sammanhanget snarare än hämtas ur en fast repertoar. Det här är de teman de oftast utgår från.",
       topics: [
         {
-          id: "climate-psychology",
-          title: "Klimatpsykologi",
+          id: "organisational",
+          title: "Organisationspsykologi och förändringsledning",
           description:
-            "Vad klimatkrisen gör med hur människor tänker, känner och handlar, och vad det innebär för organisationer.",
+            "Det som händer mellan människor på jobbet: ledningsgrupper under press, relationerna som bär en organisation, och vad som håller när belastningen ökar.",
+        },
+        {
+          id: "implementation",
+          title: "Implementering",
+          description:
+            "Hur evidens, metoder och policy tas i bruk i en verksamhet som redan är full. Utgår ofta från arbetet med SNAP inom socialtjänst och skola.",
         },
         {
           id: "psychological-resilience",
-          title: "Psykologisk motståndskraft",
+          title: "Psykologisk resiliens",
           description:
-            "Att bära människor genom långvarig osäkerhet, utan att reducera motståndskraft till individuell uthållighet.",
-        },
-        {
-          id: "climate-emotions",
-          title: "Klimatkänslor och handling",
-          description:
-            "Varför svåra känslor inför klimatet är en resurs snarare än ett hinder för handling.",
+            "Att bära människor genom långvarig osäkerhet, utan att reducera resiliens till individuell uthållighet.",
         },
         {
           id: "behavioural-change",
@@ -197,15 +201,15 @@ export const sv: SiteContent = {
             "Avståndet mellan avsikt och beteende, och vad som sluter det i praktiken.",
         },
         {
+          id: "climate-psychology",
+          title: "Klimatpsykologi",
+          description:
+            "Vad klimatkrisen gör med hur människor tänker, känner och handlar, och vad det innebär för organisationer.",
+        },
+        {
           id: "uncertainty",
           title: "Ledarskap i osäkerhet",
           description: "Beslut och ledarskap när förutsättningarna hela tiden rör sig.",
-        },
-        {
-          id: "organisational",
-          title: "Organisationspsykologi",
-          description:
-            "Det som händer mellan människor på jobbet: ledningsgrupper under press, relationerna som bär en organisation, och vad som håller när belastningen ökar.",
         },
       ],
     },
@@ -217,6 +221,49 @@ export const sv: SiteContent = {
         { id: "panel", title: "Panel", description: "Medverkan i ett modererat samtal." },
         { id: "workshop", title: "Workshop", description: "Längre, deltagande arbete med en grupp." },
         { id: "conversation", title: "Modererat samtal", description: "En intervju eller ett samtal på scen." },
+      ],
+    },
+    examples: {
+      heading: "Exempel på uppdrag",
+      intro:
+        "Genomförda uppdrag, beskrivna utan uppdragsgivare. Namn läggs till först när de är godkända.",
+      items: [
+        {
+          id: "change-workshop",
+          format: "Workshop",
+          description:
+            "Förändringsledning och omställning: varför det inte räcker att veta vad som behöver förändras, och hur organisationer kan arbeta med de hinder de möter.",
+        },
+        {
+          id: "sustainability-behaviour",
+          format: "Föreläsning",
+          description:
+            "Från hållbarhetsambitioner till faktisk beteendeförändring i en organisation.",
+        },
+        {
+          id: "data-for-decisions",
+          format: "Interaktivt pass",
+          description:
+            "Att använda data för beslut, inklusive vad som händer när evidensen utmanar våra antaganden, och hur man tar sig från insikt till handling.",
+        },
+        {
+          id: "implementation-training",
+          format: "Utbildning",
+          description:
+            "Att implementera evidensbaserade metoder: analysera kontexten, välja implementeringsstrategier och stödja förändring i det dagliga arbetet.",
+        },
+        {
+          id: "resilience-collective",
+          format: "Föreläsning och workshop",
+          description:
+            "Psykologisk resiliens, kollektiv förmåga och att handla tillsammans i osäkerhet.",
+        },
+        {
+          id: "moderation",
+          format: "Moderering",
+          description:
+            "Konferenser om till exempel kulturens roll i samhällsomställningen, hållbar turism och miljöval i nybyggnation.",
+        },
       ],
     },
     credibility: {
@@ -282,10 +329,16 @@ export const sv: SiteContent = {
     fieldsHeading: "Områden hon arbetar med",
     fields: [
       {
-        id: "climate-psychology",
-        title: "Klimatpsykologi",
+        id: "organisational",
+        title: "Organisationspsykologi och förändringsledning",
         description:
-          "Hur klimatkrisen registreras psykologiskt, och varför kunskap om den inte tillförlitligt leder till handling. Klimatpsykologin undersöker det som händer mellan informationen och svaret: undvikandet, avdomningen, de plötsliga larmen, och under vilka förutsättningar människor stannar kvar i engagemang i stället för att stänga av. Boken Klimatpsykologi, skriven tillsammans med Frida Hylander och Kali Andersson, tillämpar detta på klimatarbetet självt, för den som leder eller beslutar och märker att fakta ensamt inte förflyttar någon.",
+          "Det som händer mellan människor på jobbet, och hur en organisation faktiskt förändras. Ledningsgrupper under ihållande press, relationerna som håller ihop en verksamhet, och vad som ger vika när belastningen ökar. Det är här resiliens slutar vara en privat angelägenhet och blir en egenskap hos en grupp och hos hur den leds. Hit hör också förändringsledning och organisationsutveckling: att veta vad som behöver förändras leder sällan av sig självt till att det sker.",
+      },
+      {
+        id: "implementation",
+        title: "Implementering",
+        description:
+          "Att få kunskap, metoder och beslut att fungera i vardagen, långt efter att beslutet är fattat. Kata arbetar med implementeringen av SNAP inom socialtjänst och skola, och stödjer organisationer med utbildning och praktiskt arbete för att införa evidens, metoder och policy. Frågan är sällan om något är bra i sig, utan vad som krävs för att det ska hålla i en verksamhet som redan är full.",
       },
       {
         id: "psychological-resilience",
@@ -294,28 +347,22 @@ export const sv: SiteContent = {
           "Resiliens som förmågan att stå kvar, anpassa sig och fortsätta röra sig genom svårigheter medan de pågår, snarare än ett personlighetsdrag som vissa har turen att äga. Boken Psykologisk resiliens driver tesen att den inte bärs ensam: den byggs och underhålls i de relationer och sammanhang människor ingår i, och den går att odla medvetet i grupper och team lika väl som hos enskilda.",
       },
       {
-        id: "climate-emotions",
-        title: "Klimatkänslor",
-        description:
-          "Sorg, oro, ilska och hopp inför världens tillstånd, behandlade som information snarare än symtom att hantera bort. Svåra känslor inför klimatet är ett rimligt svar på en verklig situation; den psykologiska frågan är vad som gör dem uthärdliga nog att handla utifrån, och vad som i stället förvandlar dem till förlamning.",
-      },
-      {
         id: "behavioural-change",
         title: "Beteendeförändring",
         description:
           "Avståndet mellan avsikt och beteende, och vad som sluter det. Varför information, brådska och moralisk press så ofta misslyckas med att förändra vad människor gör, och vad forskningen säger fungerar i stället, både på vanans nivå och i en organisation som försöker förändra hur den arbetar.",
       },
       {
+        id: "climate-psychology",
+        title: "Klimatpsykologi",
+        description:
+          "Hur klimatkrisen registreras psykologiskt, och varför kunskap om den inte tillförlitligt leder till handling. Klimatpsykologin undersöker det som händer mellan informationen och svaret: undvikandet, avdomningen, de plötsliga larmen, och under vilka förutsättningar människor stannar kvar i engagemang i stället för att stänga av. Hit hör också klimatkänslorna. Sorg, oro, ilska och hopp inför världens tillstånd är information snarare än symtom att hantera bort; den psykologiska frågan är vad som gör dem uthärdliga nog att handla utifrån. Boken Klimatpsykologi, skriven tillsammans med Frida Hylander och Kali Andersson, tillämpar detta på klimatarbetet självt.",
+      },
+      {
         id: "uncertainty",
         title: "Att navigera osäkerhet",
         description:
           "Hur människor beslutar, leder och fungerar inuti en förändring de inte valt och inte kan förutsäga. Långvarig osäkerhet är psykologiskt något annat än en enskild kris: den tar inte slut, och de strategier som bär någon genom en akut nödsituation brukar svikta över år.",
-      },
-      {
-        id: "organisational",
-        title: "Organisationspsykologi",
-        description:
-          "Det som händer mellan människor på jobbet. Ledningsgrupper under ihållande press, relationerna som håller ihop en organisation, och vad som ger vika när belastningen ökar. Det är här resiliens slutar vara en privat angelägenhet och blir en egenskap hos en grupp och hos hur den leds.",
       },
     ],
     frameworkHeading: "LÄKA",

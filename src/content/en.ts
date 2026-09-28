@@ -33,15 +33,19 @@ export const en: SiteContent = {
     hero: {
       eyebrow: "Kata Nylén",
       headline: "Psychology for a changing world.",
+      // The headline stays exactly as it is. Kata asked for that, and it
+      // already carries the new emphasis: "a world in change" read as climate
+      // only because everything under it was climate.
       standfirst:
-        "Psychologist, author and speaker working with climate psychology, resilience and how people and organisations respond to profound change.",
+        "Licensed psychologist and specialist in organisational psychology, author and speaker. Kata works on turning knowledge, ambition and decisions into action inside organisations.",
       primaryCta: { label: "Explore Kata's work", href: "/speaking" },
       secondaryCta: { label: "Book release", href: "/book-release" },
     },
     intro: {
       heading: "About Kata",
       body: [
-        "Kata Nylén is a Swedish psychologist, author and speaker. Her work sits at the intersection of climate psychology, psychological resilience, behavioural change and the human response to uncertainty.",
+        "Kata Nylén is a licensed psychologist, a specialist in organisational psychology, an author and a speaker. She works on organisational development and change leadership, implementation, behavioural change and psychological resilience.",
+        "The thread running through it is the distance between knowing and doing. What needs to change is usually already known; what is missing is what it takes for the change to happen and to hold. Climate psychology is one of the places where that question shows itself most sharply.",
         "She writes and speaks about what happens to people, individually and collectively, when the world around them changes faster than the mind expects.",
       ],
     },
@@ -54,8 +58,32 @@ export const en: SiteContent = {
     areasOfWork: {
       heading: "Areas of work",
       intro:
-        "Six connected fields that run through Kata's writing, speaking and professional practice.",
+        "Six connected fields that run through Kata's work, from how organisations change to the psychology of climate.",
       topics: [
+        {
+          id: "organisational",
+          title: "Organisational psychology and change leadership",
+          description:
+            "How organisations actually change: senior teams under pressure, the relationships that carry the work, and what holds when the load rises.",
+        },
+        {
+          id: "implementation",
+          title: "Implementation",
+          description:
+            "Making evidence, methods and decisions work in daily practice, long after the decision has been taken.",
+        },
+        {
+          id: "psychological-resilience",
+          title: "Psychological resilience",
+          description:
+            "What actually carries people and groups through sustained pressure, beyond individual coping.",
+        },
+        {
+          id: "behavioural-change",
+          title: "Behavioural change",
+          description:
+            "Why knowing is not doing, and what genuinely shifts behaviour in individuals and organisations.",
+        },
         {
           id: "climate-psychology",
           title: "Climate psychology",
@@ -63,34 +91,10 @@ export const en: SiteContent = {
             "How the climate crisis registers psychologically, and what helps people stay engaged rather than shut down.",
         },
         {
-          id: "psychological-resilience",
-          title: "Psychological resilience",
-          description:
-            "What actually sustains people and groups under prolonged pressure, beyond individual coping.",
-        },
-        {
-          id: "behavioural-change",
-          title: "Behavioural change",
-          description:
-            "Why knowing is not doing, and what genuinely moves behaviour at individual and organisational scale.",
-        },
-        {
-          id: "climate-emotions",
-          title: "Climate emotions",
-          description:
-            "Grief, anxiety, anger and hope as information rather than symptoms to be managed away.",
-        },
-        {
           id: "uncertainty",
           title: "Navigating uncertainty",
           description:
-            "How people lead, decide and stay functional inside systemic change they did not choose.",
-        },
-        {
-          id: "organisational",
-          title: "Organisational psychology",
-          description:
-            "Senior teams under pressure, and the relationships that carry an organisation when the load rises.",
+            "How people lead, decide and function inside a systemic change they did not choose.",
         },
       ],
     },
@@ -172,10 +176,16 @@ export const en: SiteContent = {
         "Talks are shaped around the audience rather than delivered from a fixed set. These are the themes they usually draw on.",
       topics: [
         {
-          id: "climate-psychology",
-          title: "Climate psychology",
+          id: "organisational",
+          title: "Organisational psychology and change leadership",
           description:
-            "What the climate crisis does to how people think, feel and act, and what follows from that for organisations.",
+            "What happens between people at work: senior teams under pressure, the relationships that carry an organisation, and what holds when the load rises.",
+        },
+        {
+          id: "implementation",
+          title: "Implementation",
+          description:
+            "How evidence, methods and policy get taken up in a service that is already full. Often drawn from the work on SNAP in social services and schools.",
         },
         {
           id: "psychological-resilience",
@@ -184,28 +194,22 @@ export const en: SiteContent = {
             "Sustaining people through prolonged uncertainty, without reducing resilience to individual endurance.",
         },
         {
-          id: "climate-emotions",
-          title: "Climate emotions and action",
-          description:
-            "Why difficult feelings about the climate are a resource rather than an obstacle to action.",
-        },
-        {
           id: "behavioural-change",
           title: "Behavioural change",
           description:
             "The distance between intention and behaviour, and what closes it in practice.",
         },
         {
+          id: "climate-psychology",
+          title: "Climate psychology",
+          description:
+            "What the climate crisis does to how people think, feel and act, and what follows from that for organisations.",
+        },
+        {
           id: "uncertainty",
           title: "Leading through uncertainty",
           description:
             "Decision-making and leadership when the conditions keep moving.",
-        },
-        {
-          id: "organisational",
-          title: "Organisational psychology",
-          description:
-            "What happens between people at work: senior teams under pressure, the relationships that carry an organisation, and what holds when the load rises.",
         },
       ],
     },
@@ -217,6 +221,49 @@ export const en: SiteContent = {
         { id: "panel", title: "Panel", description: "Contribution to a moderated discussion." },
         { id: "workshop", title: "Workshop", description: "Longer, participatory work with a group." },
         { id: "conversation", title: "Moderated conversation", description: "An interview or on-stage conversation." },
+      ],
+    },
+    examples: {
+      heading: "Examples of engagements",
+      intro:
+        "Sessions Kata has delivered, described without the client. Names are added only once they are approved.",
+      items: [
+        {
+          id: "change-workshop",
+          format: "Workshop",
+          description:
+            "Change management and transition: why knowing what needs to change does not by itself lead to action, and how organisations can work with the barriers they meet.",
+        },
+        {
+          id: "sustainability-behaviour",
+          format: "Talk",
+          description:
+            "Moving from sustainability ambitions to actual behavioural change inside an organisation.",
+        },
+        {
+          id: "data-for-decisions",
+          format: "Interactive session",
+          description:
+            "Using data for decisions, including what happens when the evidence challenges our assumptions, and how to get from insight to action.",
+        },
+        {
+          id: "implementation-training",
+          format: "Training",
+          description:
+            "Implementing evidence-based methods: analysing the context, choosing implementation strategies and supporting change in everyday practice.",
+        },
+        {
+          id: "resilience-collective",
+          format: "Talk and workshop",
+          description:
+            "Psychological resilience, collective capacity and acting together during uncertainty.",
+        },
+        {
+          id: "moderation",
+          format: "Moderation",
+          description:
+            "Conferences on subjects such as the role of culture in societal transition, sustainable tourism, and environmental choices in new construction.",
+        },
       ],
     },
     credibility: {
@@ -283,40 +330,40 @@ export const en: SiteContent = {
     fieldsHeading: "The subjects she works on",
     fields: [
       {
-        id: "climate-psychology",
-        title: "Climate psychology",
+        id: "organisational",
+        title: "Organisational psychology and change leadership",
         description:
-          "How the climate crisis registers psychologically, and why knowing about it does not reliably produce action. Climate psychology looks at what happens between the information and the response: the avoidance, the numbing, the bursts of alarm, and the conditions under which people stay engaged instead of shutting down. Her book Klimatpsykologi, written with Frida Hylander and Kali Andersson, applies this to climate work itself, for people who lead or decide and find that facts alone are not moving anyone.",
+          "What happens between people at work, and how an organisation actually changes. Senior teams under sustained pressure, the relationships that hold an organisation together, and what gives way when the load rises. This is where resilience stops being a personal matter and becomes a property of a group and how it is led. Change leadership and organisational development sit here too: knowing what needs to change rarely leads on its own to it happening.",
+      },
+      {
+        id: "implementation",
+        title: "Implementation",
+        description:
+          "Making knowledge, methods and decisions work in daily practice, long after the decision has been taken. Kata works on implementing SNAP in social services and schools, and supports organisations through training and practical work on putting evidence, methods and policy into use. The question is rarely whether something is good in itself, but what it takes for it to hold in a service that is already full.",
       },
       {
         id: "psychological-resilience",
         title: "Psychological resilience",
         description:
-          "Resilience as the capacity to stay standing, adapt and keep moving through difficulty while it is still happening, rather than a personality trait some people are lucky enough to have. Her book Psykologisk resiliens argues that it is not carried alone: it is built and maintained in the relationships and contexts people are part of, and it can be deliberately cultivated by groups and teams as well as individuals.",
-      },
-      {
-        id: "climate-emotions",
-        title: "Climate emotions",
-        description:
-          "Grief, anxiety, anger and hope about the state of the world, treated as information rather than symptoms to be managed away. Difficult feelings about the climate are a reasonable response to a real situation; the psychological question is what makes them bearable enough to act on, and what turns them into paralysis instead.",
+          "Resilience as the capacity to stay standing, adapt and keep moving through difficulty while it is still happening, rather than a trait some people are lucky enough to have. Psykologisk resiliens argues that it is not carried alone: it is built and maintained in the relationships and settings people belong to, and it can be cultivated deliberately in groups and teams as much as in individuals.",
       },
       {
         id: "behavioural-change",
         title: "Behavioural change",
         description:
-          "The distance between intention and behaviour, and what closes it. Why information, urgency and moral pressure so often fail to change what people do, and what the evidence says works instead, at the scale of an individual habit and at the scale of an organisation trying to transform how it operates.",
+          "The distance between intention and behaviour, and what closes it. Why information, urgency and moral pressure so often fail to change what people do, and what the research says works instead, both at the level of habit and in an organisation trying to change how it works.",
+      },
+      {
+        id: "climate-psychology",
+        title: "Climate psychology",
+        description:
+          "How the climate crisis registers psychologically, and why knowing about it does not reliably lead to acting on it. Climate psychology examines what happens between the information and the response: the avoidance, the numbing, the sudden alarm, and the conditions under which people stay engaged rather than shut down. Climate emotions belong here too. Grief, worry, anger and hope about the state of the world are information rather than symptoms to be managed away; the psychological question is what makes them bearable enough to act on. Klimatpsykologi, written with Frida Hylander and Kali Andersson, applies this to climate work itself.",
       },
       {
         id: "uncertainty",
         title: "Navigating uncertainty",
         description:
-          "How people decide, lead and stay functional inside change they did not choose and cannot predict. Prolonged uncertainty is psychologically distinct from a single crisis: it does not resolve, and the strategies that carry someone through an acute emergency tend to fail over years.",
-      },
-      {
-        id: "organisational",
-        title: "Organisational psychology",
-        description:
-          "What happens between people at work. Senior teams under sustained pressure, the relationships that hold an organisation together, and what gives way when the load rises. This is where resilience stops being a personal matter and becomes a property of a group and how it is led.",
+          "How people decide, lead and function inside a change they did not choose and cannot predict. Prolonged uncertainty is psychologically different from a single crisis: it does not end, and the strategies that carry someone through an acute emergency tend to fail over years.",
       },
     ],
     frameworkHeading: "LÄKA",

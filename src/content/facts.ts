@@ -503,11 +503,45 @@ export type MediaItem = {
   /** Original title, and an English gloss for readers who need one. */
   title: { sv: string; en: string };
   year?: string;
+  /**
+   * A line explaining the item, where the title alone does not.
+   *
+   * Most entries are a single appearance and need nothing. An ongoing column
+   * does: "Gröna frågan" tells a reader neither what it is nor what Kata does
+   * in it.
+   */
+  note?: { sv: string; en: string };
   /** Show on the shorter selections used elsewhere. */
   featured?: boolean;
 };
 
 export const media: MediaItem[] = [
+  {
+    /*
+      An ongoing column rather than a one-off appearance, which is why it
+      leads the list and why it carries a note. Confirmed by Kata, 28 Sep
+      2026, along with the Swedish wording below, which is hers.
+
+      The URL is the column's own page rather than any single answer. She also
+      sent an example (etc.se/klimat-miljo/vad-haende-med-flygskammen); the
+      column page is the better link because it keeps working as she writes
+      more.
+    */
+    id: "dagens-etc-grona-fragan",
+    url: "https://www.etc.se/om/groena-fraagan",
+    source: "Dagens ETC",
+    kind: "print",
+    role: "contributor",
+    featured: true,
+    title: {
+      sv: "Gröna frågan",
+      en: "Gröna frågan (The green question)",
+    },
+    note: {
+      sv: "I Dagens ETC spalt Gröna frågan svarar Kata på läsarnas frågor om klimat, känslor och förändring ur ett psykologiskt perspektiv.",
+      en: "In Dagens ETC's column Gröna frågan, Kata answers readers' questions about climate, emotion and change from a psychological perspective.",
+    },
+  },
   {
     id: "nyhetsmorgon-2023",
     url: "https://www.youtube.com/watch?v=aWYJJdiOPWk",
@@ -843,25 +877,23 @@ export const organisations: Organisation[] = [
   },
   {
     /*
-      ⚠️ NEEDS KATA'S CONFIRMATION, and there are three reasons to ask.
+      Kata is on their team page at climatepsyched.org/hej-hej, listed with
+      four other psychologists including Frida Hylander and Kali Andersson,
+      her co-authors on "Klimatpsykologi". So this is a real affiliation and
+      not a duplicate of Klimatpsykologerna, though the two clearly overlap.
 
-      She did not mention Climate Psyched when she listed the organisations
-      she works through, though it came from the original brief and has been
-      on the site since the start. Their own site does not name her anywhere.
-      And they publish "Klimatpsykologi", the same book Klimatpsykologerna
-      did, so this may be that collective's English-language presence rather
-      than a separate affiliation.
+      Their page describes her as "Licensed psychologist, Specialist in
+      organizational psychology", which is word for word the title she gave us
+      independently. It also says she runs SHIFT Collective.
 
-      Kept for now, because removing an affiliation nobody asked us to remove
-      is worse than carrying one with a question against it. But it claims no
-      role for her: the description below is the organisation's account of
-      itself, taken from their homepage, and says nothing about what Kata does
-      there. Add a role only when she confirms one.
+      The role here is deliberately modest. Their page names no founders, so
+      "part of the team" is what can actually be shown from the source.
     */
     id: "climate-psyched",
     name: "Climate Psyched",
     url: "https://www.climatepsyched.org/",
     kind: "collective",
+    role: { sv: "Del av teamet", en: "Part of the team" },
     description: {
       sv: "En organisation av legitimerade psykologer som arbetar med klimatpsykologi och beteendeförändring, genom webbinarier, föreläsningar, workshops och rådgivning.",
       en: "An organisation of licensed psychologists working on climate psychology and behavioural change, through webinars, lectures, workshops and consultation.",

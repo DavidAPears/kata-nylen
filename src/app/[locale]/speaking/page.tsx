@@ -87,6 +87,27 @@ export default async function SpeakingPage({
       </Section>
 
       {/*
+        Real work she has done, described without the client. Kata supplied
+        these and asked that no client be named until she has approved it, so
+        the entries carry the format and the subject and nothing else. That is
+        also the more useful half for a booker: what the session was, not who
+        bought it.
+      */}
+      <Section ornament id="examples" heading={speaking.examples.heading}>
+        <Prose>
+          <p>{speaking.examples.intro}</p>
+        </Prose>
+        <ul className="mt-8 grid max-w-3xl gap-6 sm:grid-cols-2">
+          {speaking.examples.items.map((item) => (
+            <li key={item.id} className="border-t border-[var(--color-line)] pt-4">
+              <p className={LABEL}>{item.format}</p>
+              <p className="mt-1 text-[var(--color-ink-muted)]">{item.description}</p>
+            </li>
+          ))}
+        </ul>
+      </Section>
+
+      {/*
         Credibility. Deliberately empty: brief §11 says "Never fabricate client
         logos or testimonials." The section renders only its heading until real,
         verified material is supplied.

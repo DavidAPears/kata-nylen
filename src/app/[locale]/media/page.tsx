@@ -68,6 +68,11 @@ export function MediaEntry({
       <p className="mt-1 text-sm text-[var(--color-ink-muted)]">
         {[item.source, item.year, role].filter(Boolean).join(" · ")}
       </p>
+      {item.note ? (
+        <p className="mt-1 max-w-[var(--measure)] text-sm text-[var(--color-ink-muted)]">
+          {item.note[locale]}
+        </p>
+      ) : null}
     </li>
   );
 }

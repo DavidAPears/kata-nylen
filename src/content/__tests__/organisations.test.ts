@@ -68,22 +68,20 @@ describe("organisations", () => {
     expect(sv).toContain("Lerum");
   });
 
-  it("does not claim a role it has not been given", () => {
+  it("claims only the Climate Psyched role their own page supports", () => {
     /*
-      Climate Psyched came from the original brief. Kata did not mention it
-      when she listed the organisations she works through, and their own site
-      does not name her. So the entry describes the organisation, in the
-      organisation's own words, and asserts nothing about what she does there.
-
-      If she confirms a role, add it and this test should be updated with her
-      answer. Until then, an empty role is the honest state.
+      She is on their team page with four other psychologists, so the
+      affiliation is real. But that page names no founders, so this stays at
+      "part of the team" rather than borrowing the co-founder wording used for
+      the three organisations she told us she co-founded.
     */
-    const cp = organisations.find((o) => o.id === "climate-psyched");
-    expect(cp).toBeDefined();
-    expect(cp!.role).toBeUndefined();
-    // The description must not imply she is part of it.
-    expect(cp!.description!.sv).not.toMatch(/Kata/);
-    expect(cp!.description!.en).not.toMatch(/Kata/);
+    const cp = organisations.find((o) => o.id === "climate-psyched")!;
+    expect(cp.role).toBeDefined();
+    expect(cp.role!.sv).not.toMatch(/grundare/i);
+    expect(cp.role!.en).not.toMatch(/founder/i);
+    // The description is the organisation's account of itself, not of Kata.
+    expect(cp.description!.sv).not.toMatch(/Kata/);
+    expect(cp.description!.en).not.toMatch(/Kata/);
   });
 });
 
