@@ -162,6 +162,9 @@ Blocking Group C, and worth asking in one message rather than several.
    My recommendation is in section 5.
 6. **Short bio.** Still `TODO` alongside the job title, and still one of the two
    strongest fields in the Person schema.
+7. **Who edited "Vad håller ni på med?"** The Libris catalogue record names no
+   editors, and the other anthology on the site credits its three. Worth
+   crediting them if she knows, but not worth guessing.
 
 ---
 
