@@ -26,9 +26,12 @@ export const en: SiteContent = {
 
   home: {
     seo: {
+      // This description is the sentence that shows in Google and on every
+      // shared link, so it carries the positioning Kata asked for rather than
+      // the old climate-first one.
       title: "Kata Nylén | Psychologist, author and speaker",
       description:
-        "Kata Nylén is a Swedish psychologist, author and speaker working with climate psychology, psychological resilience, behavioural change and how people respond to uncertainty.",
+        "Licensed psychologist and specialist in organisational psychology, author and speaker. Kata Nylén works on change leadership, implementation and psychological resilience.",
     },
     hero: {
       eyebrow: "Kata Nylén",

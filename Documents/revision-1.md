@@ -170,7 +170,15 @@ Items 1 to 6 of the original list are all answered and built. What remains:
    the seventeen contributors as authors, Kata among them, and none names an
    editor. The cover is now on the site too, taken from the publisher's press
    image.
-5. **The book synopsis.** The last unconfirmed fact in `facts.ts`: it is Natur
+5. **The book subtitle contradicts its own cover.** Kata corrected it to the
+   plural "motgångar" and the site now says that throughout. But Natur &
+   Kultur's title page still says "motgång", singular, and so does the cover
+   artwork from their press download, which sits next to our text on the
+   book-release page and on the sharing card. She is the author so her
+   correction stands, and the book is not out until 6 November, so the likely
+   answer is that the subtitle changed late. Needs confirming, and a new cover
+   file if it did.
+6. **The book synopsis.** The last unconfirmed fact in `facts.ts`: it is Natur
    & Kultur's own copy and still needs their sign-off.
 
 ---

@@ -121,6 +121,22 @@ export const person = {
 export const book = {
   /* CONFIRMED from the book's own title page. */
   title: "Psykologisk resiliens" as Fact<string>,
+  /*
+    ⚠️ UNRESOLVED, and visible on the site. Kata corrected this to the plural
+    "motgangar" on 28 Sep 2026 and asked for it to be consistent everywhere,
+    so that is what the text says.
+
+    But Natur & Kultur's own title page still reads "Att mota motgang i en
+    osaker varld", singular, and so does the cover artwork we hold from their
+    press download. The book-release page and its sharing card therefore show
+    our plural text directly beside a cover that says singular.
+
+    She is the author, so her correction wins for now, and the book is not out
+    until 6 November: the likeliest explanation is that the subtitle changed
+    late and the publisher's listing and our cover file are both pre-final.
+    Confirm with her, and if the final cover differs, replace
+    public/images/book-cover.webp and book-cover-og.jpg.
+  */
   subtitle: "Att möta motgångar i en osäker värld" as Fact<string>,
   /** The book is Swedish. On English pages the Swedish title leads and this
    *  follows in brackets, so the real title stays findable and searchable. */

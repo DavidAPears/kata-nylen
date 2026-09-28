@@ -34,8 +34,41 @@ const C = {
 const LEAF =
   "M27.5 0C38 14 55 33 55 52.5 55 69 43 81 30.5 83.6V100h-6V83.6C12 81 0 69 0 52.5 0 33 17 14 27.5 0Z";
 
-const LINE =
-  "Psychologist, author and speaker working in and around climate psychology, at a personal and an organisational level.";
+/*
+  Everything on the cards is read from facts.ts rather than written here.
+
+  These strings had drifted: the site card still described Kata as working
+  "in and around climate psychology", which stopped being how she wants to be
+  introduced, and the book card's date and venue were typed out by hand, so a
+  change of venue would have left the shared link quietly advertising the
+  wrong door. A card nobody looks at is exactly where a stale fact survives
+  longest.
+*/
+const facts = await import("../src/content/facts");
+
+const jobTitle = facts.resolved(facts.person.jobTitle.en);
+const LINE = `${jobTitle}. Change leadership, implementation and psychological resilience.`;
+
+/** "11 November 2026 · 17:00 · Djupet", built from the confirmed event. */
+function eventLine(locale: "sv" | "en"): string {
+  const { launchEvent } = facts;
+  const startsAt = facts.resolved(launchEvent.startsAt);
+  const venue = facts.resolved(launchEvent.venueName);
+  if (!startsAt || !venue) return "";
+  const date = new Date(startsAt);
+  const day = new Intl.DateTimeFormat(locale === "sv" ? "sv-SE" : "en-GB", {
+    day: "numeric",
+    month: "long",
+    year: "numeric",
+    timeZone: launchEvent.timeZone,
+  }).format(date);
+  const time = new Intl.DateTimeFormat("sv-SE", {
+    hour: "2-digit",
+    minute: "2-digit",
+    timeZone: launchEvent.timeZone,
+  }).format(date);
+  return `${day} · ${time} · ${venue}`;
+}
 
 function asset(rel: string): string {
   const bytes = readFileSync(join(ROOT, "public", rel));
@@ -108,17 +141,14 @@ async function write(name: string, element: React.ReactElement, fontData: ArrayB
 const fontData = (await font())!;
 
 await write("site", siteCard(), fontData);
-await write(
-  "book-release-sv",
-  bookCard("Resilienssalong", "Psykologisk resiliens", "11 november 2026 · 17:00 · Djupet"),
-  fontData,
-);
-await write(
-  "book-release-en",
-  bookCard(
-    "Resilienssalong (Resilience Salon)",
-    "Psychological resilience",
-    "11 November 2026 · 17:00 · Djupet",
-  ),
-  fontData,
-);
+for (const locale of ["sv", "en"] as const) {
+  await write(
+    `book-release-${locale}`,
+    bookCard(
+      facts.launchEventNameFor(locale),
+      facts.bookTitlePlainFor(locale) ?? "",
+      eventLine(locale),
+    ),
+    fontData,
+  );
+}
