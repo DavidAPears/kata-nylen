@@ -437,11 +437,22 @@ export const publications: Publication[] = [
     /* The publisher's own cover file, from enbokforalla.se, resized to match
        the other covers on the site. Their original is 4.8MB. */
     cover: { src: "/images/vad-haller-ni-pa-med.webp", width: 573, height: 800 },
+    /*
+      Written from En bok for alla's own description of the book rather than
+      copied from it, and cross-checked against Akademibokhandeln's
+      contributor list.
+
+      The named contributors are a fact about the anthology, not a credential
+      for Kata: seventeen people wrote in it and she wrote one chapter. Her own
+      role is stated separately and plainly for exactly that reason. Do not
+      rework this into "alongside Greta Thunberg", which would borrow a
+      standing she has not claimed and which she did not ask for.
+    */
     summary: {
       // The subtitle already says it is an anthology about the climate, and it
-      // renders directly above this, so repeating it just wastes the line.
-      sv: "Kata Nylén har skrivit ett kapitel i antologin.",
-      en: "Kata Nylén contributed a chapter to this anthology.",
+      // renders directly above this, so the sentence does not repeat it.
+      sv: "Tankar om klimatet i form av noveller, poesi, intervjuer, krönikor och serier, med bidrag från författare, musiker, serieskapare och aktivister. Bland de medverkande finns Greta Thunberg, Björn Wiman, Annika Norlin och Mats Jonsson. Kata Nylén har skrivit ett kapitel.",
+      en: "Thoughts on the climate in the form of short stories, poetry, interviews, columns and comics, with contributions from writers, musicians, cartoonists and activists. Contributors include Greta Thunberg, Björn Wiman, Annika Norlin and Mats Jonsson. Kata Nylén wrote a chapter.",
     },
   },
 ];
