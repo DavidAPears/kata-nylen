@@ -95,7 +95,7 @@ export const person = {
 export const book = {
   /* CONFIRMED from the book's own title page. */
   title: "Psykologisk resiliens" as Fact<string>,
-  subtitle: "Att möta motgång i en osäker värld" as Fact<string>,
+  subtitle: "Att möta motgångar i en osäker värld" as Fact<string>,
   /** The book is Swedish. On English pages the Swedish title leads and this
    *  follows in brackets, so the real title stays findable and searchable. */
   titleEnglish: "Psychological resilience" as Fact<string>,
@@ -120,13 +120,18 @@ export const book = {
    * she is the one who has to stand behind it.
    */
   synopsis: {
-    sv: "Resiliens är förmågan att stå kvar, anpassa sig och navigera svårigheter medan de pågår. I Psykologisk resiliens: att möta motgång i en osäker värld visar psykologen Kata Nylén hur resiliens kan utvecklas både individuellt och tillsammans med andra." as Fact<string>,
-    en: "Resilience is the capacity to stay standing, adapt, and navigate difficulty while it is still happening. In Psykologisk resiliens: att möta motgång i en osäker värld, psychologist Kata Nylén shows how resilience can be developed both on our own and together with others." as Fact<string>,
+    sv: "Resiliens är förmågan att stå kvar, anpassa sig och navigera svårigheter medan de pågår. I Psykologisk resiliens: att möta motgångar i en osäker värld visar psykologen Kata Nylén hur resiliens kan utvecklas både individuellt och tillsammans med andra." as Fact<string>,
+    en: "Resilience is the capacity to stay standing, adapt, and navigate difficulty while it is still happening. In Psykologisk resiliens: att möta motgångar i en osäker värld, psychologist Kata Nylén shows how resilience can be developed both on our own and together with others." as Fact<string>,
   },
   /* CONFIRMED: the book's own chapter structure. */
   themes: {
-    sv: ["Lyssna", "Älska", "Kollektivisera", "Agera", "Ge och ta emot stöd"],
-    en: ["Listen", "Love", "Collectivise", "Act", "Give and receive support"],
+    /*
+      Four, not five. The initials spell LÄKA, which has four letters, so the
+      earlier fifth movement ("Ge och ta emot stöd") was wrong on its own terms
+      as well as wrong about the book. Corrected by Kata, 28 Sep 2026.
+    */
+    sv: ["Lyssna", "Älska", "Kollektivisera", "Agera"],
+    en: ["Listen", "Love", "Collectivise", "Act"],
   },
   /**
    * Front cover. The publisher has a press-image download on their title page
@@ -172,7 +177,7 @@ export const launchEvent = {
   startsAt: "2026-11-11T17:00:00+01:00" as Fact<string>,
   /** No end time published. The calendar file falls back to two hours. */
   endsAt: TODO as Fact<string>,
-  /** Stage programme begins at 17.15, and guests are asked to be seated by then. */
+  /** Stage programme begins at 17.15. */
   stageStartsAt: "2026-11-11T17:15:00+01:00" as Fact<string>,
   timeZone: "Europe/Stockholm",
   /**
@@ -205,8 +210,8 @@ export const launchEvent = {
     {
       time: "17.15",
       description: {
-        sv: "Programmet börjar på scen. Var på plats senast 17.15.",
-        en: "The stage programme begins. Please be seated by 17.15.",
+        sv: "Programmet börjar på scen.",
+        en: "The stage programme begins.",
       },
     },
   ] as ProgrammeItem[],
@@ -283,7 +288,7 @@ export const publications: Publication[] = [
   {
     id: "psykologisk-resiliens",
     title: "Psykologisk resiliens",
-    subtitle: "Att möta motgång i en osäker värld",
+    subtitle: "Att möta motgångar i en osäker värld",
     titleEn: "Psychological resilience",
     subtitleEn: "Meeting adversity in an uncertain world",
     year: "2026",
@@ -375,6 +380,35 @@ export const publications: Publication[] = [
     summary: {
       sv: "En antologi om evidensbaserad elevhälsa. Tredje upplagan är uppdaterad med bland annat klimatångest, neuropsykiatri och digitaliseringens påverkan på elevers lärande och mående. Kata Nylén har skrivit ett kapitel.",
       en: "An edited volume on evidence-based student health. The third edition adds chapters on climate anxiety, neuropsychiatry and how digitalisation affects pupils' learning and wellbeing. Kata Nylén contributed a chapter.",
+    },
+  },
+  {
+    /*
+      Kata's chapter, supplied by her on 28 Sep 2026 with the Adlibris link.
+
+      Publisher and year are from Libris, the Swedish national library
+      catalogue (bib/5g5hjgrt37jkc6z0), rather than from the retailer page,
+      which was unreachable. The catalogue record lists no contributors, so
+      `editors` is deliberately absent rather than guessed.
+
+      ⚠️ The summary is thin on purpose: all we can state is what the record
+      says and what Kata told us. Ask her what her chapter is actually about
+      and expand it then.
+    */
+    id: "vad-haller-ni-pa-med",
+    title: "Vad håller ni på med?",
+    subtitle: "En antologi om klimatet",
+    titleEn: "What are you doing?",
+    subtitleEn: "An anthology on the climate",
+    year: "2019",
+    publisher: "En bok för alla",
+    url: "https://www.adlibris.com/sv/bok/vad-haller-ni-pa-med-en-antologi-om-klimatet-9789172218024",
+    role: "chapter",
+    summary: {
+      // The subtitle already says it is an anthology about the climate, and it
+      // renders directly above this, so repeating it just wastes the line.
+      sv: "Kata Nylén har skrivit ett kapitel i antologin.",
+      en: "Kata Nylén contributed a chapter to this anthology.",
     },
   },
 ];
@@ -777,6 +811,55 @@ export function speakingCredentials(limit = 3): MediaItem[] {
       return Number(Boolean(b.featured)) - Number(Boolean(a.featured));
     })
     .slice(0, limit);
+}
+
+/**
+ * Cardinal numbers as words, for counts that appear inside a sentence.
+ *
+ * Digits read as clinical in prose ("4 egna böcker"), and the numbers here are
+ * always small. Falls back to the digit above the range rather than throwing,
+ * since a slightly plain sentence beats a crashed page.
+ */
+const NUMBER_WORDS: Record<"sv" | "en", string[]> = {
+  sv: ["noll", "en", "två", "tre", "fyra", "fem", "sex", "sju", "åtta", "nio", "tio"],
+  en: ["no", "one", "two", "three", "four", "five", "six", "seven", "eight", "nine", "ten"],
+};
+
+export function numberWord(n: number, locale: "sv" | "en"): string {
+  return NUMBER_WORDS[locale][n] ?? String(n);
+}
+
+/**
+ * How many publications of each kind there are.
+ *
+ * Counted rather than written into the copy. "Fem titlar" was wrong by one and
+ * counted a chapter contribution as a book Kata wrote, which overstates what
+ * she did. A sentence that counts its own list cannot drift away from it, and
+ * the next publication she sends updates the prose for free.
+ */
+export function publicationCounts(): { authored: number; chapters: number } {
+  return {
+    authored: publications.filter((p) => p.role === "author").length,
+    chapters: publications.filter((p) => p.role === "chapter").length,
+  };
+}
+
+/**
+ * The books intro with its count filled in, in the page's own language.
+ *
+ * Only the authored books are counted. Chapter contributions are described
+ * rather than numbered, partly because Kata asked for them to read as
+ * contributions rather than as books she wrote, and partly because a count of
+ * one would need singular and plural forms of the noun in both languages for
+ * a single sentence. A test keeps the authored count above one so the plural
+ * here stays grammatical.
+ */
+export function booksIntroFor(locale: "sv" | "en", template: string): string {
+  const { authored } = publicationCounts();
+  const filled = template.replace("{authored}", numberWord(authored, locale));
+  // The placeholder opens the sentence, and the number words are lowercase,
+  // so without this the paragraph begins "fyra egna böcker".
+  return filled.charAt(0).toUpperCase() + filled.slice(1);
 }
 
 export function bookTitleFor(locale: "sv" | "en"): string | undefined {

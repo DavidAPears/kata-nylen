@@ -29,7 +29,20 @@ describe("publications data", () => {
     const chapters = publications.filter((p) => p.role === "chapter");
     expect(chapters.length).toBeGreaterThan(0);
     for (const p of chapters) {
-      expect(p.editors?.length, `${p.id} should name its editors`).toBeGreaterThan(0);
+      // The summary has to say it is a contribution. This is the guard that
+      // actually matters: Kata asked specifically that chapters not read as
+      // books she wrote.
+      expect(p.summary?.sv, `${p.id} sv summary`).toMatch(/kapitel/i);
+      expect(p.summary?.en, `${p.id} en summary`).toMatch(/chapter/i);
+      /*
+        Editors are credited where we know them, but an absent list is
+        allowed. Not every catalogue record names them, and inventing editors
+        would misattribute other people's work. An empty array, though, means
+        someone started the job and left it half done.
+      */
+      if (p.editors !== undefined) {
+        expect(p.editors.length, `${p.id} has an empty editors list`).toBeGreaterThan(0);
+      }
     }
   });
 

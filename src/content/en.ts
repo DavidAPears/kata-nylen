@@ -48,7 +48,7 @@ export const en: SiteContent = {
     featuredBook: {
       heading: "The new book",
       description:
-        "Five movements for meeting hardship without shutting down: listening, loving, collectivising, acting, and giving and receiving support.",
+        "Four movements for meeting hardship without shutting down: listening, loving, collectivising and acting.",
       cta: { label: "Read about the book release", href: "/book-release" },
     },
     areasOfWork: {
@@ -333,20 +333,21 @@ export const en: SiteContent = {
     frameworkHeading: "LÄKA",
     framework: {
       intro:
-        "Psykologisk resiliens is organised around five movements. Their initials spell LÄKA, which is also the Swedish word for to heal.",
+        "Psykologisk resiliens is organised around four movements. Their initials spell LÄKA, which is also the Swedish word for to heal.",
       steps: [
         { title: "Lyssna", description: "Listen. To yourself, and to what your reactions are telling you." },
         { title: "Älska", description: "Love. The relationships and attachments that make difficulty survivable." },
         { title: "Kollektivisera", description: "Collectivise. Move from carrying it alone to carrying it together." },
         { title: "Agera", description: "Act. Do something, at a scale that is actually available to you." },
-        { title: "Stöd", description: "Support. Give it and receive it, which are different skills." },
       ],
       closing:
         "The argument running through it is that resilience is not endurance. It is not about withstanding more; it is about what people build, and build together, so that less has to be withstood alone.",
     },
     booksHeading: "Books",
+    // {authored} and {chapters} are filled from the publications list itself,
+    // so the sentence can never contradict the books printed under it.
     booksIntro:
-      "Five titles for Natur & Kultur and Studentlitteratur, on climate psychology, resilience, cognitive behavioural therapy in social work, and climate-aware teaching.",
+      "{authored} books of her own for Natur & Kultur and Studentlitteratur, on climate psychology, resilience, cognitive behavioural therapy in social work, and climate-aware teaching, plus chapters in edited volumes.",
     booksCta: { label: "All publications", href: "/publications" },
     collectiveHeading: "Collective work",
     collectiveBody:
@@ -423,8 +424,10 @@ export const en: SiteContent = {
     required: "required",
     chooseOption: "Choose an option",
     honeypot: "Leave this field empty",
-    privacyNotice:
-      "We use your details only to answer your enquiry or manage your place at the event. We never sell or share them.",
+    privacyNotice: {
+      rsvp: "We use your details only to manage your place at the event. We never sell or share them.",
+      contact: "We use your details only to answer your enquiry. We never sell or share them.",
+    },
     submit: {
       rsvp: "Reserve my place",
       contact: "Send enquiry",

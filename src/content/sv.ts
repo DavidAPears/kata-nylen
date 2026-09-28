@@ -49,7 +49,7 @@ export const sv: SiteContent = {
     featuredBook: {
       heading: "Den nya boken",
       description:
-        "Fem rörelser för att möta motgång utan att stänga av: att lyssna, älska, kollektivisera, agera och att ge och ta emot stöd.",
+        "Fyra rörelser för att möta motgångar utan att stänga av: att lyssna, älska, kollektivisera och agera.",
       cta: { label: "Läs om bokreleasen", href: "/book-release" },
     },
     areasOfWork: {
@@ -332,20 +332,21 @@ export const sv: SiteContent = {
     frameworkHeading: "LÄKA",
     framework: {
       intro:
-        "Psykologisk resiliens är uppbyggd kring fem rörelser. Deras begynnelsebokstäver stavar LÄKA.",
+        "Psykologisk resiliens är uppbyggd kring fyra rörelser. Deras begynnelsebokstäver stavar LÄKA.",
       steps: [
         { title: "Lyssna", description: "På dig själv, och på vad dina reaktioner försöker säga." },
         { title: "Älska", description: "Relationerna och banden som gör svårigheter möjliga att överleva." },
         { title: "Kollektivisera", description: "Från att bära det ensam till att bära det tillsammans." },
         { title: "Agera", description: "Gör något, i en skala som faktiskt är tillgänglig för dig." },
-        { title: "Stöd", description: "Att ge det och att ta emot det, vilket är två olika färdigheter." },
       ],
       closing:
         "Tanken som löper genom boken är att resiliens inte är uthållighet. Det handlar inte om att stå ut med mer, utan om vad människor bygger, och bygger tillsammans, så att mindre behöver bäras ensam.",
     },
     booksHeading: "Böcker",
+    // {authored} and {chapters} are filled from the publications list itself,
+    // so the sentence can never contradict the books printed under it.
     booksIntro:
-      "Fem titlar för Natur & Kultur och Studentlitteratur, om klimatpsykologi, resiliens, kognitiv beteendeterapi i socialt arbete och klimatmedveten undervisning.",
+      "{authored} egna böcker för Natur & Kultur och Studentlitteratur, om klimatpsykologi, resiliens, kognitiv beteendeterapi i socialt arbete och klimatmedveten undervisning, samt kapitel i antologier.",
     booksCta: { label: "Alla publikationer", href: "/publications" },
     collectiveHeading: "Kollektivt arbete",
     collectiveBody:
@@ -372,7 +373,7 @@ export const sv: SiteContent = {
         "Intervjuer och medverkan om klimatpsykologi, resiliens och hur människor möter en värld i förändring.",
     },
     kinds: {
-      tv: "Television",
+      tv: "TV",
       radio: "Radio",
       print: "Press",
       podcast: "Poddar",
@@ -422,8 +423,10 @@ export const sv: SiteContent = {
     required: "obligatoriskt",
     chooseOption: "Välj ett alternativ",
     honeypot: "Lämna detta fält tomt",
-    privacyNotice:
-      "Vi använder dina uppgifter endast för att svara på din fråga eller hantera din plats på evenemanget. Vi säljer eller delar dem aldrig.",
+    privacyNotice: {
+      rsvp: "Vi använder dina uppgifter endast för att hantera din plats på evenemanget. Vi säljer eller delar dem aldrig.",
+      contact: "Vi använder dina uppgifter endast för att svara på din förfrågan. Vi säljer eller delar dem aldrig.",
+    },
     submit: {
       rsvp: "Anmäl mig",
       contact: "Skicka förfrågan",

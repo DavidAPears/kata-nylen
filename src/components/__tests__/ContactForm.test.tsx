@@ -154,3 +154,19 @@ describe("ContactForm", () => {
     expect(screen.getByRole("button", { name: sv.forms.submit.contact })).toBeInTheDocument();
   });
 });
+
+describe("privacy wording", () => {
+  it("describes answering an enquiry, and nothing about the event", () => {
+    // This form collects an enquiry. It previously told people their details
+    // might be used to manage a place at the book launch, which it never does.
+    render(<ContactForm forms={sv.forms} reasons={sv.contact.reasons} />);
+    expect(screen.getByText(sv.forms.privacyNotice.contact)).toBeInTheDocument();
+    expect(screen.queryByText(/evenemang/i)).toBeNull();
+  });
+
+  it("says the same in English, without mentioning the event", () => {
+    render(<ContactForm forms={en.forms} reasons={en.contact.reasons} />);
+    expect(screen.getByText(en.forms.privacyNotice.contact)).toBeInTheDocument();
+    expect(screen.queryByText(/place at the event/i)).toBeNull();
+  });
+});

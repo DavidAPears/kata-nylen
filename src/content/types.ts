@@ -225,7 +225,14 @@ export type FormsContent = {
   chooseOption: string;
   /** Honeypot field label, visually hidden but present for screen readers */
   honeypot: string;
-  privacyNotice: string;
+  /**
+   * Privacy wording, per form.
+   *
+   * These were one shared string, which meant the contact form told people we
+   * might use their details to manage a place at the event. Each form should
+   * describe only what it actually does with what it collects.
+   */
+  privacyNotice: { rsvp: string; contact: string };
   submit: {
     rsvp: string;
     contact: string;

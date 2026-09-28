@@ -103,7 +103,7 @@ export function ContactForm({
       <Honeypot label={forms.honeypot} />
 
       <p className="mb-5 max-w-[var(--measure)] text-sm text-[var(--color-ink-muted)]">
-        {forms.privacyNotice}
+        {forms.privacyNotice.contact}
       </p>
 
       <button

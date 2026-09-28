@@ -196,3 +196,22 @@ describe("RsvpForm", () => {
     expect(screen.getByRole("button", { name: "Anmäl mig" })).toBeInTheDocument();
   });
 });
+
+describe("privacy wording", () => {
+  it("describes managing a place, because that is what this form does", () => {
+    renderForm();
+    expect(screen.getByText(en.forms.privacyNotice.rsvp)).toBeInTheDocument();
+  });
+
+  it("does not show the contact form's wording", () => {
+    // The two shared one string, which meant each form described the other's
+    // purpose as well as its own.
+    renderForm();
+    expect(screen.queryByText(en.forms.privacyNotice.contact)).toBeNull();
+  });
+
+  it("says the same in Swedish", () => {
+    renderForm({ locale: "sv", forms: sv.forms });
+    expect(screen.getByText(sv.forms.privacyNotice.rsvp)).toBeInTheDocument();
+  });
+});

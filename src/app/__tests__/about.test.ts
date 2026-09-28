@@ -32,10 +32,18 @@ describe("About page content", () => {
   });
 
   it.each(LOCALES)("%s spells out the LÄKA framework in full", (_label, about) => {
-    expect(about.framework.steps).toHaveLength(5);
+    expect(about.framework.steps).toHaveLength(4);
     const initials = about.framework.steps.map((s) => s.title[0]).join("");
-    // L-Ä-K-A-S: the acronym plus Stöd at the centre.
-    expect(initials).toBe("LÄKAS");
+    /*
+      The initials ARE the name, so the count is not a matter of opinion:
+      four letters, four movements.
+
+      This test previously asserted five steps spelling "LÄKAS", explained
+      away as "the acronym plus Stöd at the centre". That was a rationalisation
+      of a mistake rather than a reading of the book, and it made the test
+      protect the error instead of catching it. Corrected by Kata, 28 Sep 2026.
+    */
+    expect(initials).toBe("LÄKA");
   });
 
   it.each(LOCALES)("%s links onward rather than dead-ending", (_label, about) => {

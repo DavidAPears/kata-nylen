@@ -12,7 +12,12 @@ import {
   outstandingFacts,
   speakingCredentials,
   media,
+  publications,
+  publicationCounts,
+  booksIntroFor,
+  numberWord,
 } from "@/content/facts";
+import { getContent } from "@/content";
 import { en } from "@/content/en";
 import { sv } from "@/content/sv";
 
@@ -140,5 +145,84 @@ describe("speakingCredentials", () => {
     const before = media.map((item) => item.id);
     speakingCredentials();
     expect(media.map((item) => item.id)).toEqual(before);
+  });
+});
+
+describe("the book's own details", () => {
+  it("uses the plural motgångar in the subtitle", () => {
+    // The real subtitle is "Att möta motgångar i en osäker värld". The site
+    // shipped the singular in four places, including inside both synopsis
+    // strings. Corrected by Kata, 28 Sep 2026.
+    expect(resolved(book.subtitle)).toBe("Att möta motgångar i en osäker värld");
+    for (const locale of ["sv", "en"] as const) {
+      const synopsis = resolved(book.synopsis[locale]);
+      if (synopsis?.includes("Psykologisk resiliens:")) {
+        expect(synopsis, `${locale} synopsis`).toContain("motgångar");
+        expect(synopsis, `${locale} synopsis`).not.toMatch(/motgång\b(?!ar)/);
+      }
+    }
+  });
+
+  it("has four movements, because LÄKA has four letters", () => {
+    for (const locale of ["sv", "en"] as const) {
+      expect(book.themes[locale], locale).toHaveLength(4);
+    }
+    // The Swedish list is where the acronym is legible.
+    expect(book.themes.sv.map((t) => t[0]).join("")).toBe("LÄKA");
+  });
+});
+
+describe("publicationCounts and booksIntroFor", () => {
+  it("counts what is actually in the list, split by what she did", () => {
+    const { authored, chapters } = publicationCounts();
+    expect(authored).toBe(publications.filter((p) => p.role === "author").length);
+    expect(chapters).toBe(publications.filter((p) => p.role === "chapter").length);
+    expect(authored + chapters).toBe(publications.length);
+  });
+
+  it("keeps at least two authored books, so the prose stays plural", () => {
+    // booksIntroFor writes "{authored} egna böcker" / "books of her own".
+    // At one, both languages would need a singular form. This is the
+    // assumption that lets the sentence stay simple: if it ever breaks, the
+    // copy needs rewording rather than the count fudging.
+    expect(publicationCounts().authored).toBeGreaterThanOrEqual(2);
+  });
+
+  it("fills the placeholder with a word, not a digit", () => {
+    for (const locale of ["sv", "en"] as const) {
+      const filled = booksIntroFor(locale, getContent(locale).about.booksIntro);
+      expect(filled).not.toContain("{authored}");
+      expect(filled).not.toMatch(/\d/);
+    }
+    expect(numberWord(4, "sv")).toBe("fyra");
+    expect(numberWord(4, "en")).toBe("four");
+  });
+
+  it("cannot contradict the list printed underneath it", () => {
+    // The whole point of deriving it. "Fem titlar" was wrong by one and
+    // counted a chapter contribution as a book she wrote.
+    const { authored } = publicationCounts();
+    for (const locale of ["sv", "en"] as const) {
+      const filled = booksIntroFor(locale, getContent(locale).about.booksIntro);
+      // Case-insensitive: the count opens the sentence, so it is capitalised.
+      expect(filled.toLowerCase()).toContain(numberWord(authored, locale));
+    }
+  });
+});
+
+describe("booksIntroFor: sentence shape", () => {
+  it("starts the sentence with a capital, even though the count opens it", () => {
+    for (const locale of ["sv", "en"] as const) {
+      const filled = booksIntroFor(locale, getContent(locale).about.booksIntro);
+      expect(filled[0], `${locale}: "${filled.slice(0, 24)}"`).toBe(
+        filled[0].toUpperCase(),
+      );
+    }
+  });
+
+  it("ends as a sentence", () => {
+    for (const locale of ["sv", "en"] as const) {
+      expect(booksIntroFor(locale, getContent(locale).about.booksIntro)).toMatch(/\.$/);
+    }
   });
 });

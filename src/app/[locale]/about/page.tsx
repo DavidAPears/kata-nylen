@@ -11,6 +11,7 @@ import {
   recognition,
   media,
   resolved,
+  booksIntroFor,
 } from "@/content/facts";
 import { Container, Section, Prose, ExternalAnchor } from "@/components/primitives";
 import { iconForProfile, labelForProfile } from "@/components/SocialIcons";
@@ -148,7 +149,7 @@ export default async function AboutPage({
 
       <Section ornament id="books" heading={copy.booksHeading} tone="sunken">
         <Prose>
-          <p>{copy.booksIntro}</p>
+          <p>{booksIntroFor(locale, copy.booksIntro)}</p>
         </Prose>
         <ul className="mt-6 max-w-2xl space-y-3">
           {authored.map((publication) => (
