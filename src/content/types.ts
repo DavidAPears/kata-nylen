@@ -221,6 +221,21 @@ export type ContactContent = {
 };
 
 /** Shared form copy — labels, validation messages, submission states. */
+/**
+ * Voice rule, set with Kata on 28 Sep 2026.
+ *
+ * The site talks about Kata in the third person, but every transactional
+ * string used to switch to "vi" / "we": the contact intro, the errors, the
+ * success messages, the privacy notices. There is no we. It is her personal
+ * site, and someone filling in the contact form is writing to her.
+ *
+ * So:
+ *   - whoever reads, replies or acts is named: "Kata återkommer", not "vi"
+ *   - data handling and system failures are impersonal: "Dina uppgifter
+ *     används endast för...", "Något gick fel"
+ *   - the one surviving "vi" is the book launch invitation, where it means
+ *     the people in the room and the reader is one of them
+ */
 export type FormsContent = {
   fields: {
     name: string;

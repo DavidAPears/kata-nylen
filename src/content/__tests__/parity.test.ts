@@ -107,3 +107,48 @@ describe("content parity", () => {
     expect([...locales].sort()).toEqual(["en", "sv"]);
   });
 });
+
+describe("voice: the site does not speak as a company", () => {
+  /*
+    Kata asked us to look at "Kata/hon" versus "vi", especially around the
+    contact form. The site describes her in the third person but every
+    transactional string used to say "vi", which implies an organisation that
+    does not exist. Someone using the contact form is writing to her.
+
+    The launch invitation keeps its "vi" on purpose: an event has hosts, and
+    "hur många vi blir" counts the reader in. It is allowed by id rather than
+    by a loose pattern, so a new "vi" somewhere else still fails.
+  */
+  const ALLOWED = ["Anmäl dig gärna så att vi vet", "so we know how many to expect"];
+
+  function offenders(node: unknown, path = ""): string[] {
+    if (typeof node === "string") {
+      if (ALLOWED.some((phrase) => node.includes(phrase))) return [];
+      return /\b(vi|vår|vårt|våra|oss|we|we'll|we've|we're|our|us)\b/i.test(node)
+        ? [`${path}: ${node}`]
+        : [];
+    }
+    if (Array.isArray(node)) return node.flatMap((v, i) => offenders(v, `${path}[${i}]`));
+    if (node && typeof node === "object") {
+      return Object.entries(node).flatMap(([k, v]) =>
+        offenders(v, path ? `${path}.${k}` : k),
+      );
+    }
+    return [];
+  }
+
+  it.each([
+    ["Swedish", sv],
+    ["English", en],
+  ])("%s form and contact copy names Kata or nobody", (_label, content) => {
+    expect(offenders(content.forms, "forms")).toEqual([]);
+    expect(offenders(content.contact, "contact")).toEqual([]);
+  });
+
+  it.each([
+    ["Swedish", sv],
+    ["English", en],
+  ])("%s speaking call to action names Kata", (_label, content) => {
+    expect(offenders(content.speaking.cta, "speaking.cta")).toEqual([]);
+  });
+});

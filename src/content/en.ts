@@ -130,6 +130,8 @@ export const en: SiteContent = {
       heading: "About the evening",
       body: [
         "An evening to mark the release of the new book: an experience of the book, and an occasion to cultivate psychological resilience together.",
+        // See the Swedish: the one "we" the site keeps, because an event
+        // genuinely has hosts and the reader is one of the people being counted.
         "You are warmly welcome. Please reserve a place so we know how many to expect.",
       ],
       includesHeading: "The evening holds",
@@ -150,7 +152,7 @@ export const en: SiteContent = {
     rsvp: {
       heading: "RSVP",
       intro:
-        "Reserve your place below. We only use these details for the event itself.",
+        "Reserve your place below. These details are used only for the event itself.",
       addToCalendarLabel: "Add to calendar",
       downloadIcsLabel: "Download .ics file",
       googleCalendarLabel: "Add to Google Calendar",
@@ -279,7 +281,7 @@ export const en: SiteContent = {
     },
     cta: {
       heading: "Interested in inviting Kata?",
-      body: "Tell us a little about the event and we'll come back to you.",
+      body: "Tell Kata a little about the event and she will come back to you.",
       cta: { label: "Speaking enquiry", href: "/contact" },
     },
   },
@@ -434,7 +436,7 @@ export const en: SiteContent = {
     hero: {
       heading: "Contact",
       standfirst:
-        "For speaking, media and professional enquiries. We read everything and reply as soon as we can.",
+        "For speaking, media and professional enquiries. Kata reads everything and replies as soon as she can.",
     },
     reasons: [
       { value: "speaking", label: "Speaking & events" },
@@ -461,8 +463,8 @@ export const en: SiteContent = {
     chooseOption: "Choose an option",
     honeypot: "Leave this field empty",
     privacyNotice: {
-      rsvp: "We use your details only to manage your place at the event. We never sell or share them.",
-      contact: "We use your details only to answer your enquiry. We never sell or share them.",
+      rsvp: "Your details are used only to manage your place at the event. They are never sold or shared.",
+      contact: "Your details are used only to answer your enquiry. They are never sold or shared.",
     },
     submit: {
       rsvp: "Reserve my place",
@@ -476,17 +478,17 @@ export const en: SiteContent = {
       messageRequired: "Please enter a message.",
       reasonRequired: "Please choose a reason for contact.",
       guestsRange: "Please enter a valid number of guests.",
-      tooLong: "That's longer than we can accept.",
+      tooLong: "That is longer than the form can accept.",
       rateLimited: "Too many attempts. Please wait a moment and try again.",
-      server: "Something went wrong at our end. Please try again shortly.",
+      server: "Something went wrong. Please try again shortly.",
       summary: "Please check the following:",
     },
     success: {
       rsvpHeading: "You're on the list.",
       rsvpBody:
-        "We've sent a confirmation to your email address with the event details.",
+        "A confirmation has been sent to your email address with the event details.",
       contactHeading: "Thank you. Your message is on its way.",
-      contactBody: "We'll come back to you as soon as we can.",
+      contactBody: "Kata will come back to you as soon as she can.",
     },
   },
 

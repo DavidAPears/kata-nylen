@@ -131,6 +131,9 @@ export const sv: SiteContent = {
       heading: "Om kvällen",
       body: [
         "En kväll för att fira släppet av den nya boken: en upplevelse av boken och ett tillfälle att odla psykologisk resiliens tillsammans.",
+        // The one "vi" the site keeps. An event has hosts, Kata and Sebastian
+        // Ring among them, and "hur många vi blir" counts the reader in. It is
+        // a real we, not the phantom company voice removed everywhere else.
         "Du är varmt välkommen. Anmäl dig gärna så att vi vet hur många vi blir.",
       ],
       includesHeading: "Kvällen innehåller",
@@ -151,7 +154,7 @@ export const sv: SiteContent = {
     rsvp: {
       heading: "Anmälan",
       intro:
-        "Anmäl dig nedan. Vi använder bara dina uppgifter för själva evenemanget.",
+        "Anmäl dig nedan. Uppgifterna används bara för själva evenemanget.",
       addToCalendarLabel: "Lägg till i kalender",
       downloadIcsLabel: "Ladda ner .ics-fil",
       googleCalendarLabel: "Lägg till i Google Kalender",
@@ -279,7 +282,7 @@ export const sv: SiteContent = {
     },
     cta: {
       heading: "Vill du bjuda in Kata?",
-      body: "Berätta kort om sammanhanget så återkommer vi.",
+      body: "Berätta kort om sammanhanget så återkommer Kata.",
       cta: { label: "Förfrågan om föreläsning", href: "/contact" },
     },
   },
@@ -433,7 +436,7 @@ export const sv: SiteContent = {
     hero: {
       heading: "Kontakt",
       standfirst:
-        "För föreläsningar, media och professionella förfrågningar. Vi läser allt och svarar så snart vi kan.",
+        "För föreläsningar, media och professionella förfrågningar. Kata läser allt och svarar så snart hon kan.",
     },
     reasons: [
       { value: "speaking", label: "Föreläsningar & event" },
@@ -460,8 +463,8 @@ export const sv: SiteContent = {
     chooseOption: "Välj ett alternativ",
     honeypot: "Lämna detta fält tomt",
     privacyNotice: {
-      rsvp: "Vi använder dina uppgifter endast för att hantera din plats på evenemanget. Vi säljer eller delar dem aldrig.",
-      contact: "Vi använder dina uppgifter endast för att svara på din förfrågan. Vi säljer eller delar dem aldrig.",
+      rsvp: "Dina uppgifter används endast för att hantera din plats på evenemanget. De säljs eller delas aldrig.",
+      contact: "Dina uppgifter används endast för att svara på din förfrågan. De säljs eller delas aldrig.",
     },
     submit: {
       rsvp: "Anmäl mig",
@@ -475,17 +478,17 @@ export const sv: SiteContent = {
       messageRequired: "Skriv ett meddelande.",
       reasonRequired: "Välj en anledning till kontakt.",
       guestsRange: "Ange ett giltigt antal gäster.",
-      tooLong: "Det är längre än vi kan ta emot.",
+      tooLong: "Det är längre än formuläret kan ta emot.",
       rateLimited: "För många försök. Vänta en stund och försök igen.",
-      server: "Något gick fel hos oss. Försök igen om en liten stund.",
+      server: "Något gick fel. Försök igen om en liten stund.",
       summary: "Kontrollera följande:",
     },
     success: {
       rsvpHeading: "Du står på listan.",
       rsvpBody:
-        "Vi har skickat en bekräftelse till din e-postadress med detaljerna för kvällen.",
+        "En bekräftelse har skickats till din e-postadress med detaljerna för kvällen.",
       contactHeading: "Tack. Ditt meddelande är på väg.",
-      contactBody: "Vi återkommer så snart vi kan.",
+      contactBody: "Kata återkommer så snart hon kan.",
     },
   },
 
