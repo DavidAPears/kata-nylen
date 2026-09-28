@@ -86,10 +86,11 @@ export type HomeContent = {
     body: string;
     cta: Cta;
   };
-  collective: {
+  organisations: {
     heading: string;
     body: string;
-    links: ExternalLink[];
+    /** "Opens example.com in a new tab", with {site} filled from the URL. */
+    linkDescription: string;
   };
 };
 
@@ -283,8 +284,8 @@ export type AboutContent = {
   booksHeading: string;
   booksIntro: string;
   booksCta: Cta;
-  collectiveHeading: string;
-  collectiveBody: string;
+  organisationsHeading: string;
+  organisationsBody: string;
   speakingHeading: string;
   speakingBody: string;
   speakingCta: Cta;
@@ -312,7 +313,7 @@ export type FooterContent = {
   contactHeading: string;
   aboutLabel: string;
   mediaLabel: string;
-  collectiveHeading: string;
+  organisationsHeading: string;
   followHeading: string;
   privacyLabel: string;
   /** Template containing `{year}`, e.g. "© {year} Kata Nylén". Must be a

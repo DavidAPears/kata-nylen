@@ -4,7 +4,7 @@ import { render, screen, within } from "@testing-library/react";
 import { Footer } from "../Footer";
 import { en } from "@/content/en";
 import { sv } from "@/content/sv";
-import { collectives, person, isResolved } from "@/content/facts";
+import { organisations, person, isResolved } from "@/content/facts";
 
 vi.mock("@/i18n/navigation", () => ({
   usePathname: () => "/",
@@ -59,7 +59,7 @@ describe("Footer", () => {
 
   it("lists every collective, each opening safely in a new tab", () => {
     render(<Footer locale="en" />);
-    for (const collective of collectives) {
+    for (const collective of organisations) {
       const link = screen.getByRole("link", { name: collective.name });
       expect(link).toHaveAttribute("href", collective.url);
       expect(link).toHaveAttribute("target", "_blank");

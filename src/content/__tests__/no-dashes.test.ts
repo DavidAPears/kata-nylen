@@ -59,7 +59,7 @@ describe("facts contain no em or en dashes", () => {
       person: facts.person,
       book: facts.book,
       launchEvent: facts.launchEvent,
-      collectives: facts.collectives,
+      organisations: facts.organisations,
     })
       .filter(([, text]) => FORBIDDEN.test(text))
       .map(([path, text]) => `${path}: ${text}`);

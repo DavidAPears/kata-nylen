@@ -1,7 +1,7 @@
 import { Link } from "@/i18n/navigation";
 import type { Locale } from "@/i18n/routing";
 import { getContent } from "@/content";
-import { collectives, person, isResolved } from "@/content/facts";
+import { organisations, person, isResolved } from "@/content/facts";
 import { Container, ExternalAnchor } from "./primitives";
 import { LanguageSwitcher } from "./LanguageSwitcher";
 import { OutstandingContent, TodoNote } from "./TodoNote";
@@ -33,9 +33,9 @@ export function Footer({ locale }: { locale: Locale }) {
           </div>
 
           <div>
-            <h2 className="mb-2 font-semibold">{footer.collectiveHeading}</h2>
+            <h2 className="mb-2 font-semibold">{footer.organisationsHeading}</h2>
             <ul className="space-y-1">
-              {collectives.map((c) => (
+              {organisations.map((c) => (
                 <li key={c.id}>
                   <ExternalAnchor href={c.url}>{c.name}</ExternalAnchor>
                 </li>

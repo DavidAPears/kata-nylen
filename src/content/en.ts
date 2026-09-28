@@ -99,21 +99,10 @@ export const en: SiteContent = {
       body: "Kata speaks at conferences, universities, leadership events and public institutions on the psychology of climate, resilience, behaviour and change.",
       cta: { label: "Speaking topics and enquiries", href: "/speaking" },
     },
-    collective: {
-      heading: "Collective work",
-      body: "Alongside her own practice, Kata works with collectives of psychologists focused on climate and sustainability. Their work is separate from this site and continues in its own right.",
-      links: [
-        {
-          label: "Klimatpsykologerna",
-          href: "https://www.klimatpsykologerna.se/",
-          description: "Opens klimatpsykologerna.se in a new tab",
-        },
-        {
-          label: "Climate Psyched",
-          href: "https://www.climatepsyched.org/",
-          description: "Opens climatepsyched.org in a new tab",
-        },
-      ],
+    organisations: {
+      heading: "Organisations and programmes",
+      body: "Alongside her own practice, Kata works through several organisations and programmes. Each has its own focus, but the thread is the same: the psychology of making change actually happen.",
+      linkDescription: "Opens {site} in a new tab",
     },
   },
 
@@ -349,9 +338,9 @@ export const en: SiteContent = {
     booksIntro:
       "{authored} books of her own for Natur & Kultur and Studentlitteratur, on climate psychology, resilience, cognitive behavioural therapy in social work, and climate-aware teaching, plus chapters in edited volumes.",
     booksCta: { label: "All publications", href: "/publications" },
-    collectiveHeading: "Collective work",
-    collectiveBody:
-      "Alongside her own practice, Kata works with collectives of psychologists focused on climate and sustainability. Their work is separate from this site and continues in its own right.",
+    organisationsHeading: "Organisations and programmes",
+    organisationsBody:
+      "Alongside her own practice, Kata works through several organisations and programmes. Each has its own focus, but the thread is the same: the psychology of making change actually happen.",
     speakingHeading: "Speaking",
     speakingBody:
       "She speaks at conferences, universities, leadership events and public institutions, and works with organisations on resilience, behavioural change and leading through uncertainty.",
@@ -456,7 +445,7 @@ export const en: SiteContent = {
 
   footer: {
     contactHeading: "Contact",
-    collectiveHeading: "Collective work",
+    organisationsHeading: "Organisations",
     followHeading: "Elsewhere",
     aboutLabel: "About Kata",
     mediaLabel: "Media",

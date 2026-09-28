@@ -32,10 +32,36 @@ export type ProgrammeItem = { time: string; description: { sv: string; en: strin
 
 export const person = {
   fullName: "Kata Nylén",
-  /** §23: preferred professional title, per language */
-  jobTitle: { sv: TODO as Fact<string>, en: TODO as Fact<string> },
-  /** §23: approved short bios */
-  shortBio: { sv: TODO as Fact<string>, en: TODO as Fact<string> },
+  /**
+   * §23: preferred professional title. CONFIRMED by Kata, 28 Sep 2026.
+   *
+   * She asked to be introduced as "legitimerad psykolog och specialist i
+   * organisationspsykologi, författare och föreläsare", and that full
+   * four-part form is what the visible copy uses.
+   *
+   * This field carries only the licensed credentials, because the other two
+   * parts are already in the structured data as their own things: she is the
+   * `author` of a Book, and `makesOffer` lists what she can be booked to
+   * speak on. Repeating them here would say the same thing twice in a field
+   * meant to be precise.
+   */
+  jobTitle: {
+    sv: "Legitimerad psykolog och specialist i organisationspsykologi" as Fact<string>,
+    en: "Licensed psychologist and specialist in organisational psychology" as Fact<string>,
+  },
+  /**
+   * §23: approved short bio. Written by Kata, 28 Sep 2026.
+   *
+   * The Swedish is hers, with one change: her draft used an en dash before
+   * "med ett särskilt intresse", and the site does not use en or em dashes in
+   * anything a reader sees. It is a comma here instead.
+   *
+   * The English is our translation of her text and still needs her eye.
+   */
+  shortBio: {
+    sv: "Kata Nylén är legitimerad psykolog, specialist i organisationspsykologi, författare och föreläsare. Hon arbetar med beteendeförändring, psykologisk resiliens och implementering, med ett särskilt intresse för hur kunskap och ambitioner blir till handling i organisationer. Hennes arbete spänner från hållbar omställning och klimatpsykologi till förebyggande insatser för barn och unga genom SNAP. Hon är medgrundare av Klimatpsykologerna, SNAP Sverige och SHIFT Collective och författare till bland annat Psykologisk resiliens: att möta motgångar i en osäker värld." as Fact<string>,
+    en: "Kata Nylén is a licensed psychologist, a specialist in organisational psychology, an author and a speaker. She works with behavioural change, psychological resilience and implementation, with a particular interest in how knowledge and ambition become action inside organisations. Her work runs from sustainable transition and climate psychology to preventive work with children and young people through SNAP. She is a co-founder of Klimatpsykologerna, SNAP Sverige and SHIFT Collective, and the author of books including Psykologisk resiliens: att möta motgångar i en osäker värld." as Fact<string>,
+  },
   /**
     * §12: public contact address.
     *
@@ -724,19 +750,124 @@ export const media: MediaItem[] = [
   },
 ];
 
-/** §1 / §9: the collectives Kata works with./** §1 / §9: the collectives Kata works with. These URLs are confirmed. */
-export const collectives = [
+/**
+ * The bare hostname of a URL, for "opens example.com in a new tab".
+ *
+ * These descriptions used to be written out per link in the content files,
+ * which meant adding an organisation meant remembering to add its sentence
+ * too, in two languages.
+ */
+export function hostOf(url: string): string {
+  try {
+    return new URL(url).hostname.replace(/^www\./, "");
+  } catch {
+    return url;
+  }
+}
+
+/** §1 / §9: the organisations Kata works through. These URLs are confirmed. */
+export type Organisation = {
+  id: string;
+  name: string;
+  url: string;
+  /**
+   * What the thing actually is.
+   *
+   * This exists because "collective" was doing duty for all of them and SNAP
+   * is not one. Kata was explicit: SNAP is a programme and an area of her
+   * work, not a collective of psychologists, even though she works on it with
+   * colleagues. Calling it a collective would misdescribe it.
+   */
+  kind: "collective" | "company" | "programme";
+  /** Kata's own relationship to it. Absent where she has not confirmed one. */
+  role?: { sv: string; en: string };
+  /** What it does, and what her work in it involves. */
+  description?: { sv: string; en: string };
+};
+
+/**
+ * The organisations and programmes Kata works through, alongside her own
+ * practice. Confirmed by her on 28 Sep 2026, with the descriptions largely in
+ * her own words.
+ *
+ * Ordered to match the site's emphasis: the organisational change work leads,
+ * because that is the thread she asked the site to carry.
+ */
+export const organisations: Organisation[] = [
+  {
+    id: "shift-collective",
+    name: "SHIFT Collective",
+    url: "https://www.shiftcollective.se/",
+    kind: "company",
+    /*
+      ⚠️ Kata wrote "I founded SHIFT Collective" in her notes, but her own
+      draft bio says "medgrundare av Klimatpsykologerna, SNAP Sverige och
+      SHIFT Collective". Founder and co-founder are different claims, and the
+      difference matters to whoever else founded it, so this uses the more
+      modest of the two until she confirms which is right.
+    */
+    role: { sv: "Medgrundare", en: "Co-founder" },
+    description: {
+      sv: "Organisationsutveckling och förändringsledning. Här ligger arbetet med hur organisationer förändras i praktiken.",
+      en: "Organisational development and change leadership. This is where the work on how organisations actually change sits.",
+    },
+  },
+  {
+    id: "snap-sverige",
+    name: "SNAP Sverige",
+    url: "https://snap.nu/",
+    kind: "programme",
+    role: { sv: "Medgrundare", en: "Co-founder" },
+    /*
+      Her own wording, used as she sent it. The second paragraph names Malmö
+      and Lerum: she confirmed the municipalities and the existence of the
+      pilots are public, and asked that the site stay at that level. So no
+      individual cases, no outcome claims, nothing about specific children or
+      families. Do not add any.
+    */
+    description: {
+      sv: "Kata arbetar med att implementera SNAP (Stop Now And Plan) i Sverige, inom socialtjänst och skola. Arbetet omfattar anpassning till svensk kontext, utbildning och handledning av yrkesverksamma samt stöd för att metoden ska fungera och hålla över tid i verksamheten. SNAP är ett program för barn och familjer som syftar till att förebygga normbrytande beteenden. Programmet har piloterats inom socialtjänsten i Malmö, och SNAP i skolan har introducerats i Lerum.",
+      en: "Kata works on implementing SNAP (Stop Now And Plan) in Sweden, in social services and in schools. That covers adapting the material to the Swedish context, training and supervising practitioners, and supporting the method so it works and holds over time in practice. SNAP is a programme for children and families aimed at preventing antisocial behaviour. It has been piloted in social services in Malmö, and SNAP i skolan has been introduced in Lerum.",
+    },
+  },
   {
     id: "klimatpsykologerna",
     name: "Klimatpsykologerna",
     url: "https://www.klimatpsykologerna.se/",
+    kind: "collective",
+    role: { sv: "Medgrundare", en: "Co-founder" },
+    description: {
+      sv: "Klimatpsykologi. Kollektivet arbetar med de psykologiska sidorna av klimatkrisen och omställningen.",
+      en: "Climate psychology. The collective works on the psychological side of the climate crisis and the transition.",
+    },
   },
   {
+    /*
+      ⚠️ NEEDS KATA'S CONFIRMATION, and there are three reasons to ask.
+
+      She did not mention Climate Psyched when she listed the organisations
+      she works through, though it came from the original brief and has been
+      on the site since the start. Their own site does not name her anywhere.
+      And they publish "Klimatpsykologi", the same book Klimatpsykologerna
+      did, so this may be that collective's English-language presence rather
+      than a separate affiliation.
+
+      Kept for now, because removing an affiliation nobody asked us to remove
+      is worse than carrying one with a question against it. But it claims no
+      role for her: the description below is the organisation's account of
+      itself, taken from their homepage, and says nothing about what Kata does
+      there. Add a role only when she confirms one.
+    */
     id: "climate-psyched",
     name: "Climate Psyched",
     url: "https://www.climatepsyched.org/",
+    kind: "collective",
+    description: {
+      sv: "En organisation av legitimerade psykologer som arbetar med klimatpsykologi och beteendeförändring, genom webbinarier, föreläsningar, workshops och rådgivning.",
+      en: "An organisation of licensed psychologists working on climate psychology and behavioural change, through webinars, lectures, workshops and consultation.",
+    },
   },
-] as const;
+];
 
 export const site = {
   domain: "katanylen.com",

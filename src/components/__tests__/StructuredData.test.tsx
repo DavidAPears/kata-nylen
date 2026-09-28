@@ -7,7 +7,7 @@ import {
   BookJsonLd,
   EventJsonLd,
 } from "../StructuredData";
-import { person, book, launchEvent, isResolved } from "@/content/facts";
+import { person, book, launchEvent, isResolved, organisations } from "@/content/facts";
 import { getContent } from "@/content";
 
 /**
@@ -41,10 +41,17 @@ describe("PersonJsonLd", () => {
     for (const url of sameAs) expect(() => new URL(url)).not.toThrow();
   });
 
-  it("claims only the affiliations the brief supplied", () => {
+  it("claims only the affiliations Kata confirmed", () => {
+    // Derived rather than listed here. Hard-coding the names meant this test
+    // had to be edited every time she named another organisation, which makes
+    // it a chore rather than a guard. What matters is that the schema says
+    // exactly what the site says, with nothing invented on either side.
     const data = parse(render(<PersonJsonLd locale="sv" />))!;
     const names = (data.affiliation as { name: string }[]).map((a) => a.name);
-    expect(names).toEqual(["Klimatpsykologerna", "Climate Psyched"]);
+    expect(names).toEqual(organisations.map((o) => o.name));
+    for (const affiliation of data.affiliation as { url: string }[]) {
+      expect(() => new URL(affiliation.url)).not.toThrow();
+    }
   });
 
   it("emits valid JSON for both languages", () => {

@@ -8,6 +8,8 @@ import {
   resolved,
   bookTitlePlainFor,
   bookSubtitleFor,
+  organisations,
+  hostOf,
 } from "@/content/facts";
 import Image from "next/image";
 import { Link } from "@/i18n/navigation";
@@ -180,15 +182,30 @@ export default async function HomePage({
       </Section>
 
       {/* Collectives — link out, never duplicate their content (§9) */}
-      <Section ornament id="collective" heading={home.collective.heading}>
+      {/*
+        Names and links only. The detail on what each one is, and what Kata
+        does in it, lives on the About page; repeating it here would turn the
+        home page into a directory.
+
+        Derived from `organisations` rather than listed again in the content
+        files, which is where the old version had drifted: it still showed two
+        entries after Kata named three more.
+      */}
+      <Section ornament id="organisations" heading={home.organisations.heading}>
         <Prose>
-          <p>{home.collective.body}</p>
+          <p>{home.organisations.body}</p>
         </Prose>
         <ul className="mt-6 space-y-2">
-          {home.collective.links.map((link) => (
-            <li key={link.href}>
-              <ExternalAnchor href={link.href} description={link.description}>
-                {link.label}
+          {organisations.map((organisation) => (
+            <li key={organisation.id}>
+              <ExternalAnchor
+                href={organisation.url}
+                description={home.organisations.linkDescription.replace(
+                  "{site}",
+                  hostOf(organisation.url),
+                )}
+              >
+                {organisation.name}
               </ExternalAnchor>
             </li>
           ))}

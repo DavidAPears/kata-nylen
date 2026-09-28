@@ -7,7 +7,7 @@ import { getPathname, Link } from "@/i18n/navigation";
 import {
   person,
   publications,
-  collectives,
+  organisations,
   recognition,
   media,
   resolved,
@@ -26,7 +26,7 @@ import { TodoNote } from "@/components/TodoNote";
  * here is real and useful to a human, and the search value follows from that.
  *
  * Every claim is drawn from confirmed sources: the books and their publishers,
- * the collectives the brief supplied, and the content of the new book itself.
+ * the organisations Kata named, and the content of the new book itself.
  * Nothing asserts credentials, clients or standing that has not been verified
  * (brief §21.3, §11).
  */
@@ -188,14 +188,50 @@ export default async function AboutPage({
         </p>
       </Section>
 
-      <Section ornament id="collective" heading={copy.collectiveHeading} tone="sunken">
+      {/*
+        Kata asked for a heading that could hold all of these at once, because
+        SNAP is a programme rather than a collective of psychologists and the
+        old "Kollektivt arbete" quietly miscast it.
+
+        Each entry carries her role and a description, so the section answers
+        the question she actually asked: how these parts of her work relate.
+        Entries without a description render as a plain link rather than an
+        invented sentence.
+      */}
+      <Section
+        ornament
+        id="organisations"
+        heading={copy.organisationsHeading}
+        tone="sunken"
+      >
         <Prose>
-          <p>{copy.collectiveBody}</p>
+          <p>{copy.organisationsBody}</p>
         </Prose>
-        <ul className="mt-4 space-y-2">
-          {collectives.map((collective) => (
-            <li key={collective.id}>
-              <ExternalAnchor href={collective.url}>{collective.name}</ExternalAnchor>
+        <ul className="mt-8 max-w-2xl space-y-6">
+          {organisations.map((organisation) => (
+            <li
+              key={organisation.id}
+              className="border-t border-[var(--color-line)] pt-4"
+            >
+              <div className="flex flex-wrap items-baseline gap-x-3 gap-y-1">
+                <h3 className="text-lg">
+                  <ExternalAnchor href={organisation.url} underline={false}>
+                    <span className="underline-offset-4 hover:underline">
+                      {organisation.name}
+                    </span>
+                  </ExternalAnchor>
+                </h3>
+                {organisation.role ? (
+                  <span className="text-xs uppercase tracking-[0.12em] text-[var(--color-ink-muted)]">
+                    {organisation.role[locale]}
+                  </span>
+                ) : null}
+              </div>
+              {organisation.description ? (
+                <p className="mt-2 max-w-[var(--measure)] text-[var(--color-ink-muted)]">
+                  {organisation.description[locale]}
+                </p>
+              ) : null}
             </li>
           ))}
         </ul>

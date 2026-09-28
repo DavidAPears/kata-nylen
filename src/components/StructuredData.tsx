@@ -4,7 +4,7 @@ import {
   person,
   book,
   launchEvent,
-  collectives,
+  organisations,
   site,
   isResolved,
   resolved,
@@ -46,8 +46,8 @@ export function PersonJsonLd({ locale }: { locale: Locale }) {
     ...(description ? { description } : {}),
     ...(portrait ? { image: `${site.url}${portrait.src}` } : {}),
     ...(person.sameAs.length > 0 ? { sameAs: person.sameAs } : {}),
-    // Affiliations are confirmed (brief §1 supplied these URLs).
-    affiliation: collectives.map((c) => ({
+    // Affiliations are confirmed. Kata named these herself, 28 Sep 2026.
+    affiliation: organisations.map((c) => ({
       "@type": "Organization",
       name: c.name,
       url: c.url,

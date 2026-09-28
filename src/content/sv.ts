@@ -100,21 +100,10 @@ export const sv: SiteContent = {
       body: "Kata föreläser på konferenser, universitet, ledarskapsevent och inom offentlig sektor om klimatets psykologi, motståndskraft, beteende och förändring.",
       cta: { label: "Teman och förfrågningar", href: "/speaking" },
     },
-    collective: {
-      heading: "Kollektivt arbete",
-      body: "Vid sidan av sin egen praktik arbetar Kata i kollektiv av psykologer med fokus på klimat och hållbarhet. Deras arbete är fristående från den här sidan och fortsätter i egen rätt.",
-      links: [
-        {
-          label: "Klimatpsykologerna",
-          href: "https://www.klimatpsykologerna.se/",
-          description: "Öppnar klimatpsykologerna.se i en ny flik",
-        },
-        {
-          label: "Climate Psyched",
-          href: "https://www.climatepsyched.org/",
-          description: "Öppnar climatepsyched.org i en ny flik",
-        },
-      ],
+    organisations: {
+      heading: "Organisationer och program",
+      body: "Vid sidan av sin egen praktik arbetar Kata genom flera organisationer och program. Var och en har sitt eget fokus, men tråden är densamma: psykologin i att få förändring att faktiskt hända.",
+      linkDescription: "Öppnar {site} i en ny flik",
     },
   },
 
@@ -348,9 +337,9 @@ export const sv: SiteContent = {
     booksIntro:
       "{authored} egna böcker för Natur & Kultur och Studentlitteratur, om klimatpsykologi, resiliens, kognitiv beteendeterapi i socialt arbete och klimatmedveten undervisning, samt kapitel i antologier.",
     booksCta: { label: "Alla publikationer", href: "/publications" },
-    collectiveHeading: "Kollektivt arbete",
-    collectiveBody:
-      "Vid sidan av sin egen praktik arbetar Kata i kollektiv av psykologer med fokus på klimat och hållbarhet. Deras arbete är fristående från den här sidan och fortsätter i egen rätt.",
+    organisationsHeading: "Organisationer och program",
+    organisationsBody:
+      "Vid sidan av sin egen praktik arbetar Kata genom flera organisationer och program. Var och en har sitt eget fokus, men tråden är densamma: psykologin i att få förändring att faktiskt hända.",
     speakingHeading: "Föreläsningar",
     speakingBody:
       "Hon föreläser på konferenser, universitet, ledarskapsevent och inom offentlig sektor, och arbetar med organisationer kring motståndskraft, beteendeförändring och ledarskap i osäkerhet.",
@@ -455,7 +444,7 @@ export const sv: SiteContent = {
 
   footer: {
     contactHeading: "Kontakt",
-    collectiveHeading: "Kollektivt arbete",
+    organisationsHeading: "Organisationer",
     followHeading: "Andra platser",
     aboutLabel: "Om Kata",
     mediaLabel: "I medier",
