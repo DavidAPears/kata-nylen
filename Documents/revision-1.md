@@ -3,9 +3,9 @@
 Source: Kata's review of **katanylen.com/sv**, sent 28 Sep. She has reviewed
 the **Swedish only**. English is untouched and unverified by her.
 
-**Status: Group A is done** (branch `revision-one`, commit `b38023d`). Groups B,
-C and D are still a plan. Group C is blocked on material from Kata, listed in
-section 4.
+**Status, 28 Sep: Groups A, B and C are done** on branch `revision-one`. Kata
+supplied everything Group C was blocked on, so the only work left is Group D,
+the language and voice pass, plus the few open questions in section 4.
 
 Her framing, which should govern everything below:
 
@@ -74,24 +74,24 @@ ship in one pass.
 
 The real work. This is where the site's proposition changes.
 
-- [ ] **B1.** Professional introduction becomes **legitimerad psykolog och
+- [x] **B1.** Professional introduction becomes **legitimerad psykolog och
       specialist i organisationspsykologi, författare och föreläsare**. All
       four parts, wherever she is introduced.
-- [ ] **B2.** Fill `person.jobTitle` from B1. This is currently `TODO`, which
+- [x] **B2.** Fill `person.jobTitle` from B1. This is currently `TODO`, which
       means the Person structured data ships without a `jobTitle`. Filling it
       is a direct SEO gain, not just copy.
-- [ ] **B3.** Rewrite the homepage opening so it leads with helping
+- [x] **B3.** Rewrite the homepage opening so it leads with helping
       organisations turn knowledge, ambition and decisions into action.
       Keep the headline exactly as it is.
-- [ ] **B4.** Reorder Arbetsområden: organisationspsykologi /
+- [x] **B4.** Reorder Arbetsområden: organisationspsykologi /
       förändringsledning / organisationsutveckling first, then implementering,
       then resilience, behaviour change, climate psychology.
-- [ ] **B5.** Fold **Klimatkänslor** into climate psychology. Her instruction,
+- [x] **B5.** Fold **Klimatkänslor** into climate psychology. Her instruction,
       and it frees a slot so the section does not grow.
-- [ ] **B6.** Add **implementering** as an area, with the concrete examples she
+- [x] **B6.** Add **implementering** as an area, with the concrete examples she
       gave: SNAP in social services and schools; training and practical work on
       implementing evidence, methods and policy.
-- [ ] **B7.** Apply the same emphasis and ordering to the Speaking page, and
+- [x] **B7.** Apply the same emphasis and ordering to the Speaking page, and
       add concrete examples of talks, workshops and implementation training.
       **Needs material from her** — see section 4.
 
@@ -99,21 +99,21 @@ The real work. This is where the site's proposition changes.
 
 Genuinely new, and the largest risk to readability.
 
-- [ ] **C1.** Replace the "Collective work" model. Kata is explicit that SNAP is
+- [x] **C1.** Replace the "Collective work" model. Kata is explicit that SNAP is
       a programme and an area of her work, not a psychologist collective, and
       asks for a heading that accommodates all four connections. This is a data
       model change, not just a heading: `collectives` is typed as a flat list
       of peer organisations.
-- [ ] **C2.** Write the four connections, each short, each linked:
+- [x] **C2.** Write the four connections, each short, each linked:
       - **Kata Nylén** — her own practice: psychologist, author, speaker,
         facilitator, particularly organisational change and implementation
       - **SHIFT Collective** — organisational development and change leadership
       - **Klimatpsykologerna** — climate psychology
       - **SNAP** — implementation in social services and schools, linked to
         [snap.nu](https://snap.nu/)
-- [ ] **C3.** Give SNAP real coverage. She says the site "says very little
+- [x] **C3.** Give SNAP real coverage. She says the site "says very little
       about her work with SNAP, and that needs to change." **Needs material.**
-- [ ] **C4.** Add Dagens ETC (answering readers' questions) to Media.
+- [x] **C4.** Add Dagens ETC (answering readers' questions) to Media.
       **Needs the link.**
 
 ### Group D — Language and voice
@@ -134,9 +134,9 @@ Genuinely new, and the largest risk to readability.
 | C | New section, new data shape, new page content | High. Blocked on her material. |
 | D | Audit + English pass | Medium. Slow, not hard. |
 
-Group A can ship today without her. Group B can largely ship with what she has
-already written. Group C cannot start properly until she supplies SNAP and
-SHIFT material.
+All three shipped on 28 Sep. She answered the same day with SHIFT's URL, the
+Dagens ETC column, her SNAP role and its public pilots, six real speaking
+engagements and a short bio, which unblocked everything.
 
 **One structural note.** The area ids (`climate-psychology`,
 `organisational`, and so on) are shared across the home, speaking and about
@@ -146,25 +146,24 @@ safety feature rather than a cost.
 
 ---
 
-## 4. What we still need from her
+## 4. Still open
 
-Blocking Group C, and worth asking in one message rather than several.
+Items 1 to 6 of the original list are all answered and built. What remains:
 
-1. **SHIFT Collective URL.** Not supplied.
-2. **Dagens ETC link**, and one line describing the format.
-3. **SNAP material.** What her role actually is, what she has implemented,
-   where, and what can be said publicly. Right now we have a programme name and
-   a URL, which is not enough to write a section.
-4. **Concrete speaking examples** — a few real talks, workshops and
-   implementation trainings, with client names only where they have agreed.
-5. **Her open question, answered.** She asked whether implementation in social
-   work and schools needs its own area or works as an example of implementation.
-   My recommendation is in section 5.
-6. **Short bio.** Still `TODO` alongside the job title, and still one of the two
-   strongest fields in the Person schema.
-7. **Who edited "Vad håller ni på med?"** The Libris catalogue record names no
-   editors, and the other anthology on the site credits its three. Worth
-   crediting them if she knows, but not worth guessing.
+1. **Founder or co-founder of SHIFT Collective?** She wrote "I founded SHIFT
+   Collective", but her own bio says "medgrundare av Klimatpsykologerna, SNAP
+   Sverige och SHIFT Collective". Climate Psyched's team page says she "runs"
+   it. The site currently says co-founder, the more modest of the three,
+   because the difference matters to whoever else founded it.
+2. **Client names for the speaking examples.** She said the climate transition
+   workshop and the moderation work have been described publicly but she wants
+   to approve any names first. The examples run without them for now.
+3. **The English.** Her bio, the SNAP description and the new areas of work are
+   all our translations of her Swedish. She has not read any of it.
+4. **Who edited "Vad håller ni på med?"** The Libris record names no editors,
+   and the other anthology on the site credits its three.
+5. **The book synopsis.** The last unconfirmed fact in `facts.ts`: it is Natur
+   & Kultur's own copy and still needs their sign-off.
 
 ---
 
