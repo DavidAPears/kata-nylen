@@ -3,9 +3,10 @@
 Source: Kata's review of **katanylen.com/sv**, sent 28 Sep. She has reviewed
 the **Swedish only**. English is untouched and unverified by her.
 
-**Status, 28 Sep: Groups A, B and C are done** on branch `revision-one`. Kata
-supplied everything Group C was blocked on, so the only work left is Group D,
-the language and voice pass, plus the few open questions in section 4.
+**Status, 28 Sep: Groups A, B, C and D1 are done** on branch `revision-one`,
+pushed. Kata supplied everything Group C was blocked on the same day. What is
+left is D2, the English, which needs her eyes rather than ours, and the open
+questions in section 4.
 
 Her framing, which should govern everything below:
 
@@ -118,8 +119,12 @@ Genuinely new, and the largest risk to readability.
 
 ### Group D — Language and voice
 
-- [ ] **D1.** Audit "Kata / hon" versus "vi" across the site, especially around
-      the contact form. Decide one rule and apply it.
+- [x] **D1.** Audit "Kata / hon" versus "vi". Rule set and applied: whoever
+      reads, replies or acts is named ("Kata återkommer"); data handling and
+      system failures are impersonal ("Dina uppgifter används endast för...").
+      The rule is written into `types.ts` beside the form copy and guarded by a
+      test. One "vi" survives on purpose, in the launch invitation, where an
+      event genuinely has hosts and the reader is one of the people counted.
 - [ ] **D2.** Once Swedish is settled, bring English into line. The type system
       guarantees English *exists*, not that it is *good*.
 
