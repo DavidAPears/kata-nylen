@@ -165,7 +165,15 @@ export type SpeakingContent = {
   examples: {
     heading: string;
     intro: string;
-    items: { id: string; format: string; description: string }[];
+    /** `label` is the theme of the work, not its format. Kata's examples do
+     *  not map onto keynote/workshop/training cleanly, and the client named in
+     *  the body is what a booker is actually scanning for. */
+    items: { id: string; label: string; description: string }[];
+    /** Heading for the run of client names below the examples. */
+    furtherHeading: string;
+    /** Follows the client names. Deliberately unspecific about which EU and UN
+     *  bodies: Kata's call, and anyone curious can ask. */
+    furtherNote: string;
   };
   credibility: {
     heading: string;

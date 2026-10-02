@@ -4,7 +4,7 @@ import type { Locale } from "@/i18n/routing";
 import { getContent } from "@/content";
 import { getPathname, Link } from "@/i18n/navigation";
 import { Container, Section, Prose, ExternalAnchor } from "@/components/primitives";
-import { recognition, speakingCredentials } from "@/content/facts";
+import { recognition, speakingCredentials, furtherClients } from "@/content/facts";
 
 export async function generateMetadata({
   params,
@@ -100,11 +100,41 @@ export default async function SpeakingPage({
         <ul className="mt-8 grid max-w-3xl gap-6 sm:grid-cols-2">
           {speaking.examples.items.map((item) => (
             <li key={item.id} className="border-t border-[var(--color-line)] pt-4">
-              <p className={LABEL}>{item.format}</p>
+              <p className={LABEL}>{item.label}</p>
               <p className="mt-1 text-[var(--color-ink-muted)]">{item.description}</p>
             </li>
           ))}
         </ul>
+
+        {/*
+          The rest of the client list, as names rather than logos.
+
+          Deliberately not logos: Kata approved being named, which is not the
+          same as licensing anyone's trademark, several of these are public
+          bodies with strict identity rules, and a political party's logo would
+          read as alignment rather than as a piece of paid work. Names set in
+          the site's own type also age better than a wall of mismatched marks.
+        */}
+        <div className="mt-12 max-w-3xl border-t border-[var(--color-line)] pt-6">
+          <h3 className={LABEL}>{speaking.examples.furtherHeading}</h3>
+          {/*
+            Commas rather than middle dots. A dot sits in its own box, so when
+            the row wraps the separator lands at the start of the next line and
+            several lines began with a stray mark. A comma is part of the name
+            before it and always breaks in the right place.
+          */}
+          <ul className="mt-3 flex flex-wrap gap-x-1.5 gap-y-1 text-[var(--color-ink-muted)]">
+            {furtherClients.map((client, index) => (
+              <li key={client.id}>
+                {client.name[locale]}
+                {index < furtherClients.length - 1 ? "," : null}
+              </li>
+            ))}
+          </ul>
+          <p className="mt-3 text-sm text-[var(--color-ink-muted)]">
+            {speaking.examples.furtherNote}
+          </p>
+        </div>
       </Section>
 
       {/*

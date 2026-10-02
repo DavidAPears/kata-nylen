@@ -833,6 +833,39 @@ export function hostOf(url: string): string {
   }
 }
 
+/**
+ * Organisations Kata has worked for, beyond the ones already named in the
+ * speaking examples. Supplied by her on 2 Oct 2026 for use on the site, which
+ * is the approval the examples section was previously waiting on.
+ *
+ * Both languages sit on one record on purpose. Several of these are Swedish
+ * public bodies whose English names are translations rather than the same
+ * word, so holding them as two separate lists in sv.ts and en.ts would let one
+ * quietly lose a client that the other still shows.
+ *
+ * Deliberately excludes Svenska kyrkan, PacsOn, AddLife, SPP, Musikverket,
+ * Moderna Museet and Rädda Barnen: those are named in the examples above this
+ * list, and repeating them would read as padding.
+ */
+export type Client = { id: string; name: { sv: string; en: string } };
+
+export const furtherClients: Client[] = [
+  { id: "naturvardsverket", name: { sv: "Naturvårdsverket", en: "Swedish Environmental Protection Agency" } },
+  { id: "trafikverket", name: { sv: "Trafikverket", en: "Swedish Transport Administration" } },
+  { id: "energimyndigheten", name: { sv: "Energimyndigheten", en: "Swedish Energy Agency" } },
+  { id: "skr", name: { sv: "SKR", en: "Swedish Association of Local Authorities and Regions" } },
+  { id: "lansstyrelser", name: { sv: "Länsstyrelser", en: "County administrative boards" } },
+  { id: "borlange", name: { sv: "Borlänge kommun", en: "Borlänge Municipality" } },
+  { id: "naturskyddsforeningen", name: { sv: "Naturskyddsföreningen", en: "Swedish Society for Nature Conservation" } },
+  { id: "live-green", name: { sv: "Live Green", en: "Live Green" } },
+  /* A political party. Kata named it herself and is content for it to appear:
+     her politics are not separable from the climate work. Listed as a client,
+     which is what it is, and never with a logo, which would read as alignment
+     rather than as a piece of work she was paid to do. */
+  { id: "miljopartiet", name: { sv: "Miljöpartiet", en: "Swedish Green Party" } },
+  { id: "science-park-boras", name: { sv: "Science Park Borås", en: "Science Park Borås" } },
+];
+
 /** §1 / §9: the organisations Kata works through. These URLs are confirmed. */
 export type Organisation = {
   id: string;

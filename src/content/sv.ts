@@ -232,45 +232,41 @@ export const sv: SiteContent = {
     examples: {
       heading: "Exempel på uppdrag",
       intro:
-        "Genomförda uppdrag, beskrivna utan uppdragsgivare. Namn läggs till först när de är godkända.",
+        "Ett urval av uppdrag inom näringsliv, offentlig sektor och civilsamhälle.",
       items: [
         {
-          id: "change-workshop",
-          format: "Workshop",
+          id: "svenska-kyrkan",
+          label: "Förändringsledning i praktiken",
           description:
-            "Förändringsledning och omställning: varför det inte räcker att veta vad som behöver förändras, och hur organisationer kan arbeta med de hinder de möter.",
+            "Arbetat tillsammans med förändringsledare inom Svenska kyrkan för att omsätta Färdplan för klimatet i praktiken i stift och församlingar, med fokus på att leda förändring och skapa engagemang.",
         },
         {
-          id: "sustainability-behaviour",
-          format: "Föreläsning",
+          id: "ledarskap",
+          label: "Ledarskap och förändringsledning",
           description:
-            "Från hållbarhetsambitioner till faktisk beteendeförändring i en organisation.",
+            "Utbildat företagsledare i förändringsledning, bland annat på PacsOn och AddLife, med fokus på hur ledare kan skapa förutsättningar för förändring och omsätta ambitioner i konkret handling.",
         },
         {
-          id: "data-for-decisions",
-          format: "Interaktivt pass",
+          id: "spp",
+          label: "Hållbarhet i kunddialogen",
           description:
-            "Att använda data för beslut, inklusive vad som händer när evidensen utmanar våra antaganden, och hur man tar sig från insikt till handling.",
+            "Stöttat och tränat säljare och kommunikatörer på SPP i att lyfta hållbarhet i kunddialogen och kommunicera företagets hållbarhetsarbete. Uppdraget kombinerade kommunikationsträning med stöd för att utveckla nya arbetssätt.",
         },
         {
-          id: "implementation-training",
-          format: "Utbildning",
+          id: "kultur",
+          label: "Kultur och hållbarhet",
           description:
-            "Att implementera evidensbaserade metoder: analysera kontexten, välja implementeringsstrategier och stödja förändring i det dagliga arbetet.",
+            "Arbetat med myndigheter som Musikverket och Moderna Museet för att utveckla deras hållbarhetsarbete och utforska hur konst, musik och scenkonst kan bidra till samhällsomställningen.",
         },
         {
-          id: "resilience-collective",
-          format: "Föreläsning och workshop",
+          id: "radda-barnen",
+          label: "Socialt och psykosocialt arbete",
           description:
-            "Psykologisk resiliens, kollektiv förmåga och att handla tillsammans i osäkerhet.",
-        },
-        {
-          id: "moderation",
-          format: "Moderering",
-          description:
-            "Konferenser om till exempel kulturens roll i samhällsomställningen, hållbar turism och miljöval i nybyggnation.",
+            "Hållit föreläsningar för Rädda Barnen och stöttat utveckling och implementering av program och modeller inom socialt och psykosocialt arbete.",
         },
       ],
+      furtherHeading: "Fler uppdragsgivare",
+      furtherNote: "Därtill föreläsningar för organ inom EU och FN.",
     },
     credibility: {
       heading: "Bakgrund",

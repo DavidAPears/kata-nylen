@@ -231,45 +231,41 @@ export const en: SiteContent = {
     examples: {
       heading: "Examples of engagements",
       intro:
-        "Sessions Kata has delivered, described without the client. Names are added only once they are approved.",
+        "A selection of work across business, the public sector and civil society.",
       items: [
         {
-          id: "change-workshop",
-          format: "Workshop",
+          id: "svenska-kyrkan",
+          label: "Change leadership in practice",
           description:
-            "Change management and transition: why knowing what needs to change does not by itself lead to action, and how organisations can work with the barriers they meet.",
+            "Worked with change leaders within the Church of Sweden to put its climate roadmap into practice across dioceses and parishes, focusing on leading change and building engagement.",
         },
         {
-          id: "sustainability-behaviour",
-          format: "Talk",
+          id: "ledarskap",
+          label: "Leadership and change management",
           description:
-            "Moving from sustainability ambitions to actual behavioural change inside an organisation.",
+            "Delivered change management training for business leaders, including at PacsOn and AddLife, focusing on how leaders can create the conditions for change and turn ambitions into practical action.",
         },
         {
-          id: "data-for-decisions",
-          format: "Interactive session",
+          id: "spp",
+          label: "Sustainability in customer conversations",
           description:
-            "Using data for decisions, including what happens when the evidence challenges our assumptions, and how to get from insight to action.",
+            "Supported and trained sales and communications teams at SPP to bring sustainability into customer conversations and communicate the company's sustainability work. The assignment combined communication skills training with support for developing new ways of working.",
         },
         {
-          id: "implementation-training",
-          format: "Training",
+          id: "kultur",
+          label: "Culture and sustainability",
           description:
-            "Implementing evidence-based methods: analysing the context, choosing implementation strategies and supporting change in everyday practice.",
+            "Worked with public institutions including Musikverket and Moderna Museet to develop their sustainability work and explore how art, music and the performing arts can contribute to societal change.",
         },
         {
-          id: "resilience-collective",
-          format: "Talk and workshop",
+          id: "radda-barnen",
+          label: "Social and psychosocial practice",
           description:
-            "Psychological resilience, collective capacity and acting together during uncertainty.",
-        },
-        {
-          id: "moderation",
-          format: "Moderation",
-          description:
-            "Conferences on subjects such as the role of culture in societal transition, sustainable tourism, and environmental choices in new construction.",
+            "Delivered talks for Save the Children Sweden and supported the development and implementation of programmes and models for social and psychosocial practice.",
         },
       ],
+      furtherHeading: "Clients also include",
+      furtherNote: "Plus talks for bodies within the EU and the UN.",
     },
     credibility: {
       heading: "Background",
