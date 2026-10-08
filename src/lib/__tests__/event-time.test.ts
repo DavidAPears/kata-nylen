@@ -25,7 +25,10 @@ const record: RsvpRecord = {
   email: "gast@example.com",
   guests: 0,
   marketingConsent: false,
+  // The honeypot, always empty for a real person.
+  website: "",
   submittedAt: "2026-10-08T12:00:00.000Z",
+  dedupeKey: "gast@example.com",
 };
 
 describe("eventDateTime", () => {
