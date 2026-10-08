@@ -1,5 +1,6 @@
 import type { RsvpRecord } from "../rsvp-store";
 import { getCalendarEvent } from "../ics";
+import { eventDateTime } from "../event-time";
 import type { Locale } from "@/i18n/routing";
 
 /**
@@ -16,7 +17,7 @@ export function attendeeConfirmation(record: RsvpRecord, locale: Locale) {
         "",
         locale === "sv" ? "Detaljer:" : "Details:",
         `  ${event.title}`,
-        `  ${new Date(event.startsAt).toLocaleString(locale === "sv" ? "sv-SE" : "en-GB")}`,
+        `  ${eventDateTime(event.startsAt, locale)}`,
         `  ${event.location}`,
         "",
         event.url,
