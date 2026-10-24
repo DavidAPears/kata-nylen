@@ -23,6 +23,8 @@ export type RsvpRecord = RsvpInput & {
 export type SaveResult =
   | { status: "saved" }
   | { status: "duplicate" }
+  /** The guest list is full. Recorded on the waiting list instead. */
+  | { status: "waitlisted" }
   | { status: "full" }
   /** The store failed. The RSVP is still honoured — see `saveRsvp` below. */
   | { status: "error"; reason: string };

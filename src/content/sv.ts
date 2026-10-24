@@ -486,6 +486,9 @@ export const sv: SiteContent = {
       rsvpHeading: "Du står på listan.",
       rsvpBody:
         "En bekräftelse har skickats till din e-postadress med detaljerna för kvällen.",
+      waitlistHeading: "Du står på väntelistan.",
+      waitlistBody:
+        "Kvällen är fullbokad, så din anmälan har lagts till väntelistan. Om en plats blir ledig får du ett mejl.",
       contactHeading: "Tack. Ditt meddelande är på väg.",
       contactBody: "Kata återkommer så snart hon kan.",
     },

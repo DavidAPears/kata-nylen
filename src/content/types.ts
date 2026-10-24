@@ -289,6 +289,17 @@ export type FormsContent = {
   success: {
     rsvpHeading: string;
     rsvpBody: string;
+    /**
+     * Shown instead of the confirmation once the guest list is full.
+     *
+     * The form itself is unchanged, so this is where someone finds out. It
+     * has to match what the email says, word for word in substance: a page
+     * saying "you're on the list" beside an email saying "waiting list" is
+     * the same class of mistake as the invitation and the confirmation
+     * disagreeing about the hour.
+     */
+    waitlistHeading: string;
+    waitlistBody: string;
     contactHeading: string;
     contactBody: string;
   };

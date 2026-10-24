@@ -241,3 +241,60 @@ describe("POST /api/rsvp", () => {
     expect(saved).toHaveLength(1);
   });
 });
+
+describe("POST /api/rsvp: the waiting list", () => {
+  beforeEach(() => {
+    resetRateLimits();
+    resetRsvpStore();
+    sendEmailMock.mockClear();
+    sendEmailMock.mockResolvedValue({ sent: true });
+    setRsvpStore({
+      name: "waitlisting",
+      durable: true,
+      async save() {
+        return { status: "waitlisted" };
+      },
+    });
+  });
+
+  it("is a success, not an error", async () => {
+    /*
+      The person did everything right and is recorded. The form they filled in
+      is the same one that was taking bookings yesterday, so failing the
+      request would be both rude and wrong: nothing went wrong.
+    */
+    const response = await post(valid);
+    expect(response.status).toBe(200);
+    await expect(response.json()).resolves.toMatchObject({
+      ok: true,
+      waitlisted: true,
+    });
+  });
+
+  it("tells the guest they are on the waiting list, not that they have a place", async () => {
+    await post({ ...valid, locale: "sv" });
+    const toGuest = sendEmailMock.mock.calls
+      .map(([message]) => message)
+      .find((message) => message.to === valid.email)!;
+    expect(toGuest).toBeDefined();
+    expect(toGuest.subject).toMatch(/väntelistan/i);
+    expect(toGuest.text).toMatch(/fullbokad/i);
+    // The confirmation wording must not survive into the waiting-list email.
+    expect(toGuest.text).not.toMatch(/Du står på listan/i);
+  });
+
+  it("flags it for Kata, so the two lists are not confused in her inbox", async () => {
+    await post(valid);
+    const toOrganiser = sendEmailMock.mock.calls
+      .map(([message]) => message)
+      .find((message) => message.to === "organiser@example.com")!;
+    expect(toOrganiser).toBeDefined();
+    expect(toOrganiser.subject).toMatch(/waiting list/i);
+  });
+
+  it("still confirms properly when the list is not full", async () => {
+    resetRsvpStore();
+    const response = await post(valid);
+    await expect(response.json()).resolves.toMatchObject({ waitlisted: false });
+  });
+});

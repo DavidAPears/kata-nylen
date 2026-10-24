@@ -215,3 +215,69 @@ describe("privacy wording", () => {
     expect(screen.getByText(sv.forms.privacyNotice.rsvp)).toBeInTheDocument();
   });
 });
+
+describe("the waiting list", () => {
+  it("says waiting list, not confirmed, and offers no calendar", async () => {
+    /*
+      The page and the email have to agree. A panel saying "You're on the
+      list" beside an email saying "waiting list" is the same class of
+      mistake as the invitation and the confirmation disagreeing about the
+      hour, which a guest caught in production.
+    */
+    mockFetch({ ok: true, waitlisted: true });
+    renderForm({ calendar: { icsHref: "/api/calendar", googleHref: "https://cal" } });
+
+    await userEvent.type(screen.getByLabelText(en.forms.fields.name), "Guest");
+    await userEvent.type(screen.getByLabelText(en.forms.fields.email), "guest@example.com");
+    await userEvent.click(screen.getByRole("button", { name: en.forms.submit.rsvp }));
+
+    await waitFor(() => {
+      expect(screen.getByText(en.forms.success.waitlistHeading)).toBeInTheDocument();
+    });
+    expect(screen.getByText(en.forms.success.waitlistBody)).toBeInTheDocument();
+    expect(screen.queryByText(`✓ ${en.forms.success.rsvpHeading}`)).toBeNull();
+  });
+
+  it("offers the waiting-list calendar entry, not the guest one", async () => {
+    /*
+      The entry is labelled "(waiting list)" and says there is no place yet, so
+      it cannot be read as an invitation. What must never happen is the
+      confirmed entry being handed to someone on the waiting list.
+    */
+    mockFetch({ ok: true, waitlisted: true });
+    renderForm({
+      calendar: { icsHref: "/api/calendar?locale=en", googleHref: "https://cal/confirmed" },
+      waitlistCalendar: {
+        icsHref: "/api/calendar?locale=en&waitlist=1",
+        googleHref: "https://cal/waiting",
+      },
+    });
+
+    await userEvent.type(screen.getByLabelText(en.forms.fields.name), "Guest");
+    await userEvent.type(screen.getByLabelText(en.forms.fields.email), "guest@example.com");
+    await userEvent.click(screen.getByRole("button", { name: en.forms.submit.rsvp }));
+
+    await waitFor(() => {
+      expect(screen.getByText(en.forms.success.waitlistHeading)).toBeInTheDocument();
+    });
+    const ics = screen.getByText(en.bookRelease.rsvp.downloadIcsLabel).closest("a")!;
+    expect(ics).toHaveAttribute("href", "/api/calendar?locale=en&waitlist=1");
+    expect(screen.queryByText("https://cal/confirmed")).toBeNull();
+  });
+
+  it("still confirms and offers the calendar when a place was reserved", async () => {
+    mockFetch({ ok: true, waitlisted: false });
+    renderForm({ calendar: { icsHref: "/api/calendar", googleHref: "https://cal" } });
+
+    await userEvent.type(screen.getByLabelText(en.forms.fields.name), "Guest");
+    await userEvent.type(screen.getByLabelText(en.forms.fields.email), "guest@example.com");
+    await userEvent.click(screen.getByRole("button", { name: en.forms.submit.rsvp }));
+
+    await waitFor(() => {
+      expect(
+        screen.getByText(`✓ ${en.forms.success.rsvpHeading}`),
+      ).toBeInTheDocument();
+    });
+    expect(screen.getByText(en.bookRelease.rsvp.addToCalendarLabel)).toBeInTheDocument();
+  });
+});

@@ -115,10 +115,19 @@ export default async function BookReleasePage({
 
   const cover = resolved(book.cover);
   const calendarEvent = getCalendarEvent(locale);
+  const waitlistEvent = getCalendarEvent(locale, { waitlist: true });
   const calendar = calendarEvent
     ? {
         icsHref: `/api/calendar?locale=${locale}`,
         googleHref: googleCalendarUrl(calendarEvent),
+      }
+    : null;
+  /* Same evening, labelled as a waiting-list entry. The form picks whichever
+     matches what actually happened to the submission. */
+  const waitlistCalendar = waitlistEvent
+    ? {
+        icsHref: `/api/calendar?locale=${locale}&waitlist=1`,
+        googleHref: googleCalendarUrl(waitlistEvent),
       }
     : null;
 
@@ -517,6 +526,7 @@ export default async function BookReleasePage({
             guestsAllowed={guestsAllowed}
             maxGuests={launchEvent.maxPlacesPerRsvp}
             calendar={calendar}
+            waitlistCalendar={waitlistCalendar}
           />
         </div>
         {!isResolved(launchEvent.guestsAllowed) ? (

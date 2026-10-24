@@ -12,7 +12,12 @@ const config: SheetsConfig = {
   clientEmail: "svc@project.iam.gserviceaccount.com",
   privateKey: "-----BEGIN PRIVATE KEY-----\nfake\n-----END PRIVATE KEY-----",
   tabName: "RSVPs",
+  waitlistTabName: "Waiting list",
+  waitingList: false,
 };
+
+/** The encoded form a tab name takes inside a Sheets A1 range URL. */
+const tabRange = (tabName: string) => encodeURIComponent(`'${tabName}'`);
 
 const record: RsvpRecord = {
   name: "Guest",
@@ -30,14 +35,22 @@ const record: RsvpRecord = {
  */
 function fakeSheets({
   existing = [] as [string, number][],
+  waiting = [] as [string, number][],
+  tabs = ["RSVPs", "Waiting list"],
   headers = SHEET_HEADERS as readonly string[],
   failOn,
 }: {
   existing?: [string, number][];
+  /** Rows already on the waiting-list tab. */
+  waiting?: [string, number][];
+  /** Tabs the spreadsheet currently has, so a missing one can be tested. */
+  tabs?: string[];
   headers?: readonly string[] | null;
   failOn?: (url: string) => { status: number; body: string } | undefined;
 } = {}) {
   const calls: { url: string; method: string; body?: unknown }[] = [];
+  // Tabs the spreadsheet has, which grows when addSheet creates one.
+  const live = [...tabs];
 
   const fetchFn = vi.fn(async (url: string | URL | Request, init?: RequestInit) => {
     const href = String(url);
@@ -53,13 +66,34 @@ function fakeSheets({
       return new Response(failure.body, { status: failure.status });
     }
 
+    // A range naming a tab that does not exist is a 400, exactly as Sheets
+    // responds. This is how a missing tab is discovered.
+    if (href.includes(":batchUpdate")) {
+      const requests = (init?.body ? JSON.parse(init.body as string) : {}) as {
+        requests?: { addSheet?: { properties?: { title?: string } } }[];
+      };
+      for (const request of requests.requests ?? []) {
+        const title = request.addSheet?.properties?.title;
+        if (title) live.push(title);
+      }
+      return Response.json({});
+    }
+
+    const named = live.find((title) => href.includes(tabRange(title)));
+    if (href.includes("values/") && !named) {
+      return new Response(
+        JSON.stringify({ error: { message: "Unable to parse range" } }),
+        { status: 400 },
+      );
+    }
     // Header probe (A1:E1)
     if (method === "GET" && href.includes("A1%3AE1")) {
       return Response.json(headers ? { values: [headers] } : {});
     }
-    // Existing rows probe (C2:D)
+    // Existing rows probe (C2:D), per tab.
     if (method === "GET" && href.includes("C2%3AD")) {
-      return Response.json({ values: existing.map(([e, g]) => [e, String(g)]) });
+      const rows = href.includes(tabRange("Waiting list")) ? waiting : existing;
+      return Response.json({ values: rows.map(([e, g]) => [e, String(g)]) });
     }
     return Response.json({});
   }) as unknown as typeof fetch;
@@ -163,10 +197,12 @@ describe("createSheetsStore", () => {
       await expect(store.save(record)).resolves.toEqual({ status: "saved" });
     });
 
-    it("refuses an RSVP that would exceed capacity", async () => {
+    it("waitlists an RSVP that would exceed capacity", async () => {
+      // Being over capacity is no longer a refusal. The place is gone, but
+      // the person is recorded, which is the whole point of a waiting list.
       const { fetchFn } = fakeSheets({ existing: [["a@example.com", 40]] });
       const store = createSheetsStore(capped, { fetchFn, getToken });
-      await expect(store.save(record)).resolves.toEqual({ status: "full" });
+      await expect(store.save(record)).resolves.toEqual({ status: "waitlisted" });
     });
 
     it("counts guests, not rows", async () => {
@@ -176,7 +212,7 @@ describe("createSheetsStore", () => {
       const store = createSheetsStore(capped, { fetchFn, getToken });
       // 39 existing + 2 requested = 41 > 40
       await expect(store.save({ ...record, guests: 2 })).resolves.toEqual({
-        status: "full",
+        status: "waitlisted",
       });
     });
 
@@ -202,14 +238,111 @@ describe("createSheetsStore", () => {
     await expect(store.save(record)).rejects.toThrow(/caller lacks permission/);
   });
 
+
+  describe("the waiting list", () => {
+    const waitlisting: SheetsConfig = { ...config, waitingList: true };
+
+    it("writes to the waiting-list tab, not the guest list", async () => {
+      const { fetchFn, calls } = fakeSheets();
+      const store = createSheetsStore(waitlisting, { fetchFn, getToken });
+
+      await expect(store.save(record)).resolves.toEqual({ status: "waitlisted" });
+
+      const appends = calls.filter((c) => c.url.includes(":append"));
+      expect(appends).toHaveLength(1);
+      expect(appends[0].url).toContain(encodeURIComponent("'Waiting list'"));
+      expect(appends[0].url).not.toContain(encodeURIComponent("'RSVPs'"));
+    });
+
+    it("still confirms someone who already holds a place", async () => {
+      /*
+        The outcome worse than doing nothing: a confirmed guest submits again,
+        and we quietly move them off the guest list and onto the waiting list.
+        They stay a duplicate, and nothing is written anywhere.
+      */
+      const { fetchFn, calls } = fakeSheets({ existing: [["guest@example.com", 1]] });
+      const store = createSheetsStore(waitlisting, { fetchFn, getToken });
+
+      await expect(store.save(record)).resolves.toEqual({ status: "duplicate" });
+      expect(calls.filter((c) => c.url.includes(":append"))).toHaveLength(0);
+    });
+
+    it("does not add the same person to the waiting list twice", async () => {
+      const { fetchFn, calls } = fakeSheets({ waiting: [["guest@example.com", 1]] });
+      const store = createSheetsStore(waitlisting, { fetchFn, getToken });
+
+      await expect(store.save(record)).resolves.toEqual({ status: "duplicate" });
+      expect(calls.filter((c) => c.url.includes(":append"))).toHaveLength(0);
+    });
+
+    it("addresses batchUpdate without a slash, as the API requires", async () => {
+      // ".../{id}/:batchUpdate" 404s. It would have failed only the first time
+      // the waiting list needed its tab, and the store swallows its own errors,
+      // so the guest would have seen a confirmation and the row gone nowhere.
+      const { fetchFn, calls } = fakeSheets({ tabs: ["RSVPs"] });
+      const store = createSheetsStore(waitlisting, { fetchFn, getToken });
+      await store.save(record);
+
+      const batch = calls.find((c) => c.url.includes("batchUpdate"))!;
+      expect(batch).toBeDefined();
+      expect(batch.url).toContain("sheet-123:batchUpdate");
+      expect(batch.url).not.toContain("sheet-123/:batchUpdate");
+    });
+
+    it("creates the waiting-list tab when the spreadsheet has none", async () => {
+      // Otherwise this needs a tab added by hand with exactly the right name,
+      // and a typo fails silently: the guest sees a confirmation and the row
+      // goes nowhere.
+      const { fetchFn, calls } = fakeSheets({ tabs: ["RSVPs"] });
+      const store = createSheetsStore(waitlisting, { fetchFn, getToken });
+
+      await expect(store.save(record)).resolves.toEqual({ status: "waitlisted" });
+
+      const created = calls.find((c) => c.url.includes(":batchUpdate"));
+      expect(created, "the waiting-list tab was never created").toBeDefined();
+      expect(JSON.stringify(created!.body)).toContain("Waiting list");
+    });
+
+    it("costs no extra request when the tabs are already there", async () => {
+      /*
+        Creating the tab used to mean listing every tab in the spreadsheet
+        before each save, an extra Google round trip to answer a question
+        whose answer is almost always yes. It pushed the endpoint past five
+        seconds often enough for the browser test to catch it.
+      */
+      const { fetchFn, calls } = fakeSheets();
+      const store = createSheetsStore(config, { fetchFn, getToken });
+      await store.save(record);
+      expect(calls.filter((c) => c.method === "GET")).toHaveLength(2);
+    });
+
+    it("does not recreate a tab that already exists", async () => {
+      const { fetchFn, calls } = fakeSheets({ tabs: ["RSVPs", "Waiting list"] });
+      const store = createSheetsStore(waitlisting, { fetchFn, getToken });
+      await store.save(record);
+      expect(calls.find((c) => c.url.includes(":batchUpdate"))).toBeUndefined();
+    });
+
+    it("leaves the guest list alone when waiting-list mode is off", async () => {
+      const { fetchFn, calls } = fakeSheets();
+      const store = createSheetsStore(config, { fetchFn, getToken });
+      await expect(store.save(record)).resolves.toEqual({ status: "saved" });
+      const appends = calls.filter((c) => c.url.includes(":append"));
+      expect(appends[0].url).toContain(encodeURIComponent("'RSVPs'"));
+    });
+  });
+
   it("quotes the tab name so names with spaces work", async () => {
-    const { fetchFn, calls } = fakeSheets();
+    const { fetchFn, calls } = fakeSheets({ tabs: ["Book launch RSVPs"] });
     const store = createSheetsStore(
       { ...config, tabName: "Book launch RSVPs" },
       { fetchFn, getToken },
     );
     await store.save(record);
-    expect(calls[0].url).toContain(encodeURIComponent("'Book launch RSVPs'!"));
+    // Not calls[0]: the first request now lists the tabs, so that a missing
+    // one can be created before anything is written to it.
+    const ranged = calls.find((c) => c.url.includes(encodeURIComponent("'Book launch RSVPs'")));
+    expect(ranged, "no call addressed the configured tab").toBeDefined();
   });
 });
 

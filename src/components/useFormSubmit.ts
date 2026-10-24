@@ -15,6 +15,8 @@ export function useFormSubmit(endpoint: string, forms: FormsContent) {
   const [state, setState] = useState<State>("idle");
   const [fieldErrors, setFieldErrors] = useState<Record<string, string>>({});
   const [formError, setFormError] = useState<string | null>(null);
+  /** The RSVP succeeded, but onto the waiting list rather than the guest list. */
+  const [waitlisted, setWaitlisted] = useState(false);
 
   const errorText = (code: string): string =>
     forms.errors[code as keyof typeof forms.errors] as string | undefined ??
@@ -35,10 +37,12 @@ export function useFormSubmit(endpoint: string, forms: FormsContent) {
       const data = (await response.json().catch(() => ({}))) as {
         ok?: boolean;
         error?: string;
+        waitlisted?: boolean;
         fieldErrors?: Record<string, string>;
       };
 
       if (response.ok && data.ok) {
+        setWaitlisted(Boolean(data.waitlisted));
         setState("success");
         return true;
       }
@@ -69,5 +73,6 @@ export function useFormSubmit(endpoint: string, forms: FormsContent) {
     submit,
     isSubmitting: state === "submitting",
     isSuccess: state === "success",
+    waitlisted,
   };
 }

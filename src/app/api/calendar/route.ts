@@ -11,7 +11,10 @@ export async function GET(request: Request) {
     ? (requested as Locale)
     : defaultLocale;
 
-  const event = getCalendarEvent(locale);
+  // The waiting-list variant is the same evening, labelled so it cannot be
+  // mistaken for a place. See getCalendarEvent.
+  const waitlist = url.searchParams.get("waitlist") === "1";
+  const event = getCalendarEvent(locale, { waitlist });
   if (!event) {
     // Event details are not confirmed yet — never emit a calendar entry
     // containing invented dates (brief §21.3).
@@ -21,7 +24,9 @@ export async function GET(request: Request) {
   return new Response(buildIcs(event), {
     headers: {
       "Content-Type": "text/calendar; charset=utf-8",
-      "Content-Disposition": 'attachment; filename="kata-nylen-book-release.ics"',
+      "Content-Disposition": `attachment; filename="kata-nylen-book-release${
+        waitlist ? "-waiting-list" : ""
+      }.ics"`,
       "Cache-Control": "public, max-age=3600",
     },
   });

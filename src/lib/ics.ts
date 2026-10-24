@@ -40,13 +40,29 @@ export type CalendarEvent = {
   url: string;
 };
 
-/** Returns the event only when the real details are confirmed (brief §21.3). */
-export function getCalendarEvent(locale: "sv" | "en"): CalendarEvent | null {
+/**
+ * Returns the event only when the real details are confirmed (brief §21.3).
+ *
+ * `waitlist` produces an entry for someone who applied after the evening sold
+ * out. It is the same date and place, labelled so it cannot be mistaken for a
+ * place: the title carries "(väntelista)" and the description says outright
+ * that they do not have one. Someone who turns up anyway has read past two
+ * explicit statements.
+ *
+ * Giving them an entry at all is deliberate. They wanted to come, the evening
+ * stays in their diary, and a calendar that says "waiting list" is a truer
+ * record of where they stand than nothing at all.
+ */
+export function getCalendarEvent(
+  locale: "sv" | "en",
+  options: { waitlist?: boolean } = {},
+): CalendarEvent | null {
   if (!isResolved(launchEvent.startsAt) || !isResolved(launchEvent.venueName)) {
     return null;
   }
 
-  const title = launchEventNameFor(locale);
+  const waitlistSuffix = locale === "sv" ? " (väntelista)" : " (waiting list)";
+  const title = launchEventNameFor(locale) + (options.waitlist ? waitlistSuffix : "");
 
   const addressParts = [
     launchEvent.venueName,
@@ -60,12 +76,17 @@ export function getCalendarEvent(locale: "sv" | "en"): CalendarEvent | null {
     : // Default to a two-hour event when no end time is confirmed.
       new Date(new Date(launchEvent.startsAt).getTime() + 2 * 60 * 60 * 1000).toISOString();
 
+  const description = options.waitlist
+    ? locale === "sv"
+      ? "Du står på väntelistan och har ännu ingen plats. Om en plats blir ledig får du ett mejl."
+      : "You are on the waiting list and do not yet have a place. If one becomes available you will get an email."
+    : locale === "sv"
+      ? "Bokrelease med Kata Nylén."
+      : "Book release with Kata Nylén.";
+
   return {
     title,
-    description:
-      locale === "sv"
-        ? "Bokrelease med Kata Nylén."
-        : "Book release with Kata Nylén.",
+    description,
     startsAt: launchEvent.startsAt,
     endsAt,
     location: addressParts.join(", "),

@@ -20,6 +20,7 @@ export function RsvpForm({
   guestsAllowed,
   maxGuests,
   calendar,
+  waitlistCalendar = null,
 }: {
   locale: Locale;
   forms: FormsContent;
@@ -27,9 +28,18 @@ export function RsvpForm({
   guestsAllowed: boolean;
   maxGuests: number;
   calendar: { icsHref: string; googleHref: string } | null;
+  /** The same evening, labelled as a waiting-list entry. */
+  waitlistCalendar?: { icsHref: string; googleHref: string } | null;
 }) {
-  const { state, fieldErrors, formError, submit, isSubmitting, isSuccess } =
-    useFormSubmit("/api/rsvp", forms);
+  const {
+    state,
+    fieldErrors,
+    formError,
+    submit,
+    isSubmitting,
+    isSuccess,
+    waitlisted,
+  } = useFormSubmit("/api/rsvp", forms);
   const [marketingConsent, setMarketingConsent] = useState(false);
 
   async function handleSubmit(event: React.FormEvent<HTMLFormElement>) {
@@ -46,21 +56,39 @@ export function RsvpForm({
   }
 
   if (isSuccess) {
+    const activeCalendar = waitlisted ? (waitlistCalendar ?? null) : calendar;
     return (
       <div role="status" className="border border-[var(--color-line)] p-6">
-        <h3 className="text-xl">✓ {forms.success.rsvpHeading}</h3>
+        {/*
+          The form is identical whether or not the evening is full, so this
+          panel is where someone finds out. It has to say the same thing their
+          email says.
+        */}
+        <h3 className="text-xl">
+          {waitlisted
+            ? forms.success.waitlistHeading
+            : `✓ ${forms.success.rsvpHeading}`}
+        </h3>
         <p className="mt-2 text-[var(--color-ink-muted)]">
-          {forms.success.rsvpBody}
+          {waitlisted ? forms.success.waitlistBody : forms.success.rsvpBody}
         </p>
-        {calendar ? (
+        {/*
+          The waiting list gets its own calendar entry rather than none.
+
+          It is titled "(väntelista)" and its description says outright that
+          there is no place yet, so it cannot be mistaken for an invitation.
+          Someone who wanted to come keeps the evening in their diary, and the
+          entry is a truer record of where they stand than nothing would be.
+        */}
+        {activeCalendar ? (
           <div className="mt-6">
             <h4 className="font-medium">{labels.addToCalendarLabel}</h4>
             <div className="mt-2 flex flex-wrap gap-4">
-              <a href={calendar.icsHref} className="underline underline-offset-4">
+              <a href={activeCalendar.icsHref} className="underline underline-offset-4">
                 {labels.downloadIcsLabel}
               </a>
               <a
-                href={calendar.googleHref}
+                href={activeCalendar.googleHref}
                 target="_blank"
                 rel="noopener noreferrer"
                 className="underline underline-offset-4"

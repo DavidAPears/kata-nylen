@@ -486,6 +486,9 @@ export const en: SiteContent = {
       rsvpHeading: "You're on the list.",
       rsvpBody:
         "A confirmation has been sent to your email address with the event details.",
+      waitlistHeading: "You're on the waiting list.",
+      waitlistBody:
+        "The evening is fully booked, so your registration has been added to the waiting list. If a place becomes available you will get an email.",
       contactHeading: "Thank you. Your message is on its way.",
       contactBody: "Kata will come back to you as soon as she can.",
     },

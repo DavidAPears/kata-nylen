@@ -133,3 +133,40 @@ describe("with unconfirmed event details", () => {
     expect(getCalendarEvent("sv")).toBeNull();
   });
 });
+
+describe("the waiting-list variant", () => {
+  async function load() {
+    vi.doMock("@/content/facts", () => confirmedFacts);
+    return import("../ics");
+  }
+
+  it("labels the title so it cannot be read as a place", async () => {
+    const { getCalendarEvent } = await load();
+    const sv = getCalendarEvent("sv", { waitlist: true })!;
+    const en = getCalendarEvent("en", { waitlist: true })!;
+    expect(sv.title).toContain("(väntelista)");
+    expect(en.title).toContain("(waiting list)");
+  });
+
+  it("says in the description that there is no place yet", async () => {
+    // The title alone is easy to skim past in a calendar grid.
+    const { getCalendarEvent } = await load();
+    expect(getCalendarEvent("sv", { waitlist: true })!.description).toMatch(/ingen plats/i);
+    expect(getCalendarEvent("en", { waitlist: true })!.description).toMatch(/do not yet have a place/i);
+  });
+
+  it("keeps the same date, time and venue", async () => {
+    const { getCalendarEvent } = await load();
+    const confirmed = getCalendarEvent("sv")!;
+    const waiting = getCalendarEvent("sv", { waitlist: true })!;
+    expect(waiting.startsAt).toBe(confirmed.startsAt);
+    expect(waiting.endsAt).toBe(confirmed.endsAt);
+    expect(waiting.location).toBe(confirmed.location);
+  });
+
+  it("leaves the confirmed entry unlabelled", async () => {
+    const { getCalendarEvent } = await load();
+    expect(getCalendarEvent("sv")!.title).not.toMatch(/väntelista/i);
+    expect(getCalendarEvent("en")!.title).not.toMatch(/waiting list/i);
+  });
+});
