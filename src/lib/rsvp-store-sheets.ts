@@ -69,7 +69,7 @@ export function sheetsConfigFromEnv(): SheetsConfig | null {
     // "\n" sequences and unescaped here.
     privateKey: rawKey.replace(/\\n/g, "\n"),
     tabName: process.env.GOOGLE_SHEETS_TAB_NAME || "RSVPs",
-    waitlistTabName: process.env.GOOGLE_SHEETS_WAITLIST_TAB_NAME || "Waiting list",
+    waitlistTabName: process.env.GOOGLE_SHEETS_WAITLIST_TAB_NAME || "Waitlist",
     // Any of the usual truthy spellings, because this gets typed into a
     // Vercel form by hand under time pressure.
     waitingList: /^(1|true|yes|on)$/i.test(process.env.RSVP_WAITING_LIST ?? ""),

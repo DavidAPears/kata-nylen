@@ -12,7 +12,7 @@ const config: SheetsConfig = {
   clientEmail: "svc@project.iam.gserviceaccount.com",
   privateKey: "-----BEGIN PRIVATE KEY-----\nfake\n-----END PRIVATE KEY-----",
   tabName: "RSVPs",
-  waitlistTabName: "Waiting list",
+  waitlistTabName: "Waitlist",
   waitingList: false,
 };
 
@@ -36,7 +36,7 @@ const record: RsvpRecord = {
 function fakeSheets({
   existing = [] as [string, number][],
   waiting = [] as [string, number][],
-  tabs = ["RSVPs", "Waiting list"],
+  tabs = ["RSVPs", "Waitlist"],
   headers = SHEET_HEADERS as readonly string[],
   failOn,
 }: {
@@ -92,7 +92,7 @@ function fakeSheets({
     }
     // Existing rows probe (C2:D), per tab.
     if (method === "GET" && href.includes("C2%3AD")) {
-      const rows = href.includes(tabRange("Waiting list")) ? waiting : existing;
+      const rows = href.includes(tabRange("Waitlist")) ? waiting : existing;
       return Response.json({ values: rows.map(([e, g]) => [e, String(g)]) });
     }
     return Response.json({});
@@ -250,7 +250,7 @@ describe("createSheetsStore", () => {
 
       const appends = calls.filter((c) => c.url.includes(":append"));
       expect(appends).toHaveLength(1);
-      expect(appends[0].url).toContain(encodeURIComponent("'Waiting list'"));
+      expect(appends[0].url).toContain(encodeURIComponent("'Waitlist'"));
       expect(appends[0].url).not.toContain(encodeURIComponent("'RSVPs'"));
     });
 
@@ -300,7 +300,7 @@ describe("createSheetsStore", () => {
 
       const created = calls.find((c) => c.url.includes(":batchUpdate"));
       expect(created, "the waiting-list tab was never created").toBeDefined();
-      expect(JSON.stringify(created!.body)).toContain("Waiting list");
+      expect(JSON.stringify(created!.body)).toContain("Waitlist");
     });
 
     it("costs no extra request when the tabs are already there", async () => {
@@ -317,7 +317,7 @@ describe("createSheetsStore", () => {
     });
 
     it("does not recreate a tab that already exists", async () => {
-      const { fetchFn, calls } = fakeSheets({ tabs: ["RSVPs", "Waiting list"] });
+      const { fetchFn, calls } = fakeSheets({ tabs: ["RSVPs", "Waitlist"] });
       const store = createSheetsStore(waitlisting, { fetchFn, getToken });
       await store.save(record);
       expect(calls.find((c) => c.url.includes(":batchUpdate"))).toBeUndefined();
