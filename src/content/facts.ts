@@ -59,8 +59,8 @@ export const person = {
    * The English is our translation of her text and still needs her eye.
    */
   shortBio: {
-    sv: "Kata Nylén är legitimerad psykolog, specialist i organisationspsykologi, författare och föreläsare. Hon arbetar med beteendeförändring, psykologisk resiliens och implementering, med ett särskilt intresse för hur kunskap och ambitioner blir till handling i organisationer. Hennes arbete spänner från hållbar omställning och klimatpsykologi till förebyggande insatser för barn och unga genom SNAP. Hon är medgrundare av Klimatpsykologerna, SNAP Sverige och SHIFT Collective och författare till bland annat Psykologisk resiliens: att möta motgångar i en osäker värld." as Fact<string>,
-    en: "Kata Nylén is a licensed psychologist, a specialist in organisational psychology, an author and a speaker. She works with behavioural change, psychological resilience and implementation, with a particular interest in how knowledge and ambition become action inside organisations. Her work runs from sustainable transition and climate psychology to preventive work with children and young people through SNAP. She is a co-founder of Klimatpsykologerna, SNAP Sverige and SHIFT Collective, and the author of books including Psykologisk resiliens: att möta motgångar i en osäker värld." as Fact<string>,
+    sv: "Kata Nylén är legitimerad psykolog, specialist i organisationspsykologi, författare och föreläsare. Hon arbetar med beteendeförändring, psykologisk resiliens och implementering, med ett särskilt intresse för hur kunskap och ambitioner blir till handling i organisationer. Hennes arbete spänner från hållbar omställning och klimatpsykologi till förebyggande insatser för barn och unga genom SNAP. Hon är medgrundare av Klimatpsykologerna, SNAP Sverige och SHIFT Collective och författare till bland annat Psykologisk resiliens: att möta motgång i en osäker värld." as Fact<string>,
+    en: "Kata Nylén is a licensed psychologist, a specialist in organisational psychology, an author and a speaker. She works with behavioural change, psychological resilience and implementation, with a particular interest in how knowledge and ambition become action inside organisations. Her work runs from sustainable transition and climate psychology to preventive work with children and young people through SNAP. She is a co-founder of Klimatpsykologerna, SNAP Sverige and SHIFT Collective, and the author of books including Psykologisk resiliens: att möta motgång i en osäker värld." as Fact<string>,
   },
   /**
     * §12: public contact address.
@@ -122,22 +122,22 @@ export const book = {
   /* CONFIRMED from the book's own title page. */
   title: "Psykologisk resiliens" as Fact<string>,
   /*
-    ⚠️ UNRESOLVED, and visible on the site. Kata corrected this to the plural
-    "motgangar" on 28 Sep 2026 and asked for it to be consistent everywhere,
-    so that is what the text says.
+    Singular "motgång", taken from the printed cover.
 
-    But Natur & Kultur's own title page still reads "Att mota motgang i en
-    osaker varld", singular, and so does the cover artwork we hold from their
-    press download. The book-release page and its sharing card therefore show
-    our plural text directly beside a cover that says singular.
+    Kata asked for the plural on 28 Sep and the site carried it for seven
+    weeks. The book was published on 6 November, and the cover, the publisher's
+    title page and her own bio draft then disagreed with each other: the first
+    two say "motgång", her bio said "motgångar". Once the launch page became a
+    page about the book, our plural sat directly beside a photograph of a cover
+    reading singular, which is where it stopped being arguable.
 
-    She is the author, so her correction wins for now, and the book is not out
-    until 6 November: the likeliest explanation is that the subtitle changed
-    late and the publisher's listing and our cover file are both pre-final.
-    Confirm with her, and if the final cover differs, replace
-    public/images/book-cover.webp and book-cover-og.jpg.
+    David's call, 16 Nov: the cover is the reference. Her bio is quoted as she
+    wrote it everywhere except the book's own title, which is corrected here so
+    the site does not misquote a published work in the middle of her biography.
+
+    Do not change this without looking at a copy of the book.
   */
-  subtitle: "Att möta motgångar i en osäker värld" as Fact<string>,
+  subtitle: "Att möta motgång i en osäker värld" as Fact<string>,
   /** The book is Swedish. On English pages the Swedish title leads and this
    *  follows in brackets, so the real title stays findable and searchable. */
   titleEnglish: "Psychological resilience" as Fact<string>,
@@ -162,8 +162,8 @@ export const book = {
    * she is the one who has to stand behind it.
    */
   synopsis: {
-    sv: "Resiliens är förmågan att stå kvar, anpassa sig och navigera svårigheter medan de pågår. I Psykologisk resiliens: att möta motgångar i en osäker värld visar psykologen Kata Nylén hur resiliens kan utvecklas både individuellt och tillsammans med andra." as Fact<string>,
-    en: "Resilience is the capacity to stay standing, adapt, and navigate difficulty while it is still happening. In Psykologisk resiliens: att möta motgångar i en osäker värld, psychologist Kata Nylén shows how resilience can be developed both on our own and together with others." as Fact<string>,
+    sv: "Resiliens är förmågan att stå kvar, anpassa sig och navigera svårigheter medan de pågår. I Psykologisk resiliens: att möta motgång i en osäker värld visar psykologen Kata Nylén hur resiliens kan utvecklas både individuellt och tillsammans med andra." as Fact<string>,
+    en: "Resilience is the capacity to stay standing, adapt, and navigate difficulty while it is still happening. In Psykologisk resiliens: att möta motgång i en osäker värld, psychologist Kata Nylén shows how resilience can be developed both on our own and together with others." as Fact<string>,
   },
   /* CONFIRMED: the book's own chapter structure. */
   themes: {
@@ -330,7 +330,7 @@ export const publications: Publication[] = [
   {
     id: "psykologisk-resiliens",
     title: "Psykologisk resiliens",
-    subtitle: "Att möta motgångar i en osäker värld",
+    subtitle: "Att möta motgång i en osäker värld",
     titleEn: "Psychological resilience",
     subtitleEn: "Meeting adversity in an uncertain world",
     year: "2026",

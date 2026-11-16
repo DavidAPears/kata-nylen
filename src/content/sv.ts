@@ -120,7 +120,7 @@ export const sv: SiteContent = {
       // carries the book's name because that is what people search for.
       title: "Senaste boken: Psykologisk resiliens",
       description:
-        "Psykologisk resiliens av Kata Nylén, ute nu på Natur & Kultur. Om att möta motgångar i en osäker värld, enskilt och tillsammans.",
+        "Psykologisk resiliens av Kata Nylén, ute nu på Natur & Kultur. Om att möta motgång i en osäker värld, enskilt och tillsammans.",
     },
     hero: {
       eyebrow: "Välkommen",

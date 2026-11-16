@@ -24,7 +24,7 @@ so the list separates real defects from things that are already fine.
 
 | Her point | Verified? | Where |
 |---|---|---|
-| Subtitle should be plural `motgångar` | ✅ Confirmed wrong | `facts.ts:98`, `:123`, `:124`, `:286` and `subtitleEnglish` |
+| Subtitle should be plural `motgångar` | ⚠️ Applied, then reverted | See the note below. The printed cover says `motgång`. |
 | LÄKA is four movements, not five | ✅ Confirmed wrong | `facts.ts:128`, `sv.ts:335`, `en.ts:336` |
 | "Fem titlar" miscounts | ✅ Confirmed wrong | `sv.ts:348`, `en.ts:349` |
 | Remove "Var på plats senast 17.15" | ✅ Confirmed present | `facts.ts:~208` |
@@ -34,8 +34,13 @@ so the list separates real defects from things that are already fine.
 | Professional title missing | ✅ Confirmed | `facts.ts:36` — still `TODO` |
 | SNAP and SHIFT absent | ✅ Confirmed | `collectives` holds only Klimatpsykologerna + Climate Psyched |
 
-**One thing that is already fine:** the OG social cards do not bake in the
-subtitle, so the `motgång → motgångar` fix needs no image regeneration.
+**⚠️ A1 was later reversed.** Kata asked for the plural `motgångar` and the
+site carried it for seven weeks. The book came out on 6 November, and the
+printed cover and the publisher's title page both read `motgång`. Once the
+launch page became a page about the book, our text sat beside a photograph of
+the cover contradicting it. David's call on 16 November: the cover is the
+reference. The site now says `motgång` everywhere it quotes the title,
+including inside Kata's own bio, which had the plural as she wrote it.
 
 **The LÄKA error is ours, and it was always internally inconsistent.** LÄKA has
 four letters. The site listed five movements, the fifth being "Ge och ta emot
@@ -170,14 +175,10 @@ Items 1 to 6 of the original list are all answered and built. What remains:
    the seventeen contributors as authors, Kata among them, and none names an
    editor. The cover is now on the site too, taken from the publisher's press
    image.
-5. **The book subtitle contradicts its own cover.** Kata corrected it to the
-   plural "motgångar" and the site now says that throughout. But Natur &
-   Kultur's title page still says "motgång", singular, and so does the cover
-   artwork from their press download, which sits next to our text on the
-   book-release page and on the sharing card. She is the author so her
-   correction stands, and the book is not out until 6 November, so the likely
-   answer is that the subtitle changed late. Needs confirming, and a new cover
-   file if it did.
+5. ~~**The book subtitle contradicts its own cover.**~~ Settled 16 Nov: the
+   cover is the reference, so the site says `motgång`. Worth one sentence to
+   Kata, since she asked for the plural and her bio was edited to match the
+   printed title.
 6. **The book synopsis.** The last unconfirmed fact in `facts.ts`: it is Natur
    & Kultur's own copy and still needs their sign-off.
 

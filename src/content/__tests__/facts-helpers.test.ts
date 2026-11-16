@@ -3,6 +3,7 @@ import {
   TODO,
   isResolved,
   resolved,
+  person,
   book,
   launchEvent,
   bookTitleFor,
@@ -149,17 +150,32 @@ describe("speakingCredentials", () => {
 });
 
 describe("the book's own details", () => {
-  it("uses the plural motgångar in the subtitle", () => {
-    // The real subtitle is "Att möta motgångar i en osäker värld". The site
-    // shipped the singular in four places, including inside both synopsis
-    // strings. Corrected by Kata, 28 Sep 2026.
-    expect(resolved(book.subtitle)).toBe("Att möta motgångar i en osäker värld");
+  it("quotes the subtitle as the printed cover has it", () => {
+    /*
+      Singular "motgång". Kata asked for the plural in September and the site
+      carried it until the book came out, when the cover, the publisher's page
+      and our text stopped agreeing. The cover won, because it is the book.
+
+      This test previously asserted the plural. It is inverted rather than
+      deleted so the next person can see that the question was asked and
+      settled, instead of assuming it is a typo and changing it back.
+    */
+    expect(resolved(book.subtitle)).toBe("Att möta motgång i en osäker värld");
     for (const locale of ["sv", "en"] as const) {
       const synopsis = resolved(book.synopsis[locale]);
       if (synopsis?.includes("Psykologisk resiliens:")) {
-        expect(synopsis, `${locale} synopsis`).toContain("motgångar");
-        expect(synopsis, `${locale} synopsis`).not.toMatch(/motgång\b(?!ar)/);
+        expect(synopsis, `${locale} synopsis`).toContain("motgång i en osäker");
+        expect(synopsis, `${locale} synopsis`).not.toContain("motgångar i en osäker");
       }
+    }
+  });
+
+  it("does not misquote the title inside Kata's own bio", () => {
+    // Her draft used the plural. Everything else in the bio is her wording.
+    for (const locale of ["sv", "en"] as const) {
+      const bio = resolved(person.shortBio[locale])!;
+      expect(bio, locale).toContain("att möta motgång i en osäker värld");
+      expect(bio, locale).not.toContain("motgångar");
     }
   });
 
