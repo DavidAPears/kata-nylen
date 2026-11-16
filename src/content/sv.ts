@@ -16,7 +16,7 @@ export const sv: SiteContent = {
 
   nav: {
     home: "Hem",
-    bookRelease: "Bokrelease",
+    bookRelease: "Boken",
     publications: "Publikationer",
     speaking: "Föreläsningar",
     contact: "Kontakt",
@@ -43,7 +43,7 @@ export const sv: SiteContent = {
       standfirst:
         "Legitimerad psykolog och specialist i organisationspsykologi, författare och föreläsare. Kata arbetar med att få kunskap, ambitioner och beslut att bli handling i organisationer.",
       primaryCta: { label: "Utforska Katas arbete", href: "/speaking" },
-      secondaryCta: { label: "Bokrelease", href: "/book-release" },
+      secondaryCta: { label: "Boken", href: "/book-release" },
     },
     intro: {
       heading: "Om Kata",
@@ -57,7 +57,7 @@ export const sv: SiteContent = {
       heading: "Den nya boken",
       description:
         "Fyra rörelser för att möta motgångar utan att stänga av: att lyssna, älska, kollektivisera och agera.",
-      cta: { label: "Läs om bokreleasen", href: "/book-release" },
+      cta: { label: "Läs om boken", href: "/book-release" },
     },
     areasOfWork: {
       heading: "Arbetsområden",
@@ -116,43 +116,22 @@ export const sv: SiteContent = {
 
   bookRelease: {
     seo: {
-      title: "Bokrelease",
+      // The launch is over; this page is now about the book itself. The title
+      // carries the book's name because that is what people search for.
+      title: "Senaste boken: Psykologisk resiliens",
       description:
-        "Du är varmt välkommen till releasen av Kata Nyléns nya bok. Anmäl dig här.",
+        "Psykologisk resiliens av Kata Nylén, ute nu på Natur & Kultur. Om att möta motgångar i en osäker värld, enskilt och tillsammans.",
     },
     hero: {
       eyebrow: "Välkommen",
-      heading: "Bokrelease",
-      dateLabel: "Datum",
-      timeLabel: "Tid",
-      venueLabel: "Plats",
-      toBeConfirmed: "Meddelas snart",
-      launchLabel: "Bokrelease",
-      rsvpCta: "Anmäl mig",
-    },
-    invitation: {
-      heading: "Om kvällen",
-      body: [
-        "En kväll för att fira släppet av den nya boken: en upplevelse av boken och ett tillfälle att odla psykologisk resiliens tillsammans.",
-        // The one "vi" the site keeps. An event has hosts, Kata and Sebastian
-        // Ring among them, and "hur många vi blir" counts the reader in. It is
-        // a real we, not the phantom company voice removed everywhere else.
-        "Du är varmt välkommen. Anmäl dig gärna så att vi vet hur många vi blir.",
-      ],
-      includesHeading: "Kvällen innehåller",
-      withLabel: "med",
+      heading: "Senaste boken",
+      outNow: "Ute nu",
     },
     aboutBook: {
       heading: "Om boken",
       synopsisHeading: "Sammanfattning",
       themesHeading: "Teman",
       purchaseLabel: "Hitta boken",
-    },
-    programme: { heading: "Program" },
-    location: {
-      heading: "Plats",
-      directionsLabel: "Vägbeskrivning",
-      accessibilityHeading: "Tillgänglighet",
     },
     rsvp: {
       heading: "Anmälan",

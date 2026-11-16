@@ -91,23 +91,24 @@ test.describe("desktop nav", () => {
 test.describe("phone", () => {
   test.use({ viewport: { width: 390, height: 844 } });
 
-  test("the RSVP form can be completed on a phone", async ({ page }) => {
-    // The path a WhatsApp recipient actually takes.
-    await page.goto("/sv/bokrelease");
+  /*
+    The RSVP walkthrough lived here until 16 November 2026, when the launch was
+    over and the page became a page about the book. There is no form on the
+    site to drive any more.
 
-    // Scoped by role: the consent checkbox's label also contains "e-post".
-    await page.getByRole("textbox", { name: "Namn" }).fill("Test Gäst");
-    await page.getByRole("textbox", { name: "E-post" }).fill("gast@example.com");
-    await page.getByRole("button", { name: "Anmäl mig" }).click();
+    RsvpForm, the API route, the Sheets store and the waiting list are all
+    still covered by unit tests and all still work. Restore this test, pointed
+    at whichever page carries the form, when Kata next runs an event.
 
-    await expect(page.getByRole("status")).toContainText("Du står på listan.");
-  });
+    It also wrote a live row to the attendee sheet on every local run, which
+    is a second reason not to leave it pointed at nothing.
+  */
 
   test("every nav destination is reachable without horizontal scrolling", async ({
     page,
   }) => {
     await page.goto("/sv");
-    for (const label of ["Bokrelease", "Föreläsningar", "Kontakt"]) {
+    for (const label of ["Boken", "Föreläsningar", "Kontakt"]) {
       await page.getByRole("navigation", { name: "Meny" }).getByRole("link", { name: label }).click();
       await expect(page).toHaveURL(/\/sv\//);
       const { scrollWidth, clientWidth } = await page.evaluate(() => ({

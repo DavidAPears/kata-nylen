@@ -6,19 +6,15 @@ import { getContent } from "@/content";
 import { getPathname } from "@/i18n/navigation";
 import {
   book,
-  launchEvent,
   isResolved,
   resolved,
   bookTitleFor,
   bookTitlePlainFor,
   bookSubtitleFor,
-  launchEventNameFor,
 } from "@/content/facts";
-import { getCalendarEvent, googleCalendarUrl, directionsUrl } from "@/lib/ics";
 import { Container, Section, Prose, ExternalAnchor } from "@/components/primitives";
 import { TodoNote } from "@/components/TodoNote";
-import { RsvpForm } from "@/components/RsvpForm";
-import { BookJsonLd, EventJsonLd } from "@/components/StructuredData";
+import { BookJsonLd } from "@/components/StructuredData";
 
 export async function generateMetadata({
   params,
@@ -63,40 +59,6 @@ export async function generateMetadata({
   };
 }
 
-/** Formats a confirmed ISO date for display, or returns null. */
-function formatDate(iso: string | undefined, locale: Locale): string | null {
-  if (!iso) return null;
-  return new Intl.DateTimeFormat(locale === "sv" ? "sv-SE" : "en-GB", {
-    dateStyle: "full",
-    timeZone: launchEvent.timeZone,
-  }).format(new Date(iso));
-}
-
-/**
- * A short date for the three-column row on a phone.
- *
- * "Wednesday, 11 November 2026" forces that column to wrap over several lines
- * and pushes the whole hero down into the artwork. The weekday is pleasant but
- * not information anyone needs here.
- */
-function formatDateShort(iso: string | undefined, locale: Locale): string | null {
-  if (!iso) return null;
-  return new Intl.DateTimeFormat(locale === "sv" ? "sv-SE" : "en-GB", {
-    day: "numeric",
-    month: "short",
-    year: "numeric",
-    timeZone: launchEvent.timeZone,
-  }).format(new Date(iso));
-}
-
-function formatTime(iso: string | undefined, locale: Locale): string | null {
-  if (!iso) return null;
-  return new Intl.DateTimeFormat(locale === "sv" ? "sv-SE" : "en-GB", {
-    timeStyle: "short",
-    timeZone: launchEvent.timeZone,
-  }).format(new Date(iso));
-}
-
 export default async function BookReleasePage({
   params,
 }: {
@@ -107,36 +69,7 @@ export default async function BookReleasePage({
   const content = getContent(locale);
   const { bookRelease } = content;
 
-  const startsAt = isResolved(launchEvent.startsAt) ? launchEvent.startsAt : undefined;
-  const endsAt = isResolved(launchEvent.endsAt) ? launchEvent.endsAt : undefined;
-  const venueName = isResolved(launchEvent.venueName) ? launchEvent.venueName : null;
-  const guestsAllowed =
-    isResolved(launchEvent.guestsAllowed) && launchEvent.guestsAllowed;
-
   const cover = resolved(book.cover);
-  const calendarEvent = getCalendarEvent(locale);
-  const waitlistEvent = getCalendarEvent(locale, { waitlist: true });
-  const calendar = calendarEvent
-    ? {
-        icsHref: `/api/calendar?locale=${locale}`,
-        googleHref: googleCalendarUrl(calendarEvent),
-      }
-    : null;
-  /* Same evening, labelled as a waiting-list entry. The form picks whichever
-     matches what actually happened to the submission. */
-  const waitlistCalendar = waitlistEvent
-    ? {
-        icsHref: `/api/calendar?locale=${locale}&waitlist=1`,
-        googleHref: googleCalendarUrl(waitlistEvent),
-      }
-    : null;
-
-  const address = [
-    venueName,
-    isResolved(launchEvent.addressLine) ? launchEvent.addressLine : null,
-    isResolved(launchEvent.postalCode) ? launchEvent.postalCode : null,
-    isResolved(launchEvent.city) ? launchEvent.city : null,
-  ].filter(Boolean) as string[];
 
   return (
     // The book's own colourway, scoped to this page. Everything else on the
@@ -194,45 +127,13 @@ export default async function BookReleasePage({
             title is what people search for. The evening's own name sits above
             it so the page still matches the invitation, which leads with it.
           */}
-          <p /*
-              Tighter tracking on a phone: at 0.25em this line ran past the
-              container and was silently clipped by the hero's overflow-hidden,
-              so it looked cut off at both edges rather than wrapping.
-            */
-            /*
-              Held inside the leaf's navy centre on a phone. The leaf narrows
-              towards the top, and a wider line runs out over the orange band
-              where cream text has almost no contrast and simply disappears.
-              It was never clipped; it was camouflaged.
-            */
-            className="mx-auto mb-5 max-w-[15rem] text-xs uppercase tracking-[0.12em] text-[var(--color-book-orange-text)] sm:mx-0 sm:max-w-none sm:text-sm sm:tracking-[0.25em]">
-            {/*
-              The event's own name alone read as "some evening event". This is
-              a book launch, and saying so is the point of the page, so both
-              sit here. The bracketed English gloss of "Resilienssalong" is
-              dropped: at this size it made the line unreadable, and "Book
-              launch" now carries the meaning anyway.
-            */}
-            {/*
-              The plain Swedish name in both languages here. The English gloss
-              "(Resilience Salon)" makes this line long enough to run out over
-              the orange band on a phone, and it is redundant beside "Book
-              launch", which already says what the evening is. The gloss still
-              appears in the Event structured data and the calendar file.
-            */}
-            {resolved(launchEvent.name.sv) ?? launchEventNameFor(locale)}
-            <span aria-hidden="true" className="mx-2 opacity-60">
-              /
-            </span>
-            {/*
-              A break opportunity after the separator. The margin around the
-              slash is visual only, so without this the whole line is one
-              unbreakable word: it reports no overflow, paints past its box and
-              gets clipped by the hero's overflow-hidden. Silent and invisible
-              to a scrollWidth check.
-            */}
-            <wbr />
-            {bookRelease.hero.launchLabel}
+          {/*
+            The launch was on 11 November 2026. This line used to carry the
+            evening's name and "Book launch"; now the book exists and the only
+            thing worth saying above the title is that you can buy it.
+          */}
+          <p className="mx-auto mb-5 max-w-[15rem] text-xs uppercase tracking-[0.12em] text-[var(--color-book-orange-text)] sm:mx-0 sm:max-w-none sm:text-sm sm:tracking-[0.25em]">
+            {bookRelease.hero.outNow}
           </p>
           {/*
             Two renderings of the same title, one shown at a time.
@@ -260,140 +161,18 @@ export default async function BookReleasePage({
             </p>
           ) : null}
 
-          <dl /*
-              Three columns on a phone too. Stacked, these three rows pushed
-              the hero down into the artwork and left the RSVP button sitting
-              over the orange band.
-            */
-            className="mx-auto mt-10 grid max-w-[19rem] grid-cols-3 gap-3 text-[var(--color-book-cream-light)] sm:mx-0 sm:max-w-lg sm:gap-6">
-            <div>
-              <dt className="text-xs uppercase tracking-[0.18em] text-[var(--color-book-orange-text)]">
-                {bookRelease.hero.dateLabel}
-              </dt>
-              <dd className="mt-1">
-                {/*
-                  Short date in the narrow column, full date where there is
-                  room. "Wednesday, 11 November 2026" wrapped over three lines
-                  on a phone and pushed the hero down into the artwork.
-                */}
-                <span className="sm:hidden">
-                  {formatDateShort(startsAt, locale) ?? bookRelease.hero.toBeConfirmed}
-                </span>
-                <span className="hidden sm:inline">
-                  {formatDate(startsAt, locale) ?? bookRelease.hero.toBeConfirmed}
-                </span>
-              </dd>
-            </div>
-            <div>
-              <dt className="text-xs uppercase tracking-[0.18em] text-[var(--color-book-orange-text)]">
-                {bookRelease.hero.timeLabel}
-              </dt>
-              <dd className="mt-1">
-                {formatTime(startsAt, locale)
-                  ? `${formatTime(startsAt, locale)}${
-                      formatTime(endsAt, locale) ? `-${formatTime(endsAt, locale)}` : ""
-                    }`
-                  : bookRelease.hero.toBeConfirmed}
-              </dd>
-            </div>
-            <div>
-              <dt className="text-xs uppercase tracking-[0.18em] text-[var(--color-book-orange-text)]">
-                {bookRelease.hero.venueLabel}
-              </dt>
-              <dd className="mt-1">{venueName ?? bookRelease.hero.toBeConfirmed}</dd>
-            </div>
-          </dl>
-
-          <p className="mt-10">
-            <a
-              href="#rsvp"
-              className="inline-block bg-[var(--color-book-orange)] px-7 py-3 font-medium text-[var(--color-book-navy-deep)] hover:brightness-95"
-            >
-              {bookRelease.hero.rsvpCta}
-            </a>
-          </p>
           </div>
         </Container>
       </div>
 
-      {!startsAt || !venueName ? (
-        <Container className="pt-6">
-          <TodoNote>
-            Event date, time and venue (<code>launchEvent.*</code>). Until these
-            are confirmed the page shows a to-be-confirmed placeholder rather
-            than invented details, and no Event structured data or calendar
-            file is emitted.
-          </TodoNote>
-        </Container>
-      ) : null}
-
-      {/* Invitation */}
-      <Section ornament id="invitation" heading={bookRelease.invitation.heading}>
-        <Prose>
-          {bookRelease.invitation.body.map((paragraph) => (
-            <p key={paragraph}>{paragraph}</p>
-          ))}
-        </Prose>
-
-        {/*
-          What the evening holds, as the invitation lists it. Middots between
-          items on screen, but a real <ul> underneath, so a screen reader
-          announces it as a list of six things rather than one run-on line.
-        */}
-        {launchEvent.includes[locale].length > 0 ? (
-          <div className="mt-8">
-            <h3 className="text-sm uppercase tracking-[0.18em] text-[var(--color-ink-muted)]">
-              {bookRelease.invitation.includesHeading}
-            </h3>
-            <ul className="mt-3 flex flex-wrap items-center gap-x-3 gap-y-1 text-lg">
-              {launchEvent.includes[locale].map((item, index) => (
-                <li key={item} className="flex items-center gap-3">
-                  {index > 0 ? (
-                    <span aria-hidden="true" className="text-[var(--color-accent)]">
-                      ·
-                    </span>
-                  ) : null}
-                  {item}
-                </li>
-              ))}
-            </ul>
-          </div>
-        ) : null}
-
-        {/* The people appearing. Real people, so named properly. */}
-        {launchEvent.guests.length > 0 ? (
-          <p className="mt-8 text-[var(--color-ink-muted)]">
-            <span className="text-[var(--color-ink)]">Kata Nylén</span>{" "}
-            {bookRelease.invitation.withLabel}{" "}
-            {launchEvent.guests.map((guest, index) => (
-              <span key={guest.name}>
-                {index > 0 ? ", " : ""}
-                <span className="text-[var(--color-ink)]">{guest.name}</span>{" "}
-                ({guest.role[locale]})
-              </span>
-            ))}
-          </p>
-        ) : null}
-      </Section>
-
       {/* About the book */}
       <Section ornament id="book" heading={bookRelease.aboutBook.heading} tone="sunken">
-        <div className="grid gap-8 sm:grid-cols-[200px_1fr] sm:items-start">
-          {cover ? (
-            <Image
-              src={cover.src}
-              alt={cover.alt[locale]}
-              width={cover.width}
-              height={cover.height}
-              sizes="(min-width: 640px) 200px, 60vw"
-              className="w-full rounded-sm shadow-lg shadow-black/15"
-            />
-          ) : (
-            <div className="flex aspect-[2/3] items-center justify-center border border-dashed border-[var(--color-line)] bg-white text-sm text-[var(--color-ink-muted)]">
-              Book cover
-            </div>
-          )}
-          <div>
+        {/*
+          No cover here any more. The hero above shows it at full size, and
+          with the event sections gone the two sat within one screen of each
+          other, which reads as a mistake rather than a design.
+        */}
+        <div>
             <h3 className="text-lg">{bookRelease.aboutBook.synopsisHeading}</h3>
             {isResolved(book.synopsis[locale]) ? (
               <Prose>
@@ -428,118 +207,12 @@ export default async function BookReleasePage({
                 on-site shop for MVP (§21.14).
               </TodoNote>
             )}
-          </div>
         </div>
       </Section>
 
-      {/* Programme — only when there genuinely is one (§10) */}
-      {launchEvent.programme.length > 0 ? (
-        <Section ornament id="programme" heading={bookRelease.programme.heading}>
-          <ol className="max-w-xl">
-            {launchEvent.programme.map((item) => (
-              <li
-                key={item.time}
-                className="flex gap-6 border-b border-[var(--color-line)] py-3"
-              >
-                <span className="w-16 shrink-0 tabular-nums">{item.time}</span>
-                <span>{item.description[locale]}</span>
-              </li>
-            ))}
-          </ol>
-        </Section>
-      ) : null}
-
-      {/* Location */}
-      <Section ornament id="location" heading={bookRelease.location.heading}>
-        {address.length > 0 ? (
-          <>
-            <address className="not-italic">
-              {address.map((line) => (
-                <span key={line} className="block">
-                  {line}
-                </span>
-              ))}
-            </address>
-            {/*
-              The map is rendered only when a Maps key is configured. Without
-              one the address and the directions link stand on their own,
-              which is a perfectly good experience, so this never blocks.
-              The image is proxied through our own route so the key stays
-              server-side.
-            */}
-            {/*
-              Plain <img> on purpose. The source is our own route, which
-              already returns a correctly sized, long-cached PNG. next/image
-              would add a second optimisation pass over an already optimised
-              image, for no benefit and extra cost.
-            */}
-            {process.env.GOOGLE_MAPS_API_KEY ? (
-              // eslint-disable-next-line @next/next/no-img-element
-              <img
-                src="/api/venue-map"
-                alt=""
-                width={640}
-                height={360}
-                loading="lazy"
-                decoding="async"
-                className="mt-6 w-full max-w-2xl rounded-xl border border-[var(--color-line)]"
-              />
-            ) : null}
-
-            <p className="mt-4">
-              {/* A plain directions link: no Maps JS API, no key in the
-                  browser, and it opens the visitor's own maps app. */}
-              <ExternalAnchor href={directionsUrl(address.join(", "))}>
-                {bookRelease.location.directionsLabel}
-              </ExternalAnchor>
-            </p>
-          </>
-        ) : (
-          <TodoNote>
-            Venue name and address (<code>launchEvent.venueName</code>,
-            <code>launchEvent.addressLine</code>).
-          </TodoNote>
-        )}
-
-        {isResolved(launchEvent.accessibility[locale]) ? (
-          <>
-            <h3 className="mt-6 text-lg">
-              {bookRelease.location.accessibilityHeading}
-            </h3>
-            <Prose>
-              <p>{launchEvent.accessibility[locale]}</p>
-            </Prose>
-          </>
-        ) : null}
-      </Section>
-
-      {/* RSVP */}
-      <Section ornament id="rsvp" heading={bookRelease.rsvp.heading} tone="sunken">
-        <Prose>
-          <p>{bookRelease.rsvp.intro}</p>
-        </Prose>
-        <div className="mt-8">
-          <RsvpForm
-            locale={locale}
-            forms={content.forms}
-            labels={bookRelease.rsvp}
-            guestsAllowed={guestsAllowed}
-            maxGuests={launchEvent.maxPlacesPerRsvp}
-            calendar={calendar}
-            waitlistCalendar={waitlistCalendar}
-          />
-        </div>
-        {!isResolved(launchEvent.guestsAllowed) ? (
-          <TodoNote>
-            Whether +1s are permitted (<code>launchEvent.guestsAllowed</code>).
-            Until confirmed, the guests field is hidden and every RSVP counts as
-            one person.
-          </TodoNote>
-        ) : null}
-      </Section>
-
+      {/* No EventJsonLd: the launch has happened, so there is no event to
+          describe. BookJsonLd stays, because the book is the page now. */}
       <BookJsonLd locale={locale} />
-      <EventJsonLd locale={locale} />
     </div>
   );
 }

@@ -99,23 +99,8 @@ export type BookReleaseContent = {
   hero: {
     eyebrow: string;
     heading: string;
-    /** Labels only — the values come from src/content/facts.ts */
-    dateLabel: string;
-    timeLabel: string;
-    venueLabel: string;
-    /** Shown in place of a detail Kata has not confirmed yet. */
-    toBeConfirmed: string;
-    /** Says plainly that this is a book launch, next to the event's own name. */
-    launchLabel: string;
-    rsvpCta: string;
-  };
-  invitation: {
-    heading: string;
-    body: string[];
-    /** Heading above the list of what the evening holds. */
-    includesHeading: string;
-    /** Introduces the people appearing, e.g. "Kata Nylén with ...". */
-    withLabel: string;
+    /** Sits above the title now the book is published. */
+    outNow: string;
   };
   aboutBook: {
     heading: string;
@@ -123,14 +108,15 @@ export type BookReleaseContent = {
     themesHeading: string;
     purchaseLabel: string;
   };
-  programme: {
-    heading: string;
-  };
-  location: {
-    heading: string;
-    directionsLabel: string;
-    accessibilityHeading: string;
-  };
+  /**
+   * Kept although the page no longer renders a form.
+   *
+   * The launch happened on 11 November 2026 and this page became a page about
+   * the book. The RSVP form, its API route, the Google Sheets store and the
+   * waiting list are all intact and still tested: Kata runs events, and
+   * throwing away a working, tested booking system to tidy one page would be
+   * the expensive kind of neatness. Wire `RsvpForm` back in when she needs it.
+   */
   rsvp: {
     heading: string;
     intro: string;

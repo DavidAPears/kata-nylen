@@ -15,7 +15,7 @@ export const en: SiteContent = {
 
   nav: {
     home: "Home",
-    bookRelease: "Book Release",
+    bookRelease: "The book",
     publications: "Publications",
     speaking: "Speaking",
     contact: "Contact",
@@ -42,7 +42,7 @@ export const en: SiteContent = {
       standfirst:
         "Licensed psychologist and specialist in organisational psychology, author and speaker. Kata works on turning knowledge, ambition and decisions into action inside organisations.",
       primaryCta: { label: "Explore Kata's work", href: "/speaking" },
-      secondaryCta: { label: "Book release", href: "/book-release" },
+      secondaryCta: { label: "The book", href: "/book-release" },
     },
     intro: {
       heading: "About Kata",
@@ -56,7 +56,7 @@ export const en: SiteContent = {
       heading: "The new book",
       description:
         "Four movements for meeting hardship without shutting down: listening, loving, collectivising and acting.",
-      cta: { label: "Read about the book release", href: "/book-release" },
+      cta: { label: "Read about the book", href: "/book-release" },
     },
     areasOfWork: {
       heading: "Areas of work",
@@ -115,42 +115,22 @@ export const en: SiteContent = {
 
   bookRelease: {
     seo: {
-      title: "Book release",
+      // The launch is over; this page is now about the book itself. The title
+      // carries the book's name because that is what people search for.
+      title: "Latest release: Psychological resilience",
       description:
-        "You're invited to the release of Kata Nylén's new book. Reserve your place.",
+        "Psykologisk resiliens by Kata Nylén, out now from Natur & Kultur. On meeting adversity in an uncertain world, alone and together.",
     },
     hero: {
-      eyebrow: "You're invited",
-      heading: "Book release",
-      dateLabel: "Date",
-      timeLabel: "Time",
-      venueLabel: "Venue",
-      toBeConfirmed: "To be confirmed",
-      launchLabel: "Book launch",
-      rsvpCta: "Reserve my place",
-    },
-    invitation: {
-      heading: "About the evening",
-      body: [
-        "An evening to mark the release of the new book: an experience of the book, and an occasion to cultivate psychological resilience together.",
-        // See the Swedish: the one "we" the site keeps, because an event
-        // genuinely has hosts and the reader is one of the people being counted.
-        "You are warmly welcome. Please reserve a place so we know how many to expect.",
-      ],
-      includesHeading: "The evening holds",
-      withLabel: "with",
+      eyebrow: "Welcome",
+      heading: "Latest release",
+      outNow: "Out now",
     },
     aboutBook: {
       heading: "About the book",
       synopsisHeading: "Synopsis",
       themesHeading: "Themes",
       purchaseLabel: "Find the book",
-    },
-    programme: { heading: "Programme" },
-    location: {
-      heading: "Location",
-      directionsLabel: "Get directions",
-      accessibilityHeading: "Accessibility",
     },
     rsvp: {
       heading: "RSVP",

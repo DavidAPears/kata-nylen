@@ -49,25 +49,17 @@ const facts = await import("../src/content/facts");
 const jobTitle = facts.resolved(facts.person.jobTitle.en);
 const LINE = `${jobTitle}. Change leadership, implementation and psychological resilience.`;
 
-/** "11 November 2026 · 17:00 · Djupet", built from the confirmed event. */
-function eventLine(locale: "sv" | "en"): string {
-  const { launchEvent } = facts;
-  const startsAt = facts.resolved(launchEvent.startsAt);
-  const venue = facts.resolved(launchEvent.venueName);
-  if (!startsAt || !venue) return "";
-  const date = new Date(startsAt);
-  const day = new Intl.DateTimeFormat(locale === "sv" ? "sv-SE" : "en-GB", {
-    day: "numeric",
-    month: "long",
-    year: "numeric",
-    timeZone: launchEvent.timeZone,
-  }).format(date);
-  const time = new Intl.DateTimeFormat("sv-SE", {
-    hour: "2-digit",
-    minute: "2-digit",
-    timeZone: launchEvent.timeZone,
-  }).format(date);
-  return `${day} · ${time} · ${venue}`;
+/**
+ * The line under the book title on the sharing card.
+ *
+ * It used to be the event details, built from launchEvent. The launch
+ * happened on 11 November 2026, so a card advertising a date and a door is
+ * now wrong in the one place people see most: the preview of a shared link.
+ */
+function bookLine(locale: "sv" | "en"): string {
+  const publisher = facts.resolved(facts.book.publisher);
+  const out = locale === "sv" ? "Ute nu" : "Out now";
+  return publisher ? `${out} · ${publisher}` : out;
 }
 
 function asset(rel: string): string {
@@ -145,9 +137,9 @@ for (const locale of ["sv", "en"] as const) {
   await write(
     `book-release-${locale}`,
     bookCard(
-      facts.launchEventNameFor(locale),
+      locale === "sv" ? "Ny bok" : "New book",
       facts.bookTitlePlainFor(locale) ?? "",
-      eventLine(locale),
+      bookLine(locale),
     ),
     fontData,
   );
