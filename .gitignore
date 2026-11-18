@@ -55,3 +55,11 @@ coverage/
 /playwright-report/
 /blob-report/
 /playwright/.cache/
+
+# Original photography and artwork, kept out of the repo.
+#
+# The launch photo arrived at 5039x3361 and 8.6MB. Full-resolution originals
+# do not belong in git: they are committed forever, they slow every clone, and
+# they are never what gets served. The processed, deployed version lives in
+# public/images. Keep originals here, or anywhere outside the repo.
+/assets-src/

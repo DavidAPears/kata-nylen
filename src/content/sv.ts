@@ -139,6 +139,11 @@ export const sv: SiteContent = {
       themesHeading: "Teman",
       purchaseLabel: "Hitta boken",
     },
+    launchPhoto: {
+      caption:
+        "Kata Nylén läser ur Psykologisk resiliens på releasekvällen, Djupet i Stockholm, 11 november 2026.",
+      creditLabel: "Foto",
+    },
     rsvp: {
       heading: "Anmälan",
       intro:

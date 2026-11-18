@@ -117,6 +117,12 @@ export type BookReleaseContent = {
     themesHeading: string;
     purchaseLabel: string;
   };
+  /** Caption for the photograph from the launch evening. */
+  launchPhoto: {
+    caption: string;
+    /** Prefixes the credit, e.g. "Foto: Karin Boo". Shown only when we have one. */
+    creditLabel: string;
+  };
   /**
    * Kept although the page no longer renders a form.
    *

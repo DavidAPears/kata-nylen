@@ -6,6 +6,7 @@ import { getContent } from "@/content";
 import { getPathname } from "@/i18n/navigation";
 import {
   book,
+  launchEvent,
   isResolved,
   resolved,
   bookTitleFor,
@@ -73,6 +74,8 @@ export default async function BookReleasePage({
   const { bookRelease } = content;
 
   const cover = resolved(book.cover);
+  const launchPhoto = launchEvent.photo;
+  const photoCredit = resolved(launchPhoto.credit);
 
   return (
     // The book's own colourway, scoped to this page. Everything else on the
@@ -212,6 +215,40 @@ export default async function BookReleasePage({
             )}
         </div>
       </Section>
+
+      {/*
+        A photograph from the evening the book came out.
+
+        Full container width, which is wider than the prose above it and gives
+        the picture room to be a picture. <figure>/<figcaption> rather than a
+        bare image with a paragraph under it, so the caption is tied to the
+        photograph for anyone using a screen reader.
+
+        The credit renders only when we have one. An empty "Foto:" would be
+        worse than no line at all.
+      */}
+      {launchPhoto ? (
+        <Section id="launch-photo">
+          <figure>
+            <Image
+              src={launchPhoto.src}
+              alt={launchPhoto.alt[locale]}
+              width={launchPhoto.width}
+              height={launchPhoto.height}
+              sizes="(min-width: 1024px) 960px, 100vw"
+              className="w-full rounded-sm"
+            />
+            <figcaption className="mt-3 max-w-[var(--measure)] text-sm text-[var(--color-ink-muted)]">
+              {bookRelease.launchPhoto.caption}
+              {photoCredit ? (
+                <span className="block">
+                  {bookRelease.launchPhoto.creditLabel}: {photoCredit}
+                </span>
+              ) : null}
+            </figcaption>
+          </figure>
+        </Section>
+      ) : null}
 
       {/* No EventJsonLd: the launch has happened, so there is no event to
           describe. BookJsonLd stays, because the book is the page now. */}

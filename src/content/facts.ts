@@ -272,6 +272,28 @@ export const launchEvent = {
       role: { sv: "musiker och kompositör", en: "musician and composer" },
     },
   ],
+  /**
+   * A photograph from the evening itself, 11 November 2026.
+   *
+   * ⚠️ PHOTO CREDIT NOT CONFIRMED. The site credits Karin Boo on the press
+   * portraits because two sources named her; nobody has told us who took this
+   * one. The caption renders the credit only once `credit` is filled, so the
+   * page never implies the photographer is unknown or unimportant, it simply
+   * does not claim one. Ask whoever was shooting that night.
+   *
+   * The deployed file is 2400px wide and 92KB. The 8.6MB original is in
+   * assets-src/, which is gitignored.
+   */
+  photo: {
+    src: "/images/book-launch-reading.webp",
+    width: 2400,
+    height: 1601,
+    alt: {
+      sv: "Kata Nylén läser ur sin bok i rosa och gult scenljus, med publiken i förgrunden.",
+      en: "Kata Nylén reading from her book in pink and yellow stage light, with the audience in the foreground.",
+    },
+    credit: TODO as Fact<string>,
+  },
   accessibility: { sv: TODO as Fact<string>, en: TODO as Fact<string> },
 };
 
@@ -1168,6 +1190,8 @@ export function outstandingFacts(): string[] {
   check("person.email", person.email);
   check("person.portrait", person.portrait);
   if (person.sameAs.length === 0) missing.push("person.sameAs (no verified profiles yet)");
+
+  check("launchEvent.photo.credit (who took the launch photograph?)", launchEvent.photo.credit);
 
   check("book.title", book.title);
   check("book.publisher", book.publisher);
