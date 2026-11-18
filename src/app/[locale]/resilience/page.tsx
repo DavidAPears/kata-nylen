@@ -52,7 +52,9 @@ export async function generateMetadata({
           url: `/og/book-release-${locale}.jpg`,
           width: 1200,
           height: 630,
-          alt: "Resilienssalong, a book launch with Kata Nylén",
+          /* Describes the card, which has shown the book rather than the
+             event since the launch page became a page about the book. */
+          alt: "Psykologisk resiliens by Kata Nylén, out now from Natur & Kultur",
         },
       ],
     },
