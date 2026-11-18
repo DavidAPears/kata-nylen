@@ -14,8 +14,8 @@ describe("localised pathnames", () => {
   it.each([
     ["/", "sv", "/sv"],
     ["/", "en", "/en"],
-    ["/book-release", "sv", "/sv/bokrelease"],
-    ["/book-release", "en", "/en/book-release"],
+    ["/resilience", "sv", "/sv/psykologisk-resiliens"],
+    ["/resilience", "en", "/en/psychological-resilience"],
     ["/publications", "sv", "/sv/publikationer"],
     ["/publications", "en", "/en/publications"],
     ["/speaking", "sv", "/sv/forelasningar"],
@@ -39,8 +39,12 @@ describe("localised pathnames", () => {
 
   it("never leaves a Swedish reader on an English path, or the reverse", () => {
     // The whole point of the mapping: a Swedish URL should read as Swedish.
-    expect(getPathname({ locale: "sv", href: "/book-release" })).not.toContain("book-release");
-    expect(getPathname({ locale: "en", href: "/book-release" })).not.toContain("bokrelease");
+    expect(getPathname({ locale: "sv", href: "/resilience" })).not.toContain(
+      "psychological-resilience",
+    );
+    expect(getPathname({ locale: "en", href: "/resilience" })).not.toContain(
+      "psykologisk-resiliens",
+    );
     expect(getPathname({ locale: "sv", href: "/speaking" })).not.toContain("speaking");
     expect(getPathname({ locale: "en", href: "/speaking" })).not.toContain("forelasningar");
   });

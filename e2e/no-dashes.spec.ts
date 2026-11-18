@@ -11,8 +11,8 @@ import { test, expect } from "@playwright/test";
 const PATHS = [
   "/sv",
   "/en",
-  "/sv/bokrelease",
-  "/en/book-release",
+  "/sv/psykologisk-resiliens",
+  "/en/psychological-resilience",
   "/sv/publikationer",
   "/en/publications",
   "/sv/forelasningar",

@@ -9,7 +9,7 @@ import { flagFor } from "./FlagIcons";
  * SV | EN switcher.
  *
  * Brief §7: switching must land on the *equivalent* page, not the homepage.
- * `usePathname` from next-intl returns the internal route (e.g. "/book-release"),
+ * `usePathname` from next-intl returns the internal route (e.g. "/resilience"),
  * and <Link locale="sv"> resolves it to that language's public URL
  * ("/sv/bokrelease"). So equivalence is structural rather than a lookup table
  * we have to remember to update.

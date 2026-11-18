@@ -140,7 +140,7 @@ export function EventJsonLd({ locale }: { locale: Locale }) {
     return null;
   }
 
-  const pagePath = locale === "sv" ? "/sv/bokrelease" : "/en/book-release";
+  const pagePath = locale === "sv" ? "/sv/psykologisk-resiliens" : "/en/psychological-resilience";
 
   return (
     <JsonLd

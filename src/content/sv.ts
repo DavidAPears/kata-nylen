@@ -16,7 +16,8 @@ export const sv: SiteContent = {
 
   nav: {
     home: "Hem",
-    bookRelease: "Boken",
+    bookRelease: "Psykologisk resiliens",
+    media: "I media",
     publications: "Publikationer",
     speaking: "Föreläsningar",
     contact: "Kontakt",
@@ -43,21 +44,26 @@ export const sv: SiteContent = {
       standfirst:
         "Legitimerad psykolog och specialist i organisationspsykologi, författare och föreläsare. Kata arbetar med att få kunskap, ambitioner och beslut att bli handling i organisationer.",
       primaryCta: { label: "Utforska Katas arbete", href: "/speaking" },
-      secondaryCta: { label: "Boken", href: "/book-release" },
+      secondaryCta: { label: "Psykologisk resiliens", href: "/resilience" },
     },
     intro: {
       heading: "Om Kata",
       body: [
-        "Kata Nylén är legitimerad psykolog, specialist i organisationspsykologi, författare och föreläsare. Hon arbetar med organisationsutveckling och förändringsledning, implementering, beteendeförändring och psykologisk resiliens.",
-        "Tråden genom arbetet är avståndet mellan att veta och att göra. Det som behöver förändras är ofta känt; det som saknas är vad som krävs för att förändringen ska ske och hålla. Klimatpsykologin är ett av de områden där den frågan blir som tydligast.",
-        "Hon skriver och talar om vad som händer med människor, enskilt och tillsammans, när världen omkring dem förändras snabbare än vad tanken hinner med.",
+        "Kata är legitimerad psykolog, specialist i organisationspsykologi, författare och föreläsare. Hon arbetar med organisationsutveckling, förändringsledning, implementering, beteendeförändring och psykologisk resiliens.",
+        "Tråden genom arbetet är avståndet mellan att veta och göra. Det som behöver förändras är ofta känt. Det som saknas är vad som krävs för att förändringen ska ske och hålla.",
+        "Hon skriver och talar om vad som händer med människor, enskilt och tillsammans, när världen omkring dem förändras.",
       ],
     },
     featuredBook: {
       heading: "Den nya boken",
       description:
-        "Fyra rörelser för att möta motgångar utan att stänga av: att lyssna, älska, kollektivisera och agera.",
-      cta: { label: "Läs om boken", href: "/book-release" },
+        "Hur kan vi LÄKA oss själva, andra och vår omvärld genom att odla resiliens? I boken visar Kata hur vi kan stärka vår förmåga att möta motgångar och osäkerhet. Vägledande är LÄKA: Lyssna, Älska, Kollektivisera och Agera.",
+      cta: { label: "Läs om boken", href: "/resilience" },
+    },
+    mediaTeaser: {
+      heading: "Kata i media",
+      body: "Intervjuer, samtal och medverkan i tv, radio och press om psykologi, resiliens och förändring.",
+      cta: { label: "Se alla medieinslag", href: "/media" },
     },
     areasOfWork: {
       heading: "Arbetsområden",
@@ -68,13 +74,13 @@ export const sv: SiteContent = {
           id: "organisational",
           title: "Organisationspsykologi och förändringsledning",
           description:
-            "Hur organisationer förändras i praktiken: ledningsgrupper under press, relationerna som bär verksamheten och vad som håller när belastningen ökar.",
+            "Hur organisationer förändras i praktiken. Kata är utbildad och certifierad konsult inom OBM, Organizational Behavior Management. Hon arbetar med ledningsgrupper, förändringsledning och implementering med fokus på de beteendeförändringar som krävs för att nå resultat och få förändringen att hålla.",
         },
         {
           id: "implementation",
           title: "Implementering",
           description:
-            "Att få evidens, metoder och beslut att fungera i vardagen, långt efter att beslutet är fattat.",
+            "Att få evidensbaserade metoder och beslut att fungera i praktiken.",
         },
         {
           id: "psychological-resilience",
@@ -92,19 +98,19 @@ export const sv: SiteContent = {
           id: "climate-psychology",
           title: "Klimatpsykologi",
           description:
-            "Hur klimatkrisen registreras psykologiskt, och vad som hjälper människor att stanna kvar i engagemang i stället för att stänga av.",
+            "Hur människor reagerar på och förhåller sig till klimatkrisen och de sammanhängande kriserna och hur vi kan använda psykologisk kunskap för att bidra till storskalig förändring.",
         },
         {
           id: "uncertainty",
           title: "Att navigera osäkerhet",
           description:
-            "Hur människor leder, beslutar och fungerar inuti en systemförändring de inte valt.",
+            "Hur människor leder, beslutar och fungerar i en föränderlig värld.",
         },
       ],
     },
     speakingTeaser: {
       heading: "Föreläsningar",
-      body: "Kata föreläser på konferenser, universitet, ledarskapsevent och inom offentlig sektor om klimatets psykologi, motståndskraft, beteende och förändring.",
+      body: "Kata föreläser inom offentlig, privat och ideell sektor om klimatpsykologi, psykologisk resiliens, beteendeförändring och förändringsledning.",
       cta: { label: "Teman och förfrågningar", href: "/speaking" },
     },
     organisations: {
@@ -284,7 +290,7 @@ export const sv: SiteContent = {
     currentLabel: "Ny",
     mediaNudge:
       "Kata medverkar också regelbundet i tv, radio, press och poddar.",
-    mediaNudgeLink: "Se var hennes arbete har uppmärksammats",
+    mediaNudgeLink: "Kata i media",
   },
 
   about: {

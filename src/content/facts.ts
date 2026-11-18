@@ -578,6 +578,29 @@ export const media: MediaItem[] = [
   },
   {
     /*
+      ⚠️ PARTIAL. Confirmed from UR Play: Klimatkampen, season 2, 2022, and
+      Kata is listed under "Medverkande". She says she coached the
+      participants; that is her own account and is not stated on the
+      programme page, so nothing here claims it. She is sending a fuller
+      description, which should replace `note` when it arrives.
+    */
+    id: "klimatkampen",
+    url: "https://urplay.se/serie/230960-klimatkampen",
+    source: "UR Play",
+    kind: "tv",
+    role: "contributor",
+    year: "2022",
+    title: {
+      sv: "Klimatkampen",
+      en: "Klimatkampen (The climate challenge)",
+    },
+    note: {
+      sv: "Fyra kända profiler mäter sina klimatavtryck och försöker ställa om sina liv. Kata medverkar.",
+      en: "Four public figures measure their carbon footprints and try to change how they live. Kata takes part.",
+    },
+  },
+  {
+    /*
       Headline, date and byline read from the article itself rather than
       reconstructed from the URL slug. The Sveriges Radio entry further down
       is the cautionary tale: that one is a guess from its slug because the

@@ -90,7 +90,7 @@ export function getCalendarEvent(
     startsAt: launchEvent.startsAt,
     endsAt,
     location: addressParts.join(", "),
-    url: `${site.url}/${locale}/${locale === "sv" ? "bokrelease" : "book-release"}`,
+    url: `${site.url}/${locale}/${locale === "sv" ? "psykologisk-resiliens" : "psychological-resilience"}`,
   };
 }
 

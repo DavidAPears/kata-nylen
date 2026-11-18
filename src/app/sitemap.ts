@@ -5,7 +5,7 @@ import { resolveSiteUrl } from "@/lib/site-url";
 
 const routes = [
   "/",
-  "/book-release",
+  "/resilience",
   "/publications",
   "/speaking",
   "/contact",
@@ -25,8 +25,8 @@ export default function sitemap(): MetadataRoute.Sitemap {
     routes.map((route) => ({
       url: `${site.url}${getPathname({ locale, href: route })}`,
       lastModified: new Date(),
-      changeFrequency: route === "/book-release" ? ("weekly" as const) : ("monthly" as const),
-      priority: route === "/" ? 1 : route === "/book-release" ? 0.9 : 0.7,
+      changeFrequency: route === "/resilience" ? ("weekly" as const) : ("monthly" as const),
+      priority: route === "/" ? 1 : route === "/resilience" ? 0.9 : 0.7,
       alternates: {
         languages: Object.fromEntries([
           ...locales.map((alt: Locale) => [

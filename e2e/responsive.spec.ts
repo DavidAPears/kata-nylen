@@ -11,8 +11,8 @@ import { test, expect, type Page } from "@playwright/test";
 const PATHS = [
   "/sv",
   "/en",
-  "/sv/bokrelease",
-  "/en/book-release",
+  "/sv/psykologisk-resiliens",
+  "/en/psychological-resilience",
   "/sv/publikationer",
   "/en/publications",
   "/sv/forelasningar",
@@ -78,10 +78,11 @@ for (const viewport of WIDTHS) {
 test.describe("desktop nav", () => {
   test.use({ viewport: { width: 1280, height: 900 } });
 
-  test("shows all five links and the flags", async ({ page }) => {
+  test("shows all six links and the flags", async ({ page }) => {
+    // Six since "I media" joined the menu in November.
     await page.goto("/sv");
     const nav = page.getByRole("banner").getByRole("navigation", { name: "Meny" });
-    expect(await nav.getByRole("link").all()).toHaveLength(5);
+    expect(await nav.getByRole("link").all()).toHaveLength(6);
 
     const switcher = page.getByRole("banner").getByRole("navigation", { name: "Byt språk" });
     await expect(switcher.locator("svg").first()).toBeVisible();
@@ -108,7 +109,7 @@ test.describe("phone", () => {
     page,
   }) => {
     await page.goto("/sv");
-    for (const label of ["Boken", "Föreläsningar", "Kontakt"]) {
+    for (const label of ["Psykologisk resiliens", "I media", "Föreläsningar", "Kontakt"]) {
       await page.getByRole("navigation", { name: "Meny" }).getByRole("link", { name: label }).click();
       await expect(page).toHaveURL(/\/sv\//);
       const { scrollWidth, clientWidth } = await page.evaluate(() => ({
@@ -120,14 +121,26 @@ test.describe("phone", () => {
     }
   });
 
-  test("the nav fits on one row at phone width, with Home dropped", async ({ page }) => {
-    // Home is hidden on a phone because the wordmark links home. Measured:
-    // five links needed 371px against 350px available at 390px; four links
-    // with tighter spacing need about 337px.
+  test("the nav fits the phone without overflowing, even on two rows", async ({
+    page,
+  }) => {
+    /*
+      Home is hidden on a phone because the wordmark links home.
+
+      This used to require a single row, and four links fitted: measured at
+      371px for five against 350px available, and about 337px for four. In
+      November Kata renamed "Boken" to "Psykologisk resiliens" and asked for
+      "I media" in the menu, which together need roughly 490px. One row was no
+      longer possible without a hamburger, so the nav wraps to two.
+
+      What still matters is that nothing runs off the side, so that is what is
+      asserted. Two rows is the budget: a third means the nav has outgrown
+      this pattern and needs a real menu.
+    */
     await page.goto("/sv");
     const nav = page.getByRole("navigation", { name: "Meny" });
     const links = await nav.getByRole("link").all();
-    expect(links, "Home is hidden on mobile").toHaveLength(4);
+    expect(links, "Home is hidden on mobile").toHaveLength(5);
 
     const viewport = await page.evaluate(() => document.documentElement.clientWidth);
     const tops = new Set<number>();
@@ -137,7 +150,7 @@ test.describe("phone", () => {
         .toBeLessThanOrEqual(viewport + 1);
       tops.add(Math.round(box.y));
     }
-    expect(tops.size, "nav sits on one row at 390px").toBe(1);
+    expect(tops.size, "nav uses at most two rows at 390px").toBeLessThanOrEqual(2);
   });
 
   test("the wordmark still leads home once Home is hidden", async ({ page }) => {
@@ -163,7 +176,7 @@ test.describe("phone", () => {
       the box reports the right size while the glyphs paint past it and are
       cut off. Measuring the text range catches that.
     */
-    for (const path of ["/sv/bokrelease", "/en/book-release", "/sv", "/en"]) {
+    for (const path of ["/sv/psykologisk-resiliens", "/en/psychological-resilience", "/sv", "/en"]) {
       await page.goto(path);
       const clipped = await page.evaluate(() => {
         const bad: string[] = [];
@@ -185,7 +198,7 @@ test.describe("phone", () => {
   });
 
   test("interactive controls meet the 24px minimum touch target", async ({ page }) => {
-    await page.goto("/sv/bokrelease");
+    await page.goto("/sv/psykologisk-resiliens");
 
     const undersized = await page.evaluate(() => {
       return [...document.querySelectorAll("a, button, select, textarea")]

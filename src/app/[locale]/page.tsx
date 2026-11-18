@@ -137,6 +137,34 @@ export default async function HomePage({
             <Prose>
               <p>{home.featuredBook.description}</p>
             </Prose>
+
+            {/*
+              LÄKA, spelled out so the acronym is visible rather than asserted.
+
+              Always the Swedish words, on both language versions. The initials
+              are the title of the framework, and "Listen, Love, Collectivise,
+              Act" spells LLCA, so translating them would quietly destroy the
+              thing this is pointing at. The English page carries the meaning
+              in the sentence above instead.
+
+              aria-hidden on the emphasised initial: a screen reader should say
+              "Lyssna", not "L yssna".
+            */}
+            <ul className="mt-6 flex flex-wrap gap-x-6 gap-y-2">
+              {book.themes.sv.map((word) => (
+                <li key={word} className="text-[var(--color-ink-muted)]">
+                  <span
+                    aria-hidden="true"
+                    className="text-lg font-semibold text-[var(--color-leaf)]"
+                  >
+                    {word.charAt(0)}
+                  </span>
+                  <span aria-hidden="true">{word.slice(1)}</span>
+                  <span className="sr-only">{word}</span>
+                </li>
+              ))}
+            </ul>
+
             <p className="mt-6">
               <Link
                 href={home.featuredBook.cta.href}
@@ -152,6 +180,25 @@ export default async function HomePage({
             ) : null}
           </div>
         </div>
+      </Section>
+
+      {/*
+        A way into the media page from the homepage. It was reachable only
+        through a small link at the foot of Publikationer, which Kata said was
+        too hidden, and she was right: nothing on the homepage pointed at it.
+      */}
+      <Section ornament id="media" heading={home.mediaTeaser.heading}>
+        <Prose>
+          <p>{home.mediaTeaser.body}</p>
+        </Prose>
+        <p className="mt-6">
+          <Link
+            href={home.mediaTeaser.cta.href}
+            className="underline underline-offset-4"
+          >
+            {home.mediaTeaser.cta.label}
+          </Link>
+        </p>
       </Section>
 
       {/* Areas of work */}

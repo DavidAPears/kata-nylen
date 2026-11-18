@@ -27,11 +27,11 @@ export async function generateMetadata({
     title: bookRelease.seo.title,
     description: bookRelease.seo.description,
     alternates: {
-      canonical: getPathname({ locale, href: "/book-release" }),
+      canonical: getPathname({ locale, href: "/resilience" }),
       languages: {
-        sv: getPathname({ locale: "sv", href: "/book-release" }),
-        en: getPathname({ locale: "en", href: "/book-release" }),
-        "x-default": getPathname({ locale: "sv", href: "/book-release" }),
+        sv: getPathname({ locale: "sv", href: "/resilience" }),
+        en: getPathname({ locale: "en", href: "/resilience" }),
+        "x-default": getPathname({ locale: "sv", href: "/resilience" }),
       },
     },
     /*
@@ -45,6 +45,9 @@ export async function generateMetadata({
       type: "website",
       images: [
         {
+          /* Filename unchanged on purpose: this URL is inside sharing-card
+             previews people have already posted, and renaming it would 404
+             them. The card's contents are current. */
           url: `/og/book-release-${locale}.jpg`,
           width: 1200,
           height: 630,

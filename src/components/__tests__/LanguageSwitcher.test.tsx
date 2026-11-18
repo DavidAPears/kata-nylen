@@ -37,10 +37,10 @@ describe("LanguageSwitcher", () => {
   it("switches to the equivalent page, not back to the homepage", () => {
     // Brief §7. next-intl maps this internal path to each locale's public URL,
     // so the switcher must hand it the path it is on rather than "/".
-    mockPathname.mockReturnValue("/book-release");
+    mockPathname.mockReturnValue("/resilience");
     render(<LanguageSwitcher locale="en" label="Language" />);
     for (const link of screen.getAllByRole("link")) {
-      expect(link).toHaveAttribute("href", "/book-release");
+      expect(link).toHaveAttribute("href", "/resilience");
     }
   });
 

@@ -60,9 +60,9 @@ describe("sitemap", () => {
     const urls = entries.map((e) => e.url);
 
     for (const path of [
-      "/sv", "/sv/bokrelease", "/sv/publikationer", "/sv/forelasningar",
+      "/sv", "/sv/psykologisk-resiliens", "/sv/publikationer", "/sv/forelasningar",
       "/sv/kontakt", "/sv/integritetspolicy",
-      "/en", "/en/book-release", "/en/publications", "/en/speaking",
+      "/en", "/en/psychological-resilience", "/en/publications", "/en/speaking",
       "/en/contact", "/en/privacy",
     ]) {
       expect(urls, `sitemap should list ${path}`).toContain(`https://katanylen.com${path}`);
@@ -71,9 +71,9 @@ describe("sitemap", () => {
 
   it("uses the localised URL for each language, not the internal route", async () => {
     const urls = (await loadSitemap())().map((e) => e.url);
-    // A Swedish reader should never be pointed at /sv/book-release.
-    expect(urls).not.toContain("https://katanylen.com/sv/book-release");
-    expect(urls).not.toContain("https://katanylen.com/en/bokrelease");
+    // A Swedish reader should never be pointed at the English path.
+    expect(urls).not.toContain("https://katanylen.com/sv/psychological-resilience");
+    expect(urls).not.toContain("https://katanylen.com/en/psykologisk-resiliens");
   });
 
   it("declares language alternates, so the two versions are not duplicates", async () => {
@@ -86,7 +86,7 @@ describe("sitemap", () => {
 
   it("gives the book release page more weight than the rest", async () => {
     const entries = (await loadSitemap())();
-    const release = entries.find((e) => e.url.endsWith("/sv/bokrelease"))!;
+    const release = entries.find((e) => e.url.endsWith("/sv/psykologisk-resiliens"))!;
     const privacy = entries.find((e) => e.url.endsWith("/sv/integritetspolicy"))!;
     expect(release.priority!).toBeGreaterThan(privacy.priority!);
   });

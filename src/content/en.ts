@@ -15,7 +15,8 @@ export const en: SiteContent = {
 
   nav: {
     home: "Home",
-    bookRelease: "The book",
+    bookRelease: "Psychological resilience",
+    media: "In the media",
     publications: "Publications",
     speaking: "Speaking",
     contact: "Contact",
@@ -42,21 +43,26 @@ export const en: SiteContent = {
       standfirst:
         "Licensed psychologist and specialist in organisational psychology, author and speaker. Kata works on turning knowledge, ambition and decisions into action inside organisations.",
       primaryCta: { label: "Explore Kata's work", href: "/speaking" },
-      secondaryCta: { label: "The book", href: "/book-release" },
+      secondaryCta: { label: "Psychological resilience", href: "/resilience" },
     },
     intro: {
       heading: "About Kata",
       body: [
-        "Kata Nylén is a licensed psychologist, a specialist in organisational psychology, an author and a speaker. She works on organisational development and change leadership, implementation, behavioural change and psychological resilience.",
-        "The thread running through it is the distance between knowing and doing. What needs to change is usually already known; what is missing is what it takes for the change to happen and to hold. Climate psychology is one of the places where that question shows itself most sharply.",
-        "She writes and speaks about what happens to people, individually and collectively, when the world around them changes faster than the mind expects.",
+        "Kata is a licensed psychologist, a specialist in organisational psychology, an author and a speaker. She works on organisational development, change leadership, implementation, behavioural change and psychological resilience.",
+        "The thread running through her work is the distance between knowing and doing. What needs to change is usually already known. What is missing is what it takes for the change to happen and to hold.",
+        "She writes and speaks about what happens to people, individually and collectively, when the world around them changes.",
       ],
     },
     featuredBook: {
       heading: "The new book",
       description:
-        "Four movements for meeting hardship without shutting down: listening, loving, collectivising and acting.",
-      cta: { label: "Read about the book", href: "/book-release" },
+        "How can we LÄKA, heal, ourselves, each other and the world around us by cultivating resilience? In the book Kata shows how we can strengthen our capacity to meet adversity and uncertainty. The guide is LÄKA: Lyssna, Älska, Kollektivisera and Agera.",
+      cta: { label: "Read about the book", href: "/resilience" },
+    },
+    mediaTeaser: {
+      heading: "Kata in the media",
+      body: "Interviews, conversations and appearances on television, radio and in the press, on psychology, resilience and change.",
+      cta: { label: "See all media appearances", href: "/media" },
     },
     areasOfWork: {
       heading: "Areas of work",
@@ -67,13 +73,13 @@ export const en: SiteContent = {
           id: "organisational",
           title: "Organisational psychology and change leadership",
           description:
-            "How organisations actually change: senior teams under pressure, the relationships that carry the work, and what holds when the load rises.",
+            "How organisations actually change. Kata is a trained and certified consultant in OBM, Organizational Behavior Management. She works with senior teams, change leadership and implementation, focusing on the behavioural changes needed to reach results and make the change hold.",
         },
         {
           id: "implementation",
           title: "Implementation",
           description:
-            "Making evidence, methods and decisions work in daily practice, long after the decision has been taken.",
+            "Making evidence-based methods and decisions work in practice.",
         },
         {
           id: "psychological-resilience",
@@ -91,19 +97,19 @@ export const en: SiteContent = {
           id: "climate-psychology",
           title: "Climate psychology",
           description:
-            "How the climate crisis registers psychologically, and what helps people stay engaged rather than shut down.",
+            "How people react and relate to the climate crisis and the crises bound up with it, and how psychological knowledge can contribute to large-scale change.",
         },
         {
           id: "uncertainty",
           title: "Navigating uncertainty",
           description:
-            "How people lead, decide and function inside a systemic change they did not choose.",
+            "How people lead, decide and function in a changing world.",
         },
       ],
     },
     speakingTeaser: {
       heading: "Speaking",
-      body: "Kata speaks at conferences, universities, leadership events and public institutions on the psychology of climate, resilience, behaviour and change.",
+      body: "Kata speaks across the public, private and non-profit sectors on climate psychology, psychological resilience, behavioural change and change leadership.",
       cta: { label: "Speaking topics and enquiries", href: "/speaking" },
     },
     organisations: {
@@ -284,7 +290,7 @@ export const en: SiteContent = {
     currentLabel: "New",
     mediaNudge:
       "Kata also appears regularly across television, radio, press and podcasts.",
-    mediaNudgeLink: "See where her work has been covered",
+    mediaNudgeLink: "Kata in the media",
   },
 
   about: {

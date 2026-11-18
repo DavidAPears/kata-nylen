@@ -13,6 +13,8 @@
 export type Nav = {
   home: string;
   bookRelease: string;
+  /** "I media" in the main menu. Kata asked for it to stop being buried. */
+  media: string;
   publications: string;
   speaking: string;
   contact: string;
@@ -36,7 +38,7 @@ export type Cta = {
   /** Internal route key, matching `pathnames` in src/i18n/routing.ts */
   href:
     | "/"
-    | "/book-release"
+    | "/resilience"
     | "/publications"
     | "/speaking"
     | "/contact"
@@ -74,6 +76,13 @@ export type HomeContent = {
   featuredBook: {
     heading: string;
     description: string;
+    cta: Cta;
+  };
+  /** Kata asked for a route to the media page from the homepage, because it
+   *  was only reachable through a small link under Publikationer. */
+  mediaTeaser: {
+    heading: string;
+    body: string;
     cta: Cta;
   };
   areasOfWork: {

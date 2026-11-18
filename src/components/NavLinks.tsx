@@ -25,8 +25,9 @@ export function NavLinks({
     // it keeps the remaining four on one line. It stays on wider screens where
     // there is room for the convention.
     { href: "/", label: nav.home, hideOnMobile: true },
-    { href: "/book-release", label: nav.bookRelease },
+    { href: "/resilience", label: nav.bookRelease },
     { href: "/publications", label: nav.publications },
+    { href: "/media", label: nav.media },
     { href: "/speaking", label: nav.speaking },
     { href: "/contact", label: nav.contact },
   ];

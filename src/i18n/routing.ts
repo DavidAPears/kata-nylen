@@ -21,9 +21,18 @@ export const routing = defineRouting({
   localePrefix: "always",
   pathnames: {
     "/": "/",
-    "/book-release": {
-      sv: "/bokrelease",
-      en: "/book-release",
+    /*
+      Was "/book-release" ("/bokrelease"). The launch happened in November and
+      the page is becoming Kata's resilience page: the book plus exercises and
+      other resources. The old path was wrong twice over.
+
+      The old URLs permanently redirect here, in next.config.ts. They were sent
+      to 110 guests, they are in every confirmation email and in the sharing
+      cards, so they have to keep working.
+    */
+    "/resilience": {
+      sv: "/psykologisk-resiliens",
+      en: "/psychological-resilience",
     },
     "/publications": {
       sv: "/publikationer",
