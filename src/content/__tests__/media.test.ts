@@ -1,5 +1,5 @@
 import { describe, it, expect } from "vitest";
-import { media, publications } from "../facts";
+import { media, publications, recognition } from "../facts";
 
 /**
  * Media is credibility evidence, so it has to be accurate about what Kata
@@ -70,5 +70,21 @@ describe("Klimatpsykologi publication year", () => {
     // the field rather than one.
     expect(book.year).toBe("2019");
     expect(book.editionNote?.en).toMatch(/2025/);
+  });
+});
+
+describe("media and recognition do not overlap", () => {
+  it("never prints the same link twice on the About page", () => {
+    /*
+      The About page renders the recognition list and then the featured media.
+      The Klimatklubben interview was in both, with the same URL, so the page
+      showed it twice: once as "Sveriges 52 främsta klimatkvinnor" and again a
+      few lines below under a different headline.
+    */
+    const recognised = new Set(recognition.map((r) => r.url));
+    const duplicated = media
+      .filter((m) => m.featured && recognised.has(m.url))
+      .map((m) => m.id);
+    expect(duplicated).toEqual([]);
   });
 });

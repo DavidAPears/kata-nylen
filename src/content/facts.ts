@@ -577,6 +577,27 @@ export const media: MediaItem[] = [
     },
   },
   {
+    /*
+      Headline, date and byline read from the article itself rather than
+      reconstructed from the URL slug. The Sveriges Radio entry further down
+      is the cautionary tale: that one is a guess from its slug because the
+      site blocks us, and it says so.
+
+      Interview with Carolina Högling, 22 September 2026, about the new book.
+    */
+    id: "miljo-utveckling-motstandskraft",
+    url: "https://miljo-utveckling.se/psykologen-sa-starker-du-din-motstandskraft-i-hallbarhetsarbetet/",
+    source: "Miljö & Utveckling",
+    kind: "print",
+    role: "interview",
+    year: "2026",
+    featured: true,
+    title: {
+      sv: "Psykologen: Så stärker du din motståndskraft i hållbarhetsarbetet",
+      en: "The psychologist: how to strengthen your resilience in sustainability work",
+    },
+  },
+  {
     id: "nyhetsmorgon-2023",
     url: "https://www.youtube.com/watch?v=aWYJJdiOPWk",
     source: "Nyhetsmorgon",
@@ -646,7 +667,11 @@ export const media: MediaItem[] = [
     source: "Klimatklubben",
     kind: "web",
     role: "interview",
-    featured: true,
+    /*
+      Not featured: the About page already shows this exact URL in the
+      recognition list, as Klimatklubben's "52 främsta klimatkvinnor" entry.
+      Featuring it too printed the same link twice on one page.
+    */
     title: {
       sv: "Det är fullt möjligt att få till storskalig beteendeförändring",
       en: "Large-scale behavioural change is entirely possible",
