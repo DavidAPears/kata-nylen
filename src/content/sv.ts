@@ -102,7 +102,7 @@ export const sv: SiteContent = {
         },
         {
           id: "uncertainty",
-          title: "Att navigera osäkerhet",
+          title: "Navigera osäkerhet",
           description:
             "Hur människor leder, beslutar och fungerar i en föränderlig värld.",
         },
@@ -352,7 +352,7 @@ export const sv: SiteContent = {
       },
       {
         id: "uncertainty",
-        title: "Att navigera osäkerhet",
+        title: "Navigera osäkerhet",
         description:
           "Hur människor beslutar, leder och fungerar inuti en förändring de inte valt och inte kan förutsäga. Långvarig osäkerhet är psykologiskt något annat än en enskild kris: den tar inte slut, och de strategier som bär någon genom en akut nödsituation brukar svikta över år.",
       },

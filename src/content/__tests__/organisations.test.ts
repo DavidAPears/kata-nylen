@@ -114,3 +114,37 @@ describe("Kata's professional identity", () => {
     }
   });
 });
+
+describe("founder and co-founder are not the same claim", () => {
+  /*
+    Kata founded SHIFT Collective. She co-founded Klimatpsykologerna and SNAP
+    Sverige, with other people.
+
+    Her instruction on 18 Nov was to change "medgrundare" to "grundare"
+    "wherever it appears on the site", which read literally would have
+    promoted her to sole founder of all three and written her colleagues out
+    of organisations they started with her. These tests pin the distinction so
+    a later find-and-replace cannot quietly do it.
+  */
+
+  it("credits her as founder of SHIFT, and only SHIFT", () => {
+    const shift = organisations.find((o) => o.id === "shift-collective")!;
+    expect(shift.role!.sv).toBe("Grundare");
+    expect(shift.role!.en).toBe("Founder");
+
+    for (const id of ["klimatpsykologerna", "snap-sverige"]) {
+      const org = organisations.find((o) => o.id === id)!;
+      expect(org.role!.sv, `${id} sv`).toBe("Medgrundare");
+      expect(org.role!.en, `${id} en`).toBe("Co-founder");
+    }
+  });
+
+  it("keeps the two claims apart in her bio as well", () => {
+    const sv = resolved(person.shortBio.sv)!;
+    const en = resolved(person.shortBio.en)!;
+    expect(sv).toContain("grundare av SHIFT Collective");
+    expect(sv).toContain("medgrundare av Klimatpsykologerna och SNAP Sverige");
+    expect(en).toContain("founder of SHIFT Collective");
+    expect(en).toContain("co-founder of Klimatpsykologerna and SNAP Sverige");
+  });
+});

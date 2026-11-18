@@ -59,8 +59,8 @@ export const person = {
    * The English is our translation of her text and still needs her eye.
    */
   shortBio: {
-    sv: "Kata Nylén är legitimerad psykolog, specialist i organisationspsykologi, författare och föreläsare. Hon arbetar med beteendeförändring, psykologisk resiliens och implementering, med ett särskilt intresse för hur kunskap och ambitioner blir till handling i organisationer. Hennes arbete spänner från hållbar omställning och klimatpsykologi till förebyggande insatser för barn och unga genom SNAP. Hon är medgrundare av Klimatpsykologerna, SNAP Sverige och SHIFT Collective och författare till bland annat Psykologisk resiliens: att möta motgång i en osäker värld." as Fact<string>,
-    en: "Kata Nylén is a licensed psychologist, a specialist in organisational psychology, an author and a speaker. She works with behavioural change, psychological resilience and implementation, with a particular interest in how knowledge and ambition become action inside organisations. Her work runs from sustainable transition and climate psychology to preventive work with children and young people through SNAP. She is a co-founder of Klimatpsykologerna, SNAP Sverige and SHIFT Collective, and the author of books including Psykologisk resiliens: att möta motgång i en osäker värld." as Fact<string>,
+    sv: "Kata Nylén är legitimerad psykolog, specialist i organisationspsykologi, författare och föreläsare. Hon arbetar med beteendeförändring, psykologisk resiliens och implementering, med ett särskilt intresse för hur kunskap och ambitioner blir till handling i organisationer. Hennes arbete spänner från hållbar omställning och klimatpsykologi till förebyggande insatser för barn och unga genom SNAP. Hon är grundare av SHIFT Collective, medgrundare av Klimatpsykologerna och SNAP Sverige och författare till bland annat Psykologisk resiliens: att möta motgång i en osäker värld." as Fact<string>,
+    en: "Kata Nylén is a licensed psychologist, a specialist in organisational psychology, an author and a speaker. She works with behavioural change, psychological resilience and implementation, with a particular interest in how knowledge and ambition become action inside organisations. Her work runs from sustainable transition and climate psychology to preventive work with children and young people through SNAP. She is the founder of SHIFT Collective, a co-founder of Klimatpsykologerna and SNAP Sverige, and the author of books including Psykologisk resiliens: att möta motgång i en osäker värld." as Fact<string>,
   },
   /**
     * §12: public contact address.
@@ -275,11 +275,8 @@ export const launchEvent = {
   /**
    * A photograph from the evening itself, 11 November 2026.
    *
-   * ⚠️ PHOTO CREDIT NOT CONFIRMED. The site credits Karin Boo on the press
-   * portraits because two sources named her; nobody has told us who took this
-   * one. The caption renders the credit only once `credit` is filled, so the
-   * page never implies the photographer is unknown or unimportant, it simply
-   * does not claim one. Ask whoever was shooting that night.
+   * Photographed by Karin Boo, confirmed by Kata on 18 Nov 2026. She also
+   * took the press portraits, which the site credits in the same way.
    *
    * The deployed file is 2400px wide and 92KB. The 8.6MB original is in
    * assets-src/, which is gitignored.
@@ -292,7 +289,7 @@ export const launchEvent = {
       sv: "Kata Nylén läser ur sin bok i rosa och gult scenljus, med publiken i förgrunden.",
       en: "Kata Nylén reading from her book in pink and yellow stage light, with the audience in the foreground.",
     },
-    credit: TODO as Fact<string>,
+    credit: "Karin Boo" as Fact<string>,
   },
   accessibility: { sv: TODO as Fact<string>, en: TODO as Fact<string> },
 };
@@ -600,11 +597,9 @@ export const media: MediaItem[] = [
   },
   {
     /*
-      ⚠️ PARTIAL. Confirmed from UR Play: Klimatkampen, season 2, 2022, and
-      Kata is listed under "Medverkande". She says she coached the
-      participants; that is her own account and is not stated on the
-      programme page, so nothing here claims it. She is sending a fuller
-      description, which should replace `note` when it arrives.
+      Programme details from UR Play; the description is Kata's own wording,
+      sent 18 Nov 2026, which is what confirms her role. The UR page lists her
+      under "Medverkande" but does not say what she did there.
     */
     id: "klimatkampen",
     url: "https://urplay.se/serie/230960-klimatkampen",
@@ -617,8 +612,8 @@ export const media: MediaItem[] = [
       en: "Klimatkampen (The climate challenge)",
     },
     note: {
-      sv: "Fyra kända profiler mäter sina klimatavtryck och försöker ställa om sina liv. Kata medverkar.",
-      en: "Four public figures measure their carbon footprints and try to change how they live. Kata takes part.",
+      sv: "I UR:s Klimatkampen medverkade Kata Nylén som klimatpsykolog och coachade de medverkande kändisarna i deras klimatomställning.",
+      en: "In UR's Klimatkampen, Kata Nylén took part as a climate psychologist and coached the participating public figures through their own climate transitions.",
     },
   },
   {
@@ -971,13 +966,16 @@ export const organisations: Organisation[] = [
     url: "https://www.shiftcollective.se/",
     kind: "company",
     /*
-      ⚠️ Kata wrote "I founded SHIFT Collective" in her notes, but her own
-      draft bio says "medgrundare av Klimatpsykologerna, SNAP Sverige och
-      SHIFT Collective". Founder and co-founder are different claims, and the
-      difference matters to whoever else founded it, so this uses the more
-      modest of the two until she confirms which is right.
+      Founder, not co-founder. Settled by Kata on 18 Nov 2026: "I founded
+      SHIFT".
+
+      Her instruction was to change "medgrundare" to "grundare" wherever it
+      appears, but that is taken to mean SHIFT rather than literally
+      everywhere. Klimatpsykologerna and SNAP Sverige keep "Medgrundare",
+      because she co-founded those with other people, and a blanket replace
+      would have quietly written them out of their own organisations.
     */
-    role: { sv: "Medgrundare", en: "Co-founder" },
+    role: { sv: "Grundare", en: "Founder" },
     description: {
       sv: "Organisationsutveckling och förändringsledning. Här ligger arbetet med hur organisationer förändras i praktiken.",
       en: "Organisational development and change leadership. This is where the work on how organisations actually change sits.",
